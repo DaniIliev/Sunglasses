@@ -1,0 +1,8 @@
+.searchBar{
+  display: flex;
+  align-items: center;
+  gap: 10em;
+  border: 0.1em solid black;
+  border-radius: 4em;
+  padding: 0.5em;
+}
