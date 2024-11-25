@@ -1,4 +1,9 @@
+.navBars{
+  width: 100%;
+  height: auto;
+}
 .navBarOne{
+    padding: 1em;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -10,7 +15,8 @@
 }
  
 .language, .personIcon, .favoriteIcon, .shoppingIcon{
-    cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .language{
@@ -18,25 +24,28 @@
 }
 
 .language:hover, .personIcon:hover, .favoriteIcon:hover, .shoppingIcon:hover, .navBarTwo nav a:hover{
-    transform: scale(1.5); /* Grow the icon */
+    /* transform: scale(1.5);  */
     color: #2f2e2d;
+    transform: translateY(-10px); /* Move the button up */
 }
 
 .moving-label {
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    color: white;
+    background-color: black;
     /* white-space: nowrap; Prevents text wrapping */
     overflow: hidden;
-
     border: 1px solid #ccc;
-    border-radius: 16px;
     position: relative;
   }
 
   .moving-label span {
     display: flex;
-    gap: 5em;
-    animation: moveText 20s linear infinite;
+    justify-content: space-around;
+    padding: 0.5em;
+    /* gap: 5em; */
+    /* animation: moveText 20s linear infinite; */
   }
 
   .moving-label span p {
@@ -58,6 +67,7 @@
     align-items: center;
     gap: 5em;
     justify-content: center;
+    margin: 0 0 0.9em 0;
 }
 
 .navBarTwo nav a {
@@ -65,5 +75,44 @@
     color: black;
     font-size: 1.3em;
     padding: 0.5em;
+    transition: transform 0.2s ease-in-out;
 }
 
+.menuMen {
+  position: absolute;
+  background-color: white;
+  top: 23%;
+  right: 50%;
+  width: 90%;
+  height: 400px;
+  z-index: 4;
+  display: flex;
+  gap: 5em;
+  padding: 1em 0em 0em 2em;
+  transform: translate(50%, 0);
+}
+
+.manWithSunglasses{
+  margin: 0 0 1.5em 5em;
+}
+
+
+.bestseller, .outlet{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+
+}
+
+.lensOptions ul li, .frameShape ul li{
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0 0 0;
+  gap: 1em;
+  font-size: 1.2em;
+}
+
+.lensOptions ul li img{
+  width: 2.5em;
+}
