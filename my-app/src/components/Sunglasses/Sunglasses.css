@@ -1,0 +1,248 @@
+.sunglassesPage{
+    display: flex;
+    gap: 2em;
+    margin: 2em;
+}
+.filters{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 35%;
+    gap: 2em;
+}
+.sunglassesfilter{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.5em;
+    border-bottom: 2px solid black;
+}
+.frame-colors, 
+.lens-colors{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em; 
+}
+.colorContainer,
+.lens-color-container{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.blue, .black, .clear, .gold, .green, .grey, .multi,
+.neutral, .orange, .pink, .purple, .red, .silver, .tort, .white, .yellow{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+.yellow{
+    background-color: yellow;
+}
+.white{
+    background-color: white;
+}
+.tort{
+    background-image: url('../../../public/images/tort.png');
+}
+.silver{
+    background-color: silver;
+}
+.red{
+    background-color: red;
+}
+.purple{
+    background-color: purple;
+}
+.pink{
+    background-color: pink;
+}
+.orange{
+    background-color: orange;
+}
+.neutral{
+    background-color: navajowhite;
+}
+.multi{
+    background-color: mediumslateblue ;
+}
+.grey{
+    background-color: grey;
+}
+.green{
+    background-color: green;
+}
+.gold{
+    background-color: yellow;
+}
+.clear{
+    background-color: silver
+}
+.blue{
+    background-color: blue;
+}
+.black{
+    background-color: black;
+}
+/* filter price  */
+
+.filter-container {
+    width: 100%;
+    padding: 20px;
+    background: white;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    text-align: center;
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Slider Styles */
+.price-slider {
+    position: relative;
+    width: 100%;
+    padding: 2em 2em;
+    top:  25%;
+    left: 25%;
+    transform: translate(-70%, -55%);
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    background: transparent;
+}
+
+.slider::-webkit-slider-runnable-track {
+    height: 5px;
+    background: #c7e3c7;
+    border-radius: 5px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #5c8fb8;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+}
+
+/* Price Labels */
+.price-labels {
+    font-size: 14px;
+    margin: 15px 0;
+    color: #555;
+}
+
+/* Filter Button */
+.filter-button {
+    background-color: rgb(68, 68, 246);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: blue;
+}
+
+/*  */
+.catalog-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.card{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.info h3{
+    font-size: 0.8em;
+    border-bottom: 2px solid gainsboro;
+}
+.prices{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.prices h5{
+    text-decoration: line-through;
+    color: black;
+}
+
+.prices h4{
+    color: red;
+}
+.prices p{
+    font-size: 0.8em;
+    color: red;
+}
+
+.sale{
+    position: absolute;
+    margin: 1em;
+    border: 2px solid red;
+    padding: 0.5em 1em;
+    z-index: 1;
+    color: red;
+}
+.like{
+    position: absolute;
+    color: red;
+    z-index: 2;
+    font-size: 2.3em;
+    margin: 6.8em 6.8em;
+}
+.imageContainer{
+    width: 300px; 
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+.imageContainer img {
+    transition: opacity 1s ease;
+}
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.imageContainer:hover .hover-image {
+    opacity: 1;
+}
+
+.imageContainer:hover .default-image {
+    opacity: 0;
+}

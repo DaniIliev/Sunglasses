@@ -1,0 +1,118 @@
+.detailsPage{
+    margin: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+}
+
+.infinitiImages{
+    position: relative;
+    width: 40em; 
+    height: 30em;
+    overflow: hidden;
+}
+
+.infinitiImages img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.infinitiImages p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1em 1em;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.infinitiImages .left {
+    left: 1em;
+  }
+  
+.infinitiImages .right {
+    right: 1em;
+}
+
+
+.infinitiImages p:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.imagesContainer{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    /* justify-content: center; */
+}
+.imagesContainer img{
+    width: 5em;
+}
+
+.allAboutImages{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+.reviews{
+    font-size: 2em;
+    color: rgb(238, 156, 63);
+}
+
+.counter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+    padding: 0.5em;
+    width: 40%;
+    border: 1px solid gainsboro;
+}
+
+.counter p{
+    font-size: 1em;
+}
+
+.aboutSunglasses{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* align-items: center; */
+    gap: 1em;
+    width: 30%;
+}
+
+.addToCart{
+    background-color: rgb(1, 1, 96);
+    padding: 0.8em 4em;
+    color: white;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.addToCart:hover{
+    background-color: black;
+}
+
+.information{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.information h4{
+    border-bottom: 1px solid gainsboro;
+    margin-bottom: 2em;
+}
+
+.sections{
+    display: flex;
+    align-items: center;
+}
+

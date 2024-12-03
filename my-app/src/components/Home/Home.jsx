@@ -4,20 +4,21 @@ import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Stack from '@mui/material/Stack';
 import { GiClick } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 const Home = () => {
 
 
   return (
     <div className='home'>
-        <div className='blurred-container'>
-            <div className='images'>
-                <img className='blurred-image1' src="../../../public/images/sunglasses4.jpg" alt="" />
-                <img className='blurred-image2' src="../../../public/images/sunglasses5.jpg" alt=""/>
+        <p>PISHKA</p>
+        <div className='images'>
+            <img className='hero1' src="../../../public/images/sunglasses4.jpg" alt="" />
+            <img className='hero2' src="../../../public/images/sunglasses5.jpg" alt=""/>
             <div class="content">
                 <h1>Welcome to the Blurred Photo</h1>
                 <p>This is an example of a blurred image with a background</p>
-                <p className='button'><GiClick />SHOPPING WIHT LOVE <GiClick /></p>
-            </div>
+                <p className='button'><Link to='/sunglasses'><GiClick />SHOPPING WIHT LOVE <GiClick /></Link></p>
+
             </div>
         </div>
         <div className='trendingContainer'>
@@ -25,7 +26,7 @@ const Home = () => {
             <div className='trendingCards'>
                 <div className='trandingCard'>
                     <div className='cardIMG'>
-                        <img src="../../../public/images/test5.png" width={200} height={150} alt="" />
+                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
                     </div>
                     <div className='aboutCard'>
                         <p>Something</p>
@@ -41,24 +42,7 @@ const Home = () => {
                 </div>
                 <div className='trandingCard'>
                     <div className='cardIMG'>
-                        <img src="../../../public/images/test1.png" width={200} height={150} alt="" />
-                    </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
-                    </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
-                    </div>
-                </div>
-                <div className='trandingCard'>
-                    
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/test2.png" width={200} height={150} alt="" />
+                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
                     </div>
                     <div className='aboutCard'>
                         <p>Something</p>
@@ -75,7 +59,24 @@ const Home = () => {
                 <div className='trandingCard'>
                     
                     <div className='cardIMG'>
-                        <img src="../../../public/images/test3.png" width={200} height={150} alt="" />
+                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
+                    </div>
+                    <div className='aboutCard'>
+                        <p>Something</p>
+                        <p>price 321$$</p>
+                    </div>
+                    <div className='buttonsLoveCart'>
+                        <Stack direction="row" spacing={2}>
+                            <FavoriteIcon className='favoriteIcon'/> 
+                            <Button variant="contained">ADD TO CART</Button>
+
+                        </Stack>
+                    </div>
+                </div>
+                <div className='trandingCard'>
+                    
+                    <div className='cardIMG'>
+                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
                     </div>
                     <div className='aboutCard'>
                         <p>Something</p>
@@ -91,7 +92,7 @@ const Home = () => {
                 </div>
                 <div className='trandingCard'>
                     <div className='cardIMG'>
-                        <img src="../../../public/images/test4.png" width={200} height={150} alt="" />
+                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
                     </div>
                     <div className='aboutCard'>
                         <p>Something</p>
