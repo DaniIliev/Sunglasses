@@ -11,11 +11,15 @@ import { BsSunglasses } from "react-icons/bs";
 import { GiReturnArrow } from "react-icons/gi";
 import { SiAuthy } from "react-icons/si";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import CartDropdown from '../shared/CartDropdown/CartDropdown';
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
+    const [isShippingHovered, setIsShippingHovered] = useState(false)
+    
     useEffect(() => {
         setIsMenuMenOpen(false)
+        setIsShippingHovered(false)
     }, [])
   return (
     <div className='navBars'>
@@ -30,25 +34,30 @@ const NavBar = () => {
         </div>
         <div  className='navBarOne'>
             <SearchBar /> 
-            <h1>LOGO</h1>
+            <Link to='/'><h1>LOGO</h1></Link>
             <div className='aboutUser'>
                 <p className='language'><strong>EN</strong></p>
                <Link to={'/user-login'}><PersonIcon className='personIcon' /> </Link>
-                <FavoriteIcon className='favoriteIcon'/> 
-                <ShoppingCartIcon className='shoppingIcon'/> 
+                <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> </Link>
+                <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)} ><ShoppingCartIcon className='shoppingIcon'/></Link>
             </div>
         </div>
         <hr />
         <div className='navBarTwo'>
             <nav>
-                <a href="">New <MdOutlineKeyboardArrowDown /></a>
-                <Link to="/sunglasses">Best sellers <MdOutlineKeyboardArrowDown /></Link>
+                <a href="">New</a>
+                <Link to="/sunglasses">Best sellers</Link>
                 <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>Women's <MdOutlineKeyboardArrowDown /></a>
                 <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>Men's <MdOutlineKeyboardArrowDown /></a>
-                <a href="">Unisex <MdOutlineKeyboardArrowDown /></a>
-                <a href="">Sale <MdOutlineKeyboardArrowDown /></a>
+                <a href="">Unisex</a>
+                <Link to="">Sale</Link>
             </nav>
         </div>
+        {isShippingHovered ? 
+        <CartDropdown setIsShippingHovered={setIsShippingHovered} isShippingHovered={isShippingHovered}/> 
+        : ''
+        }
+
         {isMenuMenOpen ? 
             <div className='menuMen'>
                 <div className='populer'>

@@ -1,111 +1,152 @@
 import React, { useState } from 'react'
 import './Home.css'
-import Button from '@mui/material/Button';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Stack from '@mui/material/Stack';
+import { CiHeart } from "react-icons/ci";
 import { GiClick } from "react-icons/gi";
+import { BsEmojiSunglasses } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 const Home = () => {
 
+    const slides = [
+        {
+          id: 1,
+          image: "/images/sunglasses1.jpg",
+        },
+        {
+          id: 2,
+          image: "/images/sunglasses4.jpg",
+
+        },
+        {
+          id: 3,
+          image: "/images/sunglasses5.jpg",
+        },
+        {
+            id: 4,
+            image: "/images/sunglasses3.jpg",
+          },
+          {
+            id: 5,
+            image: "/images/sunglasses6.jpg",
+          },
+      ];
+
+      const [currentIndex, setCurrentIndex] = useState(0);
+      const [currentList, setCurrentList] = useState(slides)
+      useEffect(() => {
+        const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+        const firstImage = slides.shift()
+        slides.push(firstImage)
+        setCurrentList(slides)
+
+      setCurrentList((prevArray) => {
+            const newArray = [...prevArray];
+            newArray.push(newArray.shift()); 
+            return newArray;
+      });
+        }, 9000);
+        return () => clearInterval(interval);
+      }, []);
+    
 
   return (
     <div className='home'>
-        <p>PISHKA</p>
         <div className='images'>
-            <img className='hero1' src="../../../public/images/sunglasses4.jpg" alt="" />
-            <img className='hero2' src="../../../public/images/sunglasses5.jpg" alt=""/>
+            <div className="carousel-track"
+   >
+                {currentList.map((slide, index) => {
+                    let position = 'non-active'
+                    if(index == 2){
+                        position = 'active'
+                    }
+                    return (
+                        <div className={`carousel-item ${position}`} key={slide.id}>
+                          <img src={slide.image} />
+                        </div>
+                      );
+                })}
+            </div>
             <div class="content">
-                <h1>Welcome to the Blurred Photo</h1>
-                <p>This is an example of a blurred image with a background</p>
-                <p className='button'><Link to='/sunglasses'><GiClick />SHOPPING WIHT LOVE <GiClick /></Link></p>
-
+                <h1 className='welcomeText'>Welcome to vistglasses</h1>
+                <Link to='/sunglasses' className='button'><GiClick />Shopping with love<GiClick /></Link>
             </div>
         </div>
         <div className='trendingContainer'>
-            <h2>Trending now</h2>
+            <h2 className='trendingTitle'>Trending now</h2>
             <div className='trendingCards'>
-                <div className='trandingCard'>
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
                     </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
                     </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
+                </Link>
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
                     </div>
-                </div>
-                <div className='trandingCard'>
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
                     </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
+                </Link>
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
                     </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
                     </div>
-                </div>
-                <div className='trandingCard'>
-                    
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
+                </Link>
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
                     </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
                     </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
-                    </div>
-                </div>
-                <div className='trandingCard'>
-                    
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
-                    </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
-                    </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
-                    </div>
-                </div>
-                <div className='trandingCard'>
-                    <div className='cardIMG'>
-                        <img src="../../../public/images/COPY1.webp" width={200} height={150} alt="" />
-                    </div>
-                    <div className='aboutCard'>
-                        <p>Something</p>
-                        <p>price 321$$</p>
-                    </div>
-                    <div className='buttonsLoveCart'>
-                        <Stack direction="row" spacing={2}>
-                            <FavoriteIcon className='favoriteIcon'/> 
-                            <Button variant="contained">ADD TO CART</Button>
-
-                        </Stack>
-                    </div>
-                </div>
+                </Link>
             </div>
         </div>
         <div className='choice'>

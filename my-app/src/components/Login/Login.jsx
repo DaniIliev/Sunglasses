@@ -12,7 +12,7 @@ const Login = () => {
 
             <div className='dontHaveAcc'>
                 <p>I don't have an account</p>
-                <Link className='createAcc'>Create an account</Link>
+                <Link className='createAcc' to='/user-register'>Create an account</Link>
             </div>
         </form>
     </div>

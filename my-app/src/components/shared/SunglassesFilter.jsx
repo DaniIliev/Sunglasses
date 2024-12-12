@@ -33,24 +33,24 @@ const SunglassesFilter = () => {
                 {isFrameShapeOpen ? 
                         <div className="checkboxes">
                             <div className="checkbox">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                                <label for="vehicle1"> I have a bike</label>
+                                <input type="checkbox" id="1" name="round" value="Round"/>
+                                <label for="round">Round <img src="/images/round.jpeg" alt="" /></label>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                                <label for="vehicle1"> I have a bike</label>
+                                <input type="checkbox" id="2" name="squared" value="Squared"/>
+                                <label for="squared">Squared <img src="/images/squared.jpeg" alt="" /></label>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                                <label for="vehicle1"> I have a bike</label>
+                                <input type="checkbox" id="3" name="rechtangular" value="Rechtangular"/>
+                                <label for="rechtangular">Rechtangular <img src="/images/rechtangular.jpeg" alt="" /></label>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                                <label for="vehicle1"> I have a bike</label>
+                                <input type="checkbox" id="4" name="pilot/aviator" value="Pilot/Aviator"/>
+                                <label for="pilot/aviator">Pilot/Aviator <img src="/images/pilotAviator.jpeg" alt="" /></label>
                             </div>
                             <div className="checkbox">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                                <label for="vehicle1"> I have a bike</label>
+                                <input type="checkbox" id="5" name="catYey" value="CatEye"/>
+                                <label for="catYey">Cat eye <img src="/images/catEye.jpeg" alt="" /></label>
                             </div>
                         </div> : ''}
 
@@ -128,23 +128,23 @@ const SunglassesFilter = () => {
             {isLensColrFilterOpen ? 
                     <div className="lens-colors">
                         <div className="lens-color-container">
-                            <img src="/images/standartsunlenses.png" alt="" />
+                            <img src="/images/standartsunlenses.png" alt="" width={50}/>
                             <p>Standart sun lenses</p>
                         </div>
                         <div className="lens-color-container">
-                            <img src="/images/polarized.png" alt="" />
+                            <img src="/images/polarized.png" alt="" width={50}/>
                             <p>Polarized</p>
                         </div>
                         <div className="lens-color-container">
-                            <img src="/images/mirrored.png" alt="" />
+                            <img src="/images/mirrored.png" alt="" width={50}/>
                             <p>Mirrored</p>
                         </div>
                         <div className="lens-color-container">
-                            <img src="/images/colortransaction.png" alt="" />
+                            <img src="/images/colortransaction.png" alt="" width={50}/>
                             <p>With a color transition</p>
                         </div>
                         <div className="lens-color-container">
-                            <img src="/images/colortransaction.png" alt="" />
+                            <img src="/images/dioptric.png" alt="" width={50}/>
                             <p>Diobtric sunglasses</p>
                         </div>
                     </div>

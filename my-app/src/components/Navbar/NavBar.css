@@ -90,6 +90,7 @@
   gap: 5em;
   padding: 1em 0em 0em 2em;
   transform: translate(50%, 0);
+  border: 1px solid black;
 }
 
 .manWithSunglasses{

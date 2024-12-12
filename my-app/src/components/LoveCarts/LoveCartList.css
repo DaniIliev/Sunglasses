@@ -1,0 +1,102 @@
+.LoveCartPage{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin-bottom: 3em;
+    font-family: "Playfair Display", serif;
+}
+
+.titels{    
+    text-transform:uppercase;
+}
+
+.contentWishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40vh;
+    gap: 1.5em;
+    width: 100%;
+    background-image: url('/images/wishlistIMG.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contentWishlist div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    margin-top: 3em;
+}
+
+.newUserBox, .wishlistCreate{
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    height: 47.5vh;
+}
+
+
+.signInAcc, .createWishList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    width: 100%;
+    padding: 5em;
+    margin: 1em;
+    background-color: gainsboro;
+    box-shadow: 10px 10px black;
+}
+
+.signInAcc{
+    box-shadow: 10px 10px black;
+}
+
+.createWishList{
+    box-shadow: -10px 10px black;
+}
+
+.bestsellers, .startWishlist{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em;
+    width: 100%;
+}
+.bestsellers{
+    gap: 3.5em;
+}
+.startWishlist{
+    gap: 1em;
+    flex-direction: column;
+    background-color: gainsboro;
+    box-shadow: 10px 10px black;
+}
+.startWishlist div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+    /* margin-bottom: 5em; */
+}
+
+.wishlistBTN{
+    text-decoration: underline;
+}
+.buttonsDivWishlist{
+    display: flex;
+    gap: 2.5em;
+}
+
+.wishHeart{
+    font-size: 5em;
+    color: red;
+    cursor: pointer;
+}
+
+

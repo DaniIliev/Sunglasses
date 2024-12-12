@@ -1,7 +1,7 @@
 .detailsPage{
-    margin: 1em;
+    margin: 3em 1em;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     gap: 5em;
 }
@@ -85,9 +85,10 @@
     flex-direction: column;
     align-items: flex-start;
     /* align-items: center; */
-    gap: 1em;
+    gap: 1.5em;
     width: 30%;
 }
+
 
 .addToCart{
     background-color: rgb(1, 1, 96);
@@ -101,18 +102,78 @@
 }
 
 .information{
-    width: 60%;
+    scrollbar-width: 1em;
+    margin-top: 1em;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.information h4{
+/* .information h4{
     border-bottom: 1px solid gainsboro;
-    margin-bottom: 2em;
-}
-
-.sections{
+    margin-bottom: 3em;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+} */
+ .information h4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    border-bottom: 1px solid gainsboro;
+    cursor: pointer;
+ }
+
+
+.productDetails{
+    margin: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5em;
+
 }
 
+
+.firstSection, .secondSection{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    /* align-items: center; */
+}
+.shipping{
+    width: 80%;
+}
+
+.shippingANDreturn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    text-align: justify;
+}
+.logos{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+
+.youmayalsolike{
+    text-align: center;
+    font-size: 2em;
+    margin: 1.5em 0 1.5em 0;
+}
+.shippingIsOpen{
+    text-align: center;
+    font-size: 2em;
+    margin: 0 0 1.5em 0;
+}
+
+.catalog-cards{
+    margin-bottom: 1.5em;
+}

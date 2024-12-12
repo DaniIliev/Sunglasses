@@ -11,8 +11,13 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.signUp,
 .signIn{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
     width: 100%;
     background-color: #949494;
     color: white;
@@ -29,9 +34,12 @@
 
 .dontHaveAcc{
     display: flex;
-    gap: 1em;
+    align-items: center;
+    font-size: 1.2em;
+    gap: 0.5em;
 }
 
+.register,
 .login{
     padding-top: 3em;
     display: flex;

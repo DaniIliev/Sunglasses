@@ -8,6 +8,8 @@ import SunglassesFilter from '../shared/SunglassesFilter';
 const Sunglasses = () => {
 
   return (
+    <>
+    <p className='titles'>HOME / SUNGLASSES / BEST-SELLERS</p>
     <div className='sunglassesPage'>
         <div className="filters">
             <SunglassesFilter />
@@ -75,6 +77,7 @@ const Sunglasses = () => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 
