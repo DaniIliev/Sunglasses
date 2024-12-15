@@ -14,11 +14,21 @@ import { SiAuthy } from "react-icons/si";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import CartDropdown from '../shared/CartDropdown/CartDropdown';
 import UserDropdown from '../shared/UserDropdown/UserDropdown';
+import { useTranslation } from 'react-i18next';
+
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
     const [isShippingHovered, setIsShippingHovered] = useState(false)
     const [isUserIconHovered, setIsUserIconHovered] = useState(false)
+    const [isLanguageENG, setIsLanguageENG] = useState('eng')
+
+    const { t, i18n } = useTranslation();
+
+    const switchLanguage = (lang) => {
+        console.log(lang)
+      i18n.changeLanguage(lang);
+    };
     
     useEffect(() => {
         setIsMenuMenOpen(false)
@@ -40,7 +50,15 @@ const NavBar = () => {
             <SearchBar /> 
             <Link to='/'><h1>LOGO</h1></Link>
             <div className='aboutUser'>
-                <p className='language'><strong>EN</strong></p>
+                <p className='language' onClick={() => {
+                    if(isLanguageENG == 'eng'){
+                        setIsLanguageENG("bg")
+                        switchLanguage("bg")
+                    }else{
+                        setIsLanguageENG("eng")
+                        switchLanguage("eng")
+                    }
+                }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
                <Link to={'/user-login'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon' /> </Link>
                 <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> </Link>
                 <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)} ><ShoppingCartIcon className='shoppingIcon'/></Link>

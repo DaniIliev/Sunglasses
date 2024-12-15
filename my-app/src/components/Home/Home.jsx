@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,  } from 'react'
 import './Home.css'
 import { CiHeart } from "react-icons/ci";
 import { GiClick } from "react-icons/gi";
 import { BsEmojiSunglasses } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 const Home = () => {
 
+    const {t, i18n} = useTranslation()
     const slides = [
         {
           id: 1,
@@ -68,7 +70,7 @@ const Home = () => {
                 })}
             </div>
             <div class="content">
-                <h1 className='welcomeText'>Welcome to vistglasses</h1>
+                <h1 className='welcomeText'>{t('welcome')}</h1>
                 <Link to='/sunglasses' className='button'><GiClick />Shopping with love<GiClick /></Link>
             </div>
         </div>
