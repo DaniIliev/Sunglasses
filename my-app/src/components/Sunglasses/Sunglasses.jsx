@@ -9,7 +9,8 @@ const Sunglasses = () => {
 
   return (
     <>
-    <p className='titles'>HOME / SUNGLASSES / BEST-SELLERS</p>
+    <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
+
     <div className='sunglassesPage'>
         <div className="filters">
             <SunglassesFilter />

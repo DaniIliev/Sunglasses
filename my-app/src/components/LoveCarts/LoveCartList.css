@@ -15,13 +15,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 40vh;
+    height: 45vh;
     gap: 1.5em;
     width: 100%;
-    background-image: url('/images/wishlistIMG.png');
+    /* background-image: url('/images/wishlistIMG.png'); */
+    background-image: url('/images/wishingPage.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 
 .contentWishlist div{
     display: flex;
@@ -30,6 +32,18 @@
     align-items: center;
     gap: 1.5em;
     margin-top: 3em;
+    backdrop-filter: blur(20px);
+    letter-spacing: 2px;
+    max-width: 60%;
+    text-align: center;
+    padding-bottom:  1em;
+}
+
+.contentWishlist div h1{
+    letter-spacing: 10px;
+    font-family: 'Tangerine', serif;
+    font-size: 5em;
+    padding-top: 0.2em;
 }
 
 .newUserBox, .wishlistCreate{
@@ -98,5 +112,9 @@
     color: red;
     cursor: pointer;
 }
+.wishingCards{
+    display: flex;
 
+    justify-content: center;
+}
 

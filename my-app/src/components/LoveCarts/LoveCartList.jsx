@@ -9,6 +9,7 @@ const LoveCartList = () => {
   return (
     <div className='LoveCartPage'>
         <div className="contentWishlist">
+
             <p className='titels'>home / wishlist</p>
             <div>
             <h1>Wishlist</h1>
@@ -76,6 +77,62 @@ const LoveCartList = () => {
                     </div>
                 </Link>
             </div>
+        </div>
+        <div className="wishingCards">
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
+                    </div>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
+                    </div>
+                </Link>
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
+                    </div>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
+                    </div>
+                </Link>
+                <Link className='card' to='/sunglasses/1'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <CiHeart className='like'/> 
+                        <div className='imageContainer'>
+                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </div>
+                    </div>
+                    <div className="info">
+                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <div className='prices'>
+                            <h5>600,00$</h5>
+                            <h4>500,00$</h4>
+                            <p>-10%</p>
+                        </div>
+                    </div>
+                </Link>
         </div>
     </div>
   )

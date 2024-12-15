@@ -1,7 +1,8 @@
 
-import React, {useState}from 'react'
+import React, {useEffect, useState}from 'react'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import '../Sunglasses/Sunglasses.css'
+import { MdKeyboardArrowUp } from "react-icons/md";
 const SunglassesFilter = () => {
     const [isFrameShapeOpen, setIsFrameShapeOpen] = useState(false)
     const [isFrameColrFIlterOpen, setIsFrameColrFIlterOpen] = useState(false)
@@ -11,7 +12,6 @@ const SunglassesFilter = () => {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(200);  
     
-
     // Format numbers as currency
     const formatPrice = (value) => {
       return `$${parseInt(value).toLocaleString()}`;
@@ -29,32 +29,39 @@ const SunglassesFilter = () => {
     };
   return (
     <>
-            <p className='sunglassesfilter' onClick={() => setIsFrameShapeOpen(!isFrameShapeOpen)} >FRAME SHAPE <MdOutlineKeyboardArrowDown/></p>
+            <p className='sunglassesfilter' 
+                onClick={() => setIsFrameShapeOpen(!isFrameShapeOpen)}>
+                FRAME SHAPE
+                {isFrameShapeOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }</p>
                 {isFrameShapeOpen ? 
                         <div className="checkboxes">
-                            <div className="checkbox">
+                            <label class="container">Round <img src="/images/round.jpeg" alt="" />
                                 <input type="checkbox" id="1" name="round" value="Round"/>
-                                <label for="round">Round <img src="/images/round.jpeg" alt="" /></label>
-                            </div>
-                            <div className="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label className="container"> Squared <img src="/images/squared.jpeg" alt="" />
                                 <input type="checkbox" id="2" name="squared" value="Squared"/>
-                                <label for="squared">Squared <img src="/images/squared.jpeg" alt="" /></label>
-                            </div>
-                            <div className="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label className="container"> Rechtangular <img src="/images/rechtangular.jpeg" alt="" />
                                 <input type="checkbox" id="3" name="rechtangular" value="Rechtangular"/>
-                                <label for="rechtangular">Rechtangular <img src="/images/rechtangular.jpeg" alt="" /></label>
-                            </div>
-                            <div className="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label className="container"> Pilot/Aviator <img src="/images/pilotAviator.jpeg" alt="" />
                                 <input type="checkbox" id="4" name="pilot/aviator" value="Pilot/Aviator"/>
-                                <label for="pilot/aviator">Pilot/Aviator <img src="/images/pilotAviator.jpeg" alt="" /></label>
-                            </div>
-                            <div className="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label className="container"> Cat eye <img src="/images/catEye.jpeg" alt="" />
                                 <input type="checkbox" id="5" name="catYey" value="CatEye"/>
-                                <label for="catYey">Cat eye <img src="/images/catEye.jpeg" alt="" /></label>
-                            </div>
+                                <span class="checkmark"></span>
+                            </label>
                         </div> : ''}
 
-            <p className='sunglassesfilter' onClick={() => setIsFrameColrFIlterOpen(!isFrameColrFIlterOpen)}>FRAME COLOR <MdOutlineKeyboardArrowDown /></p>
+            <p className='sunglassesfilter' 
+                onClick={() => setIsFrameColrFIlterOpen(!isFrameColrFIlterOpen)}>
+                FRAME COLOR 
+                {isFrameColrFIlterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                </p>
                 {isFrameColrFIlterOpen ? 
                             <div className="frame-colors">
                                 <div className="colorContainer">
@@ -124,7 +131,11 @@ const SunglassesFilter = () => {
                             </div> : ''
                 }
 
-            <p className='sunglassesfilter' onClick={() => setIsLensColorFilterOpen(!isLensColrFilterOpen)}>LENS COLOR <MdOutlineKeyboardArrowDown /></p>
+            <p className='sunglassesfilter' 
+                onClick={() => setIsLensColorFilterOpen(!isLensColrFilterOpen)}>
+                LENS COLOR 
+                {isLensColrFilterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                </p>
             {isLensColrFilterOpen ? 
                     <div className="lens-colors">
                         <div className="lens-color-container">
@@ -151,7 +162,11 @@ const SunglassesFilter = () => {
                 : ''
             }
 
-            <p className='sunglassesfilter' onClick={() => setIsPriceFilterOpen(!isPriceFilterOpen)}>PRICE <MdOutlineKeyboardArrowDown /></p>
+            <p className='sunglassesfilter' 
+                onClick={() => setIsPriceFilterOpen(!isPriceFilterOpen)}>
+                    PRICE
+                    {isPriceFilterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                    </p>
             {isPriceFilterOpen ? 
                         <div className="filter-container">
                         <h3>FILTER BY PRICE</h3>

@@ -4,7 +4,6 @@ import './CartDropdown.css'
 import { IoIosClose } from "react-icons/io";
 
 const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
-  console.log(isShippingHovered)
   return (
 <>
 {isShippingHovered ? 

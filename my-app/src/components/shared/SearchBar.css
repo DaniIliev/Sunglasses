@@ -1,0 +1,18 @@
+.searchBarBox{
+    width: 20%;
+}
+.searchBar{
+    display: flex;
+    align-items: center;
+    gap: 10em;
+    border: 0.1em solid black;
+    border-radius: 4em;
+    padding: 0.5em;
+    width: 80%;;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 8.5%;
+    left: 24%;
+}

@@ -34,6 +34,7 @@
     width: 100%;
     gap: 0.5em;
     border-bottom: 2px solid black;
+    cursor: pointer;
 }
 .frame-colors, 
 .lens-colors{
@@ -103,6 +104,8 @@
 .black{
     background-color: black;
 }
+
+
 /* filter price  */
 
 .filter-container {

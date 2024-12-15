@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import { MdKeyboardArrowUp } from "react-icons/md";
 import SearchBar from '../shared/SearchBar'
 import "./NavBar.css"
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,14 +13,17 @@ import { GiReturnArrow } from "react-icons/gi";
 import { SiAuthy } from "react-icons/si";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import CartDropdown from '../shared/CartDropdown/CartDropdown';
+import UserDropdown from '../shared/UserDropdown/UserDropdown';
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
     const [isShippingHovered, setIsShippingHovered] = useState(false)
+    const [isUserIconHovered, setIsUserIconHovered] = useState(false)
     
     useEffect(() => {
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
+        setIsUserIconHovered(false)
     }, [])
   return (
     <div className='navBars'>
@@ -37,7 +41,7 @@ const NavBar = () => {
             <Link to='/'><h1>LOGO</h1></Link>
             <div className='aboutUser'>
                 <p className='language'><strong>EN</strong></p>
-               <Link to={'/user-login'}><PersonIcon className='personIcon' /> </Link>
+               <Link to={'/user-login'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon' /> </Link>
                 <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> </Link>
                 <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)} ><ShoppingCartIcon className='shoppingIcon'/></Link>
             </div>
@@ -47,14 +51,18 @@ const NavBar = () => {
             <nav>
                 <a href="">New</a>
                 <Link to="/sunglasses">Best sellers</Link>
-                <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>Women's <MdOutlineKeyboardArrowDown /></a>
-                <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>Men's <MdOutlineKeyboardArrowDown /></a>
+                <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>Women's {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
+                <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>Men's {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
                 <a href="">Unisex</a>
                 <Link to="">Sale</Link>
             </nav>
         </div>
         {isShippingHovered ? 
         <CartDropdown setIsShippingHovered={setIsShippingHovered} isShippingHovered={isShippingHovered}/> 
+        : ''
+        }
+        {isUserIconHovered ? 
+        <UserDropdown setIsUserIconHovered={setIsUserIconHovered} isUserIconHovered={isUserIconHovered}/>
         : ''
         }
 
