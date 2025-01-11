@@ -6,6 +6,7 @@ import { BsEmojiSunglasses } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Reviews from '../Reviews/Reviews';
 const Home = () => {
 
     const {t, i18n} = useTranslation()
@@ -71,11 +72,11 @@ const Home = () => {
             </div>
             <div class="content">
                 <h1 className='welcomeText'>{t('welcome')}</h1>
-                <Link to='/sunglasses' className='button'><GiClick />Shopping with love<GiClick /></Link>
+                <Link to='/sunglasses' className='button'><GiClick className='clickIcon' />{t('shoppingWithLoveBTN')}<GiClick className='clickIcon'/></Link>
             </div>
         </div>
         <div className='trendingContainer'>
-            <h2 className='trendingTitle'>Trending now</h2>
+            <h2 className='trendingTitle'>{t('trendingNow')}</h2>
             <div className='trendingCards'>
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
@@ -155,20 +156,20 @@ const Home = () => {
             <div className='question'>
                 <img src="../../../public/images/scr2.jpeg" alt="" />  
                 <div>
-                    <h2>Why choose our glasses?</h2>
+                    <h2>{t('chooseQuestion')}</h2>
                     <img src="../../../public/images/questionsMark.png" alt="" />
                 </div>
                 <img src="../../../public/images/sunglasses3.jpg" alt="" />
 
             </div>
             <div className='benefits'>
-                <p className='benefit'><span>1</span>Style Meets Innovation: Our sunglasses blend cutting-edge designs with timeless aesthetics, making you stand out wherever you go.</p>
-                <p className='benefit'><span>2</span>Ultimate Eye Protection: Engineered with 100% UV protection and polarized lenses, they safeguard your eyes while reducing glare for clear, comfortable vision.</p>
-                <p className='benefit'><span>3</span>Eco-Friendly Materials: Made from sustainable materials, our sunglasses help protect the planet while protecting your eyes.</p>
-                <p className='benefit'><span>4</span>Durability You Can Trust: Built to last, they resist scratches, impacts, and everyday wear, ensuring a reliable companion for all your adventures.</p>
+                <p className='benefit'><span>1</span> {t('benefit1')}</p>
+                <p className='benefit'><span>2</span> {t('benefit2')}</p>
+                <p className='benefit'><span>3</span> {t('benefit3')}</p>
+                <p className='benefit'><span>4</span> {t('benefit4')}</p>
             </div>
         </div>
-       
+       <Reviews />
     </div>
   )
 }

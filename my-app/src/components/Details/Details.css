@@ -91,11 +91,34 @@
 
 
 .addToCart{
+    text-align: center;
     background-color: rgb(1, 1, 96);
     padding: 0.8em 4em;
     color: white;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
+
+.adminPanel{
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.editDeleteBTNS{
+    display: flex;
+    gap: 0.5em;
+}
+.edit, .delete{
+    font-size: 2em;
+    cursor: pointer;
+}
+.delete{
+    color: red;
+}
+.edit{
+    color: blue;
+}
+
 
 .addToCart:hover{
     background-color: black;

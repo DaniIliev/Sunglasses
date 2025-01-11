@@ -1,16 +1,51 @@
-import React, {useState}from 'react'
+import React, {useEffect, useState}from 'react'
 import { Link } from 'react-router-dom';
 import './Sunglasses.css'
 import { CiHeart } from "react-icons/ci";
 import SunglassesFilter from '../shared/SunglassesFilter';
-
+import { BiSort } from "react-icons/bi";
+import * as sunglassesService from '../../services/Sunglasses.js'
 
 const Sunglasses = () => {
-
+    const [sunglasses, setSunglasses] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false)
+    const [sort, setSort] = useState('standart')
+    useEffect(() => {
+        sunglassesService.getSunglasses()
+            .then(result => {
+                setSunglasses(result)
+                setIsLoading(false)
+            })
+            .catch(err => console.log(err))
+    }, [])
   return (
     <>
-    <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
-
+    <div className='div-hr-text-gradient-and-imgFilter'>
+        <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
+        <BiSort className='img' onClick={() => setIsSortOpen(!isSortOpen)}/>
+        {isSortOpen ? 
+        <div className='sortingDiv' onMouseLeave={() => setIsSortOpen(false)}>
+            <ul className='sorting'>
+                <h4>Sort by:</h4>
+                    <div className='checkboxes'>
+                        <label class="container"> Standart Sorting 
+                            <input type="checkbox" id="1" name="standart" value="standart" checked={sort == 'standart'}/>
+                            <span className="checkmark" onClick={() => setSort('standart')}></span>
+                        </label>
+                        <label className="container"> Price Ascending
+                            <input type="checkbox" id="2" name="ascending" value="ascending" checked={sort == 'ascending'}/>
+                            <span className="checkmark" onClick={() => setSort('ascending')}></span>
+                        </label>
+                        <label className="container"> Price Descending
+                            <input type="checkbox" id="3" name="descending" value="descending" checked={sort == 'descending'}/>
+                            <span className="checkmark" onClick={() => setSort('descending')}></span>
+                        </label>
+                    </div>
+            </ul>
+        </div>
+         : ''}
+    </div>
     <div className='sunglassesPage'>
         <div className="filters">
             <SunglassesFilter />

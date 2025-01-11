@@ -10,6 +10,8 @@ import Details from './components/Details/Details'
 import Cart from './components/Cart/Cart'
 import Register from './components/Register/Register'
 import LoveCartList from './components/LoveCarts/LoveCartList'
+import Create from './components/AdminOnly/Create/Create'
+
 function App() {
 
   return (
@@ -24,6 +26,7 @@ function App() {
           <Route path = '/sunglasses/:id' element={<Details/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/wishlist' element={<LoveCartList />} />
+          <Route path='/create' element={<Create/>}/>
         </Routes>
         <Footer />  
     </div>

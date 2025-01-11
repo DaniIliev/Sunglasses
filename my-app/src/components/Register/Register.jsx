@@ -16,6 +16,7 @@ const Register = () => {
             <Link to='/user-login' className='alreadyHaveAcc'>Sign in</Link>
         </div>
     </form>
+
 </div>
   )
 }

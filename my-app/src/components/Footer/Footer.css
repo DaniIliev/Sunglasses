@@ -26,3 +26,19 @@
     text-decoration: none;
     color: white;
 }
+.contacts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+@media (min-width: 300px) and (max-width: 1200px) {
+    .footer{
+        font-size: 0.5em;
+    }
+
+    .socialMediasIcons{
+        margin-top: 0.5em;
+    }
+}

@@ -1,6 +1,4 @@
-.fname{
 
-}
 #email,
 #password{
     display: flex;
@@ -45,9 +43,37 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    width: 50%;
+    width: 30%;
     height: auto;
-    margin: 0 auto;
-    text-align: center;
+    align-items: center;
     height: 57vh;
+}
+
+/* /// */
+.pageDiv{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.imagesbox{
+    position: relative;
+    /* margin: auto; */
+    /* max-width: 80px; */
+}
+.singleBoxImage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    width: 70%;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.singleBoxImage img{
+    width: 400px;
+    height: 400px;
+
 }

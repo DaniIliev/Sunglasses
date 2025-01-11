@@ -4,6 +4,8 @@ import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
 import { FaShippingFast } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa6";
+import { MdDeleteForever } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 import './Details.css'
 import { FaPlus } from "react-icons/fa";
 import { GrCaretPrevious } from "react-icons/gr";
@@ -22,9 +24,9 @@ const images = [
 const Details = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [sunglassesCount, setSunglassesCount] = useState(0)
-    const [isDescriptionOpen, setIsDescriptionOpen] = useState(false)
     const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false)
     const [isShipingAndReturnOpen, setIsShipingAndReturnOpen] = useState(false)
+    const [isAdminHere, setIsAdminHere] = useState(true)
 
     const handleNext = () => {
         setCurrentImageIndex((currentImageIndex + 1) % images.length);
@@ -51,6 +53,11 @@ const Details = () => {
             </div>
         </div>
         <div className='aboutSunglasses'>
+                {isAdminHere ? 
+                 <div className="editDeleteBTNS">
+                    <p className='edit'><FaRegEdit /></p>
+                    <p className='delete'><MdDeleteForever /></p>
+                </div> : ''}
             <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                 <p className='reviews'><RiStarSFill /><RiStarSFill /><RiStarSFill /><RiStarSFill /><RiStarSFill /></p>
                 <div className='prices'>

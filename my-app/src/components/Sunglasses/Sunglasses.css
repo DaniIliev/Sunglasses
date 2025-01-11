@@ -11,6 +11,30 @@
     width: 35%;
     gap: 2em;
 }
+.div-hr-text-gradient-and-imgFilter .img{
+    position: absolute;
+    top: 21.5%;
+    right: 5%;
+    font-size: 2em;
+    background-color: white;
+}
+
+.sortingDiv{
+    padding: 1em 1.5em;
+    position: absolute;
+    right: 5%;
+    top: 26.5%;
+    background-color: ghostwhite;
+    border: 0.5px solid black;
+    border-radius: 12px;
+
+}
+.sorting{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
 .checkboxes{
     display: flex;
     flex-direction: column;

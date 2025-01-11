@@ -17,7 +17,7 @@ const Footer = () => {
                     <a href="">Sign up</a>
                 </div>
             </div>
-            <div>
+            <div className='contacts'>
                 <h2>Contacts</h2>
                 <p>9032180912</p>
                 <p>email@abv.bg</p>

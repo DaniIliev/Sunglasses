@@ -212,13 +212,80 @@
   text-align: center;
   justify-content: center;
 }
+.question div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
 .question img{
   width: 22.5%;
   margin: 1em 0 1em 0;
   border-radius: 30%;
 }
 
+@media (min-width: 300px) and (max-width: 1200px) {
+  .benefits{
+    flex-direction: column;
+    gap: 1em;
+    margin: 1em 0 1em 0;
+  }
 
+  .benefit{
+    font-size: 0.7em;
+    width: 100%;
+  }
+
+  .choice{
+    margin: 0.5em;
+  }
+
+  .question div h2{
+    font-size: 0.8em;
+  }
+  .question div img{
+    width: 18%;
+   margin: 0.5em 0 0.5em 0;
+  }
+
+  .trendingContainer{
+    animation: none;
+  }
+  .trendingCards{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .card{
+    height: 100%;
+    width: 100%c;
+  }
+  .carousel-track{
+    height: 30vh;
+  }
+  .content{
+    gap: 2em;
+    font-size: 0.8em;
+  }
+  .clickIcon{
+    font-size: 0.5em;
+  } 
+  .images{
+    margin: 30px auto;
+  }
+  .non-active{
+    width: 105px;
+    height: 165px;
+  }
+  .active{
+    width: 180px;
+    height: 230px;
+  }
+  .images {
+    animation: none;
+  }
+
+}
 
 
 
