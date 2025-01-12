@@ -1,0 +1,51 @@
+
+#email,
+#password{
+    display: flex;
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.signUp,
+.signIn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    width: 100%;
+    background-color: #949494;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+.createAcc{
+    background-color: #ffffff;
+
+}
+
+.dontHaveAcc{
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    gap: 0.5em;
+}
+
+.register,
+.login{
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 30%;
+    height: auto;
+    align-items: center;
+    height: 57vh;
+}
+
