@@ -4,7 +4,7 @@ import './Sunglasses.css'
 import { CiHeart } from "react-icons/ci";
 import SunglassesFilter from '../shared/SunglassesFilter';
 import { BiSort } from "react-icons/bi";
-
+import * as sunglassesService from '../../services/sunglassesService'
 
 const Sunglasses = () => {
     const [sunglasses, setSunglasses] = useState([]);
@@ -12,14 +12,15 @@ const Sunglasses = () => {
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [sort, setSort] = useState('standart')
 
-    // useEffect(() => {
-    //     sunglassesService.getSunglasses()
-    //         .then(result => {
-    //             setSunglasses(result)
-    //             setIsLoading(false)
-    //         })
-    //         .catch(err => console.log(err))
-    // }, [])
+    useEffect(() => {
+        sunglassesService.getAll()
+            .then(result => {
+                setSunglasses(result)
+                setIsLoading(false)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
   return (
     <>
     <div className='div-hr-text-gradient-and-imgFilter'>
@@ -52,6 +53,26 @@ const Sunglasses = () => {
             <SunglassesFilter />
         </div>
         <div className="catalog-cards">
+            {sunglasses.map(item => 
+            <Link className='card' to={`/sunglasses/${item._id}`}>
+                <div className='imageStock'>
+                    <p className='sale'>SALE</p>
+                    <CiHeart className='like'/> 
+                    <div className='imageContainer'>
+                        <img src={item.image} width={300}/>
+                        <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                    </div>
+                </div>
+                <div className="info">
+                    <h3>{item.name}</h3>
+                    <div className='prices'>
+                        <h5>{item.price}</h5>
+                        <h4>{item.oldPrice}</h4>
+                        <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+                    </div>
+                </div>
+            </Link>
+            )}
             <Link className='card' to='/sunglasses/1'>
                 <div className='imageStock'>
                     <p className='sale'>SALE</p>

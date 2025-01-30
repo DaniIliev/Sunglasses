@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useContext, useEffect, useState }  from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { MdKeyboardArrowUp } from "react-icons/md";
 import SearchBar from '../shared/SearchBar'
@@ -15,6 +15,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import CartDropdown from '../shared/CartDropdown/CartDropdown';
 import UserDropdown from '../shared/UserDropdown/UserDropdown';
 import { useTranslation } from 'react-i18next';
+import { UserContext } from '../../context/UserContext';
 
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
@@ -23,6 +24,7 @@ const NavBar = () => {
     const [isUserIconHovered, setIsUserIconHovered] = useState(false)
     const [isLanguageENG, setIsLanguageENG] = useState('eng')
 
+    const { user , setUser} = useContext(UserContext);
     const { t, i18n } = useTranslation();
 
     const switchLanguage = (lang) => {
@@ -34,8 +36,8 @@ const NavBar = () => {
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
         setIsUserIconHovered(false)
-        
-    }, [])
+        console.log(user)
+    }, [user])
   return (
     <div className='navBars'>
         <div class="moving-label">
@@ -60,6 +62,7 @@ const NavBar = () => {
                         switchLanguage("eng")
                     }
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
+                {user ? <p>{`Welcome, ${user.email}`}</p> : ''}
                <Link to={'/user-login'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon' /> </Link>
                 <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> </Link>
                 <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)} ><ShoppingCartIcon className='shoppingIcon'/></Link>

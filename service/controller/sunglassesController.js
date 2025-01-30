@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Sunglasses = require('../schemas/SunglassesSchema')
-const authenticate = require("../utills/authenticate");
+const authenticate = require("../utills/authmiddleware");
 const mongoose = require("mongoose");
 
 router.post('/add', async (req, res) => {
@@ -31,7 +31,7 @@ router.post('/add', async (req, res) => {
     }
   });
   
-  router.get("/:id", authenticate ,async (req, res) => {
+  router.get("/:id" ,async (req, res) => {
     const { id } = req.params;
 
     try {

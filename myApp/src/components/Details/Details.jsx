@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react'
+import { Link, useParams } from 'react-router-dom';
 import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
 import { FaShippingFast } from "react-icons/fa";
@@ -11,7 +11,9 @@ import { FaPlus } from "react-icons/fa";
 import { GrCaretPrevious } from "react-icons/gr";
 import { GrCaretNext } from "react-icons/gr";
 import { CiHeart } from "react-icons/ci";
-
+import * as userService from '../../services/userService' 
+import * as sunglassesService from '../../services/sunglassesService' 
+import { UserContext } from '../../context/UserContext';
 
 
 const images = [
@@ -27,6 +29,16 @@ const Details = () => {
     const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false)
     const [isShipingAndReturnOpen, setIsShipingAndReturnOpen] = useState(false)
     const [isAdminHere, setIsAdminHere] = useState(true)
+    const [item, setItem] = useState([])
+
+    const {id} = useParams()
+    const { user , setUser} = useContext(UserContext);
+
+    useEffect(() =>{
+        sunglassesService.getById(id)
+            .then(result => setItem(result))
+            .catch(error => console.log(error))
+    },[id])
 
     const handleNext = () => {
         setCurrentImageIndex((currentImageIndex + 1) % images.length);
@@ -35,9 +47,14 @@ const Details = () => {
       const handlePrev = () => {
         setCurrentImageIndex((currentImageIndex - 1 + images.length) % images.length);
       };
+    const handleAddItem = () => {
+        userService.patchUser(user._id, id)
+            .then(result => console.log(result))
+    }
     
   return (
     <>
+    {console.log(item)}
     <div className='detailsPage'>
         <div className='allAboutImages'>
             <div className="infinitiImages">
@@ -70,7 +87,7 @@ const Details = () => {
                     <p>{sunglassesCount}</p>
                     <p className='plusMinus'><FaPlus /></p>
                 </div>
-                <p className='addToCart'>ADD TO CART</p>
+                <p className='addToCart' onClick={handleAddItem}>ADD TO CART</p>
             <h4>DESCRIPTION</h4>
             <div className="description">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, hic. Iste, itaque fugit odit accusantium est esse corrupti rerum voluptates labore corporis non reiciendis, amet obcaecati maxime id libero architecto delectus cupiditate voluptatem. Facere sapiente vitae modi magni repudiandae dolore placeat rem earum officia? Ipsam nulla magnam sint ex numquam?</p>

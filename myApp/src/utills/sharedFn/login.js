@@ -30,5 +30,5 @@ export const login = async (formData, setUser) => {
         alert("An error occurred: " + error.message);
       }
   
-      console.log("Login Submitted", { email, password });
+      console.log("Login Submitted");
 }

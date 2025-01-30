@@ -3,7 +3,56 @@ const User = require('../schemas/UserSchema')
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { SECRET_KEY } = require("../utills/jwt");
+const mongoose = require("mongoose")
 
+// router.patch('/:id', async (req , res) =>{
+
+
+//   try{
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(400).json({ message: "Invalid ID format" });
+//     }
+//     const user = await User.findById(id);
+//     console.log(user)
+  
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.status(200).json(user);
+
+//   }catch (error) {
+//     console.error("Error updating user:", error);
+//     res.status(500).json({ message: "Server error", error });
+//   }
+
+// })
+router.get('/:id', async (req,res) => {
+  const {id} = req.params;
+
+  
+  try {
+    // Проверка дали ID-то е валидно
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+
+    // Търсене в базата данни
+     const user = await User.findById(id);
+
+    // Ако няма елемент с това ID
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Връщане на елемента
+    return user
+    // res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+}); 
 
 router.post("/login", async (req, res) => {
     try {
@@ -23,15 +72,17 @@ router.post("/login", async (req, res) => {
   
       // Генериране на токен
       const payload = { _id: user._id, email: user.email, name: user.name };
-      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
-  
+      const token = await jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
+
+      res.cookie('auth', token)
+      res.redirect('/')
       // console.log("Generated Token:", token);
   
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: false, // Увери се, че това е правилно за локално тестване
+      res.cookie('auth', token,{
+        httpOnly: false, // Кукито ще бъде достъпно от JavaScript
+        secure: false,   // Включи `true` за HTTPS в продукция
         sameSite: 'strict',
-      });
+      })
   
       // Връщане на токена към клиента
       res.json({ message: "Login successful", token });
