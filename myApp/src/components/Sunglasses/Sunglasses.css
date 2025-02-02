@@ -27,6 +27,7 @@
     background-color: ghostwhite;
     border: 0.5px solid black;
     border-radius: 12px;
+    z-index: 2000;
 
 }
 .sorting{
@@ -227,6 +228,16 @@ h3 {
 
 }
 
+.allAboutCard{
+    position: relative;
+    width: 31%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;  
+}
 .info{
     display: flex;
     align-items: center;
@@ -265,13 +276,6 @@ h3 {
     z-index: 1;
     color: red;
 }
-.like{
-    position: absolute;
-    color: red;
-    z-index: 2;
-    font-size: 2.3em;
-    margin: 6.8em 6.8em;
-}
 .imageContainer{
     width: 300px; 
     height: 300px;
@@ -281,19 +285,49 @@ h3 {
 .imageContainer img {
     transition: opacity 1s ease;
 }
-.hover-image {
+.hover-image , .addToCartSUNP{
     position: absolute;
-    top: 0;
+    top: 50;
     left: 0;
     opacity: 0;
+}
+
+.addToCartSUNP{
+    position: absolute;
+    top: 70%;
+    left: 25%;
+    text-align: center;
+    color: white;
+    background-color: rgb(3, 0, 0);
+    padding: 0.8em 4em;
+    border-radius: 16px;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 .selected{
     border: 2px solid black;
 }
-.imageContainer:hover .hover-image {
+.imageStock:hover .hover-image {
     opacity: 1;
 }
-
+.imageStock:hover .addToCartSUNP{
+    opacity: 1;
+}
 .imageContainer:hover .default-image {
     opacity: 0;
+}
+@media (min-width: 300px) and (max-width: 900px){
+    .filters{
+        display: none;
+    }
+    .catalog-cards{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .sunglassesPage{
+        display: block;
+    }
+    .div-hr-text-gradient-and-imgFilter .img {
+        top: 18%;
+    }
 }

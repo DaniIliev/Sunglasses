@@ -1,17 +1,22 @@
-import React, {useEffect, useState}from 'react'
+import React, {useContext, useEffect, useState}from 'react'
 import { Link } from 'react-router-dom';
 import './Sunglasses.css'
 import { CiHeart } from "react-icons/ci";
 import SunglassesFilter from '../shared/SunglassesFilter';
 import { BiSort } from "react-icons/bi";
 import * as sunglassesService from '../../services/sunglassesService'
+import { addToCart } from '../../utills/sharedFn/addToCart';
+import { UserContext } from '../../context/UserContext';
+import AddToCartPopup from '../Popups/addToCartPopup';
 
 const Sunglasses = () => {
     const [sunglasses, setSunglasses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [sort, setSort] = useState('standart')
+    const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
+    const { user, setUser } = useContext(UserContext);
     useEffect(() => {
         sunglassesService.getAll()
             .then(result => {
@@ -21,8 +26,17 @@ const Sunglasses = () => {
             .catch(err => console.log(err))
     }, [])
 
+    const addItem = (id) => {
+        setIsAddToCartPopupOpen(true)
+        setTimeout(() => {  
+            setIsAddToCartPopupOpen(false)
+        }, 3000);
+
+        addToCart(user, setUser, id, 1)
+    }
   return (
     <>
+    {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
         <BiSort className='img' onClick={() => setIsSortOpen(!isSortOpen)}/>
@@ -54,26 +68,31 @@ const Sunglasses = () => {
         </div>
         <div className="catalog-cards">
             {sunglasses.map(item => 
-            <Link className='card' to={`/sunglasses/${item._id}`}>
-                <div className='imageStock'>
-                    <p className='sale'>SALE</p>
-                    <CiHeart className='like'/> 
-                    <div className='imageContainer'>
-                        <img src={item.image} width={300}/>
-                        <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+            <>
+            <div className="allAboutCard">
+                <div className='card'>
+                    <div className='imageStock'>
+                        <p className='sale'>SALE</p>
+                        <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
+                            <img src='/images/COPY3.webp' width={300} className='default-image'/>
+                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                        </Link>
+                        <p className='addToCartSUNP' onClick={() => addItem(item._id)}>Add to cart</p>
+                    </div>
+                    <div className="info">
+                        <h3>{item.name}</h3>
+                        <div className='prices'>
+                            <h5>{item.price}</h5>
+                            <h4>{item.oldPrice}</h4>
+                            <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+                        </div>
                     </div>
                 </div>
-                <div className="info">
-                    <h3>{item.name}</h3>
-                    <div className='prices'>
-                        <h5>{item.price}</h5>
-                        <h4>{item.oldPrice}</h4>
-                        <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-                    </div>
-                </div>
-            </Link>
+            </div>
+            </>
+            
             )}
-            <Link className='card' to='/sunglasses/1'>
+            {/* <Link className='card' to='/sunglasses/1'>
                 <div className='imageStock'>
                     <p className='sale'>SALE</p>
                     <CiHeart className='like'/> 
@@ -90,43 +109,43 @@ const Sunglasses = () => {
                         <p>-10%</p>
                     </div>
                 </div>
-            </Link>
-            <div className='card'>
+            </Link> */}
+            <div className='allAboutCard'>
                 <img src="/images/COPY2.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='card'>
+            <div className='allAboutCard'>
                 <img src="/images/COPY3.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='card'>
+            <div className='allAboutCard'>
                 <img src="/images/COPY4.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='card'>
+            <div className='allAboutCard'>
                 <img src="/images/COPY5.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='card'>
+            <div className='allAboutCard'>
                 <img src="/images/COPY6.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='card'>
+            <div className='allAboutCard'>
                 <img src="/images/COPY1.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>

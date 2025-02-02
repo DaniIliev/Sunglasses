@@ -1,45 +1,48 @@
 .cart{
-    height: 60vh;
-}
-.tableInfo{
-display: flex;
-justify-content: space-around;
-padding: 1em;
-border-bottom: 1px solid gainsboro;
+    height: 73vh;
 }
 .titles{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.imagesTitle{
-    width: 25%;
+.table{
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+.table th, .table td {  
+    text-align: center; /* Центрирай текста */  
+    vertical-align: middle; /* Центрирай вертикално съдържанието */  
+} 
+.table th{
+    background-color: gainsboro;
+    border: 1px solid gray;
+    padding: 1em 0 1em 0;
+}
+.table td {
+    align-items: center;
+    border: 1px solid gainsboro;
+
+}
+.table img {  
+    display: block; /* Направи изображението block елемент */  
+    margin: 0.5em auto; /* Центрирай изображението */  
+}  
+.counterTD{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1em;
-    margin-left: 7.2em;
+    justify-content: center;
+    gap: 2em;
+    height: auto;
+    width: 100%;
 }
+.del{
+    font-size: 2em;
+    color: red;
+}
+.scrollbarTabelle{
+    height: 400px;
+    overflow-y: scroll;
 
-.stock{
-    display: flex;
-    align-items: center;
-    padding: 1em;
-    border: 0.5px solid black;
-    margin: 1em;
-}
-
-.prices{
-    margin-left: 1em;
-    width: 20%;
-}
-.counter{
-    width: 10%;
-    margin-left: 5em;
-}
-.close{
-    margin-left: 4em;
-}
-.total{
-    margin-left: 15em;
 }

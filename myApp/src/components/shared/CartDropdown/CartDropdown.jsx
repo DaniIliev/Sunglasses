@@ -1,23 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './CartDropdown.css'
 import { IoIosClose } from "react-icons/io";
-
+import { UserContext } from '../../../context/UserContext';
+import { fetchItemsInCart } from '../../../utills/sharedFn/fetchItemsInCart';
+import { removeFromCart } from '../../../utills/sharedFn/removeFromCart';
 const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
+  const {user, setUser} = useContext(UserContext);
+  const [allItems, setAllItems] = useState([])
+
+  useEffect(() => { 
+    if(user){
+      fetchItemsInCart(user, setAllItems)
+    }
+  }, [user?.cart])
+
+  const handleDelete = (el) => {
+    console.log('delete')
+    removeFromCart(user, setUser, el)
+  }
   return (
 <>
 {isShippingHovered ? 
+    // allAboutUser.cart.map(el => 
     <div className='cartDropdown' onMouseLeave={() => setIsShippingHovered(!isShippingHovered)}>
-      <div className='aboutItem'>
+      {allItems.map(item => 
+      <div className='aboutItem' id={item._id}>
+        {console.log(item)}
           <img src="/images/COPY1.webp" alt="" width={100}/>
           <div className="sumaryInfo">
-            <p>OUTTA LOVE | TORT</p>
-            <p>QTY: 1</p>
-            <p>PRICE: 600$</p>
+            <p>{item.name}</p>
+            <p>QTY: {item.quantity}</p>
+            <p>PRICE: {item.price}$</p>
           </div>
-          <IoIosClose className='close2'/>
+          <IoIosClose className='close2' onClick={() => handleDelete(item._id)}/>
       </div>
-      
+      )}
       <p>Total price: 600$</p>
       <p>All Item(s) are shipped from Bulgaria. View further shipping info <strong>HERE</strong>. All orders are processed in EURO€</p>
       <div className="buttons">
@@ -25,7 +43,7 @@ const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
         <Link className='ckeckout'>Checkout</Link>
       </div>
     </div> : ''
-    }
+}
 </>
 )}
 

@@ -5,31 +5,49 @@ const bcrypt = require("bcrypt");
 const { SECRET_KEY } = require("../utills/jwt");
 const mongoose = require("mongoose")
 
-// router.patch('/:id', async (req , res) =>{
-
-
-//   try{
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(400).json({ message: "Invalid ID format" });
-//     }
-//     const user = await User.findById(id);
-//     console.log(user)
+router.patch('/:id', async (req , res) =>{
+  let editValue = ['cart']
+  const { id } = req.params;
+  const {data} = req.body;
+  try{
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+    let user = await User.findByIdAndUpdate(id);
   
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    let newUser;
+    if(data.type == "addToCart"){
+       user.cart.push({
+        id: data.id,
+        quantity: data.quantity,
+      })
+       newUser = await User.findByIdAndUpdate(id, user);
+    }else if(data.type == 'updateCount'){
+      newUser = await User.findByIdAndUpdate(id, data.newUser);
+    } else if(data.type == "deleteFromCart"){
+      user.cart = data.itemIDs;
+      newUser = await User.findByIdAndUpdate(id, user);
+    }else if(data.type == "likeItem"){
+      user.wishlist.push(data.id)
+      newUser = await User.findByIdAndUpdate(id, user);
+    }else if(data.type == "unlikeItem"){
+      user.wishlist.filter(item => item != data.id)
+      user.wishlist = user.wishlist.filter(item => item != data.id)
+      newUser = await User.findByIdAndUpdate(id, user);
+    }
+    res.status(200).json(newUser);
 
-//     res.status(200).json(user);
+  }catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
 
-//   }catch (error) {
-//     console.error("Error updating user:", error);
-//     res.status(500).json({ message: "Server error", error });
-//   }
-
-// })
+})
 router.get('/:id', async (req,res) => {
   const {id} = req.params;
-
   
   try {
     // Проверка дали ID-то е валидно
@@ -39,15 +57,13 @@ router.get('/:id', async (req,res) => {
 
     // Търсене в базата данни
      const user = await User.findById(id);
-
     // Ако няма елемент с това ID
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Връщане на елемента
-    return user
-    // res.status(200).json(user);
+  
+    res.status(200).json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ message: "Server error", error });
@@ -72,11 +88,7 @@ router.post("/login", async (req, res) => {
   
       // Генериране на токен
       const payload = { _id: user._id, email: user.email, name: user.name };
-      const token = await jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
-
-      res.cookie('auth', token)
-      res.redirect('/')
-      // console.log("Generated Token:", token);
+      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
   
       res.cookie('auth', token,{
         httpOnly: false, // Кукито ще бъде достъпно от JavaScript

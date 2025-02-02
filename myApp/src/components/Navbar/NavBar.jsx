@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState }  from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { MdKeyboardArrowUp } from "react-icons/md";
 import SearchBar from '../shared/SearchBar'
+import { RiMenuFold4Fill } from "react-icons/ri";
 import "./NavBar.css"
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -23,26 +24,30 @@ const NavBar = () => {
     const [isShippingHovered, setIsShippingHovered] = useState(false)
     const [isUserIconHovered, setIsUserIconHovered] = useState(false)
     const [isLanguageENG, setIsLanguageENG] = useState('eng')
-
+    const [isResponsivMenuOpen, setIsRepsonsivMenuOpen] = useState(false)
     const { user , setUser} = useContext(UserContext);
     const { t, i18n } = useTranslation();
+    const [countInCart, setCountInCart] = useState(0)
 
     const switchLanguage = (lang) => {
-        console.log(lang)
       i18n.changeLanguage(lang);
     };
     
     useEffect(() => {
+        if(user?.cart){
+            setCountInCart(user.cart.length)
+            console.log(user)
+        }
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
         setIsUserIconHovered(false)
-        console.log(user)
     }, [user])
   return (
     <div className='navBars'>
+
         <div class="moving-label">
             <span>
-                <p><EuroIcon/> CASH ON DELIVERY</p> 
+                <p><EuroIcon className='euroIcon'/> CASH ON DELIVERY</p> 
                 <p><MdLocalShipping/> FREE SHIPPING FROM BGN200.00</p>
                 <p><BsSunglasses/> MAGIC MIRROR</p>
                 <p><GiReturnArrow/> 30-DAY RETURN</p>
@@ -51,7 +56,19 @@ const NavBar = () => {
         </div>
         <div  className='navBarOne'>
             <SearchBar /> 
-            <Link to='/'><h1>LOGO</h1></Link>
+            <RiMenuFold4Fill className='responsivMenuBTN' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
+            {isResponsivMenuOpen &&
+            <div className='responsivMenu'>
+                <ul>
+                    <li>New</li>
+                    <li>Bestsellers</li>
+                    <li>Women's</li>
+                    <li>Man's</li>
+                    <li>Unisex</li>
+                </ul>
+            </div>
+            }
+            <Link to='/'><img src="/images/logo.jpg" alt="" className='logo'/></Link>
             <div className='aboutUser'>
                 <p className='language' onClick={() => {
                     if(isLanguageENG == 'eng'){
@@ -62,10 +79,11 @@ const NavBar = () => {
                         switchLanguage("eng")
                     }
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
-                {user ? <p>{`Welcome, ${user.email}`}</p> : ''}
+                {user ? <p className='welcomeUsernam'>{`Welcome, ${user.username}`}</p> : ''}
                <Link to={'/user-login'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon' /> </Link>
-                <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> </Link>
-                <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)} ><ShoppingCartIcon className='shoppingIcon'/></Link>
+                {/* <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> {user? `(${user?.wishlist?.length})` : ''}</Link> */}
+                <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/></Link>
+                <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)}><ShoppingCartIcon className='shoppingIcon'/>({countInCart})</Link>
             </div>
         </div>
         <hr />

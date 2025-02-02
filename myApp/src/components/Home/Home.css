@@ -156,7 +156,6 @@
   border-radius: 1em;
   background-color: rgba(212, 201, 193, 0.582);
   margin: 2em 0 2em 0;
-  
 
 }
 
@@ -173,7 +172,7 @@
   display: flex;
   gap: 2em;
   margin: 2em 0 2em 0;
-
+  width: 90%;
 }
 
 .benefits{
@@ -224,7 +223,7 @@
   border-radius: 30%;
 }
 
-@media (min-width: 300px) and (max-width: 1200px) {
+@media (min-width: 300px) and (max-width: 900px) {
   .benefits{
     flex-direction: column;
     gap: 1em;
@@ -266,6 +265,7 @@
   .content{
     gap: 2em;
     font-size: 0.8em;
+    /* top: 28%; */
   }
   .clickIcon{
     font-size: 0.5em;

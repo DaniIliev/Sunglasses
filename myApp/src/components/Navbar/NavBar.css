@@ -117,3 +117,81 @@
 .lensOptions ul li img{
   width: 2.5em;
 }
+.responsivMenu{
+  display: none;
+}
+.responsivMenuBTN{
+  display: none;
+}
+.logo{
+  width: 80px;
+  border-radius: 30%;
+}
+
+@media (min-width: 300px) and (max-width: 900px){
+  .moving-label {
+    font-size: 5px;
+  }
+  .moving-label span{
+    gap: 2em;
+  }
+  .moving-label span p{
+    gap: 0.3em;
+  }
+  .euroIcon{
+    width: 0.2em;
+  }
+  .searchBarBox{
+    display: none;
+  }
+  .aboutUser{
+    gap: 0.5em
+  }
+  .language{
+    display: none;
+  }
+  .welcomeUsernam{
+    display: none;
+  }
+
+  .navBarTwo{
+    display: none;
+  }
+  .navBarOne{
+    justify-content: space-between;
+  }
+  .responsivMenuBTN{
+    display: block;
+    font-size: 2em;
+    color: purple;
+  }
+  .responsivMenu{
+    position: absolute;
+    display: block;
+    top: 11%;
+    /* width: 100%; */
+    padding: 1em;
+    left: 0;
+    background-color: ghostwhite;
+    z-index: 2312;
+    border-radius: 16px;
+  }
+  .responsivMenu .searchBarBox{
+    display: block;
+  }
+  .responsivMenu ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .responsivMenu ul li{
+    display: block;
+    padding: 0.5em 1em;
+    background-color: white;
+    border-radius: 16px;
+  }
+  .responsivMenu ul li:hover{
+    background-color: rgb(79, 79, 249);
+    color: white;
+  }
+}
