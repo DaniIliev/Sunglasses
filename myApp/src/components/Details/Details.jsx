@@ -79,7 +79,6 @@ const Details = () => {
             wishlist: [...prevUser.wishlist, id]
             }))
             setIsLike(true)
-            console.log("User like this item")
         })
         .catch(error => console.log("User can not like this item"))
   }

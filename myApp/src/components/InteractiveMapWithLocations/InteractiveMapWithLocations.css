@@ -1,0 +1,32 @@
+.mapsStyle{
+   /* display: flex;  */
+}
+.office{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border-bottom: 3px solid ghostwhite;
+    padding: 1em;
+}
+
+.choiceBTN{
+    background-color: white;
+    padding: 0.5em 1em;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.choiceBTN:hover{
+    background-color:black;
+    color: white;
+}
+.location{
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.office:hover{
+    background-color: rgb(223, 223, 223);
+
+}

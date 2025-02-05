@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
   cart:{
       type: Array,
       ref: "Sunglasses",
-    },
+  },
   orders: {
       type: Array,
       ref: "Purchase",

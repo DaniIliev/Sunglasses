@@ -26,7 +26,11 @@ router.patch('/:id', async (req , res) =>{
       })
        newUser = await User.findByIdAndUpdate(id, user);
     }else if(data.type == 'updateCount'){
-      newUser = await User.findByIdAndUpdate(id, data.newUser);
+      newUser = await User.findByIdAndUpdate(id, data.newUser, {new: true});
+    }else if(data.type == 'order'){
+      user.cart = []
+      user.orders.push(data.formData)
+      newUser = await User.findByIdAndUpdate(id, user), {new: true};
     } else if(data.type == "deleteFromCart"){
       user.cart = data.itemIDs;
       newUser = await User.findByIdAndUpdate(id, user);

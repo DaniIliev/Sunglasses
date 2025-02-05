@@ -12,7 +12,7 @@ import Register from './components/Register/Register'
 import LoveCartList from './components/LoveCarts/LoveCartList'
 import Create from './components/AdminOnly/Create/Create'
 import {UserProvider} from './context/UserContext'
-// import { NavbarProvider } from './context/NavbarContext'
+import DeliveryFormPage from './components/DeliveryForm/DeliveryForm'
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/wishlist' element={<LoveCartList />} />
             <Route path='/create' element={<Create/>}/>
+            <Route path='/delivery' element={<DeliveryFormPage/>}/>
           </Routes>
           <Footer />
       {/* </NavbarProvider>   */}

@@ -80,3 +80,9 @@
 .shoppingIcon:hover .cartDropdown{
     visibility: visible;
 }
+
+@media (min-width: 300px) and (max-width: 900px){
+    .cartDropdown{
+        display: none;
+    }
+}

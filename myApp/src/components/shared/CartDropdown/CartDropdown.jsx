@@ -11,7 +11,8 @@ const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
 
   useEffect(() => { 
     if(user){
-      fetchItemsInCart(user, setAllItems)
+      fetchItemsInCart(user)
+          .then((items) => setAllItems(items))
     }
   }, [user?.cart])
 
@@ -25,8 +26,7 @@ const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
     // allAboutUser.cart.map(el => 
     <div className='cartDropdown' onMouseLeave={() => setIsShippingHovered(!isShippingHovered)}>
       {allItems.map(item => 
-      <div className='aboutItem' id={item._id}>
-        {console.log(item)}
+      <div className='aboutItem' key={item._id}>
           <img src="/images/COPY1.webp" alt="" width={100}/>
           <div className="sumaryInfo">
             <p>{item.name}</p>

@@ -68,8 +68,7 @@ const Sunglasses = () => {
         </div>
         <div className="catalog-cards">
             {sunglasses.map(item => 
-            <>
-            <div className="allAboutCard">
+            <div className="allAboutCard" key={item._id}>
                 <div className='card'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
@@ -89,8 +88,6 @@ const Sunglasses = () => {
                     </div>
                 </div>
             </div>
-            </>
-            
             )}
             {/* <Link className='card' to='/sunglasses/1'>
                 <div className='imageStock'>

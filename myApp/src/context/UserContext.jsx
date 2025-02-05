@@ -11,15 +11,10 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
     if (token) {
       const decodedUser = decodeToken(token);
-      console.log(decodedUser._id)
       userService.findOneByID(decodedUser._id)
                 .then((user) => setUser(user) )
-
-      // console.log("Decoded Payload:", decodedUser);
-      // setUser(decodedUser); 
     }
   }, []);
 

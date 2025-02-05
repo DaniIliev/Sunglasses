@@ -212,3 +212,31 @@
     font-size: 3em;
     color: red;
 }
+
+@media (min-width: 300px) and (max-width: 900px){
+    .detailsPage{
+        flex-direction: column;
+    }
+    .aboutSunglasses{
+        width: 100%;
+        align-items: center;
+    }
+    .infinitiImages{
+        height: 30vh;
+        width: 20em;
+    }
+    .productDetails{
+        flex-direction: column;
+    }
+    .firstSection img{
+        width: 80%;
+    }
+    .addToCardAndLike{
+        margin: 0 auto;
+    }
+    .description p {
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+    }
+}

@@ -36,7 +36,6 @@ const NavBar = () => {
     useEffect(() => {
         if(user?.cart){
             setCountInCart(user.cart.length)
-            console.log(user)
         }
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
@@ -45,7 +44,7 @@ const NavBar = () => {
   return (
     <div className='navBars'>
 
-        <div class="moving-label">
+        <div className="moving-label">
             <span>
                 <p><EuroIcon className='euroIcon'/> CASH ON DELIVERY</p> 
                 <p><MdLocalShipping/> FREE SHIPPING FROM BGN200.00</p>

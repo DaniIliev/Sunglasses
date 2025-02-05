@@ -1,7 +1,6 @@
 import { login } from "./login";
 
 export const register = async (formData, setUser) => {
-    console.log(formData.email)
     try {
         const response = await fetch('http://localhost:5200/users/register', {
             method: 'POST',

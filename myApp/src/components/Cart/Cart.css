@@ -1,5 +1,10 @@
 .cart{
-    height: 73vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 75vh; 
+    justify-content: flex-start;
+    gap: 2em;
+
 }
 .titles{
     display: flex;
@@ -42,7 +47,124 @@
     color: red;
 }
 .scrollbarTabelle{
-    height: 400px;
-    overflow-y: scroll;
+    /* height: 400px; */
+    /* overflow-y: scroll; */
+}
+.totalCount{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.payBTN{
+    padding: 1em 2em;
+    background-color: rgb(0, 157, 255);
+    text-align: center;
+}
+.orderComplite{
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+    gap: 5em;
+    margin-bottom: 2em;
+}
+.field{
+    display: flex;
+    gap: 1em;
+}
+
+#discount{
+    width: 75%;
+    font-size: 2em;
+}
+.discount h4{
+    padding: 1em 0;
+    background-color: aliceblue;
+}
+.btnDiscount{
+    text-align: center;
+    padding: 0.5em 1.5em;
+    background-color: black;
+    color: white;
+}
+.discountField{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:ghostwhite;
+    padding: 0.5em 1em;
+}
+.discountField .text{
+    width: 20%;
+}
+.arr, .arr1{
+    color: rgb(1, 1, 80);
+    font-size: 2.5em;
+}
+.totalCount{
+    width: 30%;
+    background-color: ghostwhite;
+    padding: 1em 1.5em;
+    border-radius: 10px;
+    font-size: 1.2em;
+}
+@media (min-width: 300px) and (max-width: 900px){
+    .table tr th{
+        font-size: 0.6em;
+        padding: 0.5em 0 0.5em;
+    }
+    .table td{
+        width: 30%;
+    }
+    .table img {
+        width: 40%;
+        margin: 0.2em auto;
+    }
+    .prices{
+        gap: 0.2em;
+        font-size: 0.7em;
+        align-items: center;
+    }
+    .del{
+        font-size: 1.5em;
+    }
+    .counter{
+        gap: 0.8em;
+        padding: 0.2em;
+        width: 60%;
+    }
+    .counterTD{
+        gap: 1em;
+    }
+    .orderComplite{
+        flex-direction: column;
+    }
+    .arr{
+        display: none;
+    }
+    .totalCount{
+        padding: 1em;
+        font-size: 1em;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .payBTN{
+        padding: 0.7em 1em;
+    }
+    .text{
+        font-size: 0.7em;
+    }
+    .discountField{
+        gap: 0.5em;
+    }
+    .btnDiscount{
+        padding: 0.2em 1em;
+        font-size: 0.7em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
 
 }
