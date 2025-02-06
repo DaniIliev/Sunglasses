@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import "./UserDropdown.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import { decodeToken } from "../../../utills/DecodeToken";
 import { logout } from "../../../utills/sharedFn/logout";
@@ -39,7 +39,7 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
       {isUserIconHovered && user ? (
         <div className="userDropdown">
             <div className="authorizedUsers">
-            <p>My Orders</p>
+            <Link to='/orders'><p>My Orders</p></Link>
             <p onClick={handleLogout}>Logout</p>
             </div>
         </div>

@@ -11,26 +11,26 @@
     flex-direction: column;
     align-items: center;
 }
-.table{
+.table, .tableModal{
     width: 90%;
     margin: 0 auto;
     border-collapse: collapse;
 }
-.table th, .table td {  
+.table th, .table td, .tableModal th, .tableModal td{  
     text-align: center; /* Центрирай текста */  
     vertical-align: middle; /* Центрирай вертикално съдържанието */  
 } 
-.table th{
+.table th, .tableModal th{
     background-color: gainsboro;
     border: 1px solid gray;
     padding: 1em 0 1em 0;
 }
-.table td {
+.table td, .tableModal td{
     align-items: center;
     border: 1px solid gainsboro;
 
 }
-.table img {  
+.table img, .tableModal img{  
     display: block; /* Направи изображението block елемент */  
     margin: 0.5em auto; /* Центрирай изображението */  
 }  

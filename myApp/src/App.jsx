@@ -13,6 +13,7 @@ import LoveCartList from './components/LoveCarts/LoveCartList'
 import Create from './components/AdminOnly/Create/Create'
 import {UserProvider} from './context/UserContext'
 import DeliveryFormPage from './components/DeliveryForm/DeliveryForm'
+import UserOrders from './components/UserOrders/UserOrders'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path='/wishlist' element={<LoveCartList />} />
             <Route path='/create' element={<Create/>}/>
             <Route path='/delivery' element={<DeliveryFormPage/>}/>
+            <Route path='/orders' element={<UserOrders />}/>
           </Routes>
           <Footer />
       {/* </NavbarProvider>   */}

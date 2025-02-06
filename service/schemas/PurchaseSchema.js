@@ -45,7 +45,8 @@ const PurchaseSchema = new mongoose.Schema({
   },
   purchaseDate: {
     type: Date,
-    default: Date.now,
+    require: true,
+    // default: Date.now,
   },
   additionalInfo: {
     type: String,
@@ -56,12 +57,21 @@ const PurchaseSchema = new mongoose.Schema({
     required: [true, "Total purchase price is required"], // Error message for missing total purchase price
     description: "Total price for the entire purchase",
   },
+  orderCode: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   sunglasses: [
     {
       item: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Sunglasses",
         required: [true, "Sunglasses item is required"],
+      },
+      name:{
+        type: String,
+        required: true,
       },
       image: {
         type: String,

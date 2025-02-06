@@ -7,6 +7,7 @@ import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
 import InteractiveMapWithLocations from "../InteractiveMapWithLocations/InteractiveMapWithLocations";
 import * as purchaseService from '../../services/purchaseService'
 import * as userService from '../../services/userService'
+import { formatDate } from "../../utills/sharedFn/formatData";
 // Компонент за формата за доставка
 const formDataInitial = {
   firstname: "",
@@ -42,14 +43,16 @@ const DeliveryFormPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const allItemsArr = []
-    allItems.map(el => allItemsArr.push({item: el._id, image: el.image, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
+    allItems.map(el => allItemsArr.push({item: el._id, name: el.name, image: el.image, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
     const totalPurchasePrice = allItemsArr.reduce((acc, el) => acc + el.totalPrice, 0);
 
     formData.sunglasses = allItemsArr;
     formData.totalPurchasePrice = totalPurchasePrice;
+    formData.orderCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+    formData.purchaseDate = formatDate()
     purchaseService.createPurchase(formData)
-                .then(() => {
-                  updateUser(formData)
+                .then((result) => {
+                  updateUser(result)
                   setFormData(formDataInitial)
                 })
   };
