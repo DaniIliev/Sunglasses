@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
 import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
 import { FaShippingFast } from "react-icons/fa";
@@ -28,7 +29,7 @@ const Details = () => {
   const [sunglassesCount, setSunglassesCount] = useState(1);
   const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false);
   const [isShipingAndReturnOpen, setIsShipingAndReturnOpen] = useState(false);
-  const [isAdminHere, setIsAdminHere] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [item, setItem] = useState([]);
   const [isLike, setIsLike] = useState(false)
   const { id } = useParams();
@@ -103,6 +104,7 @@ const Details = () => {
 
   return (
     <>
+    {isLoading && <BeatLoader  className='loader'/> }
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
       <div className="detailsPage">
         <div className="allAboutImages">

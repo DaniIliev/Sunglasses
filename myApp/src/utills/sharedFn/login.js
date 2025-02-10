@@ -1,5 +1,5 @@
 import { decodeToken } from "../DecodeToken";
-
+import * as userService from '../../services/userService'
 
 export const login = async (formData, setUser) => {
     try {
@@ -20,15 +20,14 @@ export const login = async (formData, setUser) => {
   
         const data = await response.json();
         // Ако всичко е наред
-        console.log(data);
         localStorage.setItem("token", data.token); // Save token
         const decodedUser = decodeToken(data.token);
-        setUser(decodedUser);
+              userService.findOneByID(decodedUser._id)
+                        .then((user) => setUser(user))
+        // setUser(decodedUser);
         alert("Logged in successfully!");
       } catch (error) {
         console.error("Грешка при fetch:", error);
         alert("An error occurred: " + error.message);
       }
-  
-      console.log("Login Submitted");
 }

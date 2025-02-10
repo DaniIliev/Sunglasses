@@ -1,0 +1,121 @@
+.containerAutorized {
+    width: 95%;
+    height: 60vh;
+    margin: 5% auto;
+    display: flex;
+    justify-content: center;
+}
+
+.containerAutorized.sign-in {  
+    flex-direction: row-reverse;  
+  }  
+  
+.containerAutorized.sign-up {  
+    flex-direction: row;  
+  }  
+
+.overlay-panel {  
+    display: none; /* Основно е скрито */  
+}  
+  
+.overlay-panel.active {  
+    display: flex; /* Показва се, когато е активно */
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
+    justify-content: center;
+    height: 100%;  
+} 
+
+.form-container, .overlay-container{
+    width: 50%;
+    margin: 0 auto;
+    height: 100%;
+}
+.sign-up-container form,
+.sign-in-container form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    
+}
+.sign-up-container form input,
+.sign-in-container form input{
+    background-color: rgb(244, 244, 244);
+    width: 50%;
+    padding: 0.8em 1.5em;
+}
+.typeSubmitSignUp,
+.typeSubmitSignIn{
+    padding: 1em 2em;
+    background-color: orangered;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 1.5em;
+    cursor: pointer;
+}
+.overlay{
+    height: 100%;
+}
+.overlay-left,
+.overlay-right{
+    border-radius: 1em;
+    color: white;
+    background-image: url('/images/bgSignUp.png');
+    background-repeat: no-repeat; 
+    background-size: contain;  
+    background-position: center;
+    box-shadow: 0 2em 2em rgba(0, 0, 0, 0.7);
+}
+.signIn,
+.signUp{
+    padding: 1em 2em;
+    letter-spacing: 2px;
+    border-radius: 1.5em;
+    border: 2px solid white;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+}
+.social-container{
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+}
+
+@media (min-width: 300px) and (max-width: 900px){
+    .containerAutorized.sign-up,
+    .containerAutorized.sign-in {
+        height: 75vh;
+        flex-direction: column;
+        width: 0 auto;
+    }
+    .overlay-panel.active {
+        display: none;
+    }
+    .form-container, .sign-up-container, .sign-in-container .overlay-container{
+        width: 100%;
+        height: 20%;
+    }
+    .allreadyHaveAcc{
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: 1.2em;
+    }
+    .SignInBTNPHONE{
+        padding: 0.4em 0.6em;
+        background-color: rgb(227, 128, 105);
+        color: white;
+        border-radius: 1.5em;
+    }
+    .allreadyHaveAcc
+    .overlay-left,
+    .overlay-right{
+        display: none;
+    }
+}

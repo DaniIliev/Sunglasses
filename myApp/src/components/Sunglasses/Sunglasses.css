@@ -315,6 +315,11 @@ h3 {
 .imageContainer:hover .default-image {
     opacity: 0;
 }
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
 @media (min-width: 300px) and (max-width: 900px){
     .filters{
         display: none;

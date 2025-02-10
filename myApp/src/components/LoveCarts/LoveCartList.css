@@ -37,6 +37,7 @@
     max-width: 60%;
     text-align: center;
     padding-bottom:  1em;
+    color: floralwhite;
 }
 
 .contentWishlist div h1{
@@ -118,3 +119,19 @@
     justify-content: center;
 }
 
+@media (min-width: 300px) and (max-width: 900px){
+    .newUserBox, .wishlistCreate{
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+    .bestsellers{
+        flex-direction: column;
+    }
+    .LoveCartPage{
+        align-items: center;
+    }
+    .contentWishlist div{
+        color: floralwhite;
+    }
+}

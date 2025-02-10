@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
     if (token) {
       const decodedUser = decodeToken(token);
       userService.findOneByID(decodedUser._id)
-                .then((user) => setUser(user) )
+                .then((user) => setUser(user))
     }
   }, []);
 

@@ -30,9 +30,11 @@ const DeliveryFormPage = () => {
   const { user, setUser } = useContext(UserContext);
   const [allItems, setAllItems] = useState(location.state?.allItems || []);
   const [formData, setFormData] = useState(formDataInitial);
-
-
+  const [totalPurchasePrice, setTotalPurchasePrice] = useState(0)
+  const [allItemsArr, setAllItemsArr] = useState([])
   useEffect(() => {
+    allItems.map(el => allItemsArr.push({item: el._id, name: el.name, image: el.image, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
+    setTotalPurchasePrice(allItemsArr.reduce((acc, el) => acc + el.totalPrice, 0));
 
   }, [allItems])
 
@@ -42,10 +44,7 @@ const DeliveryFormPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const allItemsArr = []
-    allItems.map(el => allItemsArr.push({item: el._id, name: el.name, image: el.image, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
-    const totalPurchasePrice = allItemsArr.reduce((acc, el) => acc + el.totalPrice, 0);
-
+    console.log('All items', allItemsArr)
     formData.sunglasses = allItemsArr;
     formData.totalPurchasePrice = totalPurchasePrice;
     formData.orderCode = Math.floor(10000000 + Math.random() * 90000000).toString();
@@ -67,10 +66,10 @@ const DeliveryFormPage = () => {
                   setUser((prevUser) => ({
                     ...prevUser,
                     cart: [],
-                    orders: [data.formData]
+                    orders: [...prevUser.orders, data.formData]
                     }))
                   setAllItems([])
-                  navigate('/')
+                  navigate('/orders')
                 })
   }
   const onHandleRemove = (id) => {
@@ -170,7 +169,8 @@ const DeliveryFormPage = () => {
             </div>
 
             <p type="submit" className="saveBTN" onClick={handleSubmit}>
-              Запази и продължи напред
+              {/* Запази и продължи напред */}
+              Завърши поръчката
             </p>
           </form>
         </section>
@@ -221,7 +221,7 @@ const DeliveryFormPage = () => {
               </div>
             ))}
           </div>
-          <p style={{fontSize: '2em'}}>Общо: 200лева</p>
+          <p style={{fontSize: '2em'}}>Общо: {totalPurchasePrice}лева</p>
         </section>
       </main>
       {/* <InteractiveMapWithLocations /> */}

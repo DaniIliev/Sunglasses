@@ -10,7 +10,9 @@ const UserOrders = () => {
   const [purchase, setPurchase] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+
+  }, [user]);
 
   const handleClick = (id) => {
     setIsModalOpen(true)
@@ -99,7 +101,7 @@ const UserOrders = () => {
           <tbody>
             {user?.orders && user.orders.length > 0 ? (
               user.orders.map((order) => (
-                <tr key={order.orderCode}>
+                <tr key={order._id} >
                   <td>#{order.orderCode}</td>
                   <td>{order.totalPurchasePrice} лв</td>
                   <td>{order.purchaseDate}</td>
@@ -141,8 +143,9 @@ const UserOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {purchase && purchase.sunglasses?.length > 0 && purchase.sunglasses.map(el => 
-                  <tr key={el.id}>
+              {purchase && purchase.sunglasses?.length > 0 && 
+                purchase.sunglasses.map(el => 
+                  <tr key={el._id}>
                     <td>
                       <img
                         src={el.image || "/images/COPY1.webp"}

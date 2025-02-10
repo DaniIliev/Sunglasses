@@ -1,8 +1,6 @@
 import React, { useState,  } from 'react'
 import './Home.css'
-import { CiHeart } from "react-icons/ci";
 import { GiClick } from "react-icons/gi";
-import { BsEmojiSunglasses } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -70,7 +68,7 @@ const Home = () => {
                       );
                 })}
             </div>
-            <div class="content">
+            <div className="content">
                 <h1 className='welcomeText'>{t('welcome')}</h1>
                 <Link to='/sunglasses' className='button'><GiClick className='clickIcon' />{t('shoppingWithLoveBTN')}<GiClick className='clickIcon'/></Link>
             </div>
@@ -81,7 +79,6 @@ const Home = () => {
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
-                        <CiHeart className='like'/> 
                         <div className='imageContainer'>
                             <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
                             <img src="/images/image.png" width={300} alt="" className='hover-image'/>
@@ -99,7 +96,6 @@ const Home = () => {
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
-                        <CiHeart className='like'/> 
                         <div className='imageContainer'>
                             <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
                             <img src="/images/image.png" width={300} alt="" className='hover-image'/>
@@ -117,7 +113,6 @@ const Home = () => {
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
-                        <CiHeart className='like'/> 
                         <div className='imageContainer'>
                             <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
                             <img src="/images/image.png" width={300} alt="" className='hover-image'/>
@@ -135,7 +130,6 @@ const Home = () => {
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
-                        <CiHeart className='like'/> 
                         <div className='imageContainer'>
                             <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
                             <img src="/images/image.png" width={300} alt="" className='hover-image'/>

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState}from 'react'
 import { Link } from 'react-router-dom';
 import './Sunglasses.css'
-import { CiHeart } from "react-icons/ci";
+import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
 import SunglassesFilter from '../shared/SunglassesFilter';
 import { BiSort } from "react-icons/bi";
 import * as sunglassesService from '../../services/sunglassesService'
@@ -18,6 +18,7 @@ const Sunglasses = () => {
 
     const { user, setUser } = useContext(UserContext);
     useEffect(() => {
+        setIsLoading(true)
         sunglassesService.getAll()
             .then(result => {
                 setSunglasses(result)
@@ -36,6 +37,7 @@ const Sunglasses = () => {
     }
   return (
     <>
+    {isLoading && <BeatLoader  className='loader'/> }
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
