@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require('../schemas/UserSchema')
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt.js");
 const { SECRET_KEY } = require("../utills/jwt");
 const mongoose = require("mongoose")
 
