@@ -1,6 +1,8 @@
+const apiUrl = process.env.REACT_APP_API_URL; 
+
 export const createPurchase = async (formData) => {
     try {
-        const response = await fetch("http://localhost:5200/purchase", {
+        const response = await fetch(`${apiUrl}/purchase`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
@@ -21,7 +23,7 @@ export const createPurchase = async (formData) => {
 
 export const getPurchaseById = async (id) => {
   try{
-    const response = await fetch(`http://localhost:5200/purchase/${id}`, {
+    const response = await fetch(`${apiUrl}/purchase/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });

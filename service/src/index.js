@@ -12,7 +12,9 @@ const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5174", // Замести това с URL-то на React приложението
+    
+    // origin: "http://localhost:5174", // Замести това с URL-то на React приложението
+    origin: "https://frolicking-vacherin-b768b4.netlify.app",
     methods: ["GET", "POST", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
@@ -27,7 +29,6 @@ app.use(routes);
 
 // const mongoURI = "mongodb://127.0.0.1:27017/sunglasses";
 const mongoURI = process.env.MONGODB_URI;
-console.log(mongoURI)
 
 
 mongoose

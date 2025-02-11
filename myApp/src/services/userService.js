@@ -1,7 +1,8 @@
+const apiUrl = process.env.REACT_APP_API_URL; 
 export const findOneByID = async (id) => {
     try {
 
-        const response = await fetch(`http://localhost:5200/users/${id}`, {
+        const response = await fetch(`${apiUrl}/users/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +23,7 @@ export const findOneByID = async (id) => {
 
 
 export const patchUser = async (id, data) => {
-    const response = await fetch(`http://localhost:5200/users/${id}`, {
+    const response = await fetch(`${apiUrl}/users/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

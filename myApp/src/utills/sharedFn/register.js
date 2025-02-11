@@ -1,8 +1,10 @@
 import { login } from "./login";
+const apiUrl = process.env.REACT_APP_API_URL; 
+
 
 export const register = async (formData, setUser) => {
     try {
-        const response = await fetch('http://localhost:5200/users/register', {
+        const response = await fetch(`${apiUrl}/users/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
