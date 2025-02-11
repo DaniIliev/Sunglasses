@@ -6,7 +6,7 @@ import { register } from "../../utills/sharedFn/register";
 import { login } from "../../utills/sharedFn/login";
 
 const UserAccess = () => {
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -112,7 +112,7 @@ const UserAccess = () => {
             />
             <div className="allreadyHaveAcc">
                 <p>I already have an account</p>
-                <p className="SignInBTNPHONE" onClick={setIsSignIn(true)}>Sing in</p>
+                <p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p>
             </div>
             <p
               className="typeSubmitSignUp"

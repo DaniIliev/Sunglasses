@@ -13,8 +13,7 @@ app.use(cookieParser());
 app.use(
   cors({
     
-    // origin: "http://localhost:5174", // Замести това с URL-то на React приложението
-    origin: "https://frolicking-vacherin-b768b4.netlify.app",
+    origin: ["http://localhost:5174",'https://frolicking-vacherin-b768b4.netlify.app'], // Замести това с URL-то на React приложението
     methods: ["GET", "POST", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type"],
     credentials: true,

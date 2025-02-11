@@ -1,6 +1,7 @@
+import { REACT_APP_API_URL } from "../../env";
 import { login } from "./login";
-const apiUrl = process.env.REACT_APP_API_URL; 
 
+const apiUrl = REACT_APP_API_URL; 
 
 export const register = async (formData, setUser) => {
     try {

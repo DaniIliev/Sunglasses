@@ -1,4 +1,6 @@
-const apiUrl = process.env.REACT_APP_API_URL; 
+import { REACT_APP_API_URL } from "../env";
+
+const apiUrl = REACT_APP_API_URL; 
 export const findOneByID = async (id) => {
     try {
 

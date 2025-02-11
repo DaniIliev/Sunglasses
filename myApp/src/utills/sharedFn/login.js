@@ -1,10 +1,12 @@
 import { decodeToken } from "../DecodeToken";
 import * as userService from '../../services/userService'
-const apiUrl = process.env.REACT_APP_API_URL; 
+import { REACT_APP_API_URL } from "../../env";
+
+const apiUrl = REACT_APP_API_URL; 
 
 export const login = async (formData, setUser) => {
     try {
-        const response = await fetch(`https://sunglasses-992v.onrender.com/users/login`, {
+        const response = await fetch(`${apiUrl}/users/login`, {
           method: "POST",
           credentials: "include", // Това е необходимо за изпращане на бисквитки
           headers: { "Content-Type": "application/json" },
