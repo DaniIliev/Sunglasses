@@ -26,9 +26,8 @@ const UserAccess = () => {
   }, [isSignIn]);
 
   const handleSignUp = async () => {
-    // await register(formData, setUser);
-    // navigate("/");
-    console.log(formData)
+    await register(formData, setUser);
+    navigate("/");
   };
 
   const handleSingIn = async (e) => {
@@ -137,7 +136,7 @@ const UserAccess = () => {
           >
             <h1>Hello, Friend!</h1>
             <p>Enter your personal details and start your journey with us</p>
-            <p className="signUp" id="signUp" onClick={() => setIsSignIn(true)}>
+            <p className="signUp" id="signUp" onClick={() => setIsSignIn(false)}>
               Sign Up
             </p>
           </div>

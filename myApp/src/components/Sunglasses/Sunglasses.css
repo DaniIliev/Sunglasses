@@ -1,9 +1,14 @@
+.page{
+    min-height: 70vh;
+}
 .sunglassesPage{
     display: flex;
     align-items: self-start;
     gap: 2em;
     margin: 2em;
+    min-height: 70vh;
 }
+
 .filters{
     display: flex;
     flex-direction: column;

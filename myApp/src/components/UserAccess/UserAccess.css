@@ -87,6 +87,9 @@
     gap: 1.5em;
 }
 
+.allreadyHaveAcc{
+    display: none;
+}
 @media (min-width: 300px) and (max-width: 900px){
     .containerAutorized.sign-up,
     .containerAutorized.sign-in {

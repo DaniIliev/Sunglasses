@@ -38,7 +38,9 @@ const Sunglasses = () => {
   return (
     <>
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
-    {isLoading && <BeatLoader  className='loader'/> }
+    <div className='page'>
+    {isLoading ? <BeatLoader  className='loader'/> : 
+    <>
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
         <details className='PhoneFillters'>
@@ -158,6 +160,9 @@ const Sunglasses = () => {
                 </div>
             </div> */}
         </div>
+    </div>
+    </>
+    }
     </div>
     </>
   )
