@@ -50,10 +50,13 @@ const Home = () => {
         return () => clearInterval(interval);
       }, []);
     
+      const isSafari = typeof navigator !== "undefined" &&
+      navigator.userAgent.toLowerCase().includes("safari") &&
+      !navigator.userAgent.toLowerCase().includes("chrome");
 
   return (
     <div className='home'>
-        <div className='images'>
+        <div className={isSafari ? 'no-animation images' : 'images' }>
             <div className="carousel-track"
    >
                 {currentList.map((slide, index) => {
@@ -148,12 +151,12 @@ const Home = () => {
         </div>
         <div className='choice'>
             <div className='question'>
-                <img src="../../../public/images/scr2.jpeg" alt="" />  
+                <img src="../../../images/scr2.jpeg" alt="" />  
                 <div>
                     <h2>{t('chooseQuestion')}</h2>
-                    <img src="../../../public/images/questionsMark.png" alt="" />
+                    <img src="../../../images/questionsMark.png" alt="" />
                 </div>
-                <img src="../../../public/images/sunglasses3.jpg" alt="" />
+                <img src="../../../images/sunglasses3.jpg" alt="" />
 
             </div>
             <div className='benefits'>

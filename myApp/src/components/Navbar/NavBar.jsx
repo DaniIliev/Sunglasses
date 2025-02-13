@@ -110,31 +110,31 @@ const NavBar = () => {
                 <div className='populer'>
                     <h3>Populer</h3>
                     <ul>
-                        <li className='bestseller'>Bestsellers <img src="../../../public/images/bestsellers.png" width={50} height={50} alt="" /></li>
+                        <li className='bestseller'>Bestsellers <img src="../../../images/bestsellers.png" width={50} height={50} alt="" /></li>
                         <li className='newArrivels'>New arrivels</li>
-                        <li className='outlet'>Outlet <img src="../../../public/images/outlet.png" width={30} height={30} alt="" /></li>
+                        <li className='outlet'>Outlet <img src="../../../images/outlet.png" width={30} height={30} alt="" /></li>
                     </ul>
                 </div>
                 <div className='lensOptions'>
                     <h3>Lens options</h3>
                     <ul>
                         <li>Show all</li>
-                        <li><img src="../../../public/images/standartsunlenses.png" alt="" />Standart sun lenses</li>
-                        <li><img src="../../../public/images/polarized.png" alt="" />Polarized</li>
-                        <li> <img src="../../../public/images/mirrored.png" alt="" />Mirrored</li>
-                        <li><img src="../../../public/images/colortransaction.png" alt="" />With a color transition</li>
-                        <li><img src="../../../public/images/dioptric.png" alt="" />Diobtric sunglasses</li>
+                        <li><img src="../../../images/standartsunlenses.png" alt="" />Standart sun lenses</li>
+                        <li><img src="../../../images/polarized.png" alt="" />Polarized</li>
+                        <li> <img src="../../../images/mirrored.png" alt="" />Mirrored</li>
+                        <li><img src="../../../images/colortransaction.png" alt="" />With a color transition</li>
+                        <li><img src="../../../images/dioptric.png" alt="" />Diobtric sunglasses</li>
                     </ul>
                 </div>
                 <div className='frameShape'>
                     <h3>Frame shape</h3>
                     <ul>
                         <li>Show all</li>
-                        <li><img src="../../../public/images/round.jpeg" alt="" />Round</li>
-                        <li><img src="../../../public/images/squared.jpeg" alt="" />Squared</li>
-                        <li><img src="../../../public/images/rechtangular.jpeg" alt="" />Rechtangular</li>
-                        <li><img src="../../../public/images/pilotAviator.jpeg" alt="" />Pilot / Aviator</li>
-                        <li><img src="../../../public/images/catEye.jpeg" alt="" />Cat eye</li>
+                        <li><img src="../../../images/round.jpeg" alt="" />Round</li>
+                        <li><img src="../../../images/squared.jpeg" alt="" />Squared</li>
+                        <li><img src="../../../images/rechtangular.jpeg" alt="" />Rechtangular</li>
+                        <li><img src="../../../images/pilotAviator.jpeg" alt="" />Pilot / Aviator</li>
+                        <li><img src="../../../images/catEye.jpeg" alt="" />Cat eye</li>
                     </ul>
                 </div>
                 <img className='manWithSunglasses' src="/images/menwithglasses.png" alt="" />
@@ -147,31 +147,31 @@ const NavBar = () => {
             <div className='populer'>
                 <h3>Populer</h3>
                 <ul>
-                    <li className='bestseller'>Bestsellers <img src="../../../public/images/bestsellers.png" width={50} height={50} alt="" /></li>
+                    <li className='bestseller'>Bestsellers <img src="../../../images/bestsellers.png" width={50} height={50} alt="" /></li>
                     <li className='newArrivels'>New arrivels</li>
-                    <li className='outlet'>Outlet <img src="../../../public/images/outlet.png" width={30} height={30} alt="" /></li>
+                    <li className='outlet'>Outlet <img src="../../../images/outlet.png" width={30} height={30} alt="" /></li>
                 </ul>
             </div>
             <div className='lensOptions'>
                 <h3>Lens options</h3>
                 <ul>
                     <li>Show all</li>
-                    <li><Link to='/sunglasses'><img src="../../../public/images/standartsunlenses.png" alt="" />Standart sun lenses</Link></li>
-                    <li><img src="../../../public/images/polarized.png" alt="" />Polarized</li>
-                    <li> <img src="../../../public/images/mirrored.png" alt="" />Mirrored</li>
-                    <li><img src="../../../public/images/colortransaction.png" alt="" />With a color transition</li>
-                    <li><img src="../../../public/images/dioptric.png" alt="" />Diobtric sunglasses</li>
+                    <li><Link to='/sunglasses'><img src="../../../images/standartsunlenses.png" alt="" />Standart sun lenses</Link></li>
+                    <li><img src="../../../images/polarized.png" alt="" />Polarized</li>
+                    <li> <img src="../../../images/mirrored.png" alt="" />Mirrored</li>
+                    <li><img src="../../../images/colortransaction.png" alt="" />With a color transition</li>
+                    <li><img src="../../../images/dioptric.png" alt="" />Diobtric sunglasses</li>
                 </ul>
             </div>
             <div className='frameShape'>
                 <h3>Frame shape</h3>
                 <ul>
                     <li>Show all</li>
-                    <li><img src="../../../public/images/round.jpeg" alt="" />Round</li>
-                    <li><img src="../../../public/images/squared.jpeg" alt="" />Squared</li>
-                    <li><img src="../../../public/images/rechtangular.jpeg" alt="" />Rechtangular</li>
-                    <li><img src="../../../public/images/pilotAviator.jpeg" alt="" />Pilot / Aviator</li>
-                    <li><img src="../../../public/images/catEye.jpeg" alt="" />Cat eye</li>
+                    <li><img src="../../../images/round.jpeg" alt="" />Round</li>
+                    <li><img src="../../../images/squared.jpeg" alt="" />Squared</li>
+                    <li><img src="../../../images/rechtangular.jpeg" alt="" />Rechtangular</li>
+                    <li><img src="../../../images/pilotAviator.jpeg" alt="" />Pilot / Aviator</li>
+                    <li><img src="../../../images/catEye.jpeg" alt="" />Cat eye</li>
                 </ul>
             </div>
             <img className='manWithSunglasses' src="/images/menwithglasses.png" alt="" />

@@ -222,6 +222,15 @@
   margin: 1em 0 1em 0;
   border-radius: 30%;
 }
+.no-animation{
+  animation: none !important;
+}
+.no-animation .carousel-item img{
+  max-width: 78em;
+}
+.no-animation .welcomeText{
+  width: 90%;
+}
 
 @media (min-width: 300px) and (max-width: 900px) {
   .benefits{
