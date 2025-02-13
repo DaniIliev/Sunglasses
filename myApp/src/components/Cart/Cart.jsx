@@ -13,6 +13,7 @@ import { addToCart } from "../../utills/sharedFn/addToCart";
 import { updateCount } from "../../utills/sharedFn/updateCount";
 import { Link, useNavigate } from "react-router-dom";
 import DeliveryFormPage from "../DeliveryForm/DeliveryForm";
+import { useTranslation } from "react-i18next";
 const Cart = () => {
   const { user, setUser } = useContext(UserContext);
   const [allItems, setAllItems] = useState([]);
@@ -21,6 +22,8 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+  const {t, i18n} = useTranslation()
+  
   useEffect(() => {
     setIsLoading(true)
     if (user) {
@@ -58,24 +61,24 @@ const Cart = () => {
       <div className="cart">
         <div className="titles">
           <p>HOME / CART</p>
-          <h2>Shopping Cart</h2>
+          <h2>{t('shoppingCart.shoppingCartTitle')}</h2>
         </div>
         {allItems?.length == 0 ?
         <div className="cartIsEmty">
             <img src="/images/shoppingCart.png" alt="shoppingCart" width={250}/>
-            <h1>Your cart is currently empty!</h1>
-            <Link to='/sunglasses'>Return to shop</Link>
+            <h1>{t('shoppingCart.textIfNoAddedItems')}</h1>
+            <Link to='/sunglasses'>{t('shoppingCart.returnToShop')}</Link>
         </div>
         :
         <>
         <table className="table">
           <thead>
             <tr>
-              <th>Photo</th>
-              <th>Product name</th>
-              <th>Quantity</th>
-              <th>Unit price</th>
-              <th>Total price</th>
+              <th>{t('shoppingCart.photo')}</th>
+              <th>{t('shoppingCart.productName')}</th>
+              <th>{t('shoppingCart.quantity')}</th>
+              <th>{t('shoppingCart.unitPrice')}</th>
+              <th>{t('shoppingCart.totalPrice')}</th>
             </tr>
           </thead>
           <tbody>
@@ -150,30 +153,28 @@ const Cart = () => {
             </div>
           </div>
           <div className="totalCount">
-            <p>Пълна цена: {sumOfOldPrice.toFixed(2)}</p>
+            <p>{t('shoppingCart.totalPrice')}: {sumOfOldPrice.toFixed(2)}</p>
             <p style={{ color: "red" }}>
-              Промоция:{" "}
+            {t('shoppingCart.promotion')}: 
               {sumOfOldPrice
-                ? `-${sumOfOldPrice - totalSum} (-${
+                ? ` -${sumOfOldPrice - totalSum} (-${
                     Math.round(
                       (((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100) / 10
                     ) * 10
                   }${"%"})`
                 : ""}
             </p>
-            <p>Общо: {totalSum.toFixed(2)}</p>
+            <p>{t('shoppingCart.totalPrice')}: {totalSum.toFixed(2)}</p>
             <p>
-              Доставка и обслужване:{" "}
-              {totalSum > 150 ? (0.0).toFixed(2) : (6.5).toFixed(2)}
+            {t('shoppingCart.delivery')}: {totalSum > 150 ? (0.0).toFixed(2) : (6.5).toFixed(2)}
             </p>
             <p>
-              Плащаш:{" "}
-              {totalSum > 150
+            {t('shoppingCart.pay')}: {totalSum > 150
                 ? totalSum.toFixed(2)
                 : (totalSum + 6.5).toFixed(2)}
             </p>
             <p className="payBTN" onClick={handleNavigate}>
-              Продължи към плащане
+            {t('shoppingCart.payBTN')}
             </p>
           </div>
         </div>

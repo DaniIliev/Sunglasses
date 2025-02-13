@@ -46,11 +46,11 @@ const NavBar = () => {
 
         <div className="moving-label">
             <span>
-                <p><EuroIcon className='euroIcon'/> CASH ON DELIVERY</p> 
-                <p><MdLocalShipping/> FREE SHIPPING FROM BGN200.00</p>
-                <p><BsSunglasses/> MAGIC MIRROR</p>
-                <p><GiReturnArrow/> 30-DAY RETURN</p>
-                <p><SiAuthy /> AUTHORIZED RESELLER</p>
+                <p><EuroIcon className='euroIcon'/>{t('navBar.cashOnDelivery')}</p> 
+                <p><MdLocalShipping/> {t('navBar.freeShipping')}</p>
+                <p><BsSunglasses/>{t('navBar.magicMirror')}</p>
+                <p><GiReturnArrow/>{t('navBar.return')}</p>
+                <p><SiAuthy />{t('navBar.authorized')}</p>
             </span>
         </div>
         <div  className='navBarOne'>
@@ -59,11 +59,10 @@ const NavBar = () => {
             {isResponsivMenuOpen &&
             <div className='responsivMenu'>
                 <ul>
-                    <li>New</li>
-                    <li>Bestsellers</li>
-                    <li>Women's</li>
-                    <li>Man's</li>
-                    <li>Unisex</li>
+                    <li>{t('menu.new')}</li>
+                    <li>{t('menu.bestsellers')}</li>
+                    <li>{t('menu.women\'s')}</li>
+                    <li>{t('menu.man\'s')}</li>
                 </ul>
             </div>
             }
@@ -88,12 +87,10 @@ const NavBar = () => {
         <hr />
         <div className='navBarTwo'>
             <nav>
-                <a href="">New</a>
-                <Link to="/sunglasses">Best sellers</Link>
-                <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>Women's {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
-                <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>Men's {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
-                <a href="">Unisex</a>
-                <Link to="">Sale</Link>
+                <a href="">{t('menu.new')}</a>
+                <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
+                <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
+                <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
             </nav>
         </div>
         {isShippingHovered ? 

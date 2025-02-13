@@ -72,12 +72,12 @@ const Home = () => {
                 })}
             </div>
             <div className="content">
-                <h1 className='welcomeText'>{t('welcome')}</h1>
-                <Link to='/sunglasses' className='button'><GiClick className='clickIcon' />{t('shoppingWithLoveBTN')}<GiClick className='clickIcon'/></Link>
+                <h1 className='welcomeText'>{t('home.welcome')}</h1>
+                <Link to='/sunglasses' className='button'><GiClick className='clickIcon' />{t('home.shoppingWithLoveBTN')}<GiClick className='clickIcon'/></Link>
             </div>
         </div>
         <div className='trendingContainer'>
-            <h2 className='trendingTitle'>{t('trendingNow')}</h2>
+            <h2 className='trendingTitle'>{t('home.trendingNow')}</h2>
             <div className='trendingCards'>
                 <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
@@ -153,17 +153,17 @@ const Home = () => {
             <div className='question'>
                 <img src="../../../images/scr2.jpeg" alt="" />  
                 <div>
-                    <h2>{t('chooseQuestion')}</h2>
+                    <h2>{t('home.chooseQuestion')}</h2>
                     <img src="../../../images/questionsMark.png" alt="" />
                 </div>
                 <img src="../../../images/sunglasses3.jpg" alt="" />
 
             </div>
             <div className='benefits'>
-                <p className='benefit'><span>1</span> {t('benefit1')}</p>
-                <p className='benefit'><span>2</span> {t('benefit2')}</p>
-                <p className='benefit'><span>3</span> {t('benefit3')}</p>
-                <p className='benefit'><span>4</span> {t('benefit4')}</p>
+                <p className='benefit'><span>1</span> {t('home.benefit1')}</p>
+                <p className='benefit'><span>2</span> {t('home.benefit2')}</p>
+                <p className='benefit'><span>3</span> {t('home.benefit3')}</p>
+                <p className='benefit'><span>4</span> {t('home.benefit4')}</p>
             </div>
         </div>
        <Reviews />

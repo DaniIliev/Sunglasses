@@ -1,33 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext,  } from 'react'
 import './LoveCartList.css'
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { FaMedal } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { CiHeart } from "react-icons/ci";
 import { UserContext } from '../../context/UserContext';
+import { useTranslation } from 'react-i18next';
 
 const LoveCartList = () => {
     const {user} = useContext(UserContext)
+    const {t, i18n} = useTranslation()
   return (
     <div className='LoveCartPage'>
         <div className="contentWishlist">
 
             <p className='titels'>home / wishlist</p>
             <div>
-            <h1>Wishlist</h1>
-            <p>All of your favorite styles in one place. Keep track of your items, create multiple lists, and share your favorites with friends and family.</p>
+            <h1>{t('wishlistPage.title')}</h1>
+            <p>{t('wishlistPage.underTitle')}</p>
             </div>
         </div>
         {user == undefined &&
         <div className='newUserBox'>
             <div className="signInAcc">
-                <h2>My Account</h2>
-                <p>To access your wishlist, and see previously saved items, please sign into your account.</p>
+                <h2>{t('wishlistPage.myACC')}</h2>
+                <p>{t('wishlistPage.access')}</p>
                 <p className="wishlistBTN">Sign in</p>
             </div>
             <div className="createWishList">
-                <h2>Start a Wishlist</h2>
-                <p>Keep track of all the items you love. Click the heart icon on each product image to save your favorites in a wishlist.</p>
+                <h2>{t("wishlistPage.startWishlist")}</h2>
+                <p>{t("wishlistPage.startWishlistP2")}</p>
                 <div className="buttonsDivWishlist">
                     <p className='wishlistBTN'>Shop Men's</p>
                     <p className='wishlistBTN'>Shop Women's</p>
@@ -40,8 +42,8 @@ const LoveCartList = () => {
             <div className="startWishlist">
                 <Link to='/sunglasses/bestselers'><FaHeartCirclePlus className='wishHeart'/></Link>
                 <div>
-                    <h2>Start a Wishlist</h2>
-                    <p>Click the heart icon to create a wishlist</p>
+                    <h2>{t("wishlistPage.startWishlist")}</h2>
+                    <p>{t("wishlistPage.startWishlistP")}</p>
                 </div>
             </div>
             <div className="bestsellers">

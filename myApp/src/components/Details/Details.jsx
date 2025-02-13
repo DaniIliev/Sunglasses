@@ -16,6 +16,7 @@ import * as sunglassesService from "../../services/sunglassesService";
 import { UserContext } from "../../context/UserContext";
 import { addToCart } from "../../utills/sharedFn/addToCart";
 import AddToCartPopup from "../Popups/addToCartPopup";
+import { useTranslation } from "react-i18next";
 
 // const images = [
 //   "/images/COPY1.webp",
@@ -37,6 +38,8 @@ const Details = () => {
   const { user, setUser } = useContext(UserContext);
   const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
   
+  const {t, i18n} = useTranslation()
+
   useEffect(() => {
     if(user?.wishlist != null){
         if(Array.isArray(user.wishlist)){
@@ -185,13 +188,13 @@ const Details = () => {
           </div>
           <div className="addToCardAndLike">
             <p className="addToCart" onClick={handleAddItem}>
-              ADD TO CART
+              {t('detailsPage.addToCart')}
             </p>
             {isLike ?  <FaHeart className="hearth" onClick={() => handleUnlike()}/> : 
                  <CiHeart className="hearth" onClick={() => handleLike()}/>
             }
           </div>
-          <h4>DESCRIPTION</h4>
+          <h4>{t('detailsPage.description')}</h4>
           <div className="description">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -206,7 +209,7 @@ const Details = () => {
       </div>
       <div className="information">
         <h4 onClick={() => setIsProductDetailsOpen(!isProductDetailsOpen)}>
-          PRODUCT DETAILS <FaArrowDown />
+        {t('detailsPage.productDetails')} <FaArrowDown />
         </h4>
         {isProductDetailsOpen ? (
           <div className="productDetails">
@@ -247,7 +250,7 @@ const Details = () => {
           ""
         )}
         <h4 onClick={() => setIsShipingAndReturnOpen(!isShipingAndReturnOpen)}>
-          SHIPPING AND RETURNS <FaShippingFast />
+        {t('detailsPage.description')} <FaShippingFast />
         </h4>
         {isShipingAndReturnOpen ? (
           <div className="shippingANDreturn">
@@ -273,7 +276,7 @@ const Details = () => {
           isShipingAndReturnOpen ? "shippingIsOpen" : "youmayalsolike"
         }`}
       >
-        You May Also Like
+        {t('detailsPage.YOUMAYALSOLIKE')}
       </h3>
       <div className="catalog-cards">
         <Link className="card" to="/sunglasses/1">
