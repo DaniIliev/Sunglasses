@@ -17,15 +17,16 @@ import { UserContext } from "../../context/UserContext";
 import { addToCart } from "../../utills/sharedFn/addToCart";
 import AddToCartPopup from "../Popups/addToCartPopup";
 
-const images = [
-  "/images/COPY1.webp",
-  "/images/COPY2.webp",
-  "/images/COPY3.webp",
-  "/images/COPY4.webp",
-];
+// const images = [
+//   "/images/COPY1.webp",
+//   "/images/COPY2.webp",
+//   "/images/COPY3.webp",
+//   "/images/COPY4.webp",
+// ];
 
 const Details = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [images, setImages] = useState([])
   const [sunglassesCount, setSunglassesCount] = useState(1);
   const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false);
   const [isShipingAndReturnOpen, setIsShipingAndReturnOpen] = useState(false);
@@ -44,7 +45,10 @@ const Details = () => {
     }
     sunglassesService
       .getById(id)
-      .then((result) => setItem(result))
+      .then((result) => {
+        setItem(result)
+        setImages(result.images)
+      })
       .catch((error) => console.log(error));
   }, [id, isLike, user]);
 
@@ -104,6 +108,7 @@ const Details = () => {
 
   return (
     <>
+    {console.log(images)}
     {isLoading && <BeatLoader  className='loader'/> }
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
       <div className="detailsPage">

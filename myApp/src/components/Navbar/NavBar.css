@@ -36,7 +36,7 @@
     background-color: black;
     /* white-space: nowrap; Prevents text wrapping */
     overflow: hidden;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     position: relative;
   }
 
@@ -81,7 +81,7 @@
 .menuMen {
   position: absolute;
   background-color: white;
-  top: 23%;
+  top: 21.8%;
   right: 50%;
   width: 90%;
   height: 400px;
@@ -168,7 +168,7 @@
   .responsivMenu{
     position: absolute;
     display: block;
-    top: 11%;
+    top: 13%;
     /* width: 100%; */
     padding: 1em;
     left: 0;

@@ -79,8 +79,8 @@ const sunglassesSchema = new mongoose.Schema({
     // },
     required: [true, "UV protection is required"], // Error message for missing UV protection
   },
-  image: {
-    type: String,
+  images: {
+    type: Array,
     required: [true, "At least one image is required"], //
     description: "File path or URL for uploaded image",
   },

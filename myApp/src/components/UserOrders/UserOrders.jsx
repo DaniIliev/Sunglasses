@@ -22,6 +22,7 @@ const UserOrders = () => {
   }
   return (
     <>
+    {console.log(user)}
       <hr
         className="hr-text gradient"
         data-content="HOME / SUNGLASSES / ORDERS"

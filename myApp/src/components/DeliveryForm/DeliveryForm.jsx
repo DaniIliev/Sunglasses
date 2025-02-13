@@ -175,16 +175,8 @@ const DeliveryFormPage = () => {
           </form>
         </section>
         <section className="sectionItems">
-          <div style={{height: '43.5vh', borderBottom: '1px solid black', display: 'flex', flexDirection: 'column', gap: '1em'
-          }}>
-            <h2
-              style={{
-                textAlign: "center",
-                position: "absolute",
-                right: "10%",
-                top: "25%",
-              }}
-            >
+          <div className="titleAndItemsDiv">
+            <h2 className="yourProductsTITLE">
               Your products{" "}
             </h2>
             {allItems.map((item) => (

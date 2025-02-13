@@ -16,6 +16,7 @@ const UserAccess = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    console.log(e.target.value)
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -25,8 +26,9 @@ const UserAccess = () => {
   }, [isSignIn]);
 
   const handleSignUp = async () => {
-    await register(formData, setUser);
-    navigate("/");
+    // await register(formData, setUser);
+    // navigate("/");
+    console.log(formData)
   };
 
   const handleSingIn = async (e) => {
@@ -73,6 +75,10 @@ const UserAccess = () => {
               required
               placeholder="Password..."
             />
+            <div className="allreadyHaveAcc">
+                  <p>I don't have an account yet:</p>
+                  <p className="SignInBTNPHONE" onClick={() => setIsSignIn(false)}>Sing up</p> 
+            </div>
             <p className="typeSubmitSignIn" type="submit" onClick={handleSingIn}>
               Sign In
             </p>
@@ -111,8 +117,8 @@ const UserAccess = () => {
               placeholder="Password..."
             />
             <div className="allreadyHaveAcc">
-                <p>I already have an account</p>
-                <p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p>
+              <p>I already have an account:</p>
+              <p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p>
             </div>
             <p
               className="typeSubmitSignUp"
@@ -131,7 +137,7 @@ const UserAccess = () => {
           >
             <h1>Hello, Friend!</h1>
             <p>Enter your personal details and start your journey with us</p>
-            <p className="signUp" id="signUp" onClick={() => setIsSignIn(false)}>
+            <p className="signUp" id="signUp" onClick={() => setIsSignIn(true)}>
               Sign Up
             </p>
           </div>

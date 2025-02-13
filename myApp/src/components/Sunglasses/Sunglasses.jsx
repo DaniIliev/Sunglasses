@@ -37,10 +37,16 @@ const Sunglasses = () => {
     }
   return (
     <>
-    {isLoading && <BeatLoader  className='loader'/> }
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
+    {isLoading && <BeatLoader  className='loader'/> }
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
+        <details className='PhoneFillters'>
+            <summary className='summaryFilter'>Filters</summary>
+            <p className='filltersForPhone'>
+                <SunglassesFilter />
+            </p>
+        </details>
         <BiSort className='img' onClick={() => setIsSortOpen(!isSortOpen)}/>
         {isSortOpen ? 
         <div className='sortingDiv' onMouseLeave={() => setIsSortOpen(false)}>
@@ -116,7 +122,7 @@ const Sunglasses = () => {
                     <h5>600$$</h5>
                 </div>
             </div>
-            <div className='allAboutCard'>
+            {/* <div className='allAboutCard'>
                 <img src="/images/COPY3.webp" alt="ok" width={300}/>
                 <div className="info">
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
@@ -150,7 +156,7 @@ const Sunglasses = () => {
                     <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
                     <h5>600$$</h5>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>
     </>

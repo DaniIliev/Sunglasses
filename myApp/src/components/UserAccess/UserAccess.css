@@ -95,11 +95,24 @@
         width: 0 auto;
     }
     .overlay-panel.active {
-        display: none;
+        visibility: hidden;
+        /* display: none; */
     }
     .form-container, .sign-up-container, .sign-in-container .overlay-container{
+        position: relative;
         width: 100%;
         height: 20%;
+    }
+    .sign-up-container form, .sign-in-container form{
+        justify-content: start;
+    }
+
+    .SignInBTNPHONE{
+        color: red;
+        font-weight: bold;
+        text-decoration: underline;
+        border-radius: 1.5em;
+        
     }
     .allreadyHaveAcc{
         display: flex;
@@ -107,15 +120,9 @@
         gap: 0.5em;
         font-size: 1.2em;
     }
-    .SignInBTNPHONE{
-        padding: 0.4em 0.6em;
-        background-color: rgb(227, 128, 105);
-        color: white;
-        border-radius: 1.5em;
-    }
-    .allreadyHaveAcc
     .overlay-left,
     .overlay-right{
         display: none;
     }
 }
+

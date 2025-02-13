@@ -47,7 +47,13 @@
   letter-spacing: 2px;
 
 }
-
+.titleAndItemsDiv{
+  height: 43.5vh;
+  border-bottom: 1px solid black; 
+  display: flex;
+  flex-direction: column;
+  gap: 1em
+}
 .saveBTN:hover{
   background-color: blue;
 }
@@ -105,9 +111,53 @@
   color: white;
 
 }
+.yourProductsTITLE{
+    text-align: center;
+    position: absolute;
+    right: 10%;
+    top: 25%;
+}
 
 .addditionalInfoAndZipCode select{
   width: 100%;
   padding: 1em;
   border: 1px solid rgb(83, 200, 255);
+}
+
+@media (min-width: 300px) and (max-width: 900px){
+  .deliveryContent{
+      flex-direction: column-reverse;
+  }
+  .sectionDeliveryForm{
+      width: 100%;
+  }
+.titleAndItemsDiv{
+  flex-direction: column;
+  height: auto;
+}
+.sectionItems{
+  height: 30%;
+  width: 100%;
+}
+.deliveryContent{
+  height: 100%;
+}
+.informationTitle{
+  padding: 0;
+  text-align: center;
+}
+.singleItem{
+  margin-bottom: 1em;
+}
+.nameAndLastname, .emailAndPhone, .stateCity, .addressAndAddressNum, .addditionalInfoAndZipCode{
+  gap: 1em;
+}
+.saveBTN{
+margin: 0;
+width: 100%;
+}
+.yourProductsTITLE{
+  position: relative;
+  left: 2%;
+}
 }

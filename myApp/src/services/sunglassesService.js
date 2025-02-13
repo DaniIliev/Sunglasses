@@ -9,7 +9,7 @@ export const getAll = async () => {
 }
 
 export const getById = async (id) => {
-    const data = await fetch(`${apiUrl}/${id}`)
+    const data = await fetch(`${apiUrl}/sunglasses/${id}`)
     const item = await data.json()
     return item
 }

@@ -15,7 +15,7 @@ router.post('/add', async (req, res) => {
         lensType: req.body.lensType,
         frameMaterial: req.body.frameMaterial,
         UV_Protection: req.body.UV_Protection,
-        image: req.body.image,
+        images: req.body.images,
         description: req.body.description,
         price: req.body.price,
         oldPrice: req.body.oldPrice,

@@ -133,5 +133,9 @@
     }
     .contentWishlist div{
         color: floralwhite;
+        position: absolute;
+    }
+    .bestsellers, .startWishlist{
+        margin: 0;
     }
 }

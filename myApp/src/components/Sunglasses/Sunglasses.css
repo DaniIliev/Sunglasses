@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 35%;
+    width: 25%;
     gap: 2em;
 }
 .div-hr-text-gradient-and-imgFilter .img{
@@ -291,7 +291,9 @@ h3 {
     left: 0;
     opacity: 0;
 }
-
+.PhoneFillters{
+    display: none;
+}
 .addToCartSUNP{
     position: absolute;
     top: 70%;
@@ -324,6 +326,9 @@ h3 {
     .filters{
         display: none;
     }
+    .PhoneFillters{
+        display: inline;
+    }
     .catalog-cards{
         flex-direction: column;
         align-items: center;
@@ -333,6 +338,38 @@ h3 {
         display: block;
     }
     .div-hr-text-gradient-and-imgFilter .img {
-        top: 18%;
+        top: 13.5%;
+    }
+    .PhoneFillters p{
+        width: 90%;
+        margin: 0 auto;
+        padding: 0.5em 1em;
+    }
+    .filltersForPhone{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        align-items: flex-start;
+        padding: 0.5em 1em;
+        gap: 2em; 
+    }
+    .frame-colors{
+        padding: 0 2em;
+        align-items: start;
+    }
+    .checkboxes{
+        padding: 0 2em;
+    }
+    .summaryFilter{
+        background-color: rgb(0, 157, 255);
+        padding: 0.5em;
+        width: 90%;
+        margin: 0 auto;
+        font-size: 1.3em;
+        text-align: center;
+        color: white;
+        letter-spacing: 2px;
     }
 }
