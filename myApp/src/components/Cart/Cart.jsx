@@ -9,11 +9,10 @@ import { UserContext } from "../../context/UserContext";
 import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
 import { fetchItemsInCart } from "../../utills/sharedFn/fetchItemsInCart";
 import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
-import { addToCart } from "../../utills/sharedFn/addToCart";
 import { updateCount } from "../../utills/sharedFn/updateCount";
 import { Link, useNavigate } from "react-router-dom";
-import DeliveryFormPage from "../DeliveryForm/DeliveryForm";
 import { useTranslation } from "react-i18next";
+
 const Cart = () => {
   const { user, setUser } = useContext(UserContext);
   const [allItems, setAllItems] = useState([]);

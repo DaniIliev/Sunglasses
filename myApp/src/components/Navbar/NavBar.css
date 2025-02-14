@@ -147,9 +147,6 @@
   .aboutUser{
     gap: 0.5em
   }
-  .language{
-    display: none;
-  }
   .welcomeUsernam{
     display: none;
   }

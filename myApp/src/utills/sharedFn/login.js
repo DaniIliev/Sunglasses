@@ -1,8 +1,11 @@
 import { decodeToken } from "../DecodeToken";
 import * as userService from '../../services/userService'
 import { REACT_APP_API_URL } from "../../env";
+// import { useNavigate } from "react-router-dom";
 
 const apiUrl = REACT_APP_API_URL; 
+
+// const navigate = useNavigate()
 
 export const login = async (formData, setUser) => {
     try {
@@ -28,7 +31,7 @@ export const login = async (formData, setUser) => {
               userService.findOneByID(decodedUser._id)
                         .then((user) => setUser(user))
         // setUser(decodedUser);
-        alert("Logged in successfully!");
+        return {status: 0, message: "Logged in successfully!"};
       } catch (error) {
         console.error("Грешка при fetch:", error);
         alert("An error occurred: " + error.message);

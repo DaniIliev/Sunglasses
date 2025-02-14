@@ -7,6 +7,7 @@ import { login } from "../../utills/sharedFn/login";
 
 const UserAccess = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [message, setMessage] = useState('')
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -14,9 +15,9 @@ const UserAccess = () => {
   });
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = (e) => {
-    console.log(e.target.value)
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -26,17 +27,34 @@ const UserAccess = () => {
   }, [isSignIn]);
 
   const handleSignUp = async () => {
-    await register(formData, setUser);
-    navigate("/");
+    await register(formData, setUser)
+        .then((res) => res.status == 0 ? navigate('/sunglasses') : '');
   };
 
   const handleSingIn = async (e) => {
     e.preventDefault()
-    console.log(formData)
     await login(formData, setUser)
-    navigate('/')
-  };
+    .then((res) => {
+      if (res.status === 0) {
+        setMessage(res.message);
+        
+        setTimeout(() => {
+          navigate("/")
+          setMessage("");
+        }, 3000);
+      }
+    });
+    
+  }
   return (
+    <>
+    {message != '' && 
+    <div className="message">
+        <img src="/images/animation.gif" alt="animation" />
+        <p>Thank you</p>
+        <p>{message}</p>
+    </div>
+    }
     <div
       // className="containerAutorized"
       className={`containerAutorized ${isSignIn ? 'sign-in' : 'sign-up'}`} 
@@ -158,7 +176,7 @@ const UserAccess = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
-
 export default UserAccess;

@@ -333,6 +333,7 @@ h3 {
     }
     .PhoneFillters{
         display: inline;
+        width: 100%;
     }
     .catalog-cards{
         flex-direction: column;
@@ -343,7 +344,7 @@ h3 {
         display: block;
     }
     .div-hr-text-gradient-and-imgFilter .img {
-        top: 13.5%;
+        top: 15%;
     }
     .PhoneFillters p{
         width: 90%;
@@ -376,5 +377,12 @@ h3 {
         text-align: center;
         color: white;
         letter-spacing: 2px;
+        position: relative;
+    }
+    .loader{
+        left: 45%;
+    }
+    .page{
+        min-height: 80vh;
     }
 }

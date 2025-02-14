@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
+import BeatLoader from 'react-spinners/BeatLoader'; 
 import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
 import { FaShippingFast } from "react-icons/fa";

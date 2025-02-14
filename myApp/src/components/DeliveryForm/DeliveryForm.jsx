@@ -4,11 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import { UserContext } from "../../context/UserContext";
 import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
-import InteractiveMapWithLocations from "../InteractiveMapWithLocations/InteractiveMapWithLocations";
 import * as purchaseService from '../../services/purchaseService'
 import * as userService from '../../services/userService'
 import { formatDate } from "../../utills/sharedFn/formatData";
-// Компонент за формата за доставка
+
+
 const formDataInitial = {
   firstname: "",
   lastname: "",
