@@ -20,6 +20,7 @@ router.post('/add', async (req, res) => {
         price: req.body.price,
         oldPrice: req.body.oldPrice,
         name: req.body.name,
+        frameColor: req.body.frameColor,
     });
   
     try {

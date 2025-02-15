@@ -1,6 +1,8 @@
 import { decodeToken } from "../DecodeToken";
 import * as userService from '../../services/userService'
 import { REACT_APP_API_URL } from "../../env";
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 // import { useNavigate } from "react-router-dom";
 
 const apiUrl = REACT_APP_API_URL; 
@@ -8,6 +10,7 @@ const apiUrl = REACT_APP_API_URL;
 // const navigate = useNavigate()
 
 export const login = async (formData, setUser) => {
+  let user
     try {
         const response = await fetch(`${apiUrl}/users/login`, {
           method: "POST",
@@ -29,8 +32,16 @@ export const login = async (formData, setUser) => {
         localStorage.setItem("token", data.token); // Save token
         const decodedUser = decodeToken(data.token);
               userService.findOneByID(decodedUser._id)
-                        .then((user) => setUser(user))
-        // setUser(decodedUser);
+                        .then((res) => setUser(res))
+        toast.success("✅ Welcome, you are now authorized!", {
+            position: "top-center",  
+            autoClose: 3000,        
+            hideProgressBar: false, 
+            closeOnClick: true,     
+            pauseOnHover: true,     
+            draggable: true,        
+            theme: "colored",       
+        });
         return {status: 0, message: "Logged in successfully!"};
       } catch (error) {
         console.error("Грешка при fetch:", error);

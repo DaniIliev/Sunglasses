@@ -193,6 +193,9 @@
     font-size: 2em;
     margin: 1.5em 0 1.5em 0;
 }
+.maybeLikedCards{
+    margin: 0 auto;
+}
 .shippingIsOpen{
     text-align: center;
     font-size: 2em;

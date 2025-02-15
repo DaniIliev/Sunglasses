@@ -278,7 +278,7 @@ const Details = () => {
       >
         {t('detailsPage.YOUMAYALSOLIKE')}
       </h3>
-      <div className="catalog-cards">
+      <div className="catalog-cards maybeLikedCards">
         <Link className="card" to="/sunglasses/1">
           <div className="imageStock">
             <p className="sale">SALE</p>

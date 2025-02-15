@@ -3,23 +3,49 @@ import React, {useEffect, useState}from 'react'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import '../Sunglasses/Sunglasses.css'
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { FaRegDotCircle } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
-const SunglassesFilter = () => {
-    const [isFrameShapeOpen, setIsFrameShapeOpen] = useState(false)
-    const [isFrameColrFIlterOpen, setIsFrameColrFIlterOpen] = useState(false)
-    const [isLensColrFilterOpen, setIsLensColorFilterOpen] = useState(false)
-    const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false)
+import { IoCheckmarkDone } from "react-icons/io5";
+
+const SunglassesFilter = ({filterValues, setFilterValues}) => {
+    const [filters, setFilters] = useState({
+        frameShape: false,
+        frameColor: false,
+        lensType: false,
+        price: false,
+        minPrice: 0,
+        maxPrice: 200
+    });
 
     const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(200);  
+    const [maxPrice, setMaxPrice] = useState(200); 
+
+    const {t} = useTranslation()
+
+    const toggleFilter = (filterName) => {
+        setFilters(prevState => ({
+            ...prevState,
+            [filterName]: !prevState[filterName]
+        }));
+    };
+
+    const handleFilterChange = (category, value) => {
+        setFilterValues((prevFilters) => {
+            const isSelected = prevFilters[category].includes(value);
     
-    const {t, i18n} = useTranslation()
-    // Format numbers as currency
+            return {
+                ...prevFilters,
+                [category]: isSelected 
+                    ? prevFilters[category].filter((item) => item !== value) // Премахване, ако вече е избран
+                    : [...prevFilters[category], value] // Добавяне, ако не е избран
+            };
+        });
+    };
+
     const formatPrice = (value) => {
       return `$${parseInt(value).toLocaleString()}`;
     };
   
-    // Handle slider changes
     const handleMinPriceChange = (e) => {
       const value = Math.min(parseInt(e.target.value), maxPrice - 5); // Prevent overlap
       setMinPrice(value);
@@ -32,144 +58,83 @@ const SunglassesFilter = () => {
   return (
     <>
             <p className='sunglassesfilter' 
-                onClick={() => setIsFrameShapeOpen(!isFrameShapeOpen)}>
+                onClick={() => toggleFilter('frameShape')}>
                 {t('sunglassesFilter.frameShape')}
-                {isFrameShapeOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }</p>
-                {isFrameShapeOpen ? 
+                {filters.frameShape ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }</p>
+                {filters.frameShape && 
                         <div className="checkboxes">
-                            <label class="container">{t('sunglassesFilter.checkbox1')}<img src="/images/round.jpeg" alt="" />
-                                <input type="checkbox" id="1" name="round" value="Round"/>
-                                <span class="checkmark"></span>
+                        {[
+                            { name: "Round", label: t('sunglassesFilter.checkbox1'), img: "/images/round.jpeg" },
+                            { name: "Squared", label: t('sunglassesFilter.checkbox2'), img: "/images/squared.jpeg" },
+                            { name: "Rechtangular", label: t('sunglassesFilter.checkbox3'), img: "/images/rechtangular.jpeg" },
+                            { name: "Pilot/Aviator", label: t('sunglassesFilter.checkbox4'), img: "/images/pilotAviator.jpeg" },
+                            { name: "Cat eye", label: t('sunglassesFilter.checkbox5'), img: "/images/catEye.jpeg" }
+                        ].map((shape, index) => (
+                            <label key={index} className="container">
+                                {shape.label}
+                                <img src={shape.img} alt="" />
+                                <input 
+                                    type="checkbox" 
+                                    // checked={filterValues.frameShapes.includes(shape.name)}
+                                    checked={Array.isArray(filterValues.frameShapes) && filterValues.frameShapes.includes(shape.name)}
+                                    onChange={() => handleFilterChange("frameShapes", shape.name)}
+                                />
+                                <span className="checkmark"></span>
                             </label>
-                            <label className="container">{t('sunglassesFilter.checkbox2')} <img src="/images/squared.jpeg" alt="" />
-                                <input type="checkbox" id="2" name="squared" value="Squared"/>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label className="container">{t('sunglassesFilter.checkbox3')} <img src="/images/rechtangular.jpeg" alt="" />
-                                <input type="checkbox" id="3" name="rechtangular" value="Rechtangular"/>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label className="container">{t('sunglassesFilter.checkbox4')}<img src="/images/pilotAviator.jpeg" alt="" />
-                                <input type="checkbox" id="4" name="pilot/aviator" value="Pilot/Aviator"/>
-                                <span class="checkmark"></span>
-                            </label>
-                            <label className="container">{t('sunglassesFilter.checkbox5')} <img src="/images/catEye.jpeg" alt="" />
-                                <input type="checkbox" id="5" name="catYey" value="CatEye"/>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div> : ''}
-
-            <p className='sunglassesfilter' 
-                onClick={() => setIsFrameColrFIlterOpen(!isFrameColrFIlterOpen)}>
-                {t('sunglassesFilter.frameColor')}
-                {isFrameColrFIlterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
-                </p>
-                {isFrameColrFIlterOpen ? 
-                            <div className="frame-colors">
-                                <div className="colorContainer">
-                                    <p className='black'></p>
-                                    <p>{t('sunglassesFilter.black')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='blue'></p>
-                                    <p>{t('sunglassesFilter.blue')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='clear'></p>
-                                    <p>{t('sunglassesFilter.clear')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='gold'></p>
-                                    <p>{t('sunglassesFilter.gold')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='green'></p>
-                                    <p>{t('sunglassesFilter.green')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='grey'></p>
-                                    <p>{t('sunglassesFilter.grey')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='multi'></p>
-                                    <p>{t('sunglassesFilter.multi')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='neutral'></p>
-                                    <p>{t('sunglassesFilter.neural')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='orange'></p>
-                                    <p>{t('sunglassesFilter.orange')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='pink'></p>
-                                    <p>{t('sunglassesFilter.pink')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='purple'></p>
-                                    <p>{t('sunglassesFilter.purple')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='red'></p>
-                                    <p>{t('sunglassesFilter.red')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='silver'></p>
-                                    <p>{t('sunglassesFilter.silver')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='tort'></p>
-                                    <p>{t('sunglassesFilter.tort')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='white'></p>
-                                    <p>{t('sunglassesFilter.white')}</p>
-                                </div>
-                                <div className="colorContainer">
-                                    <p className='yellow'></p>
-                                    <p>{t('sunglassesFilter.yellow')}</p>
-                                </div>
-                            </div> : ''
-                }
-
-            <p className='sunglassesfilter' 
-                onClick={() => setIsLensColorFilterOpen(!isLensColrFilterOpen)}>
-                {t('sunglassesFilter.lensColor')} 
-                {isLensColrFilterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
-                </p>
-            {isLensColrFilterOpen ? 
-                    <div className="lens-colors">
-                        <div className="lens-color-container">
-                            <img src="/images/standartsunlenses.png" alt="" width={50}/>
-                            <p>{t('sunglassesFilter.standart')}</p>
-                        </div>
-                        <div className="lens-color-container">
-                            <img src="/images/polarized.png" alt="" width={50}/>
-                            <p>{t('sunglassesFilter.polarized')}</p>
-                        </div>
-                        <div className="lens-color-container">
-                            <img src="/images/mirrored.png" alt="" width={50}/>
-                            <p>{t('sunglassesFilter.mirrored')}</p>
-                        </div>
-                        <div className="lens-color-container">
-                            <img src="/images/colortransaction.png" alt="" width={50}/>
-                            <p>{t('sunglassesFilter.transition')}</p>
-                        </div>
-                        <div className="lens-color-container">
-                            <img src="/images/dioptric.png" alt="" width={50}/>
-                            <p>{t('sunglassesFilter.diobtric')}</p>
-                        </div>
+                        ))}
                     </div>
-                : ''
-            }
+                    }
 
             <p className='sunglassesfilter' 
-                onClick={() => setIsPriceFilterOpen(!isPriceFilterOpen)}>
+                onClick={() => toggleFilter('frameColor')}>
+                {t('sunglassesFilter.frameColor')}
+                {filters.frameColor ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                </p>
+                {filters.frameColor &&
+                            <div className="frame-colors">
+                            {["black", "blue", "clear", "gold", "green", "grey", "multi", "neutral", "orange", "pink", "purple", "red", "silver", "tort", "white", "yellow"]
+                            .map((color) => (
+                                <div 
+                                    key={color} 
+                                    className="colorContainer" 
+                                    onClick={() => handleFilterChange("frameColor", color)}
+                                >
+                                    <p className={color}></p>
+                                    <p className='frameColorP'>{t(`sunglassesFilter.${color}`)} {filterValues.frameColor.includes(color) ? <FaRegDotCircle /> : ''}</p>
+                                </div>
+                            ))}
+                        </div>
+                        }
+            <p className='sunglassesfilter' 
+                onClick={() => toggleFilter('lensColor')}>
+                {t('sunglassesFilter.lensColor')} 
+                {filters.lensColor ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                </p>
+            {filters.lensColor &&
+                    <div className="lens-colors">
+                    {[
+                        { name: "Standart sun lenses", label:t('sunglassesFilter.standart'), img: "/images/standartsunlenses.png" },
+                        { name: "Polarized", label: t('sunglassesFilter.polarized'), img: "/images/polarized.png" },
+                        { name: "Mirrored", label: t('sunglassesFilter.mirrored'), img: "/images/mirrored.png" },
+                        { name: "With a color transition", label: t('sunglassesFilter.transition'), img: "/images/colortransaction.png" },
+                        { name: "Diobtric sunglasses", label: t('sunglassesFilter.diobtric'), img: "/images/dioptric.png" }
+                    ].map((lens, index) => (
+                        <div key={index} className="lens-color-container"
+                            onClick={() => handleFilterChange("lensType", lens.name)}
+                            // style={{ border: filterValues.lensType.includes(lens.name) ? "2px solid #000" : "none" }}
+                            >
+                            <img src={lens.img} alt="" width={50} />
+                            <p className='lensP'>{lens.label} {filterValues.lensType.includes(lens.name) ? <IoCheckmarkDone className='lensTypeCheckmark'/> : "" }</p>
+                        </div>
+                    ))}
+                </div>
+            }
+            <p className='sunglassesfilter' 
+                onClick={() => toggleFilter('price')}>
                     {t('sunglassesFilter.price')}
-                    {isPriceFilterOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
+                    {filters.price ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown/> }
                     </p>
-            {isPriceFilterOpen ? 
+            {filters.price ? 
                         <div className="filter-container">
                         <h3>{t('sunglassesFilter.filterByPrice')}</h3>
                         <div className="price-slider">
@@ -180,7 +145,7 @@ const SunglassesFilter = () => {
                             min="0"
                             max="200"
                             step="5"
-                            value={minPrice}
+                            value={filters.minPrice}
                             onChange={handleMinPriceChange}
                             />
                             {/* Max Price Slider */}
@@ -190,7 +155,7 @@ const SunglassesFilter = () => {
                             min="0"
                             max="200"
                             step="5"
-                            value={maxPrice}
+                            value={filters.maxPrice}
                             onChange={handleMaxPriceChange}
                             />
                         </div>

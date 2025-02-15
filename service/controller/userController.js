@@ -101,7 +101,7 @@ router.post("/login", async (req, res) => {
       })
   
       // Връщане на токена към клиента
-      res.json({ message: "Login successful", token });
+      res.json({ message: "Login successful", token, payload });
     } catch (error) {
       console.error("Login error:", error);
       res.status(500).json({ message: "Internal Server Error" });

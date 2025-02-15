@@ -26,7 +26,7 @@ const Create = () => {
 
 
   useEffect(() => {
-    console.log('Hello world!')
+
 }, []);
     function handleImage(e){
         const files = Array.from(e.target.files); // Преобразуваме FileList в масив
@@ -108,6 +108,38 @@ const Create = () => {
                     </FormControl>
                     <FormControl fullWidth>
                         <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                        FRAME COLOR
+                        </InputLabel>
+                        <NativeSelect
+                        defaultValue={"---"}
+                        onChange={handleChange}
+                        inputProps={{
+                            name: 'frameColor',
+                            id: 'uncontrolled-native',
+                        }}
+                        >
+                        <option value="----">---</option>
+                        <option value={'black'}>Black</option>
+                        <option value={'blue'}>Blue</option>
+                        <option value={'clear'}>Clear</option>
+                        <option value={'gold'}>Gold</option>
+                        <option value={'green'}>Green</option>
+                        <option value={'grey'}>Grey</option>
+                        <option value={'multi'}>Multi</option>
+                        <option value={'neural'}>Neural</option>
+                        <option value={'clear'}>Clear</option>
+                        <option value={'orange'}>Orange</option>
+                        <option value={'pink'}>Pink</option>
+                        <option value={'purple'}>Purple</option>
+                        <option value={'red'}>Red</option>
+                        <option value={'silver'}>Silver</option>
+                        <option value={'tort'}>Tort</option>
+                        <option value={'white'}>White</option>
+                        <option value={'yellow'}>Yellow</option>
+                        </NativeSelect>
+                    </FormControl>
+                    <FormControl fullWidth>
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
                         FRAME SHAPE
                         </InputLabel>
                         <NativeSelect
@@ -119,9 +151,9 @@ const Create = () => {
                         }}
                         >
                         <option value="---">---</option>
-                        <option value={'Aviator'}>Aviator </option>
-                        <option value={'round'}>Round <img src="/images/round.jpeg" alt="" /></option>
-                        <option value={'Round'}>Squared <img src="/images/squared.jpeg" alt="" /></option>
+                        <option value={'Pilot/Aviator'}>Aviator </option>
+                        <option value={'Round'}>Round <img src="/images/round.jpeg" alt="" /></option>
+                        <option value={'Squared'}>Squared <img src="/images/squared.jpeg" alt="" /></option>
                         <option value={'Rechtangular'}>Rechtangular <img src="/images/rechtangular.jpeg" alt="" /></option>
                         <option value={'Cat eye'}>Cat eye <img src="/images/catEye.jpeg" alt="" /></option>
                         </NativeSelect>

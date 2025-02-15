@@ -91,6 +91,7 @@ const NavBar = () => {
                 <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
                 <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
                 <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
+                <Link>{t('menu.unisex')}</Link>
             </nav>
         </div>
         {isShippingHovered ? 

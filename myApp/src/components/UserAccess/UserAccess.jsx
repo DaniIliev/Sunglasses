@@ -28,33 +28,14 @@ const UserAccess = () => {
 
   const handleSignUp = async () => {
     await register(formData, setUser)
-        .then((res) => res.status == 0 ? navigate('/sunglasses') : '');
   };
 
-  const handleSingIn = async (e) => {
-    e.preventDefault()
+  const handleSingIn = async () => {
     await login(formData, setUser)
-    .then((res) => {
-      if (res.status === 0) {
-        setMessage(res.message);
-        
-        setTimeout(() => {
-          navigate("/")
-          setMessage("");
-        }, 3000);
-      }
-    });
-    
   }
   return (
     <>
-    {message != '' && 
-    <div className="message">
-        <img src="/images/animation.gif" alt="animation" />
-        <p>Thank you</p>
-        <p>{message}</p>
-    </div>
-    }
+
     <div
       // className="containerAutorized"
       className={`containerAutorized ${isSignIn ? 'sign-in' : 'sign-up'}`} 

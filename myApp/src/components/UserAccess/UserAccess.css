@@ -90,21 +90,6 @@
 .allreadyHaveAcc{
     display: none;
 }
-.message{
-    position: absolute;
-    top: 5%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    height: 90%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1em;
-    font-size: 1.5em;
-}
 @media (min-width: 300px) and (max-width: 900px){
     .containerAutorized.sign-up,
     .containerAutorized.sign-in {

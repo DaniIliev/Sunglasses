@@ -45,6 +45,7 @@ const sunglassesSchema = new mongoose.Schema({
     // },
     required: [true, "Gender is required"], // Error message for missing gender
   },
+  createdAt: { type: Date, default: Date.now},
   frameShape: {
     type: String,
     // enum: {
@@ -62,6 +63,10 @@ const sunglassesSchema = new mongoose.Schema({
     //     "Lens type must be one of Polarized, Photochromic, Blue Light Blocking, or Standard",
     // },
     required: [true, "Lens type is required"], // Error message for missing lens type
+  },
+  frameColor:{
+    type: String,
+    required: true,
   },
   frameMaterial: {
     type: String,
@@ -84,18 +89,7 @@ const sunglassesSchema = new mongoose.Schema({
     required: [true, "At least one image is required"], //
     description: "File path or URL for uploaded image",
   },
-  // image2: {
-  //   type: String,
-  //   description: "File path or URL for uploaded image",
-  // },
-  // image3: {
-  //   type: String,
-  //   description: "File path or URL for uploaded image",
-  // },
-  // image4: {
-  //   type: String,
-  //   description: "File path or URL for uploaded image",
-  // },
+
   likes: {
     type: Array,
     ref: "User",

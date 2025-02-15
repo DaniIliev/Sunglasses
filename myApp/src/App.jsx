@@ -12,25 +12,36 @@ import {UserProvider} from './context/UserContext'
 import DeliveryFormPage from './components/DeliveryForm/DeliveryForm'
 import UserOrders from './components/UserOrders/UserOrders'
 import UserAccess from './components/UserAccess/UserAccess'
+import AuthGuard from './guards/AuthGuard'
+import GuestGuard from './guards/GuestGuard'
+import AdminGuard from './guards/AdminGuard'
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
   return (
     <>
-
     <UserProvider className="main">
+      <ToastContainer /> 
       {/* <NavbarProvider> */}
         <NavBar /> 
           <Routes>
             <Route path='/' element={<Home />}/> 
+            <Route element={<AuthGuard/>}>
+              <Route path='/cart' element={<Cart/>}/>
+              <Route path='/delivery' element={<DeliveryFormPage/>}/>
+              <Route path='/orders' element={<UserOrders />}/>
+            </Route>
+            <Route element={<GuestGuard />}>
+              <Route path='/user/access' element={<UserAccess/>}/> 
+            </Route>
+            <Route element={<AdminGuard />}>
+              <Route path='/create' element={<Create/>}/>
+            </Route>
             <Route path='/sunglasses' element={<Sunglasses />}/>
-            <Route path='/user/access' element={<UserAccess/>}/> 
             <Route path = '/sunglasses/:id' element={<Details/>}/>
-            <Route path='/cart' element={<Cart/>}/>
             <Route path='/wishlist' element={<LoveCartList />} />
-            <Route path='/create' element={<Create/>}/>
-            <Route path='/delivery' element={<DeliveryFormPage/>}/>
-            <Route path='/orders' element={<UserOrders />}/>
+
           </Routes>
           <Footer />
       {/* </NavbarProvider>   */}

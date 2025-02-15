@@ -21,7 +21,7 @@
         "bestsellers": "Bestsellers",
         "women's": "Women's",
         "man's": "Man's",
-        "Unisex": "Unisex"
+        "unisex": "Unisex"
     },
     "sunglassesFilter":{
         "frameShape": "FRAME SHAPE",

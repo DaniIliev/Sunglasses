@@ -17,6 +17,7 @@ export const register = async (formData, setUser) => {
             password: formData.password
         }
         login(loginData, setUser)
+        return {status: 0, message: "Registered successfully!"};
     } catch (error) {
         setMessage('Error registering user');
         console.error('Error:', error);
