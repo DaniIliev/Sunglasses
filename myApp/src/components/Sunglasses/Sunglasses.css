@@ -18,7 +18,7 @@
 }
 .div-hr-text-gradient-and-imgFilter .img{
     position: absolute;
-    top: 21.5%;
+    top: 6.8em;
     right: 5%;
     font-size: 2em;
     background-color: white;
@@ -225,11 +225,14 @@ h3 {
 }
 /*  */
 .catalog-cards{
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    /* margin: 0 5%; */
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width: 100%;
     gap: 2em;
 }
 
@@ -293,13 +296,13 @@ h3 {
     color: red;
 }
 .imageContainer{
-    width: 300px; 
-    height: 300px;
+    width: 100%;
     position: relative;
     overflow: hidden;
 }
 .imageContainer img {
     transition: opacity 1s ease;
+    width: 100%;
 }
 .hover-image , .addToCartSUNP{
     position: absolute;
@@ -312,8 +315,8 @@ h3 {
 }
 .addToCartSUNP{
     position: absolute;
-    top: 70%;
-    left: 17%;
+    top: 14em;
+    left: 2em;
     text-align: center;
     color: white;
     background-color: rgb(3, 0, 0);
@@ -338,9 +341,29 @@ h3 {
     top: 50%;
     left: 50%;
 }
+@media (min-width: 1600px ){
+    .catalog-cards{
+        grid-template-columns: 22% 22% 22% 22%;
+
+    }
+}
+@media(max-width: 900px){
+    .catalog-cards{
+        grid-template-columns: 45% 45%;
+    }
+}
+@media(max-width: 425px){
+    .catalog-cards{
+        grid-template-columns: 90%;
+    }
+}
+
 @media (min-width: 300px) and (max-width: 900px){
-    .filters{
+    .filters, .hover-image, .addToCartSUNP{
         display: none;
+    }
+    .sizeModelImg{
+        width: 90%;
     }
     .PhoneFillters{
         display: inline;
@@ -356,7 +379,10 @@ h3 {
         display: block;
     }
     .div-hr-text-gradient-and-imgFilter .img {
-        top: 15%;
+        top: 4em;
+    }
+    .sortingDiv{
+        top: 10em;
     }
     .PhoneFillters p{
         width: 90%;

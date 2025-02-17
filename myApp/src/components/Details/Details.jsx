@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BeatLoader from 'react-spinners/BeatLoader'; 
 import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
@@ -34,9 +34,13 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [item, setItem] = useState([]);
   const [isLike, setIsLike] = useState(false)
-  const { id } = useParams();
-  const { user, setUser } = useContext(UserContext);
   const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
+
+
+  const { id } = useParams();
+  const navigate = useNavigate()
+
+  const { user, setUser } = useContext(UserContext);
   
   const {t, i18n} = useTranslation()
 
@@ -187,12 +191,16 @@ const Details = () => {
             </p>
           </div>
           <div className="addToCardAndLike">
-            <p className="addToCart" onClick={handleAddItem}>
+            <p 
+              className="addToCart" 
+              onClick={user ? handleAddItem : () => navigate('/user/access')}
+            >
               {t('detailsPage.addToCart')}
             </p>
-            {isLike ?  <FaHeart className="hearth" onClick={() => handleUnlike()}/> : 
-                 <CiHeart className="hearth" onClick={() => handleLike()}/>
-            }
+            {user !== null && user !== undefined ? (
+            isLike ? <FaHeart className="hearth liked" onClick={handleUnlike} /> : 
+            <CiHeart className="hearth" onClick={handleLike} />
+            ) : null}
           </div>
           <h4>{t('detailsPage.description')}</h4>
           <div className="description">
@@ -230,7 +238,7 @@ const Details = () => {
                 <strong>UV PROTECTION:</strong> CATEGORY 2
               </p>
             </div>
-            <img src="/images/sizeModel.webp" alt="" />
+            <img src="/images/sizeModel.webp" alt="sizeModel" className="sizeModelImg" />
             <div className="secondSection">
               <p>
                 <strong>FRAME WIDTH:</strong> 140MM
@@ -279,6 +287,34 @@ const Details = () => {
         {t('detailsPage.YOUMAYALSOLIKE')}
       </h3>
       <div className="catalog-cards maybeLikedCards">
+        <Link className="card" to="/sunglasses/1">
+          <div className="imageStock">
+            <p className="sale">SALE</p>
+            {/* <CiHeart className='like'/>  */}
+            <div className="imageContainer">
+              <img
+                src="/images/COPY1.webp"
+                alt="ok"
+                width={300}
+                className="default-image"
+              />
+              <img
+                src="/images/image.png"
+                width={300}
+                alt=""
+                className="hover-image"
+              />
+            </div>
+          </div>
+          <div className="info">
+            <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+            <div className="prices">
+              <h5>600,00$</h5>
+              <h4>500,00$</h4>
+              <p>-10%</p>
+            </div>
+          </div>
+        </Link>
         <Link className="card" to="/sunglasses/1">
           <div className="imageStock">
             <p className="sale">SALE</p>

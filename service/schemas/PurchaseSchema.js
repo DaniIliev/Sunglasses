@@ -44,9 +44,9 @@ const PurchaseSchema = new mongoose.Schema({
     required: [true, "Address number address is required"],
   },
   purchaseDate: {
-    type: Date,
+    type: String,
     require: true,
-    // default: Date.now,
+    default: Date.now,
   },
   additionalInfo: {
     type: String,
@@ -73,9 +73,9 @@ const PurchaseSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      image: {
-        type: String,
-        required: true,
+      images: {
+        type: Array,
+        required: [true, "At least one image is required"], //
       },
       price: {
         type: Number,

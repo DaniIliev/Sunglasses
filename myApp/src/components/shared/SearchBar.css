@@ -1,18 +1,27 @@
-.searchBarBox{
-    width: 20%;
-}
-.searchBar{
+
+.searchBarBox {
     display: flex;
     align-items: center;
-    gap: 10em;
-    border: 0.1em solid black;
-    border-radius: 4em;
-    padding: 0.5em;
-    width: 80%;;
+    background: #fff;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 10px auto;
 }
 
-.searchIcon{
-    position: absolute;
-    top: 8.5%;
-    left: 24%;
+.searchBar {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.searchIcon {
+    color: #555;
+    font-size: 20px;
+    margin-left: 8px;
+    cursor: pointer;
 }

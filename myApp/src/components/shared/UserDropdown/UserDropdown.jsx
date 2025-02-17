@@ -37,7 +37,9 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
     <>
       {/* {isUserIconHovered ? console.log('work') : ''} */}
       {isUserIconHovered && user ? (
-        <div className="userDropdown">
+        <div className="userDropdown" 
+        onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
+        >
             <div className="authorizedUsers">
             <Link to='/orders'><p>My Orders</p></Link>
             <p onClick={handleLogout}>Logout</p>

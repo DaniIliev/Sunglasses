@@ -56,7 +56,7 @@ const Cart = () => {
   };
   return (
     <>
-    {isLoading && <BeatLoader  className='loader'/> }
+    {isLoading ? <BeatLoader  className='loader'/> : 
       <div className="cart">
         <div className="titles">
           <p>HOME / CART</p>
@@ -180,6 +180,7 @@ const Cart = () => {
         </>
         }
       </div>
+}
     </>
   );
 };

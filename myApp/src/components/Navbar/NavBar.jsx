@@ -4,6 +4,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import SearchBar from '../shared/SearchBar'
 import { RiMenuFold4Fill } from "react-icons/ri";
 import "./NavBar.css"
+import { IoIosClose } from "react-icons/io";
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -17,15 +18,21 @@ import CartDropdown from '../shared/CartDropdown/CartDropdown';
 import UserDropdown from '../shared/UserDropdown/UserDropdown';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../context/UserContext';
+import { logout } from '../../utills/sharedFn/logout';
 
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
     const [isShippingHovered, setIsShippingHovered] = useState(false)
     const [isUserIconHovered, setIsUserIconHovered] = useState(false)
-    const [isLanguageENG, setIsLanguageENG] = useState('eng')
     const [isResponsivMenuOpen, setIsRepsonsivMenuOpen] = useState(false)
-    const { user , setUser} = useContext(UserContext);
+
+    const [isLanguageENG, setIsLanguageENG] = useState('eng')
+
+
+    const { user, setUser} = useContext(UserContext);
+
+    const navigate = useNavigate()
     const { t, i18n } = useTranslation();
     const [countInCart, setCountInCart] = useState(0)
 
@@ -41,6 +48,13 @@ const NavBar = () => {
         setIsShippingHovered(false)
         setIsUserIconHovered(false)
     }, [user])
+
+    const handleLogout = async () => {
+        await logout(setUser) 
+        console.log('logout ok')
+        navigate('/')
+       }
+
   return (
     <div className='navBars'>
 
@@ -54,19 +68,42 @@ const NavBar = () => {
             </span>
         </div>
         <div  className='navBarOne'>
-            <SearchBar /> 
             <RiMenuFold4Fill className='responsivMenuBTN' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
-            {isResponsivMenuOpen &&
-            <div className='responsivMenu'>
+            <div className={isResponsivMenuOpen ? `responsivMenu open` : 'responsivMenu closed'}>
+                <div>
+                    <h1>Menu</h1>
+                    <p className='language responsive' onClick={() => {
+                    if(isLanguageENG == 'eng'){
+                        setIsLanguageENG("bg")
+                        switchLanguage("bg")
+                    }else{
+                        setIsLanguageENG("eng")
+                        switchLanguage("eng")
+                    }
+                }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
+                    <IoIosClose className='closeResponsivMenu' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
+                </div>
+                <h4>{user ? <p className='welcomeUsernam'>{`Welcome, ${user.username}`}</p> : ''}</h4>
+                <SearchBar /> 
                 <ul>
-                    <li>{t('menu.new')}</li>
-                    <li>{t('menu.bestsellers')}</li>
-                    <li>{t('menu.women\'s')}</li>
-                    <li>{t('menu.man\'s')}</li>
+                    <Link to={'/sunglasses'}><li>{t('menu.new')}</li></Link>
+                    <Link to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
+                    <Link to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
+                    <Link to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
+                    <Link to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link>
+                    {user ? 
+                        <>
+                            <Link to={'/orders'}><li>My orders</li></Link>
+                            <Link onClick={handleLogout}><li>Logout</li></Link>
+                        </>
+                        : <Link to='/user/access'><li>Sign in / Sign up</li></Link>
+                    }
+
                 </ul>
             </div>
-            }
             <Link to='/'><img src="/images/logo.jpg" alt="" className='logo'/></Link>
+            <SearchBar /> 
+
             <div className='aboutUser'>
                 <p className='language' onClick={() => {
                     if(isLanguageENG == 'eng'){

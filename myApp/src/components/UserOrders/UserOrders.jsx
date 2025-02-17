@@ -37,7 +37,7 @@ const UserOrders = () => {
               <th>Номер на улица</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tbodyUserOrder">
             <tr>
               <td className="namesAndIcon">
                 <p>
@@ -45,39 +45,39 @@ const UserOrders = () => {
                 </p>
                 <p>
                   {user?.orders && user.orders.length > 0
-                    ? user.orders[user.orders?.length - 1].firstname
+                    ? user.orders[user.orders?.length - 1]?.firstname
                     : ""}
                 </p>
                 <p>
                   {user?.orders && user.orders.length > 0
-                    ? user.orders[user.orders?.length - 1].lastname
+                    ? user.orders[user.orders?.length - 1]?.lastname
                     : ""}
                 </p>
               </td>
               <td>
                 {user?.orders && user.orders.length > 0
-                  ? user.orders[user.orders?.length - 1].phoneNumber
+                  ? user.orders[user.orders?.length - 1]?.phoneNumber
                   : ""}
               </td>
               <td>
                 {user?.orders && user.orders.length > 0
-                  ? user.orders[user.orders?.length - 1].email
+                  ? user.orders[user.orders?.length - 1]?.email
                   : ""}
               </td>
-              <td>
+              <td className="userAdress">
                 {user?.orders && user.orders.length > 0
-                  ? user.orders[user.orders?.length - 1].address
+                  ? user.orders[user.orders?.length - 1]?.address
                   : ""}
                 {` - ${
                   user?.orders && user.orders.length > 0
-                    ? user.orders[user.orders?.length - 1].addressNum
+                    ? user.orders[user.orders?.length - 1]?.addressNum
                     : ""
                 }`}
                 {user?.orders && user.orders.length > 0
-                  ? user.orders[user.orders?.length - 1].city
+                  ? user.orders[user.orders?.length - 1]?.city
                   : ""}
                 {user?.orders && user.orders.length > 0
-                  ? user.orders[user.orders?.length - 1].zipCode
+                  ? user.orders[user.orders?.length - 1]?.zipCode
                   : ""}
               </td>
             </tr>
@@ -89,7 +89,7 @@ const UserOrders = () => {
             {user?.username}, тук можете да проследите статуса на поръчките си.
           </p>
         </div>
-        <table className="table">
+        <table className="table tableOrders">
           <thead>
             <tr>
               <th>Номер на поръчка</th>
@@ -149,9 +149,9 @@ const UserOrders = () => {
                   <tr key={el._id}>
                     <td>
                       <img
+                        className="modalOrderImage"
                         src={el.image || "/images/COPY1.webp"}
                         alt={el.name || "Слънчеви очила"}
-                        width={100}
                       />
                     </td>
                     <td>{el.name}</td>

@@ -22,9 +22,8 @@ const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
   }
   return (
 <>
-{isShippingHovered ? 
-    // allAboutUser.cart.map(el => 
-    <div className='cartDropdown' onMouseLeave={() => setIsShippingHovered(!isShippingHovered)}>
+{/* {isShippingHovered ?  */}
+    <div onMouseLeave={() => setIsShippingHovered(!isShippingHovered)} className={isShippingHovered ? 'cartDropdown open' : 'cartDropdown closed'}>
       {allItems.map(item => 
       <div className='aboutItem' key={item._id}>
           <img src="/images/COPY1.webp" alt="" width={100}/>
@@ -42,8 +41,9 @@ const CartDropdown = ({setIsShippingHovered,isShippingHovered}) => {
         <Link className='viewCart'>View cart</Link>
         <Link className='ckeckout'>Checkout</Link>
       </div>
-    </div> : ''
-}
+    </div>
+     {/* : ''
+} */}
 </>
 )}
 

@@ -1,50 +1,31 @@
 import React, {useContext, useEffect, useState}from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Sunglasses.css'
 import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
 import SunglassesFilter from '../shared/SunglassesFilter';
 import { BiSort } from "react-icons/bi";
-import * as sunglassesService from '../../services/sunglassesService'
 import { addToCart } from '../../utills/sharedFn/addToCart';
 import { UserContext } from '../../context/UserContext';
 import AddToCartPopup from '../Popups/addToCartPopup';
+import { SunglassesContext } from '../../context/SunglassesContext';
 
 const Sunglasses = () => {
-    const [filteredSunglasses, setFilteredSunglasses] = useState([])
-    const [sunglasses, setSunglasses] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [isSortOpen, setIsSortOpen] = useState(false)
-    const [sort, setSort] = useState('newest')
     const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
-    const [filterValues, setFilterValues] = useState({
-        frameShapes: [], 
-        frameColor: [], 
-        lensType: []   
-    });
-
     const { user, setUser } = useContext(UserContext);
+    const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues} = useContext(SunglassesContext)
 
-    useEffect(() => {
-        setIsLoading(true)
-        sunglassesService.getAll()
-            .then(result => {
-                setSunglasses(result)
-                setFilteredSunglasses(result);
-                setIsLoading(false)
-            })
-            .catch(err => console.log(err))
-    }, [])
+    const navigate = useNavigate()
 
     useEffect(() => {
         let sortedSunglasses = [...sunglasses];
 
-        if(sort == 'ascending'){
+        if(filterValues.sort == 'ascending'){
             sortedSunglasses = sortedSunglasses.sort((a, b) => a.price - b.price)
-        }else if(sort == 'descending'){
+        }else if(filterValues.sort == 'descending'){
             sortedSunglasses = sortedSunglasses.sort((a, b) => b.price - a.price)
-        }else if(sort == "newest"){
-            console.log(sunglasses)
+        }else if(filterValues.sort == "newest"){
             sortedSunglasses = sortedSunglasses.sort((a, b) => a.createdAt - b.createdAt)
         }
 
@@ -53,7 +34,8 @@ const Sunglasses = () => {
             filterValues.frameColor.length === 0 &&
             filterValues.lensType.length === 0 &&
             !filterValues.minPrice &&
-            !filterValues.maxPrice;
+            !filterValues.maxPrice &&
+            filterValues.query.length === 0;
 
     const filterSunglasses = isFilterEmpty
     ? sortedSunglasses 
@@ -64,15 +46,22 @@ const Sunglasses = () => {
         const priceMatch =
             (!filterValues.minPrice || sunglass.price >= filterValues.minPrice) &&
             (!filterValues.maxPrice || sunglass.price <= filterValues.maxPrice);
-        console.log(shapeMatch, colorMatch, lensMatch, priceMatch)
-        return shapeMatch && colorMatch && lensMatch && priceMatch;
+        const searchMatch =
+            filterValues.query.length === 0 ||
+            sunglass.name.toLowerCase().includes(filterValues.query) ||
+            sunglass.frameShape.toLowerCase().includes(filterValues.query) ||
+            sunglass.frameColor.toLowerCase().includes(filterValues.query) ||
+            sunglass.lensType.toLowerCase().includes(filterValues.query);
+        return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
     });
 
     setFilteredSunglasses(filterSunglasses);
-
-    }, [sort, filterValues, sunglasses]);
+    }, [filterValues, sunglasses]);
 
     
+    const updateSort = (newSort) => {
+        setFilterValues(prev => ({ ...prev, sort: newSort }));
+    };
 
     const addItem = (id) => {
         setIsAddToCartPopupOpen(true)
@@ -93,7 +82,7 @@ const Sunglasses = () => {
         <details className='PhoneFillters'>
             <summary className='summaryFilter'>Filters</summary>
             <p className='filltersForPhone'>
-                <SunglassesFilter {...{ filterValues, setFilterValues }}/>
+                <SunglassesFilter/>
             </p>
         </details>
         <BiSort className='img' onClick={() => setIsSortOpen(!isSortOpen)}/>
@@ -103,16 +92,16 @@ const Sunglasses = () => {
                 <h4>Sort by:</h4>
                     <div className='checkboxes'>
                         <label class="container"> Newest 
-                            <input type="checkbox" id="1" name="newest" value="newest" checked={sort == 'newest'}/>
-                            <span className="checkmark" onClick={() => setSort('newest')}></span>
+                            <input type="checkbox" id="1" name="newest" value="newest" checked={filterValues.sort == 'newest'}/>
+                            <span className="checkmark" onClick={() => updateSort('newest')}></span>
                         </label>
                         <label className="container"> Price Ascending
-                            <input type="checkbox" id="2" name="ascending" value="ascending" checked={sort == 'ascending'}/>
-                            <span className="checkmark" onClick={() => setSort('ascending')}></span>
+                            <input type="checkbox" id="2" name="ascending" value="ascending" checked={filterValues.sort == 'ascending'}/>
+                            <span className="checkmark" onClick={() => updateSort('ascending')}></span>
                         </label>
                         <label className="container"> Price Descending
-                            <input type="checkbox" id="3" name="descending" value="descending" checked={sort == 'descending'}/>
-                            <span className="checkmark" onClick={() => setSort('descending')}></span>
+                            <input type="checkbox" id="3" name="descending" value="descending" checked={filterValues.sort == 'descending'}/>
+                            <span className="checkmark" onClick={() => updateSort('descending')}></span>
                         </label>
                     </div>
             </ul>
@@ -130,29 +119,25 @@ const Sunglasses = () => {
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
                         <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                            <img src='/images/COPY3.webp' width={300} className='default-image'/>
-                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                            <img src='/images/COPY3.webp' className='default-image'/>
+                            <img src="/images/image.png" alt="" className='hover-image'/>
                         </Link>
-                        <p className='addToCartSUNP' onClick={() => addItem(item._id)}>Add to cart</p>
+                        <p className='addToCartSUNP' 
+                        onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
+                        >Add to cart
+                        </p>
                     </div>
                     <div className="info">
                         <h3>{item.name}</h3>
                         <div className='prices'>
                             <h5>{item.oldPrice}</h5>
-                            <h4>{item.price}</h4>
+                            <h4>{item.price} лв</h4>
                             <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
                         </div>
                     </div>
                 </div>
             </div>
             )}
-            <div className='allAboutCard'>
-                <img src="/images/COPY2.webp" alt="ok" width={300}/>
-                <div className="info">
-                    <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
-                    <h5>600$$</h5>
-                </div>
-            </div>
         </div>
     </div>
     </>

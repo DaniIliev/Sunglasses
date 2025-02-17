@@ -54,7 +54,45 @@
 }
 .closeDetailsOrderBTN{
     position: absolute;
-    top: 4%;
-    right: 2%;
+    top: 0.2em;
     font-size: 2em;
+}
+.modalOrderImage{
+    width: 7em;
+}
+
+@media(max-width: 800px){
+    .namesAndIcon{
+        font-size: 1em;
+        gap: 0.5em;
+    }
+    .tbodyUserOrder tr td{
+        font-size: 0.6em;
+    }
+    .tableUser thead tr th{
+        font-size: 0.8em;
+    }
+    .tableModal{
+        font-size: 0.7em;
+    }
+    .modalOrderImage{
+        width: 5em;
+    }
+}
+@media(max-width: 450px){
+    .tableOrders{
+        font-size: 0.5em;
+    }
+    .namesAndIcon{
+        display: block;
+    }
+    .userAdress{
+        width: 5em;
+    }
+    .tableModal{
+        font-size: 0.5em;
+    }
+    .modalOrderImage{
+        width: 5em;
+    }
 }

@@ -150,12 +150,20 @@
   .welcomeUsernam{
     display: none;
   }
-
+  .navBars{
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
   .navBarTwo{
     display: none;
   }
   .navBarOne{
+    background-color: white;
     justify-content: space-between;
+    width: 100%;
   }
   .responsivMenuBTN{
     display: block;
@@ -165,13 +173,29 @@
   .responsivMenu{
     position: absolute;
     display: block;
-    top: 13%;
-    /* width: 100%; */
+    top: 30%;
     padding: 1em;
     left: 0;
     background-color: ghostwhite;
     z-index: 2312;
     border-radius: 16px;
+    transition: all .3s ease-in-out;
+  }
+
+  .open{
+    left: 0 !important;
+  }
+  .closed{
+    left: -100% !important;
+  }
+
+  .responsivMenu div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .closeResponsivMenu{
+    font-size: 2em;
   }
   .responsivMenu .searchBarBox{
     display: block;
@@ -190,5 +214,11 @@
   .responsivMenu ul li:hover{
     background-color: rgb(79, 79, 249);
     color: white;
+  }
+  .language, .personIcon{
+    display: none;
+  }
+  .responsive{
+    display: inline;
   }
 }

@@ -129,16 +129,22 @@
 .cartIsEmty a:hover{
   background-color: blue;
 }
+
+@media (max-width: 700px){
+    .counter p {
+        font-size: 0.7em;
+    }
+}
 @media (min-width: 300px) and (max-width: 900px){
     .table tr th{
         font-size: 0.6em;
         padding: 0.5em 0 0.5em;
     }
     .table td{
-        width: 30%;
+        width: 20em;
     }
     .table img {
-        width: 40%;
+        width: 80%;
         margin: 0.2em auto;
     }
     .prices{
@@ -147,7 +153,7 @@
         align-items: center;
     }
     .del{
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
     .counter{
         gap: 0.8em;
@@ -155,7 +161,9 @@
         width: 60%;
     }
     .counterTD{
-        gap: 1em;
+        gap: 0.5em;
+        flex-direction: column;
+        margin: 0.5em 0 0.5em 0;
     }
     .orderComplite{
         flex-direction: column;

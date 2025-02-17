@@ -33,7 +33,7 @@ const DeliveryFormPage = () => {
   const [totalPurchasePrice, setTotalPurchasePrice] = useState(0)
   const [allItemsArr, setAllItemsArr] = useState([])
   useEffect(() => {
-    allItems.map(el => allItemsArr.push({item: el._id, name: el.name, image: el.image, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
+    allItems.map(el => allItemsArr.push({item: el._id, name: el.name, images: el.images, price: el.price, quantity: el.quantity, totalPrice: Number(el.price) * Number(el.quantity)}))
     setTotalPurchasePrice(allItemsArr.reduce((acc, el) => acc + el.totalPrice, 0));
 
   }, [allItems])

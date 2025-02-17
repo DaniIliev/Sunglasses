@@ -16,35 +16,37 @@ import AuthGuard from './guards/AuthGuard'
 import GuestGuard from './guards/GuestGuard'
 import AdminGuard from './guards/AdminGuard'
 import { ToastContainer } from "react-toastify";
+import { SunglassesProvider } from './context/SunglassesContext'
 
 function App() {
 
   return (
     <>
     <UserProvider className="main">
-      <ToastContainer /> 
-      {/* <NavbarProvider> */}
-        <NavBar /> 
-          <Routes>
-            <Route path='/' element={<Home />}/> 
-            <Route element={<AuthGuard/>}>
-              <Route path='/cart' element={<Cart/>}/>
-              <Route path='/delivery' element={<DeliveryFormPage/>}/>
-              <Route path='/orders' element={<UserOrders />}/>
-            </Route>
-            <Route element={<GuestGuard />}>
-              <Route path='/user/access' element={<UserAccess/>}/> 
-            </Route>
-            <Route element={<AdminGuard />}>
-              <Route path='/create' element={<Create/>}/>
-            </Route>
-            <Route path='/sunglasses' element={<Sunglasses />}/>
-            <Route path = '/sunglasses/:id' element={<Details/>}/>
-            <Route path='/wishlist' element={<LoveCartList />} />
-
-          </Routes>
-          <Footer />
-      {/* </NavbarProvider>   */}
+      <SunglassesProvider>
+        <ToastContainer /> 
+        {/* <NavbarProvider> */}
+          <NavBar /> 
+            <Routes>
+              <Route path='/' element={<Home />}/> 
+              <Route element={<AuthGuard/>}>
+                <Route path='/cart' element={<Cart/>}/>
+                <Route path='/delivery' element={<DeliveryFormPage/>}/>
+                <Route path='/orders' element={<UserOrders />}/>
+              </Route>
+              <Route element={<GuestGuard />}>
+                <Route path='/user/access' element={<UserAccess/>}/> 
+              </Route>
+              <Route element={<AdminGuard />}>
+                <Route path='/create' element={<Create/>}/>
+              </Route>
+              <Route path='/sunglasses' element={<Sunglasses />}/>
+              <Route path = '/sunglasses/:id' element={<Details/>}/>
+              <Route path='/wishlist' element={<LoveCartList />} />
+            </Routes>
+            <Footer />
+        {/* </NavbarProvider>   */}
+      </SunglassesProvider>
     </UserProvider>
 
     </>
