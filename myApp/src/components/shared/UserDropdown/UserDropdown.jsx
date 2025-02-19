@@ -46,7 +46,7 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
             <Link to="/orders">
               <p>My Orders</p>
             </Link>
-            <p onClick={handleLogout}>Logout</p>
+            <Link onClick={handleLogout}><p>Logout</p></Link>
           </div>
         </div>
       ) : (
