@@ -3,11 +3,8 @@ import * as userService from '../../services/userService'
 import { REACT_APP_API_URL } from "../../env";
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
-// import { useNavigate } from "react-router-dom";
 
 const apiUrl = REACT_APP_API_URL; 
-
-// const navigate = useNavigate()
 
 export const login = async (formData, setUser) => {
   let user
@@ -22,9 +19,7 @@ export const login = async (formData, setUser) => {
         // Проверка за HTTP грешка
         if (!response.ok) {
           const errorData = await response.json();
-          console.error("Грешка от сървъра:", errorData);
-          alert("Login failed: " + errorData.message);
-          return;
+          throw new Error("Login failed: " + errorData.message)
         }
   
         const data = await response.json();
@@ -42,9 +37,16 @@ export const login = async (formData, setUser) => {
             draggable: true,        
             theme: "colored",       
         });
-        return {status: 0, message: "Logged in successfully!"};
+        return {status: 200, message: "Logged in successfully!"};
       } catch (error) {
-        console.error("Грешка при fetch:", error);
-        alert("An error occurred: " + error.message);
+        toast.error("❌ An error occurred: " + error.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+        });
       }
 }

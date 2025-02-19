@@ -3,11 +3,13 @@ import { FaUser } from "react-icons/fa";
 import "./UserDropdown.css";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
-import { decodeToken } from "../../../utills/DecodeToken";
+
 import { logout } from "../../../utills/sharedFn/logout";
 import { login } from "../../../utills/sharedFn/login";
+import { register } from "../../../utills/sharedFn/register";
 
 const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
+  const [isSignInForm, setIsSignInForm] = useState(true)
   const { user, setUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: "",
@@ -22,28 +24,30 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await login(formData, setUser)
-    navigate('/')
+  const handleSubmit = async (type) => {
+    type == 'signIn' ? 
+        await login(formData, setUser)
+        : await register(formData, setUser)
   };
 
   const handleLogout = async () => {
-   await logout(setUser) 
-   console.log('logout ok')
-   navigate('/')
-  }
+    await logout(setUser);
+    navigate("/");
+  };
   return (
     <>
       {/* {isUserIconHovered ? console.log('work') : ''} */}
       {isUserIconHovered && user ? (
-        <div className="userDropdown" 
-        onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
+        <div
+          className="userDropdown"
+          onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
         >
-            <div className="authorizedUsers">
-            <Link to='/orders'><p>My Orders</p></Link>
+          <div className="authorizedUsers">
+            <Link to="/orders">
+              <p>My Orders</p>
+            </Link>
             <p onClick={handleLogout}>Logout</p>
-            </div>
+          </div>
         </div>
       ) : (
         // ""
@@ -51,12 +55,13 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
           className="userDropdown"
           onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
         >
-          <div className="notAuthorizedUsers">
+          {isSignInForm ? 
+          <div className="notAuthorizedUsers SignIN">
             <div className="signInORsignUp">
               <p>
                 <FaUser /> Sign in
               </p>
-              <p>Create account</p>
+              <p onClick={() => setIsSignInForm(false)}>Create account</p>
             </div>
             <div className="fields">
               <input
@@ -75,11 +80,7 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
               />
             </div>
             <div>
-              {/* <label class="container">Remember me - I want Vistglasses to personalise my shopping experience
-                  <input type="checkbox" />
-                  <span class="checkmark"></span>
-              </label> */}
-              <div className="signInBTN" onClick={handleSubmit}>
+              <div className="signInBTN" onClick={() => handleSubmit('signIn')}>
                 Sign in
               </div>
               <hr className="hr-text gradient" data-content="OR" />
@@ -95,6 +96,55 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
               </div>
             </div>
           </div>
+          :
+          <div className="notAuthorizedUsers SignUP">
+            <div className="signInORsignUp">
+              <p>
+                <FaUser /> Sign up
+              </p>
+              <p onClick={() => setIsSignInForm(true)}>I already have an account</p>
+            </div>
+            <div className="fields">
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={onHandleChange}
+                placeholder="USERNAME*"
+              />
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={onHandleChange}
+                placeholder="EMAIL ADDRESS*"
+              />
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={onHandleChange}
+                placeholder="PASSWORD*"
+              />
+            </div>
+            <div>
+              <div className="signInBTN" onClick={() => handleSubmit('signUp')}>
+                Sign up
+              </div>
+              <hr className="hr-text gradient" data-content="OR" />
+              <div className="anotherwaytosignin">
+                <img src="/images/facebook.png" alt="" width={50} />
+                <img src="/images/google.png" alt="" width={50} />
+                <img
+                  src="/images/apple.png"
+                  alt=""
+                  width={50}
+                  className="apple"
+                />
+              </div>
+            </div>
+          </div>
+          }
         </div>
       )}
     </>

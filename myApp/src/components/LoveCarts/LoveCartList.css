@@ -102,6 +102,7 @@
 
 .wishlistBTN{
     text-decoration: underline;
+    color: black;
 }
 .buttonsDivWishlist{
     display: flex;
@@ -117,6 +118,9 @@
     display: flex;
 
     justify-content: center;
+}
+.yourWishingCardsTitle{
+    text-align: center;
 }
 
 @media (min-width: 300px) and (max-width: 900px){

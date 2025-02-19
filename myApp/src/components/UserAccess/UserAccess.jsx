@@ -26,12 +26,15 @@ const UserAccess = () => {
 
   }, [isSignIn]);
 
-  const handleSignUp = async () => {
-    await register(formData, setUser)
-  };
 
-  const handleSingIn = async () => {
+  const handleSubmit = async (type) => {
+    type == 'signIn' ? 
     await login(formData, setUser)
+            .then(result => result.status == 200 && navigate('/sunglasses'))
+
+    : await register(formData, setUser)
+            .then(result => result.status == 200 && navigate('/sunglasses'))
+
   }
   return (
     <>
@@ -77,7 +80,7 @@ const UserAccess = () => {
                   <p>I don't have an account yet:</p>
                   <p className="SignInBTNPHONE" onClick={() => setIsSignIn(false)}>Sing up</p> 
             </div>
-            <p className="typeSubmitSignIn" type="submit" onClick={handleSingIn}>
+            <p className="typeSubmitSignIn" type="submit" onClick={() => handleSubmit('signIn')}>
               Sign In
             </p>
           </form>
@@ -121,7 +124,7 @@ const UserAccess = () => {
             <p
               className="typeSubmitSignUp"
               type="submit"
-              onClick={handleSignUp}
+              onClick={() => handleSubmit('signUp')}
             >
               Sign Up
             </p>

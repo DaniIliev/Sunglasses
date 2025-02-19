@@ -14,15 +14,16 @@
     max-height: 45em;
     overflow-y: scroll;
     z-index: 5000;
-    /* transition: all .10s ease-in-out; */
-    /* transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; */
 }
 
-.open{
-    top: 7.5em !important;
+.dropDownCartIsEmty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-.closed{
-    top: -100% !important;
+.dropDownCartIsEmty h1{
+    text-align: center;
 }
 
 .cartDropdown::-webkit-scrollbar {

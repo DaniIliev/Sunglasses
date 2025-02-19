@@ -28,12 +28,17 @@ const Cart = () => {
     if (user) {
       fetchItemsInCart(user).then((items) => {
         setAllItems(items);
+
         const oldPriceSum = items
-          .map((item) => Number(item.oldPrice) * Number(item.quantity))
+          .map((item) => item.oldPrice != undefined 
+                ? Number(item.oldPrice) * Number(item.quantity)
+                : Number(item.price) * Number(item.quantity))
           .reduce((sum, price) => sum + price, 0);
+        
         const totalPrice = items
           .map((item) => Number(item.price) * Number(item.quantity))
           .reduce((sum, price) => sum + price, 0);
+          
         setSumOldPrice(oldPriceSum);
         setTotalPrice(totalPrice);
         setIsLoading(false)
@@ -84,7 +89,7 @@ const Cart = () => {
             {allItems.map((item) => (
               <tr key={item._id}>
                 <td>
-                  <img src="/images/COPY1.webp" alt="" width={100} />
+                  <img src={item.images[0]} alt="" width={100} />
                 </td>
                 <td>{item.name}</td>
                 <td>

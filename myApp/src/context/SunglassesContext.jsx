@@ -14,6 +14,7 @@ const SunglassesProvider = ({ children }) => {
     minPrice: 0,
     maxPrice: 400,
     query: "",
+    gender: ''
   });
   
   const [isLoading, setIsLoading] = useState(false);

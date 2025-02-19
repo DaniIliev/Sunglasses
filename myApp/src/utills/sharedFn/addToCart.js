@@ -9,6 +9,7 @@ export const addToCart = (user, setUser, id, quantity) => {
     userService
       .patchUser(user._id, data)
       .then((result) => {
+            console.log(result)
             if(user.cart.length <= 0){
               setUser((prevUser) =>({
                 ...prevUser,

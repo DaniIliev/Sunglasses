@@ -24,7 +24,9 @@
     align-items: center;
     gap: 1.5em;
 }
-
+.notAuthorizedUsers p{
+  cursor: pointer;
+}
 .signInORsignUp{
     display: flex;
     justify-content: space-between;
@@ -159,7 +161,7 @@ input[type=text]:focus,input[type=password]:focus {
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  gap: 2em;
+  gap: 5em;
 }
 
 .anotherwaytosignin img{

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState }  from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { BsCashStack } from "react-icons/bs";
 import SearchBar from '../shared/SearchBar'
 import { RiMenuFold4Fill } from "react-icons/ri";
 import "./NavBar.css"
@@ -19,6 +20,7 @@ import UserDropdown from '../shared/UserDropdown/UserDropdown';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../context/UserContext';
 import { logout } from '../../utills/sharedFn/logout';
+import { SunglassesContext } from '../../context/SunglassesContext';
 
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
@@ -31,23 +33,40 @@ const NavBar = () => {
 
 
     const { user, setUser} = useContext(UserContext);
+    const {sunglasses, filterValues, setFilterValues, setFilteredSunglasses} = useContext(SunglassesContext)
+
+    const updateGender = (gender) => {
+        setFilterValues(prev => ({ ...prev, gender: newSort }));
+    };
 
     const navigate = useNavigate()
     const { t, i18n } = useTranslation();
     const [countInCart, setCountInCart] = useState(0)
+
 
     const switchLanguage = (lang) => {
       i18n.changeLanguage(lang);
     };
     
     useEffect(() => {
+
         if(user?.cart){
             setCountInCart(user.cart.length)
         }
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
         setIsUserIconHovered(false)
-    }, [user])
+        // const isFilterEmpty = filterValues.gender.length;
+
+        // const filterSunglasses = isFilterEmpty
+        // ? sortedSunglasses 
+        // : sortedSunglasses.filter(sunglass => {
+        //     const genderMatch = filterValues.gender.length === 0 || filterValues.gender.includes(sunglass.gender);
+        //     return genderMatch
+        // })
+        //trqbva da izpolzvam functiqta ot sunglasses 
+        // setFilteredSunglasses()
+    }, [user, filterValues])
 
     const handleLogout = async () => {
         await logout(setUser) 
@@ -60,11 +79,11 @@ const NavBar = () => {
 
         <div className="moving-label">
             <span>
-                <p><EuroIcon className='euroIcon'/>{t('navBar.cashOnDelivery')}</p> 
-                <p><MdLocalShipping/> {t('navBar.freeShipping')}</p>
-                <p><BsSunglasses/>{t('navBar.magicMirror')}</p>
-                <p><GiReturnArrow/>{t('navBar.return')}</p>
-                <p><SiAuthy />{t('navBar.authorized')}</p>
+                <p><BsCashStack className='iconMovingLabel'/>{t('navBar.cashOnDelivery')}</p> 
+                <p><MdLocalShipping className='iconMovingLabel'/> {t('navBar.freeShipping')}</p>
+                <p><BsSunglasses className='iconMovingLabel'/>{t('navBar.magicMirror')}</p>
+                <p><GiReturnArrow className='iconMovingLabel'/>{t('navBar.return')}</p>
+                <p><SiAuthy className='iconMovingLabel'/>{t('navBar.authorized')}</p>
             </span>
         </div>
         <div  className='navBarOne'>
@@ -83,20 +102,26 @@ const NavBar = () => {
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
                     <IoIosClose className='closeResponsivMenu' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
                 </div>
-                <h4>{user ? <p className='welcomeUsernam'>{`Welcome, ${user.username}`}</p> : ''}</h4>
+                <h4>{user ? <p className='welcomeUsernameResponsive'>{`Welcome, ${user.username}`}</p> : ''}</h4>
                 <SearchBar /> 
                 <ul>
-                    <Link to={'/sunglasses'}><li>{t('menu.new')}</li></Link>
-                    <Link to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
-                    <Link to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
-                    <Link to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
-                    <Link to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link>
+                    {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.new')}</li></Link> */}
+                    <Link onClick={() => updateGender('man')}><li>{t('menu.new')}</li></Link>
+                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
+                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
+                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
+                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link>
                     {user ? 
                         <>
-                            <Link to={'/orders'}><li>My orders</li></Link>
-                            <Link onClick={handleLogout}><li>Logout</li></Link>
+                            <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/orders'}><li>My orders</li></Link>
+                            <Link onClick={() => {
+                                setIsRepsonsivMenuOpen(!isResponsivMenuOpen);
+                                handleLogout();
+                                }}>
+                                <li>Logout</li>
+                            </Link>
                         </>
-                        : <Link to='/user/access'><li>Sign in / Sign up</li></Link>
+                        : <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to='/user/access'><li>Sign in / Sign up</li></Link>
                     }
 
                 </ul>
@@ -115,7 +140,7 @@ const NavBar = () => {
                     }
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
                 {user ? <p className='welcomeUsernam'>{`Welcome, ${user.username}`}</p> : ''}
-               <Link to={'/user/access'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon' /> </Link>
+               <Link to={'/user/access'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon personIconNone' /> </Link>
                 {/* <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> {user? `(${user?.wishlist?.length})` : ''}</Link> */}
                 <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/></Link>
                 <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)}><ShoppingCartIcon className='shoppingIcon'/>({countInCart})</Link>

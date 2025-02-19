@@ -8,6 +8,9 @@ import { addToCart } from '../../utills/sharedFn/addToCart';
 import { UserContext } from '../../context/UserContext';
 import AddToCartPopup from '../Popups/addToCartPopup';
 import { SunglassesContext } from '../../context/SunglassesContext';
+import { sortSunglasses } from '../../utills/sortSunglasses';
+import { filterSunglasses } from '../../utills/filterSunglasses';
+import Pagination from '../shared/Pagination/Pagination';
 
 const Sunglasses = () => {
     const [isSortOpen, setIsSortOpen] = useState(false)
@@ -19,49 +22,55 @@ const Sunglasses = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        let sortedSunglasses = [...sunglasses];
+        // let sortedSunglasses = [...sunglasses];
 
-        if(filterValues.sort == 'ascending'){
-            sortedSunglasses = sortedSunglasses.sort((a, b) => a.price - b.price)
-        }else if(filterValues.sort == 'descending'){
-            sortedSunglasses = sortedSunglasses.sort((a, b) => b.price - a.price)
-        }else if(filterValues.sort == "newest"){
-            sortedSunglasses = sortedSunglasses.sort((a, b) => a.createdAt - b.createdAt)
-        }
+        // if(filterValues.sort == 'ascending'){
+        //     sortedSunglasses = sortedSunglasses.sort((a, b) => a.price - b.price)
+        // }else if(filterValues.sort == 'descending'){
+        //     sortedSunglasses = sortedSunglasses.sort((a, b) => b.price - a.price)
+        // }else if(filterValues.sort == "newest"){
+        //     sortedSunglasses = sortedSunglasses.sort((a, b) => a.createdAt - b.createdAt)
+        // }
 
-        const isFilterEmpty = 
-            filterValues.frameShapes.length === 0 &&
-            filterValues.frameColor.length === 0 &&
-            filterValues.lensType.length === 0 &&
-            !filterValues.minPrice &&
-            !filterValues.maxPrice &&
-            filterValues.query.length === 0;
+        // const isFilterEmpty = 
+        //     filterValues.frameShapes.length === 0 &&
+        //     filterValues.frameColor.length === 0 &&
+        //     filterValues.lensType.length === 0 &&
+        //     !filterValues.minPrice &&
+        //     !filterValues.maxPrice &&
+        //     filterValues.query.length === 0;
 
-    const filterSunglasses = isFilterEmpty
-    ? sortedSunglasses 
-    : sortedSunglasses.filter(sunglass => {
-        const shapeMatch = filterValues.frameShapes.length === 0 || filterValues.frameShapes.includes(sunglass.frameShape);
-        const colorMatch = filterValues.frameColor.length === 0 || filterValues.frameColor.includes(sunglass.frameColor);
-        const lensMatch = filterValues.lensType.length === 0 || filterValues.lensType.includes(sunglass.lensType);
-        const priceMatch =
-            (!filterValues.minPrice || sunglass.price >= filterValues.minPrice) &&
-            (!filterValues.maxPrice || sunglass.price <= filterValues.maxPrice);
-        const searchMatch =
-            filterValues.query.length === 0 ||
-            sunglass.name.toLowerCase().includes(filterValues.query) ||
-            sunglass.frameShape.toLowerCase().includes(filterValues.query) ||
-            sunglass.frameColor.toLowerCase().includes(filterValues.query) ||
-            sunglass.lensType.toLowerCase().includes(filterValues.query);
-        return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
-    });
+        // const filterSunglasses = isFilterEmpty
+        //         ? sortedSunglasses 
+        //         : sortedSunglasses.filter(sunglass => {
+        //             const shapeMatch = filterValues.frameShapes.length === 0 || filterValues.frameShapes.includes(sunglass.frameShape);
+        //             const colorMatch = filterValues.frameColor.length === 0 || filterValues.frameColor.includes(sunglass.frameColor);
+        //             const lensMatch = filterValues.lensType.length === 0 || filterValues.lensType.includes(sunglass.lensType);
+        //             const priceMatch =
+        //                 (!filterValues.minPrice || sunglass.price >= filterValues.minPrice) &&
+        //                 (!filterValues.maxPrice || sunglass.price <= filterValues.maxPrice);
+        //             const searchMatch =
+        //                 filterValues.query.length === 0 ||
+        //                 sunglass.name.toLowerCase().includes(filterValues.query) ||
+        //                 sunglass.frameShape.toLowerCase().includes(filterValues.query) ||
+        //                 sunglass.frameColor.toLowerCase().includes(filterValues.query) ||
+        //                 sunglass.lensType.toLowerCase().includes(filterValues.query);
 
-    setFilteredSunglasses(filterSunglasses);
-    }, [filterValues, sunglasses]);
+        //             return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
+        // });
+        let sortedSunglasses = sortSunglasses(sunglasses, filterValues.sort);
+        let finalSunglasses = filterSunglasses(sortedSunglasses, filterValues);
+        setFilteredSunglasses(finalSunglasses);
+    },[filterValues, sunglasses]);
 
     
     const updateSort = (newSort) => {
         setFilterValues(prev => ({ ...prev, sort: newSort }));
     };
+
+    const updateGender = (gender) => {
+        setFilterValues(prev => ({ ...prev, gender: gender }));
+    }
 
     const addItem = (id) => {
         setIsAddToCartPopupOpen(true)
@@ -79,6 +88,7 @@ const Sunglasses = () => {
     <>
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
+        {/* <Pagination items={filteredSunglasses}/> */}
         <details className='PhoneFillters'>
             <summary className='summaryFilter'>Filters</summary>
             <p className='filltersForPhone'>
@@ -110,7 +120,7 @@ const Sunglasses = () => {
     </div>
     <div className='sunglassesPage'>
         <div className="filters">
-            <SunglassesFilter filterValues={filterValues} setFilterValues={setFilterValues}/>
+            <SunglassesFilter />
         </div>
         <div className="catalog-cards">
             {filteredSunglasses.map(item => 
@@ -119,8 +129,8 @@ const Sunglasses = () => {
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
                         <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                            <img src='/images/COPY3.webp' className='default-image'/>
-                            <img src="/images/image.png" alt="" className='hover-image'/>
+                            <img src={item.images[0]} className='default-image'/>
+                            <img src={item.images[1]} alt="" className='hover-image'/>
                         </Link>
                         <p className='addToCartSUNP' 
                         onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}

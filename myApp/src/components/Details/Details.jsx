@@ -115,7 +115,6 @@ const Details = () => {
 
   return (
     <>
-    {console.log(images)}
     {isLoading && <BeatLoader  className='loader'/> }
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
       <div className="detailsPage">
@@ -138,34 +137,19 @@ const Details = () => {
             </div>
           </div>
           <div className="imagesContainer">
-            <img
-              src="/images/COPY1.webp"
-              className={`${currentImageIndex == 0 ? "selected" : ""}`}
-              alt=""
-              onClick={() => setCurrentImageIndex(0)}
-            />
-            <img
-              src="/images/COPY2.webp"
-              alt=""
-              className={`${currentImageIndex == 1 ? "selected" : ""}`}
-              onClick={() => setCurrentImageIndex(1)}
-            />
-            <img
-              src="/images/COPY3.webp"
-              alt=""
-              className={`${currentImageIndex == 2 ? "selected" : ""}`}
-              onClick={() => setCurrentImageIndex(2)}
-            />
-            <img
-              src="/images/COPY4.webp"
-              alt=""
-              className={`${currentImageIndex == 3 ? "selected" : ""}`}
-              onClick={() => setCurrentImageIndex(3)}
-            />
+          {images.map((item, index) => 
+                <img
+                src={item}
+                className={`${currentImageIndex == index ? "selected" : ""}`}
+                alt={`sunglasses-${index}`}
+                onClick={() => setCurrentImageIndex(index)}
+                key={`${item}_${index}`}
+              />
+          )}
           </div>
         </div>
         <div className="aboutSunglasses">
-          <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+          <h3>{item.name}</h3>
           <p className="reviews">
             <RiStarSFill />
             <RiStarSFill />
@@ -174,9 +158,9 @@ const Details = () => {
             <RiStarSFill />
           </p>
           <div className="prices">
-            <h5>600,00$</h5>
-            <h4>500,00$</h4>
-            <p>-10%</p>
+            <h5>{item.oldPrice != undefined ? item.oldPrice : ''}</h5>
+            <h4>{item.price} лв</h4>
+            <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
           </div>
           <div className="counter">
             <p className="plusMinus">
@@ -223,34 +207,34 @@ const Details = () => {
           <div className="productDetails">
             <div className="firstSection">
               <p>
-                <strong>FRAME SHAPE:</strong> AVIATOR
+                <strong>FRAME SHAPE:</strong> {item.frameShape}
               </p>
               <p>
-                <strong>GENDER:</strong> UNI-SEX
+                <strong>GENDER:</strong> {item.gender}
               </p>
               <p>
-                <strong>FRAME MATERIAL:</strong> METAL
+                <strong>FRAME MATERIAL:</strong> {item.frameMaterial}
               </p>
               <p>
-                <strong>LENS TYPE:</strong> POLARIZED
+                <strong>LENS TYPE:</strong> {item.lensType}
               </p>
               <p>
-                <strong>UV PROTECTION:</strong> CATEGORY 2
+                <strong>UV PROTECTION:</strong> {item.UV_Protection}
               </p>
             </div>
             <img src="/images/sizeModel.webp" alt="sizeModel" className="sizeModelImg" />
             <div className="secondSection">
               <p>
-                <strong>FRAME WIDTH:</strong> 140MM
+                <strong>FRAME WIDTH:</strong> {item.frameWidth}MM
               </p>
               <p>
-                <strong>FRAME HEIGTH:</strong> 53MM
+                <strong>FRAME HEIGTH:</strong> {item.frameHeight}MM
               </p>
               <p>
-                <strong>LENS WIDTH:</strong> 56MM
+                <strong>LENS WIDTH:</strong> {item.lensWidth}MM
               </p>
               <p>
-                <strong>Temple Length:</strong> 145MM
+                <strong>Temple Length:</strong> {item.templeLength}MM
               </p>
             </div>
           </div>

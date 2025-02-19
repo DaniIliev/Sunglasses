@@ -9,10 +9,10 @@ const AddToCartPopup = ({ product, onClose }) => {
             <button className="close-btn" onClick={onClose}>✖</button>  
             <div className='aboutAddedItem'>
                 <div className='item'>
-                    <img src='/images/COPY6.webp' alt={product?.name} className="popup-image" />  
-                    <h4>NO BIGGIE | PEWTER-SMOKE MONO</h4>  
+                    <img src={product?.images[0]} alt={product?.name} className="popup-image" />  
+                    <h4>{product?.name}</h4>  
                 </div>
-                <p>Добавихте <strong>NO BIGGIE | PEWTER-SMOKE MONO</strong> към вашата количка!</p>  
+                <p>Добавихте <strong>{product?.name}</strong> към вашата количка!</p>  
             </div> 
                 
             <Link to='/cart'><button className="cart-btn">Към количката</button></Link>
