@@ -147,10 +147,11 @@ const UserOrders = () => {
               {purchase && purchase.sunglasses?.length > 0 && 
                 purchase.sunglasses.map(el => 
                   <tr key={el._id}>
+                      {console.log(el)}
                     <td>
                       <img
                         className="modalOrderImage"
-                        src={el.image || "/images/COPY1.webp"}
+                        src={el.images[0] || "/images/COPY1.webp"}
                         alt={el.name || "Слънчеви очила"}
                       />
                     </td>

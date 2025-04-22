@@ -50,102 +50,103 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
           </div>
         </div>
       ) : (
+        ''
         // ""
-        <div
-          className="userDropdown"
-          onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
-        >
-          {isSignInForm ? 
-          <div className="notAuthorizedUsers SignIN">
-            <div className="signInORsignUp">
-              <p>
-                <FaUser /> Sign in
-              </p>
-              <p onClick={() => setIsSignInForm(false)}>Create account</p>
-            </div>
-            <div className="fields">
-              <input
-                type="text"
-                name="email"
-                value={formData.email}
-                onChange={onHandleChange}
-                placeholder="EMAIL ADDRESS*"
-              />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={onHandleChange}
-                placeholder="PASSWORD*"
-              />
-            </div>
-            <div>
-              <div className="signInBTN" onClick={() => handleSubmit('signIn')}>
-                Sign in
-              </div>
-              <hr className="hr-text gradient" data-content="OR" />
-              <div className="anotherwaytosignin">
-                <img src="/images/facebook.png" alt="" width={50} />
-                <img src="/images/google.png" alt="" width={50} />
-                <img
-                  src="/images/apple.png"
-                  alt=""
-                  width={50}
-                  className="apple"
-                />
-              </div>
-            </div>
-          </div>
-          :
-          <div className="notAuthorizedUsers SignUP">
-            <div className="signInORsignUp">
-              <p>
-                <FaUser /> Sign up
-              </p>
-              <p onClick={() => setIsSignInForm(true)}>I already have an account</p>
-            </div>
-            <div className="fields">
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={onHandleChange}
-                placeholder="USERNAME*"
-              />
-              <input
-                type="text"
-                name="email"
-                value={formData.email}
-                onChange={onHandleChange}
-                placeholder="EMAIL ADDRESS*"
-              />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={onHandleChange}
-                placeholder="PASSWORD*"
-              />
-            </div>
-            <div>
-              <div className="signInBTN" onClick={() => handleSubmit('signUp')}>
-                Sign up
-              </div>
-              <hr className="hr-text gradient" data-content="OR" />
-              <div className="anotherwaytosignin">
-                <img src="/images/facebook.png" alt="" width={50} />
-                <img src="/images/google.png" alt="" width={50} />
-                <img
-                  src="/images/apple.png"
-                  alt=""
-                  width={50}
-                  className="apple"
-                />
-              </div>
-            </div>
-          </div>
-          }
-        </div>
+        // <div
+        //   className="userDropdown"
+        //   onMouseLeave={() => setIsUserIconHovered(!isUserIconHovered)}
+        // >
+        //   {isSignInForm ? 
+        //   <div className="notAuthorizedUsers SignIN">
+        //     <div className="signInORsignUp">
+        //       <p>
+        //         <FaUser /> Sign in
+        //       </p>
+        //       <p onClick={() => setIsSignInForm(false)}>Create account</p>
+        //     </div>
+        //     <div className="fields">
+        //       <input
+        //         type="text"
+        //         name="email"
+        //         value={formData.email}
+        //         onChange={onHandleChange}
+        //         placeholder="EMAIL ADDRESS*"
+        //       />
+        //       <input
+        //         type="password"
+        //         name="password"
+        //         value={formData.password}
+        //         onChange={onHandleChange}
+        //         placeholder="PASSWORD*"
+        //       />
+        //     </div>
+        //     <div>
+        //       <div className="signInBTN" onClick={() => handleSubmit('signIn')}>
+        //         Sign in
+        //       </div>
+        //       <hr className="hr-text gradient" data-content="OR" />
+        //       <div className="anotherwaytosignin">
+        //         <img src="/images/facebook.png" alt="" width={50} />
+        //         <img src="/images/google.png" alt="" width={50} />
+        //         <img
+        //           src="/images/apple.png"
+        //           alt=""
+        //           width={50}
+        //           className="apple"
+        //         />
+        //       </div>
+        //     </div>
+        //   </div>
+        //   :
+        //   <div className="notAuthorizedUsers SignUP">
+        //     <div className="signInORsignUp">
+        //       <p>
+        //         <FaUser /> Sign up
+        //       </p>
+        //       <p onClick={() => setIsSignInForm(true)}>I already have an account</p>
+        //     </div>
+        //     <div className="fields">
+        //       <input
+        //         type="text"
+        //         name="username"
+        //         value={formData.username}
+        //         onChange={onHandleChange}
+        //         placeholder="USERNAME*"
+        //       />
+        //       <input
+        //         type="text"
+        //         name="email"
+        //         value={formData.email}
+        //         onChange={onHandleChange}
+        //         placeholder="EMAIL ADDRESS*"
+        //       />
+        //       <input
+        //         type="password"
+        //         name="password"
+        //         value={formData.password}
+        //         onChange={onHandleChange}
+        //         placeholder="PASSWORD*"
+        //       />
+        //     </div>
+        //     <div>
+        //       <div className="signInBTN" onClick={() => handleSubmit('signUp')}>
+        //         Sign up
+        //       </div>
+        //       <hr className="hr-text gradient" data-content="OR" />
+        //       <div className="anotherwaytosignin">
+        //         <img src="/images/facebook.png" alt="" width={50} />
+        //         <img src="/images/google.png" alt="" width={50} />
+        //         <img
+        //           src="/images/apple.png"
+        //           alt=""
+        //           width={50}
+        //           className="apple"
+        //         />
+        //       </div>
+        //     </div>
+        //   </div>
+        //   }
+        // </div>
       )}
     </>
   );

@@ -106,7 +106,7 @@ const NavBar = () => {
                 <SearchBar /> 
                 <ul>
                     {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.new')}</li></Link> */}
-                    <Link onClick={() => updateGender('man')}><li>{t('menu.new')}</li></Link>
+                    {/* <Link onClick={() => updateGender('man')}><li>{t('menu.new')}</li></Link> */}
                     <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
                     <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
                     <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
@@ -151,9 +151,9 @@ const NavBar = () => {
             <nav>
                 <a href="">{t('menu.new')}</a>
                 <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
-                <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
-                <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a>
-                <Link>{t('menu.unisex')}</Link>
+                {/* <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
+                {/* <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
+                {/* <Link>{t('menu.unisex')}</Link> */}
             </nav>
         </div>
         {isShippingHovered ? 

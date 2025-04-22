@@ -54,12 +54,12 @@ const UserAccess = () => {
         {isSignIn ? (
           <form action="#">
             <h1>Sign in</h1>
-            <div className="social-container">
+            {/* <div className="social-container">
               <img src="/images/facebook.png" alt="facebook" width={50} />
               <img src="/images/google.png" alt="google" width={50} />
               <img src="/images/apple.png" alt="apple" width={50} />
-            </div>
-            <span>or use your account</span>
+            </div> */}
+            {/* <span>or use your account</span> */}
             <input
               type="email"
               name="email"
@@ -87,12 +87,12 @@ const UserAccess = () => {
         ) : (
           <form action="#">
             <h1>Create Account</h1>
-            <div className="social-container">
+            {/* <div className="social-container">
               <img src="/images/facebook.png" alt="facebook" width={50} />
               <img src="/images/google.png" alt="google" width={50} />
               <img src="/images/apple.png" alt="apple" width={50} />
             </div>
-            <span>or use your email for registration</span>
+            <span>or use your email for registration</span> */}
             <input
               type="text"
               placeholder="Username"

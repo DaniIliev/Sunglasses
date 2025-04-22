@@ -43,8 +43,8 @@ const LoveCartList = () => {
                 <h2>{t("wishlistPage.startWishlist")}</h2>
                 <p>{t("wishlistPage.startWishlistP2")}</p>
                 <div className="buttonsDivWishlist">
-                    <p className='wishlistBTN'>Shop Men's</p>
-                    <p className='wishlistBTN'>Shop Women's</p>
+                    <Link to={'/sunglasses'}><p className='wishlistBTN'>Shop Men's</p></Link>
+                    <Link to={'/sunglasses'}><p className='wishlistBTN'>Shop Women's</p></Link>
                 </div>
             </div>
         </div>
@@ -100,14 +100,15 @@ const LoveCartList = () => {
         <>
         <h2 className='yourWishingCardsTitle'>Your Wishing Cards</h2>
         <div className="catalog-cards">
-            {wishingCards.map(item => 
+            {wishingCards.length > 0 && wishingCards.map(item => 
               <div className="allAboutCard" key={item._id}>
               <div className='card'>
                   <div className='imageStock'>
                       <p className='sale'>SALE</p>
+                      {console.log(item)}
                       <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                          <img src={item.images[0]} className='default-image'/>
-                          <img src={item.images[1]} alt="" className='hover-image'/>
+                          <img src={item?.images[0]} className='default-image'/>
+                          <img src={item?.images[1]} alt="" className='hover-image'/>
                       </Link>
                       <p className='addToCartSUNP' 
                       onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}

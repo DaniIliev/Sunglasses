@@ -14,7 +14,7 @@ function InteractiveMapWithLocations() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredOffices = offices.filter((office) =>
-    office.name.toLowerCase().includes(searchTerm.toLowerCase())
+    office.name?.toLowerCase().includes(searchTerm?.toLowerCase())
   );
 
   return (

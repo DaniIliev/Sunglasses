@@ -101,16 +101,16 @@ const Sunglasses = () => {
             <ul className='sorting'>
                 <h4>Sort by:</h4>
                     <div className='checkboxes'>
-                        <label class="container"> Newest 
-                            <input type="checkbox" id="1" name="newest" value="newest" checked={filterValues.sort == 'newest'}/>
+                        <label className="container"> Newest 
+                            <input type="checkbox" id="1" name="newest" value="newest" checked={filterValues.sort == 'newest'} onChange={() => updateSort('newest')}/>
                             <span className="checkmark" onClick={() => updateSort('newest')}></span>
                         </label>
                         <label className="container"> Price Ascending
-                            <input type="checkbox" id="2" name="ascending" value="ascending" checked={filterValues.sort == 'ascending'}/>
+                            <input type="checkbox" id="2" name="ascending" value="ascending" checked={filterValues.sort == 'ascending'} onChange={() => updateSort('ascending')}/>
                             <span className="checkmark" onClick={() => updateSort('ascending')}></span>
                         </label>
                         <label className="container"> Price Descending
-                            <input type="checkbox" id="3" name="descending" value="descending" checked={filterValues.sort == 'descending'}/>
+                            <input type="checkbox" id="3" name="descending" value="descending" checked={filterValues.sort == 'descending'}  onChange={() => updateSort('descending')}/>
                             <span className="checkmark" onClick={() => updateSort('descending')}></span>
                         </label>
                     </div>

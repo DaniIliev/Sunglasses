@@ -18,10 +18,10 @@ export const filterSunglasses = (sunglasses, filterValues) => {
             (!filterValues.maxPrice || sunglass.price <= filterValues.maxPrice);
         const searchMatch =
             filterValues.query.length === 0 ||
-            sunglass.name.toLowerCase().includes(filterValues.query) ||
-            sunglass.frameShape.toLowerCase().includes(filterValues.query) ||
-            sunglass.frameColor.toLowerCase().includes(filterValues.query) ||
-            sunglass.lensType.toLowerCase().includes(filterValues.query);
+            sunglass.name?.toLowerCase().includes(filterValues.query) ||
+            sunglass.frameShape?.toLowerCase().includes(filterValues.query) ||
+            sunglass.frameColor?.toLowerCase().includes(filterValues.query) ||
+            sunglass.lensType?.toLowerCase().includes(filterValues.query);
 
         return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
     });
