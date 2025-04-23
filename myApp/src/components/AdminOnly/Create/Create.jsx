@@ -11,6 +11,7 @@ const Create = () => {
     const apiUrl = REACT_APP_API_URL; 
     const [images, setImages] = useState([])
     const [message, setMessage] = useState('');
+    const [mainImage, setMainImage] = useState(null); 
     const [formData, setFormData] = useState({
       name: '',
       frameWidth: '',
@@ -28,8 +29,38 @@ const Create = () => {
   useEffect(() => {
 
 }, []);
-    function handleImage(e){
-        const files = Array.from(e.target.files); // Преобразуваме FileList в масив
+    function handleMainImage(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setMainImage(reader.result);
+        };
+        reader.onerror = (error) => {
+            console.log("Main image error", error);
+        };
+    }
+    // function handleImage(e){
+    //     const files = Array.from(e.target.files); // Преобразуваме FileList в масив
+    //     const imageArray = [];
+    
+    //     files.forEach((file) => {
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onload = () => {
+    //             imageArray.push(reader.result);
+    //             if (imageArray.length === files.length) {
+    //                 setImages(imageArray); // Запазваме всички изображения в state
+    //             }
+    //         };
+    //         reader.onerror = (error) => {
+    //             console.log("Error", error);
+    //         };
+    //     });
+    // }
+
+    function handleAdditionalImages(e) {
+        const files = Array.from(e.target.files);
         const imageArray = [];
     
         files.forEach((file) => {
@@ -38,37 +69,75 @@ const Create = () => {
             reader.onload = () => {
                 imageArray.push(reader.result);
                 if (imageArray.length === files.length) {
-                    setImages(imageArray); // Запазваме всички изображения в state
+                    setImages(imageArray); // множествени снимки
                 }
             };
             reader.onerror = (error) => {
-                console.log("Error", error);
+                console.log("Additional images error", error);
             };
         });
     }
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-   const  createApiCall = async (e) => {
-        e.preventDefault();
-        const data = {...formData, images}
-        try {
-          const response = await fetch(`${apiUrl}/sunglasses/add`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
+//    const  createApiCall = async (e) => {
+//         e.preventDefault();
+//         const data = {...formData, images}
+//         try {
+//           const response = await fetch(`${apiUrl}/sunglasses/add`, {
+//             method: 'POST',
+//             headers: {
+//               'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(data),
+//           });
     
-          const result = await response.json();
-          setMessage(result.message);
-        } catch (error) {
-          setMessage('Възникна грешка при качването.');
-          console.error(error);
-        }
-      };
+//           const result = await response.json();
+//           setMessage(result.message);
+//         } catch (error) {
+//           setMessage('Възникна грешка при качването.');
+//           console.error(error);
+//         }
+//     };
+
+const createApiCall = async (e) => {
+    e.preventDefault();
+    
+    const combinedImages = mainImage ? [mainImage, ...images] : [...images]; // основната е първа
+    const data = { ...formData, images: combinedImages };
+
+    try {
+        const response = await fetch(`${apiUrl}/sunglasses/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        setMessage(result.message);
+        setFormData({
+            name: '',
+            frameWidth: '',
+            frameHeight: '',
+            lensWidth: '',
+            templeLength: '',
+            gender: '---',
+            frameShape: '---',
+            lensType: '---',
+            frameMaterial: '---',
+            UV_Protection: '---',
+        });
+        setImages([]);
+        alert(result.message);
+        setMainImage(null);
+    } catch (error) {
+        setMessage('Възникна грешка при качването.');
+        console.error(error);
+    }
+};
+
 
     return (
         <>
@@ -230,8 +299,13 @@ const Create = () => {
             <img src="/images/sizeModel.webp" alt="" className='sizeModel'/>
             </Box>
 
-            <div>
-                <input type="file" accept="image/*"  multiple onChange={handleImage}/>
+            <div style={{padding: "5em"}}>
+                {/* <input type="file" accept="image/*"  multiple onChange={handleImage}/> */}
+                <label>Основно изображение (1 снимка):</label>
+                <input type="file" accept="image/*" onChange={handleMainImage} />
+                
+                <label>Допълнителни изображения:</label>
+                <input type="file" accept="image/*" multiple onChange={handleAdditionalImages} />
                 <button onClick={createApiCall}>Submit</button>
             </div>
         </>

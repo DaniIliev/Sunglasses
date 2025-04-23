@@ -36,7 +36,7 @@ const NavBar = () => {
     const {sunglasses, filterValues, setFilterValues, setFilteredSunglasses} = useContext(SunglassesContext)
 
     const updateGender = (gender) => {
-        setFilterValues(prev => ({ ...prev, gender: newSort }));
+        setFilterValues(prev => ({ ...prev, gender: gender }));
     };
 
     const navigate = useNavigate()
@@ -106,11 +106,19 @@ const NavBar = () => {
                 <SearchBar /> 
                 <ul>
                     {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.new')}</li></Link> */}
-                    {/* <Link onClick={() => updateGender('man')}><li>{t('menu.new')}</li></Link> */}
-                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
-                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
-                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
-                    <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link>
+                    {/* <Link onClick={() => updateGender('man')} to={'/sunglases'}><li>{t('Man\'s')}</li></Link> */}
+                    <Link onClick={() => {
+                        setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
+                    }} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
+                    <Link onClick={() => {
+                        setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
+                        updateGender('women')
+                    }} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
+                    <Link onClick={() => {
+                        setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
+                        updateGender('man')
+                    }} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
+                    {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link> */}
                     {user ? 
                         <>
                             <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/orders'}><li>My orders</li></Link>
