@@ -19,6 +19,7 @@ app.use(
     credentials: true,
   })
 );
+// app.options('*', cors(corsOptions)); // <-- Handle preflight requests properly
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "50mb" }));

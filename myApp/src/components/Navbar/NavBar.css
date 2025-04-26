@@ -129,6 +129,9 @@
   .moving-label {
     font-size: 0.3em;
   }
+  .logo{
+    margin-left: 5em;
+  }
   .moving-label span{
     gap: 2em;
   }
