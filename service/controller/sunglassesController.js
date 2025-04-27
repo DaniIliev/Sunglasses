@@ -84,7 +84,15 @@ router.post('/add', async (req, res) => {
   
   router.get('/', async (req, res) => {
       try {
-          const sunglasses = await Sunglasses.find({}).limit(20);
+        const { startIndex, limit } = req.query;
+
+        const start = parseInt(startIndex, 10) || 0;
+        const pageLimit = parseInt(limit, 10) || 10;
+
+          // const sunglasses = await Sunglasses.find({});
+          const sunglasses = await Sunglasses.find({})
+          .skip(start)
+          .limit(pageLimit);
           res.status(200).json(sunglasses);
       } catch (error) {
           res.status(500).json({ message: 'Error fetching sunglasses', error });
