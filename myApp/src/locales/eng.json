@@ -54,7 +54,11 @@
         "transition": "With a color transition",
         "diobtric": "Diobtric sunglasses",
         "price": "PRICE",
-        "filterByPrice": "FILTER BY PRICE"
+        "filterByPrice": "FILTER BY PRICE",
+        "women": "Female",
+        "man": "Male",
+        "Unisex": "Unisex",
+        "gender": "GENDER"
     },
     "detailsPage": {
         "description": "DESCRIPTION",

@@ -9,6 +9,7 @@ export const filterSunglasses = (sunglasses, filterValues) => {
 
     if (isFilterEmpty) return sunglasses;
 
+    console.log(sunglasses)
     return sunglasses.filter(sunglass => {
         const shapeMatch = filterValues.frameShapes.length === 0 || filterValues.frameShapes.includes(sunglass.frameShape);
         const colorMatch = filterValues.frameColor.length === 0 || filterValues.frameColor.includes(sunglass.frameColor);
@@ -23,6 +24,9 @@ export const filterSunglasses = (sunglasses, filterValues) => {
             sunglass.frameColor?.toLowerCase().includes(filterValues.query) ||
             sunglass.lensType?.toLowerCase().includes(filterValues.query);
 
-        return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
+        const genderMatch =
+            filterValues.gender.length === 0 ||
+            filterValues.gender.includes(sunglass.gender)
+        return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch && genderMatch;
     });
 };

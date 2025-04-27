@@ -22,10 +22,10 @@ const SunglassesFilter = () => {
   const {filterValues, setFilterValues} = useContext(SunglassesContext)
 
   const toggleFilter = (filterName) => {
-    setFilters((prevState) => ({
-      ...prevState,
-      [filterName]: !prevState[filterName],
-    }));
+      setFilters((prevState) => ({
+        ...prevState,
+        [filterName]: !prevState[filterName],
+      }));
   };
 
   const handleFilterChange = (category, value) => {
@@ -59,6 +59,43 @@ const SunglassesFilter = () => {
 
   return (
     <>
+<p
+  className="sunglassesfilter"
+  onClick={() => toggleFilter("gender")}
+>
+  <span>{t("sunglassesFilter.gender")}
+    {filters.gender ? (
+      <MdKeyboardArrowUp />
+    ) : (
+      <MdOutlineKeyboardArrowDown />
+    )}
+  </span>
+</p>
+{filters.gender && (
+  <div className="checkboxes">
+    {[
+      // { name: "All", label: t("sunglassesFilter.all") }, // Дефолтна опция "ALL"
+      { name: "Women", label: t("sunglassesFilter.women") },
+      { name: "Man", label: t("sunglassesFilter.man") },
+      { name: "Unisex", label: t("sunglassesFilter.unisex") },
+    ].map((gender, index) => (
+      <label key={index} className="container">
+        {gender.label}
+        <input
+          type="checkbox"
+          checked={
+            Array.isArray(filterValues.gender) &&
+            filterValues.gender.includes(gender.name)
+          }
+          onChange={() => handleFilterChange("gender", gender.name)}
+        />
+        <span className="checkmark"></span>
+      </label>
+    ))}
+  </div>
+)}
+
+
       <p
         className="sunglassesfilter"
         onClick={() => toggleFilter("frameShape")}

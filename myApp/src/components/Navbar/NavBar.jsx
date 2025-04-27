@@ -39,6 +39,7 @@ const NavBar = () => {
         setFilterValues(prev => ({ ...prev, gender: gender }));
     };
 
+
     const navigate = useNavigate()
     const { t, i18n } = useTranslation();
     const [countInCart, setCountInCart] = useState(0)
@@ -110,14 +111,14 @@ const NavBar = () => {
                     <Link onClick={() => {
                         setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
                     }} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
-                    <Link onClick={() => {
+                    {/* <Link onClick={() => {
                         setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
                         updateGender('women')
                     }} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
                     <Link onClick={() => {
                         setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
                         updateGender('man')
-                    }} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link>
+                    }} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link> */}
                     {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link> */}
                     {user ? 
                         <>
@@ -159,6 +160,7 @@ const NavBar = () => {
             <nav>
                 <a href="">{t('menu.new')}</a>
                 <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
+                {/* <Link to={"/sunglasses"} onClick={() => updateGender('Women')}>{t('menu.women\'s')}</Link> */}
                 {/* <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
                 {/* <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
                 {/* <Link>{t('menu.unisex')}</Link> */}

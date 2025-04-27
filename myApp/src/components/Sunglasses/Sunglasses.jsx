@@ -49,7 +49,7 @@ const Sunglasses = () => {
         );
       });
 
-      console.log('hasMore', hasMore)
+
     useEffect(() => {
         let sortedSunglasses = sortSunglasses(sunglasses, filterValues.sort);
         let finalSunglasses = filterSunglasses(sortedSunglasses, filterValues);
