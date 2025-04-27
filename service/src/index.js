@@ -38,4 +38,5 @@ mongoose
     console.error("Грешка при свързване с MongoDB:", err);
   });
 
-app.listen(5200, console.log("Server is listen on port 5200..."));
+const PORT = process.env.PORT || 5200;
+app.listen(5200, console.log(`Server is listen on port ${PORT}...`));
