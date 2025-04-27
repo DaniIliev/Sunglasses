@@ -342,6 +342,28 @@ h3 {
     top: 50%;
     left: 50%;
 }
+
+.loadMore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    gap: 0.5em;
+    font-size: 2em;
+    text-decoration: underline;
+    text-align: center;
+    margin-right: 2em;
+    cursor: pointer;
+    color: darkgray;
+    margin-bottom: 1em;
+
+}
+
+.loadMore:hover{
+color: black;
+
+}
 @media (min-width: 1700px ){
     .catalog-cards{
         grid-template-columns: 22% 22% 22% 22%;

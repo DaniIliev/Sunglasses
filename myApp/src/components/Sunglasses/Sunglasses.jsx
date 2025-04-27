@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState}from 'react'
+import React, {useContext, useEffect, useRef, useState}from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './Sunglasses.css'
-import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
+import ClipLoader from 'react-spinners/ClipLoader'; // Adjust the path if necessary
 import SunglassesFilter from '../shared/SunglassesFilter';
 import { BiSort } from "react-icons/bi";
 import { addToCart } from '../../utills/sharedFn/addToCart';
@@ -10,24 +10,52 @@ import AddToCartPopup from '../Popups/addToCartPopup';
 import { SunglassesContext } from '../../context/SunglassesContext';
 import { sortSunglasses } from '../../utills/sortSunglasses';
 import { filterSunglasses } from '../../utills/filterSunglasses';
-import Pagination from '../shared/Pagination/Pagination';
-
+// import Pagination from '../shared/Pagination/Pagination';
+// import SunglassesCard from './SunglassesCard';
 const Sunglasses = () => {
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
     const { user, setUser } = useContext(UserContext);
-    const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues} = useContext(SunglassesContext)
+    const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues, loadMoreSunglasses, loaderMoreSunglasses, hasMore} = useContext(SunglassesContext)
 
     const navigate = useNavigate()
 
+    const SunglassesCard = React.memo(({ item }) => {
+        return (
+          <div className="allAboutCard" key={item._id}>
+            <div className='card'>
+              <div className='imageStock'>
+                <p className='sale'>SALE</p>
+                <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
+                  <img src={item.images[0]} className='default-image'/>
+                  <img src={item.images[1]} alt="" className='hover-image'/>
+                </Link>
+                <p className='addToCartSUNP' 
+                   onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}>
+                   Add to cart
+                </p>
+              </div>
+              <div className="info">
+                <h3>{item.name}</h3>
+                <div className='prices'>
+                  <h5>{item.oldPrice}</h5>
+                  <h4>{item.price} лв</h4>
+                  <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      });
+
+      console.log('hasMore', hasMore)
     useEffect(() => {
         let sortedSunglasses = sortSunglasses(sunglasses, filterValues.sort);
         let finalSunglasses = filterSunglasses(sortedSunglasses, filterValues);
         setFilteredSunglasses(finalSunglasses);
     },[filterValues, sunglasses]);
 
-    
     const updateSort = (newSort) => {
         setFilterValues(prev => ({ ...prev, sort: newSort }));
     };
@@ -48,7 +76,7 @@ const Sunglasses = () => {
     <>
     {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
     <div className='page'>
-    {isLoading ? <BeatLoader  className='loader'/> : 
+    {/* {isLoading ? <BeatLoader  className='loader'/> :  */}
     <>
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
@@ -87,35 +115,19 @@ const Sunglasses = () => {
             <SunglassesFilter />
         </div>
         <div className="catalog-cards">
-            {filteredSunglasses.map(item => 
-            <div className="allAboutCard" key={item._id}>
-                <div className='card'>
-                    <div className='imageStock'>
-                        <p className='sale'>SALE</p>
-                        <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                            <img src={item.images[0]} className='default-image'/>
-                            <img src={item.images[1]} alt="" className='hover-image'/>
-                        </Link>
-                        <p className='addToCartSUNP' 
-                        onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
-                        >Add to cart
-                        </p>
-                    </div>
-                    <div className="info">
-                        <h3>{item.name}</h3>
-                        <div className='prices'>
-                            <h5>{item.oldPrice}</h5>
-                            <h4>{item.price} лв</h4>
-                            <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            )}
+        {isLoading ?
+        <ClipLoader className='loader'/> : (
+            filteredSunglasses.map(item => 
+                <SunglassesCard key={item._id} item={item} />
+                )
+        )}
         </div>
     </div>
-    </>
+    {isLoading || !hasMore ? '' :
+    <p className='loadMore' onClick={loadMoreSunglasses}>Load more {loaderMoreSunglasses &&  <ClipLoader /> }</p>
     }
+    </>
+    {/* } */}
     </div>
     </>
   )

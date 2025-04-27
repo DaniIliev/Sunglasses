@@ -56,6 +56,7 @@ const SunglassesFilter = () => {
     setMaxPrice(value);
     setFilterValues((prev) => ({ ...prev, maxPrice: value }));
   };
+
   return (
     <>
       <p

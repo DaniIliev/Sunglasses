@@ -20,7 +20,7 @@ const SunglassesProvider = ({ children }) => {
   const [lastIndex, setLastIndex] = useState(0); // Индекс за следващите 10 очила
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [loaderMoreSunglasses, setLoaderMoreSunglasses] = useState(false)
 
 
   // useEffect(() => {
@@ -38,13 +38,13 @@ const SunglassesProvider = ({ children }) => {
     const loadSunglasses = async () => {
       setIsLoading(true);
       try {
-        const result = await sunglassesService.getAll(lastIndex, 10); // Извличаме първите 10 очила
+        const result = await sunglassesService.getAll(lastIndex, 24); // Извличаме първите 10 очила
         setSunglasses(result);
         // setFilteredSunglasses(result);
         setIsLoading(false)
         setLastIndex(lastIndex + result.length); // Увеличаваме индекса за следващите очила
 
-        if (result.length < 10) {
+        if (result.length < 24) {
           setHasMore(false); // Ако не са заредени 10, значи няма повече очила за зареждане
         }
       } catch (err) {
@@ -57,6 +57,28 @@ const SunglassesProvider = ({ children }) => {
     loadSunglasses();
   }, []);
 
+  const loadMoreSunglasses = async () => {
+    if (isLoading || !hasMore) return; // Ако вече зареждаме или няма повече очила, не правим нищо
+
+    setLoaderMoreSunglasses(true);
+
+    try {
+      const newSunglasses = await sunglassesService.getAll(lastIndex, 24); // Зареждаме следващите 10
+      setSunglasses((prevSunglasses) => [...prevSunglasses, ...newSunglasses]); // Добавяме новите очила към старите
+      // setFilteredSunglasses((prevSunglasses) => [...prevSunglasses, ...newSunglasses]);
+
+      setLastIndex(lastIndex + newSunglasses.length); // Обновяваме последния индекс
+
+      if (newSunglasses.length < 10) {
+        setHasMore(false); // Ако няма повече очила, спираме зареждането
+      }
+    } catch (err) {
+      console.error("Error fetching sunglasses:", err);
+    } finally {
+      setLoaderMoreSunglasses(false);
+    }
+  };
+
   return (
     <SunglassesContext.Provider
       value={{
@@ -66,6 +88,9 @@ const SunglassesProvider = ({ children }) => {
         setFilteredSunglasses,
         filterValues,
         setFilterValues,
+        loadMoreSunglasses,
+        loaderMoreSunglasses,
+        hasMore
       }}
     >
       {children}
