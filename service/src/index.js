@@ -32,10 +32,7 @@ const mongoURI = process.env.MONGODB_URI;
 
 
 mongoose
-  .connect(mongoURI,{
-    serverSelectionTimeoutMS: 60000,
-    socketTimeoutMS: 60000
-  })
+  .connect(mongoURI)
   .then(() => console.log("MongoDB свързан успешно"))
   .catch((err) => {
     console.error("Грешка при свързване с MongoDB:", err);
