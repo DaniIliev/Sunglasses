@@ -84,7 +84,7 @@ router.post('/add', async (req, res) => {
   
   router.get('/', async (req, res) => {
       try {
-          const sunglasses = await Sunglasses.find({});
+          const sunglasses = await Sunglasses.find({}).limit(20);
           res.status(200).json(sunglasses);
       } catch (error) {
           res.status(500).json({ message: 'Error fetching sunglasses', error });
