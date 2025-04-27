@@ -22,42 +22,6 @@ const Sunglasses = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // let sortedSunglasses = [...sunglasses];
-
-        // if(filterValues.sort == 'ascending'){
-        //     sortedSunglasses = sortedSunglasses.sort((a, b) => a.price - b.price)
-        // }else if(filterValues.sort == 'descending'){
-        //     sortedSunglasses = sortedSunglasses.sort((a, b) => b.price - a.price)
-        // }else if(filterValues.sort == "newest"){
-        //     sortedSunglasses = sortedSunglasses.sort((a, b) => a.createdAt - b.createdAt)
-        // }
-
-        // const isFilterEmpty = 
-        //     filterValues.frameShapes.length === 0 &&
-        //     filterValues.frameColor.length === 0 &&
-        //     filterValues.lensType.length === 0 &&
-        //     !filterValues.minPrice &&
-        //     !filterValues.maxPrice &&
-        //     filterValues.query.length === 0;
-
-        // const filterSunglasses = isFilterEmpty
-        //         ? sortedSunglasses 
-        //         : sortedSunglasses.filter(sunglass => {
-        //             const shapeMatch = filterValues.frameShapes.length === 0 || filterValues.frameShapes.includes(sunglass.frameShape);
-        //             const colorMatch = filterValues.frameColor.length === 0 || filterValues.frameColor.includes(sunglass.frameColor);
-        //             const lensMatch = filterValues.lensType.length === 0 || filterValues.lensType.includes(sunglass.lensType);
-        //             const priceMatch =
-        //                 (!filterValues.minPrice || sunglass.price >= filterValues.minPrice) &&
-        //                 (!filterValues.maxPrice || sunglass.price <= filterValues.maxPrice);
-        //             const searchMatch =
-        //                 filterValues.query.length === 0 ||
-        //                 sunglass.name.toLowerCase().includes(filterValues.query) ||
-        //                 sunglass.frameShape.toLowerCase().includes(filterValues.query) ||
-        //                 sunglass.frameColor.toLowerCase().includes(filterValues.query) ||
-        //                 sunglass.lensType.toLowerCase().includes(filterValues.query);
-
-        //             return shapeMatch && colorMatch && lensMatch && priceMatch && searchMatch;
-        // });
         let sortedSunglasses = sortSunglasses(sunglasses, filterValues.sort);
         let finalSunglasses = filterSunglasses(sortedSunglasses, filterValues);
         setFilteredSunglasses(finalSunglasses);

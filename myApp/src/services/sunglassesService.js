@@ -1,8 +1,8 @@
 import { REACT_APP_API_URL } from "../env";
 
 const apiUrl = REACT_APP_API_URL; 
-export const getAll = async () => {
-    const data = await fetch(`${apiUrl}/sunglasses`,
+export const getAll = async (startIndex, limit=10) => {
+    const data = await fetch(`${apiUrl}/sunglasses?startIndex=${startIndex}&limit=${limit}`,
         {
             method: 'GET',
             credentials: 'include',

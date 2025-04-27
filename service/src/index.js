@@ -13,13 +13,12 @@ app.use(cookieParser());
 app.use(
   cors({
     
-    origin: ["http://localhost:5173/",'https://vist-sunglasses.netlify.app'], // Замести това с URL-то на React приложението
+    origin: ["http://localhost:5173",'https://vist-sunglasses.netlify.app'], // Замести това с URL-то на React приложението
     methods: ["GET", "POST", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
   })
 );
-// app.options('*', cors(corsOptions)); // <-- Handle preflight requests properly
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "50mb" }));
