@@ -160,7 +160,7 @@ const NavBar = () => {
             <nav>
                 <Link  to="/sunglasses">{t('menu.new')}</Link>
                 <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
-                {user._id == '68092d56a17f6bacd78b1bc4' && <Link to='/create'>Добавинов модел</Link>}
+                {user?._id == '68092d56a17f6bacd78b1bc4' && <Link to='/create'>Добавинов модел</Link>}
                 {/* <Link to={"/sunglasses"} onClick={() => updateGender('Women')}>{t('menu.women\'s')}</Link> */}
                 {/* <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
                 {/* <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
