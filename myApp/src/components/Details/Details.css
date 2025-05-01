@@ -212,15 +212,27 @@
     gap: 2em;
 }
 
-.hearth{
+.hearth {
     font-size: 3em;
     color: grey;
     cursor: pointer;
     transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
 }
+
+.hearth:hover {
+    color: red; /* Променя цвета на червен при ховър */
+    transform: scale(1.2); /* Увеличава размера при ховър */
+}
+
+.hearth:active {
+    transform: scale(0.9); /* Малко намалява размера при клик */
+    color: darkred; /* Променя цвета на по-тъмен при клик */
+}
 .liked{
     color: red;
     transform: scale(1);
+    transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
+
 }
 
 @media (min-width: 300px) and (max-width: 900px){

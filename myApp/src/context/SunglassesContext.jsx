@@ -38,13 +38,13 @@ const SunglassesProvider = ({ children }) => {
     const loadSunglasses = async () => {
       setIsLoading(true);
       try {
-        const result = await sunglassesService.getAll(lastIndex, 24); // Извличаме първите 10 очила
+        const result = await sunglassesService.getAll(lastIndex, 12); // Извличаме първите 10 очила
         setSunglasses(result);
         // setFilteredSunglasses(result);
         setIsLoading(false)
         setLastIndex(lastIndex + result.length); // Увеличаваме индекса за следващите очила
 
-        if (result.length < 24) {
+        if (result.length < 12) {
           setHasMore(false); // Ако не са заредени 10, значи няма повече очила за зареждане
         }
       } catch (err) {

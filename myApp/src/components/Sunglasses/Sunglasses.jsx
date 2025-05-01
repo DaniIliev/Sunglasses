@@ -125,7 +125,7 @@ const Sunglasses = () => {
     </div>
     {isLoading || !hasMore ? '' :
     <p className='loadMore' onClick={loadMoreSunglasses}>Load more {loaderMoreSunglasses &&  <ClipLoader /> }</p>
-    }
+   } 
     </>
     {/* } */}
     </div>

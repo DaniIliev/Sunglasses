@@ -149,7 +149,7 @@ const Details = () => {
           </div>
         </div>
         <div className="aboutSunglasses">
-          <h3>{item.name}</h3>
+          <h3 style={{textTransform: 'uppercase'}}>{item.name}</h3>
           <p className="reviews">
             <RiStarSFill />
             <RiStarSFill />
@@ -189,12 +189,7 @@ const Details = () => {
           <h4>{t('detailsPage.description')}</h4>
           <div className="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Corporis, hic. Iste, itaque fugit odit accusantium est esse
-              corrupti rerum voluptates labore corporis non reiciendis, amet
-              obcaecati maxime id libero architecto delectus cupiditate
-              voluptatem. Facere sapiente vitae modi magni repudiandae dolore
-              placeat rem earum officia? Ipsam nulla magnam sint ex numquam?
+              {item.description}
             </p>
           </div>
         </div>

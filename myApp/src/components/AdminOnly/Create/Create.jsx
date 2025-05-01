@@ -6,6 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import './Create.css'
 import { REACT_APP_API_URL } from '../../../env';
+import { Button, Typography, Stack } from '@mui/material';
+
 
 const Create = () => {
     const apiUrl = REACT_APP_API_URL; 
@@ -298,19 +300,46 @@ const createApiCall = async (e) => {
             </div>
             <img src="/images/sizeModel.webp" alt="" className='sizeModel'/>
             </Box>
-
-            <div style={{padding: "5em"}}>
-                {/* <input type="file" accept="image/*"  multiple onChange={handleImage}/> */}
-                <label>Основно изображение (1 снимка):</label>
-                <input type="file" accept="image/*" onChange={handleMainImage} />
-                
-                <label>Допълнителни изображения:</label>
-                <input type="file" accept="image/*" multiple onChange={handleAdditionalImages} />
-                <button onClick={createApiCall}>Submit</button>
-            </div>
+              <Typography variant="h6" gutterBottom>
+                Качване на изображения
+              </Typography>
+            
+              <Stack spacing={3}>
+                <div>
+                  <Typography variant="body1" gutterBottom>
+                    Основно изображение (1 снимка):
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    component="label"
+                  >
+                    Качи основно изображение
+                    <input hidden accept="image/*" type="file" onChange={handleMainImage} />
+                  </Button>
+                </div>
+            
+                <div>
+                  <Typography variant="body1" gutterBottom>
+                    Допълнителни изображения:
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    component="label"
+                  >
+                    Качи допълнителни изображения
+                    <input hidden accept="image/*" type="file" multiple onChange={handleAdditionalImages} />
+                  </Button>
+                </div>
+            
+                <Button variant="contained" color="success" sx={{m: 3}}onClick={createApiCall}>
+                Submit
+                </Button>
+              </Stack>
+            
         </>
         
       );
 }
 
 export default Create
+
