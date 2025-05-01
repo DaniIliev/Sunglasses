@@ -63,7 +63,7 @@ const SunglassesProvider = ({ children }) => {
     setLoaderMoreSunglasses(true);
 
     try {
-      const newSunglasses = await sunglassesService.getAll(lastIndex, 24); // Зареждаме следващите 10
+      const newSunglasses = await sunglassesService.getAll(lastIndex, 12); // Зареждаме следващите 10
       setSunglasses((prevSunglasses) => [...prevSunglasses, ...newSunglasses]); // Добавяме новите очила към старите
       // setFilteredSunglasses((prevSunglasses) => [...prevSunglasses, ...newSunglasses]);
 

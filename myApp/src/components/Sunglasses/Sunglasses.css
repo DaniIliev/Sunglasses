@@ -350,7 +350,7 @@ h3 {
     width: 100%;
     margin: 0 auto;
     gap: 0.5em;
-    font-size: 2em;
+    font-size: 1.5em;
     text-decoration: underline;
     text-align: center;
     margin-right: 2em;
@@ -402,10 +402,10 @@ color: black;
         display: block;
     }
     .div-hr-text-gradient-and-imgFilter .img {
-        top: 4em;
+        top: 4.3em;
     }
     .sortingDiv{
-        top: 10em;
+        top: 10.3em;
     }
     .PhoneFillters p{
         width: 90%;

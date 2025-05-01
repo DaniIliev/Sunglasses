@@ -70,7 +70,7 @@ const Cart = () => {
         {allItems?.length == 0 ?
         <div className="cartIsEmty">
             <img src="/images/shoppingCart.png" alt="shoppingCart" width={250}/>
-            <h1>{t('shoppingCart.textIfNoAddedItems')}</h1>
+            <h1 style={{textAlign: 'center'}}>{t('shoppingCart.textIfNoAddedItems')}</h1>
             <Link to='/sunglasses'>{t('shoppingCart.returnToShop')}</Link>
         </div>
         :

@@ -86,10 +86,9 @@ router.post('/add', async (req, res) => {
       try {
         const { startIndex, limit } = req.query;
 
-        const start = parseInt(startIndex, 10) || 0;
-        const pageLimit = parseInt(limit, 12) || 10;
+        const start = parseInt(startIndex, 10);
+        const pageLimit = parseInt(limit, 10);
 
-          // const sunglasses = await Sunglasses.find({});
           const sunglasses = await Sunglasses.find({})
           .skip(start)
           .limit(pageLimit);
