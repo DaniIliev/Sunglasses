@@ -17,6 +17,7 @@ import GuestGuard from './guards/GuestGuard'
 import AdminGuard from './guards/AdminGuard'
 import { ToastContainer } from "react-toastify";
 import { SunglassesProvider } from './context/SunglassesContext'
+import Edit from './components/AdminOnly/Edit'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
               </Route>
               <Route element={<AdminGuard />}>
                 <Route path='/create' element={<Create/>}/>
+                <Route path='/edit/:id' element={<Edit />}/>
               </Route>
               <Route path='/sunglasses' element={<Sunglasses />}/>
               <Route path = '/sunglasses/:id' element={<Details/>}/>

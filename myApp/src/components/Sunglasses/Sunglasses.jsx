@@ -20,16 +20,17 @@ const Sunglasses = () => {
     const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues, loadMoreSunglasses, loaderMoreSunglasses, hasMore} = useContext(SunglassesContext)
 
     const navigate = useNavigate()
-
+    console.log(filteredSunglasses)
     const SunglassesCard = React.memo(({ item }) => {
+
         return (
           <div className="allAboutCard" key={item._id}>
             <div className='card'>
               <div className='imageStock'>
                 <p className='sale'>SALE</p>
                 <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                  <img src={item.images[0]} className='default-image'/>
-                  <img src={item.images[1]} alt="" className='hover-image'/>
+                  <img src={item.images?.[0]} className='default-image'/>
+                  <img src={item.images?.[1]} alt="" className='hover-image'/>
                 </Link>
                 <p className='addToCartSUNP' 
                    onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}>
@@ -117,7 +118,7 @@ const Sunglasses = () => {
         <div className="catalog-cards">
         {isLoading ?
         <ClipLoader className='loader'/> : (
-            filteredSunglasses.map(item => 
+          filteredSunglasses.map(item => 
                 <SunglassesCard key={item._id} item={item} />
                 )
         )}

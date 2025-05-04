@@ -1,17 +1,19 @@
-.textFields{
+/* .textFields{
     display: flex;
     flex-direction: column;
     gap: 1em;
-}
+    width: 50%;
+} */
 /* .fields{
     width: 100%;
     display: flex;
     justify-content: space-between;
 } */
-
 .MuiBox-root{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 80vh;
+    align-items: center;    
+    justify-content: center;
+    gap: 5em;
+    margin-bottom: 1em;
+    /* height: 80vh; */
 }

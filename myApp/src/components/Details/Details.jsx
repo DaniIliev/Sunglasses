@@ -17,6 +17,10 @@ import { UserContext } from "../../context/UserContext";
 import { addToCart } from "../../utills/sharedFn/addToCart";
 import AddToCartPopup from "../Popups/addToCartPopup";
 import { useTranslation } from "react-i18next";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { REACT_APP_API_URL } from "../../env";
+import { toast } from "react-toastify"
 
 // const images = [
 //   "/images/COPY1.webp",
@@ -78,6 +82,43 @@ const Details = () => {
     addToCart(user, setUser, id, sunglassesCount)
   }
 
+  const deleteItem = async (id) => {
+    try {
+      const response = await fetch(`${REACT_APP_API_URL}/sunglasses/delete/${id}`, {
+        method: 'DELETE',
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(result.message || 'Грешка при изтриване на очилата.');
+      }
+  
+
+            toast.success("✅ Очилата бяха успешно изтрити:)!", {
+              position: "top-center",  
+              autoClose: 3000,        
+              hideProgressBar: false, 
+              closeOnClick: true,     
+              pauseOnHover: true,     
+              draggable: true,        
+              theme: "colored",    
+          });
+          navigate('/sunglasses')
+      // Може да обновиш UI, например да презаредиш списъка:
+      // fetchSunglassesList();
+    } catch (error) {
+      toast.error("❌ Възникна грешка при изтриването :(",{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    }
+  };
   const handleLike = () => {
     const data = {
         id: id,
@@ -149,6 +190,10 @@ const Details = () => {
           </div>
         </div>
         <div className="aboutSunglasses">
+          <div style={{display: 'flex', alignItems: 'center', gap: 2}}>
+            <EditIcon onClick={() => navigate(`/edit/${item._id}`)} sx={{color: 'blue', fontSize: 35}}/>
+            <DeleteForeverIcon sx={{color: 'red', fontSize: 35}} onClick={() => deleteItem(item._id)}/>
+          </div>
           <h3 style={{textTransform: 'uppercase'}}>{item.name}</h3>
           <p className="reviews">
             <RiStarSFill />

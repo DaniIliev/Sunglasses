@@ -1,15 +1,15 @@
 export const filterSunglasses = (sunglasses, filterValues) => {
-    const isFilterEmpty =
+    const isFilterEmpty = (
         filterValues.frameShapes.length === 0 &&
         filterValues.frameColor.length === 0 &&
         filterValues.lensType.length === 0 &&
         !filterValues.minPrice &&
         !filterValues.maxPrice &&
-        filterValues.query.length === 0;
+        filterValues.query.length === 0 &&
+        filterValues.gender.length === 0)
 
     if (isFilterEmpty) return sunglasses;
 
-    console.log(sunglasses)
     return sunglasses.filter(sunglass => {
         const shapeMatch = filterValues.frameShapes.length === 0 || filterValues.frameShapes.includes(sunglass.frameShape);
         const colorMatch = filterValues.frameColor.length === 0 || filterValues.frameColor.includes(sunglass.frameColor);
