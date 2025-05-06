@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { register } from "../../utills/sharedFn/register";
 import { login } from "../../utills/sharedFn/login";
+import { TextField } from "@mui/material";
 
 const UserAccess = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -60,21 +61,27 @@ const UserAccess = () => {
               <img src="/images/apple.png" alt="apple" width={50} />
             </div> */}
             {/* <span>or use your account</span> */}
-            <input
+            <TextField
               type="email"
               name="email"
+              label={'Email'}
               value={formData.email}
               onChange={handleChange}
+              variant="standard"
               required
               placeholder="Email..."
+              fullWidth
             />
-            <input
+            <TextField
               type="password"
               name="password"
+              label={'Pasword'}
               value={formData.password}
               onChange={handleChange}
               required
+              variant="standard"
               placeholder="Password..."
+              fullWidth
             />
             <div className="allreadyHaveAcc">
                   <p>I don't have an account yet:</p>
@@ -93,33 +100,41 @@ const UserAccess = () => {
               <img src="/images/apple.png" alt="apple" width={50} />
             </div>
             <span>or use your email for registration</span> */}
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
+
+            <TextField
+              name='username'
+              label={'Username'}
+              variant="standard"
               value={formData.username}
               onChange={handleChange}
-              required
+              // sx={{marginBottom: 2}}
+              fullWidth
             />
-            <input
+            <TextField
               type="email"
               name="email"
+              label={'Email'}
               value={formData.email}
               onChange={handleChange}
               required
               placeholder="Email..."
+              variant="standard"
+              fullWidth
             />
-            <input
+            <TextField
               type="password"
               name="password"
+              label={'Password'}
               value={formData.password}
               onChange={handleChange}
               required
+              variant="standard"
               placeholder="Password..."
+              fullWidth
             />
             <div className="allreadyHaveAcc">
               <p>I already have an account:</p>
-              <p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p>
+              <span><p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p></span>
             </div>
             <p
               className="typeSubmitSignUp"

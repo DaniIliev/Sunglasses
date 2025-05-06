@@ -21,6 +21,8 @@ import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../context/UserContext';
 import { logout } from '../../utills/sharedFn/logout';
 import { SunglassesContext } from '../../context/SunglassesContext';
+import MenuIcon from '@mui/icons-material/Menu';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
@@ -57,16 +59,7 @@ const NavBar = () => {
         setIsMenuMenOpen(false)
         setIsShippingHovered(false)
         setIsUserIconHovered(false)
-        // const isFilterEmpty = filterValues.gender.length;
 
-        // const filterSunglasses = isFilterEmpty
-        // ? sortedSunglasses 
-        // : sortedSunglasses.filter(sunglass => {
-        //     const genderMatch = filterValues.gender.length === 0 || filterValues.gender.includes(sunglass.gender);
-        //     return genderMatch
-        // })
-        //trqbva da izpolzvam functiqta ot sunglasses 
-        // setFilteredSunglasses()
     }, [user, filterValues])
 
     const handleLogout = async () => {
@@ -88,9 +81,18 @@ const NavBar = () => {
             </span>
         </div>
         <div  className='navBarOne'>
-            <RiMenuFold4Fill className='responsivMenuBTN' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
-            <div className={isResponsivMenuOpen ? `responsivMenu open` : 'responsivMenu closed'}>
-                <div>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle" onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
+            <label for="navi-toggle" class="navigation__button">
+            {!isResponsivMenuOpen ? <MenuIcon className='icon'/>
+            : <ClearIcon  className='icon' />}
+            </label>
+
+
+            <div class={`navigation__background ${isResponsivMenuOpen ? 'open-bg' : ''}`}></div>
+            {isResponsivMenuOpen ? 
+            <nav class="navigation__nav">
+                <div className='navigation__header'>
                     <h1>Menu</h1>
                     <p className='language responsive' onClick={() => {
                     if(isLanguageENG == 'eng'){
@@ -101,40 +103,29 @@ const NavBar = () => {
                         switchLanguage("eng")
                     }
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
-                    <IoIosClose className='closeResponsivMenu' onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>
                 </div>
-                <h4>{user ? <p className='welcomeUsernameResponsive'>{`Welcome, ${user.username}`}</p> : ''}</h4>
+                <h4>{user ? <p style={{textAlign: 'center'}} className='welcomeUsernameResponsive'>{`Welcome, ${user.username}`}</p> : ''}</h4>
                 <SearchBar /> 
-                <ul>
-                    {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.new')}</li></Link> */}
-                    {/* <Link onClick={() => updateGender('man')} to={'/sunglases'}><li>{t('Man\'s')}</li></Link> */}
-                    <Link onClick={() => {
+                <ul class="navigation__list">
+                <li class="navigation__item"><Link class="navigation__link" onClick={() => {
                         setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
-                    }} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link>
-                    {/* <Link onClick={() => {
-                        setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
-                        updateGender('women')
-                    }} to={'/sunglasses'}><li>{t('menu.women\'s')}</li></Link>
-                    <Link onClick={() => {
-                        setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
-                        updateGender('man')
-                    }} to={'/sunglasses'}><li>{t('menu.man\'s')}</li></Link> */}
-                    {/* <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/sunglasses'}><li>{t('menu.unisex')}</li></Link> */}
+                    }} to={'/sunglasses'}><li>{t('menu.bestsellers')}</li></Link></li>
                     {user ? 
                         <>
-                            <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/orders'}><li>My orders</li></Link>
-                            <Link onClick={() => {
+                            <li class="navigation__item" ><Link class="navigation__link" onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to={'/orders'}><li>My orders</li></Link></li>
+                            <li class="navigation__item"><Link class="navigation__link" onClick={() => {
                                 setIsRepsonsivMenuOpen(!isResponsivMenuOpen);
                                 handleLogout();
                                 }}>
                                 <li>Logout</li>
-                            </Link>
+                            </Link></li>
                         </>
-                        : <Link onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to='/user/access'><li>Sign in / Sign up</li></Link>
+                        : <li class="navigation__item" ><Link class="navigation__link" onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to='/user/access'><li>Sign in / Sign up</li></Link></li>
                     }
-
                 </ul>
-            </div>
+            </nav>
+            : null}
+        </div>
             <Link to='/'><img src="/images/logo.jpg" alt="" className='logo'/></Link>
             <SearchBar /> 
 
@@ -161,10 +152,6 @@ const NavBar = () => {
                 <Link  to="/sunglasses">{t('menu.new')}</Link>
                 <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
                 {user?._id == '68092d56a17f6bacd78b1bc4' && <Link to='/create'>Добавинов модел</Link>}
-                {/* <Link to={"/sunglasses"} onClick={() => updateGender('Women')}>{t('menu.women\'s')}</Link> */}
-                {/* <a onClick={() => setIsWomenOpen(!isMenuWomenOpen)}>{t('menu.women\'s')} {isMenuWomenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
-                {/* <a onClick={() => setIsMenuMenOpen(!isMenuMenOpen)}>{t('menu.man\'s')} {isMenuMenOpen ? <MdKeyboardArrowUp /> : <MdOutlineKeyboardArrowDown />}</a> */}
-                {/* <Link>{t('menu.unisex')}</Link> */}
             </nav>
         </div>
         {isShippingHovered ? 

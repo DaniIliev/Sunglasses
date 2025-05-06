@@ -43,12 +43,12 @@
     height: 100%;
     
 }
-.sign-up-container form input,
+/* .sign-up-container form input,
 .sign-in-container form input{
     background-color: rgb(244, 244, 244);
     width: 50%;
     padding: 0.8em 1.5em;
-}
+} */
 .typeSubmitSignUp,
 .typeSubmitSignIn{
     padding: 1em 2em;
@@ -105,7 +105,7 @@
     }
     .form-container, .sign-up-container, .sign-in-container .overlay-container{
         position: relative;
-        width: 100%;
+        width: 90%;
         height: 20%;
     }
     .sign-up-container form, .sign-in-container form{
