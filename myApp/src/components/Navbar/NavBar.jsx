@@ -24,7 +24,17 @@ import { SunglassesContext } from '../../context/SunglassesContext';
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
 import { MovingLabel } from './MovingLabel';
-
+import { Box, Typography, IconButton } from '@mui/material';
+import LanguageIcon from '@mui/icons-material/Language';
+import {
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+  } from '@mui/material';
+  import LogoutIcon from '@mui/icons-material/Logout';
+  import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+  import LoginIcon from '@mui/icons-material/Login';
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
@@ -71,16 +81,6 @@ const NavBar = () => {
 
   return (
     <div className='navBars'>
-
-        {/* <div className="moving-label">
-            <span>
-                <p><BsCashStack className='iconMovingLabel'/>{t('navBar.cashOnDelivery')}</p> 
-                <p><MdLocalShipping className='iconMovingLabel'/> {t('navBar.freeShipping')}</p>
-                <p><BsSunglasses className='iconMovingLabel'/>{t('navBar.magicMirror')}</p>
-                <p><GiReturnArrow className='iconMovingLabel'/>{t('navBar.return')}</p>
-                <p><SiAuthy className='iconMovingLabel'/>{t('navBar.authorized')}</p>
-            </span>
-        </div> */}
         <MovingLabel t={t}/>
         <div  className='navBarOne'>
         <div class="navigation">
@@ -94,7 +94,7 @@ const NavBar = () => {
             <div class={`navigation__background ${isResponsivMenuOpen ? 'open-bg' : ''}`}></div>
             {isResponsivMenuOpen ? 
             <nav class="navigation__nav">
-                <div className='navigation__header'>
+                {/* <div className='navigation__header'>
                     <h1>Menu</h1>
                     <p className='language responsive' onClick={() => {
                     if(isLanguageENG == 'eng'){
@@ -106,8 +106,40 @@ const NavBar = () => {
                     }
                 }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
                 </div>
-                <h4>{user ? <p style={{textAlign: 'center'}} className='welcomeUsernameResponsive'>{`Welcome, ${user.username}`}</p> : ''}</h4>
-                <SearchBar /> 
+                <h4>{user ? <p style={{textAlign: 'center'}} className='welcomeUsernameResponsive'>{`Welcome, ${user.username}`}</p> : ''}</h4> */}
+                <Box
+                    // className="navigation__header"
+                    sx={{
+                        display: 'flex',
+                        // justifyContent: 'space-between',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        mt: 3,
+                        px: 2,
+                        py: 1,
+                    }}
+                    >
+                    <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+                        Menu
+                    </Typography>
+
+                    <IconButton
+                        onClick={() => {
+                        const newLang = isLanguageENG === 'eng' ? 'bg' : 'eng';
+                        setIsLanguageENG(newLang);
+                        switchLanguage(newLang);
+                        }}
+                        size="small"
+                        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                        className="language responsive"
+                    >
+                        <LanguageIcon />
+                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                        {isLanguageENG === 'eng' ? 'BG' : 'EN'}
+                        </Typography>
+                    </IconButton>
+                    </Box>
+                {/* <SearchBar /> 
                 <ul class="navigation__list">
                 <li class="navigation__item"><Link class="navigation__link" onClick={() => {
                         setIsRepsonsivMenuOpen(!isResponsivMenuOpen)
@@ -124,7 +156,40 @@ const NavBar = () => {
                         </>
                         : <li class="navigation__item" ><Link class="navigation__link" onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)} to='/user/access'><li>Sign in / Sign up</li></Link></li>
                     }
-                </ul>
+                </ul> */}
+                <List sx={{ px: 2 }}>
+                <ListItem disablePadding>
+                    <ListItemButton sx={{textAlign: 'center', fontSize: 30}} component={Link} to="/sunglasses" onClick={() => setIsRepsonsivMenuOpen(false)}>
+                    <ListItemText primary={t('menu.bestsellers')} />
+                    </ListItemButton>
+                </ListItem>
+
+                {user ? (
+                    <>
+                    <ListItem disablePadding>
+                        <ListItemButton sx={{textAlign: 'center'}} component={Link} to="/orders" onClick={() => setIsRepsonsivMenuOpen(false)}>
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary="My orders" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton
+                        onClick={() => {
+                            setIsRepsonsivMenuOpen(false);
+                            handleLogout();
+                        }}
+                        >
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}}primary="Logout" />
+                        </ListItemButton>
+                    </ListItem>
+                    </>
+                ) : (
+                    <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/user/access" onClick={() => setIsRepsonsivMenuOpen(false)}>
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary="Sign in / Sign up" />
+                    </ListItemButton>
+                    </ListItem>
+                )}
+                </List>
             </nav>
             : null}
         </div>
