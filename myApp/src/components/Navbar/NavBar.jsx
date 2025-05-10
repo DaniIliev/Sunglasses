@@ -23,6 +23,7 @@ import { logout } from '../../utills/sharedFn/logout';
 import { SunglassesContext } from '../../context/SunglassesContext';
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
+import { MovingLabel } from './MovingLabel';
 
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
@@ -71,7 +72,7 @@ const NavBar = () => {
   return (
     <div className='navBars'>
 
-        <div className="moving-label">
+        {/* <div className="moving-label">
             <span>
                 <p><BsCashStack className='iconMovingLabel'/>{t('navBar.cashOnDelivery')}</p> 
                 <p><MdLocalShipping className='iconMovingLabel'/> {t('navBar.freeShipping')}</p>
@@ -79,7 +80,8 @@ const NavBar = () => {
                 <p><GiReturnArrow className='iconMovingLabel'/>{t('navBar.return')}</p>
                 <p><SiAuthy className='iconMovingLabel'/>{t('navBar.authorized')}</p>
             </span>
-        </div>
+        </div> */}
+        <MovingLabel t={t}/>
         <div  className='navBarOne'>
         <div class="navigation">
             <input type="checkbox" class="navigation__checkbox" id="navi-toggle" onClick={() => setIsRepsonsivMenuOpen(!isResponsivMenuOpen)}/>

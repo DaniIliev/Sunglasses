@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Reviews from '../Reviews/Reviews';
+import {Box} from '@mui/material'
+import {Avatar} from '@mui/material';
+import SocialSection from '../SocialSection/SocialSection';
 const Home = () => {
 
     const {t, i18n} = useTranslation()
@@ -79,41 +82,46 @@ const Home = () => {
         <div className='trendingContainer'>
             <h2 className='trendingTitle'>{t('home.trendingNow')}</h2>
             <div className='trendingCards'>
-                <Link className='card' to='/sunglasses/1'>
+                <Link className='card' to='/sunglasses/681934a2d45dbf51dd66827e'>
                     <div className='imageStock'>
-                        <p className='sale'>SALE</p>
+                        <p className='sale'>TOP</p>
                         <div className='imageContainer'>
-                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
-                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                            <img src="/marbleLuxe.JPG" alt="ok" width={300} 
+                            // className='default-image'
+                            />
+                            {/* <img src="/images/image.png" width={300} alt="" className='hover-image'/> */}
                         </div>
                     </div>
                     <div className="info">
-                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <h3>MARBLE LUXE</h3>
                         <div className='prices'>
-                            <h5>600,00$</h5>
-                            <h4>500,00$</h4>
-                            <p>-10%</p>
+                            {/* <h5>600,00$</h5> */}
+                            <h4>130лв</h4>
+                            {/* <p>-10%</p> */}
                         </div>
                     </div>
                 </Link>
-                <Link className='card' to='/sunglasses/1'>
+                <Link className='card' to='/sunglasses/681927d1d45dbf51dd668203'>
                     <div className='imageStock'>
-                        <p className='sale'>SALE</p>
+                        <p className='sale'>TOP</p>
                         <div className='imageContainer'>
-                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
-                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                            <img src="/amberOlive.JPG" alt="ok" width={300} 
+                            // className='default-image'
+                            />
+                            {/* <img src="/images/image.png" width={300} alt="" className='hover-image' */}
+                            {/* /> */}
                         </div>
                     </div>
                     <div className="info">
-                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <h3>AMBER SOUL && OLIVE EDGE</h3>
                         <div className='prices'>
-                            <h5>600,00$</h5>
-                            <h4>500,00$</h4>
-                            <p>-10%</p>
+                            {/* <h5>600,00$</h5> */}
+                            <h4>115лв && 120лв</h4>
+                            {/* <p>-10%</p> */}
                         </div>
                     </div>
                 </Link>
-                <Link className='card' to='/sunglasses/1'>
+                {/* <Link className='card' to='/sunglasses/1'>
                     <div className='imageStock'>
                         <p className='sale'>SALE</p>
                         <div className='imageContainer'>
@@ -129,21 +137,24 @@ const Home = () => {
                             <p>-10%</p>
                         </div>
                     </div>
-                </Link>
-                <Link className='card' to='/sunglasses/1'>
+                </Link> */}
+                <Link className='card' to='/sunglasses/68193981d45dbf51dd6682a8'>
                     <div className='imageStock'>
-                        <p className='sale'>SALE</p>
+                        <p className='sale' color='blue'>TOP</p>
                         <div className='imageContainer'>
-                            <img src="/images/COPY1.webp" alt="ok" width={300} className='default-image'/>
-                            <img src="/images/image.png" width={300} alt="" className='hover-image'/>
+                            <img src="/redwood.JPG" alt="ok" width={300} 
+                            // className='default-image'
+                            />
+                            {/* <img src="/images/image.png" width={300} alt="" className='hover-image' */}
+                            {/* /> */}
                         </div>
                     </div>
                     <div className="info">
-                        <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
+                        <h3>REDWOOD STOCK</h3>
                         <div className='prices'>
-                            <h5>600,00$</h5>
-                            <h4>500,00$</h4>
-                            <p>-10%</p>
+                            {/* <h5>600,00$</h5> */}
+                            <h4>110лв</h4>
+                            {/* <p>-10%</p> */}
                         </div>
                     </div>
                 </Link>
@@ -166,7 +177,8 @@ const Home = () => {
                 <p className='benefit'><span>4</span> {t('home.benefit4')}</p>
             </div>
         </div>
-       <Reviews />
+       {/* <Reviews /> */}
+        <SocialSection />
     </div>
   )
 }

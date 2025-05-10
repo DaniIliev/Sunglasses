@@ -1,6 +1,8 @@
 .footer{
     /* background-color: rgb(86, 46, 31); */
-    background-color: rgb(0, 157, 255);;
+    /* background-color: #79450e96; */
+    background: #f58e97;
+    background: radial-gradient(circle, rgba(245, 142, 151, 1) 0%, rgba(148, 187, 233, 1) 100%);
     display: flex;
     color: black;
     justify-content: space-around;

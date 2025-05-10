@@ -28,7 +28,7 @@
 } 
 
 .form-container, .overlay-container{
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
     height: 100%;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -53,7 +53,9 @@
 .typeSubmitSignIn{
     padding: 1em 2em;
     /* background-color: orangered; */
-    background-color: rgb(0, 157, 255);
+    /* background-color: rgb(0, 157, 255); */
+    background: #f58e97;
+    background: radial-gradient(circle, rgba(245, 142, 151, 1) 0%, rgba(148, 187, 233, 1) 100%);
     color: white;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -67,7 +69,8 @@
 .overlay-right{
     border-radius: 1em;
     color: white;
-    background-image: url('/images/bgSignUp.png');
+    /* width: 100%; */
+    background-image: url('/signUp.jpeg');
     background-repeat: no-repeat; 
     background-size: contain;  
     background-position: center;

@@ -21,13 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { REACT_APP_API_URL } from "../../env";
 import { toast } from "react-toastify"
-
-// const images = [
-//   "/images/COPY1.webp",
-//   "/images/COPY2.webp",
-//   "/images/COPY3.webp",
-//   "/images/COPY4.webp",
-// ];
+import { SunglassesContext } from "../../context/SunglassesContext";
 
 const Details = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -40,7 +34,7 @@ const Details = () => {
   const [isLike, setIsLike] = useState(false)
   const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
-
+  const {sunglasses} = useContext(SunglassesContext)
   const { id } = useParams();
   const navigate = useNavigate()
 
@@ -190,10 +184,12 @@ const Details = () => {
           </div>
         </div>
         <div className="aboutSunglasses">
+          {user?.id == '68092d56a17f6bacd78b1bc4' && 
           <div style={{display: 'flex', alignItems: 'center', gap: 2}}>
             <EditIcon onClick={() => navigate(`/edit/${item._id}`)} sx={{color: 'blue', fontSize: 35}}/>
             <DeleteForeverIcon sx={{color: 'red', fontSize: 35}} onClick={() => deleteItem(item._id)}/>
           </div>
+          }
           <h3 style={{textTransform: 'uppercase'}}>{item.name}</h3>
           <p className="reviews">
             <RiStarSFill />
@@ -203,9 +199,9 @@ const Details = () => {
             <RiStarSFill />
           </p>
           <div className="prices">
-            <h5>{item.oldPrice != undefined ? item.oldPrice : ''}</h5>
+            <h5>{item.oldPrice != 'undefined' ? item.oldPrice : ''}</h5>
             <h4>{item.price} лв</h4>
-            <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+            <p>{item.oldPrice != 'undefined' && item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
           </div>
           <div className="counter">
             <p className="plusMinus">
@@ -311,118 +307,38 @@ const Details = () => {
         {t('detailsPage.YOUMAYALSOLIKE')}
       </h3>
       <div className="catalog-cards maybeLikedCards">
-        <Link className="card" to="/sunglasses/1">
-          <div className="imageStock">
-            <p className="sale">SALE</p>
-            {/* <CiHeart className='like'/>  */}
-            <div className="imageContainer">
-              <img
-                src="/images/COPY1.webp"
-                alt="ok"
-                width={300}
-                className="default-image"
-              />
-              <img
-                src="/images/image.png"
-                width={300}
-                alt=""
-                className="hover-image"
-              />
-            </div>
-          </div>
-          <div className="info">
-            <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
-            <div className="prices">
-              <h5>600,00$</h5>
-              <h4>500,00$</h4>
-              <p>-10%</p>
-            </div>
-          </div>
-        </Link>
-        <Link className="card" to="/sunglasses/1">
-          <div className="imageStock">
-            <p className="sale">SALE</p>
-            {/* <CiHeart className='like'/>  */}
-            <div className="imageContainer">
-              <img
-                src="/images/COPY1.webp"
-                alt="ok"
-                width={300}
-                className="default-image"
-              />
-              <img
-                src="/images/image.png"
-                width={300}
-                alt=""
-                className="hover-image"
-              />
-            </div>
-          </div>
-          <div className="info">
-            <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
-            <div className="prices">
-              <h5>600,00$</h5>
-              <h4>500,00$</h4>
-              <p>-10%</p>
-            </div>
-          </div>
-        </Link>
-        <Link className="card" to="/sunglasses/1">
-          <div className="imageStock">
-            <p className="sale">SALE</p>
-            {/* <CiHeart className='like'/>  */}
-            <div className="imageContainer">
-              <img
-                src="/images/COPY1.webp"
-                alt="ok"
-                width={300}
-                className="default-image"
-              />
-              <img
-                src="/images/image.png"
-                width={300}
-                alt=""
-                className="hover-image"
-              />
-            </div>
-          </div>
-          <div className="info">
-            <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
-            <div className="prices">
-              <h5>600,00$</h5>
-              <h4>500,00$</h4>
-              <p>-10%</p>
-            </div>
-          </div>
-        </Link>
-        <Link className="card" to="/sunglasses/1">
-          <div className="imageStock">
-            <p className="sale">SALE</p>
-            {/* <CiHeart className='like'/>  */}
-            <div className="imageContainer">
-              <img
-                src="/images/COPY1.webp"
-                alt="ok"
-                width={300}
-                className="default-image"
-              />
-              <img
-                src="/images/image.png"
-                width={300}
-                alt=""
-                className="hover-image"
-              />
-            </div>
-          </div>
-          <div className="info">
-            <h3>NO BIGGIE | PEWTER-SMOKE MONO</h3>
-            <div className="prices">
-              <h5>600,00$</h5>
-              <h4>500,00$</h4>
-              <p>-10%</p>
-            </div>
-          </div>
-        </Link>
+      {sunglasses
+          .sort(() => 0.5 - Math.random()) // разбърква масива
+          .slice(0, 4) // взима първите 4
+          .map((sunglass, index) => (
+            <Link className="card" to={`/sunglasses/${sunglass.id}`}>
+              <div className="imageStock">
+                <p className="sale">SALE</p>
+                <div className="imageContainer">
+                  <img
+                    src={sunglass.images[0]}
+                    alt="ok"
+                    width={300}
+                    className="default-image"
+                  />
+                  <img
+                    src={sunglass.images[1]}
+                    width={300}
+                    alt=""
+                    className="hover-image"
+                  />
+                </div>
+              </div>
+              <div className="info">
+                <h3>{sunglass.name}</h3>
+                <div className="prices">
+                  <h5>{sunglass.oldPrice != 'undefined' && item.oldPrice != '' ? `${sunglass.oldPrice}ЛВ` : ''}</h5>
+                  <h4>{sunglass.price}ЛВ</h4>
+                  <p>{item.oldPrice !== 'undefined' && item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+                </div>
+              </div>
+            </Link>
+        ))}
       </div>
     </>
   );

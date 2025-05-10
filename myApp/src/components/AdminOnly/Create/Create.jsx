@@ -124,7 +124,7 @@ const Create = () => {
 
 return(
 <>
-  <Box component="form" sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, m: 4}} noValidate autoComplete="off">
+  <Box className='MuiBox-root1' component="form" sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, m: 4}} noValidate autoComplete="off">
     <div className="textFields" style={{width:'50%'}}>
       {[
         { name: "frameWidth", label: "FRAME WIDTH (MM)" },

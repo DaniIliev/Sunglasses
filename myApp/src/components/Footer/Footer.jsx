@@ -23,14 +23,14 @@ const Footer = () => {
                 <p>email@abv.bg</p>
                 <p>9300 Dobrich Bulgaria</p>
             </div>
-            <div className='socialMedias'>
+            {/* <div className='socialMedias'>
                 <h2>Social Medias</h2>
                 <div className='socialMediasIcons'>
                     <FaSquareInstagram />
                     <FaFacebook />
                     <AiFillTikTok />
                 </div>
-            </div>
+            </div> */}
     </div>
   )
 }

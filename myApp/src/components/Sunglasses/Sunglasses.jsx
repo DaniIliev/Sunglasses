@@ -10,6 +10,7 @@ import AddToCartPopup from '../Popups/addToCartPopup';
 import { SunglassesContext } from '../../context/SunglassesContext';
 import { sortSunglasses } from '../../utills/sortSunglasses';
 import { filterSunglasses } from '../../utills/filterSunglasses';
+import {Card,CardActionArea,Box,CardMedia, Typography ,CardContent,Button} from '@mui/material'
 // import Pagination from '../shared/Pagination/Pagination';
 // import SunglassesCard from './SunglassesCard';
 const Sunglasses = () => {
@@ -17,38 +18,155 @@ const Sunglasses = () => {
     const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
     const { user, setUser } = useContext(UserContext);
-    const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues, loadMoreSunglasses, loaderMoreSunglasses, hasMore} = useContext(SunglassesContext)
+    const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues} = useContext(SunglassesContext)
 
     const navigate = useNavigate()
-    console.log(filteredSunglasses)
-    const SunglassesCard = React.memo(({ item }) => {
+    // const SunglassesCard = React.memo(({ item }) => {
 
-        return (
-          <div className="allAboutCard" key={item._id}>
-            <div className='card'>
-              <div className='imageStock'>
-                <p className='sale'>SALE</p>
-                <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-                  <img src={item.images?.[0]} className='default-image'/>
-                  <img src={item.images?.[1]} alt="" className='hover-image'/>
-                </Link>
-                <p className='addToCartSUNP' 
-                   onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}>
-                   Add to cart
-                </p>
-              </div>
-              <div className="info">
-                <h3>{item.name}</h3>
-                <div className='prices'>
-                  <h5>{item.oldPrice}</h5>
-                  <h4>{item.price} лв</h4>
-                  <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      });
+    //     return (
+    //       <div className="allAboutCard" key={item._id}>
+    //         <div className='card'>
+    //           <div className='imageStock'>
+    //             <p className='sale'>SALE</p>
+    //             <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
+    //               <img src={item.images?.[0]} className='default-image'/>
+    //               <img src={item.images?.[1]} alt="" className='hover-image'/>
+    //             </Link>
+    //             <p className='addToCartSUNP' 
+    //                onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}>
+    //                Add to cart
+    //             </p>
+    //           </div>
+    //           <div className="info">
+    //             <h3>{item.name}</h3>
+    //             <div className='prices'>
+    //               <h5>{item.oldPrice != 'undefined' ? item.oldPrice : ''}</h5>
+    //               <h4>{item.price} лв</h4>
+    //               <p>{item.oldPrice != 'undefined' &&  item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     );
+    //   });
+
+    const SunglassesCard = React.memo(({ item, addItem, user }) => {
+      const navigate = useNavigate();
+    
+      const discount =
+        item.oldPrice && item.oldPrice !== 'undefined'
+          ? `-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}%`
+          : '';
+    
+      return (
+        <Card
+          sx={{
+            maxWidth: 400,
+            position: 'relative',
+            overflow: 'hidden',
+            transition: 'transform 0.3s',
+            '&:hover': { transform: 'translateY(-5px)' },
+            borderRadius: 3,
+            boxShadow: 3,
+          }}
+        >
+          <CardActionArea component={Link} to={`/sunglasses/${item._id}`}>
+            <Box sx={{ position: 'relative', height: 300, overflow: 'hidden' }}>
+              <CardMedia
+                component="img"
+                height="100"
+                image={item.images?.[0]}
+                alt={item.name}
+                sx={{
+                  transition: 'opacity 0.3s',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  // objectFit: 'contain',
+                  objectFit: 'fill',
+                  zIndex: 1,
+                }}
+              />
+              <CardMedia
+                component="img"
+                image={item.images?.[1]}
+                alt=""
+                sx={{
+                  opacity: 0,
+                  transition: 'opacity 0.3s',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  // objectFit: 'contain',
+                  objectFit: 'fill',
+                  zIndex: 2,
+                  '&:hover': { opacity: 1 },
+                }}
+                className="hover-image"
+              />
+              <Typography
+                variant="caption"
+                sx={{
+                  position: 'absolute',
+                  top: 10,
+                  left: 10,
+                  backgroundColor: '#e53935',
+                  color: 'white',
+                  padding: '2px 8px',
+                  borderRadius: 1,
+                  fontWeight: 'bold',
+                  fontSize: '0.75rem',
+                  zIndex: 3,
+                }}
+              >
+                SALE
+              </Typography>
+            </Box>
+          </CardActionArea>
+    
+          <CardContent>
+            <Typography variant="h6" component="div" gutterBottom>
+              {item.name}
+            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              {item.oldPrice && item.oldPrice !== 'undefined' && (
+                <Typography
+                  variant="body2"
+                  sx={{ textDecoration: 'line-through', color: '#888' }}
+                >
+                  {item.oldPrice} лв
+                </Typography>
+              )}
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                {item.price} лв
+              </Typography>
+              {discount && (
+                <Typography
+                  variant="body2"
+                  sx={{ color: '#e53935', marginLeft: 'auto', fontWeight: 'medium' }}
+                >
+                  {discount}
+                </Typography>
+              )}
+            </Box>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              sx={{ marginTop: 2, borderRadius: 2 }}
+              onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
+            >
+              Добави в количката
+            </Button>
+          </CardContent>
+        </Card>
+      );
+    });
+    
 
 
     useEffect(() => {
@@ -124,9 +242,6 @@ const Sunglasses = () => {
         )}
         </div>
     </div>
-    {isLoading || !hasMore ? '' :
-    <p className='loadMore' onClick={loadMoreSunglasses}>Load more {loaderMoreSunglasses &&  <ClipLoader /> }</p>
-   } 
     </>
     {/* } */}
     </div>

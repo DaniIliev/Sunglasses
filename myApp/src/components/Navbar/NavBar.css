@@ -34,7 +34,10 @@
     /* font-weight: bold; */
     color: black;
     /* background-color: rgb(86, 46, 31); */
-    background-color: rgb(0, 157, 255);
+    /* background-color: #79450e96; */
+    background: #f58e97;
+    background: radial-gradient(circle, rgba(245, 142, 151, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    
     /* white-space: nowrap; Prevents text wrapping */
     overflow: hidden;
     /* border: 1px solid #ccc; */
@@ -143,14 +146,14 @@
 @media (max-width: 900px) {
   .navigation__button {
     display: inline-block;
-    top: 2.5em;
+    top: 3em;
     left: 1em;
   }
 }
 
 @media (max-width: 600px) {
   .navigation__button {
-    top: 2.5em;
+    top: 3em;
     right: 19em;
   }
 }
@@ -163,14 +166,16 @@
   position: fixed;
   top: 3em;
   right: 21em;
-  background-image: radial-gradient(#78d9f4, rgb(0, 157, 255));
+  /* background-image: radial-gradient(#78d9f4, rgb(0, 157, 255)); */
+  background: #EEAECA;
+background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
   z-index: 1000;
   transition: all 0.6s;
 }
 
 @media (max-width: 900px) {
   .navigation__background {
-    top: 3.2em;
+    top: 3em;
     left: 2.5em;
     display: inline-block;
   }
@@ -178,7 +183,7 @@
 
 @media (max-width: 600px) {
   .navigation__background {
-    top: 2.7em;
+    top: 3.4em;
     left: 2em;
     display: inline-block;
 

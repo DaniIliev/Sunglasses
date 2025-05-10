@@ -113,14 +113,14 @@ router.post('/add',  upload.array('images', 5),async (req, res) => {
   
   router.get('/', async (req, res) => {
       try {
-        const { startIndex, limit } = req.query;
+        // const { startIndex, limit } = req.query;
 
-        const start = parseInt(startIndex, 10);
-        const pageLimit = parseInt(limit, 10);
+        // const start = parseInt(startIndex, 24);
+        // const pageLimit = parseInt(limit, 24);
 
           const sunglasses = await Sunglasses.find({})
-          .skip(start)
-          .limit(pageLimit);
+          // .skip(start)
+          // .limit(pageLimit);
           res.status(200).json(sunglasses);
       } catch (error) {
           res.status(500).json({ message: 'Error fetching sunglasses', error });
