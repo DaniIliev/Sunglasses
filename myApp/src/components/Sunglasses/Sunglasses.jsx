@@ -11,47 +11,16 @@ import { SunglassesContext } from '../../context/SunglassesContext';
 import { sortSunglasses } from '../../utills/sortSunglasses';
 import { filterSunglasses } from '../../utills/filterSunglasses';
 import {Card,CardActionArea,Box,CardMedia, Typography ,CardContent,Button} from '@mui/material'
-// import Pagination from '../shared/Pagination/Pagination';
-// import SunglassesCard from './SunglassesCard';
 const Sunglasses = () => {
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
 
     const { user, setUser } = useContext(UserContext);
     const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues} = useContext(SunglassesContext)
-
+    const [addedProduct, setAddedProduct] = useState(null);
     const navigate = useNavigate()
-    // const SunglassesCard = React.memo(({ item }) => {
-
-    //     return (
-    //       <div className="allAboutCard" key={item._id}>
-    //         <div className='card'>
-    //           <div className='imageStock'>
-    //             <p className='sale'>SALE</p>
-    //             <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-    //               <img src={item.images?.[0]} className='default-image'/>
-    //               <img src={item.images?.[1]} alt="" className='hover-image'/>
-    //             </Link>
-    //             <p className='addToCartSUNP' 
-    //                onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}>
-    //                Add to cart
-    //             </p>
-    //           </div>
-    //           <div className="info">
-    //             <h3>{item.name}</h3>
-    //             <div className='prices'>
-    //               <h5>{item.oldPrice != 'undefined' ? item.oldPrice : ''}</h5>
-    //               <h4>{item.price} лв</h4>
-    //               <p>{item.oldPrice != 'undefined' &&  item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     );
-    //   });
 
     const SunglassesCard = React.memo(({ item, addItem, user }) => {
-      const navigate = useNavigate();
     
       const discount =
         item.oldPrice && item.oldPrice !== 'undefined'
@@ -129,10 +98,10 @@ const Sunglasses = () => {
           </CardActionArea>
     
           <CardContent>
-            <Typography variant="h6" component="div" gutterBottom>
+            <Typography variant="h6" sx={{textTransform: 'uppercase', textAlign: 'center'}} component="div" gutterBottom>
               {item.name}
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
               {item.oldPrice && item.oldPrice !== 'undefined' && (
                 <Typography
                   variant="body2"
@@ -158,7 +127,7 @@ const Sunglasses = () => {
               variant="contained"
               color="primary"
               sx={{ marginTop: 2, borderRadius: 2 }}
-              onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
+              onClick={user ? () => addItem(item._id, item) : () => navigate('/user/access')}
             >
               Добави в количката
             </Button>
@@ -183,8 +152,9 @@ const Sunglasses = () => {
         setFilterValues(prev => ({ ...prev, gender: gender }));
     }
 
-    const addItem = (id) => {
+    const addItem = (id, product) => {
         setIsAddToCartPopupOpen(true)
+        setAddedProduct(product)
         setTimeout(() => {  
             setIsAddToCartPopupOpen(false)
         }, 3000);
@@ -193,13 +163,16 @@ const Sunglasses = () => {
     }
   return (
     <>
-    {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
+  {isAddToCartPopupOpen && (
+    <AddToCartPopup
+      product={addedProduct}
+      onClose={() => setIsAddToCartPopupOpen(false)}
+    />
+  )}
     <div className='page'>
-    {/* {isLoading ? <BeatLoader  className='loader'/> :  */}
     <>
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
-        {/* <Pagination items={filteredSunglasses}/> */}
         <details className='PhoneFillters'>
             <summary className='summaryFilter'>Filters</summary>
             <p className='filltersForPhone'>
@@ -237,13 +210,16 @@ const Sunglasses = () => {
         {isLoading ?
         <ClipLoader className='loader'/> : (
           filteredSunglasses.map(item => 
-                <SunglassesCard key={item._id} item={item} />
+                <SunglassesCard 
+                  key={item._id} 
+                  item={item} 
+                  addItem={addItem} 
+                  user={user}/>
                 )
         )}
         </div>
     </div>
     </>
-    {/* } */}
     </div>
     </>
   )

@@ -4,7 +4,7 @@ import "./UserOrders.css";
 import { FaUserTie } from "react-icons/fa";
 import * as purchaseService from '../../services/purchaseService'
 import { IoIosCloseCircle } from "react-icons/io";
-
+import {OrderDetailsModal} from './OrderDetailsModal'
 const UserOrders = () => {
   const { user } = useContext(UserContext);
   const [purchase, setPurchase] = useState([])
@@ -22,7 +22,6 @@ const UserOrders = () => {
   }
   return (
     <>
-    {console.log(user)}
       <hr
         className="hr-text gradient"
         data-content="HOME / SUNGLASSES / ORDERS"
@@ -89,7 +88,7 @@ const UserOrders = () => {
             {user?.username}, тук можете да проследите статуса на поръчките си.
           </p>
         </div>
-        <table className="table tableOrders">
+        <table style={{ margin: '0 auto', width: '95%'}} className="table tableOrders">
           <thead>
             <tr>
               <th>Номер на поръчка</th>
@@ -131,39 +130,44 @@ const UserOrders = () => {
           </tbody>
         </table>
         {isModalOpen && 
-        <div className="modalOrder">
-            <IoIosCloseCircle className="closeDetailsOrderBTN" onClick={() => setIsModalOpen(false)}/>
-          <table className="tableModal">
-            <thead>
-              <tr>
-                <th>Снимка</th>
-                <th>Име на продукта</th>
-                <th>Количество</th>
-                <th>Цена за единица</th>
-                <th>Обща цена</th>
-              </tr>
-            </thead>
-            <tbody>
-              {purchase && purchase.sunglasses?.length > 0 && 
-                purchase.sunglasses.map(el => 
-                  <tr key={el._id}>
-                      {console.log(el)}
-                    <td>
-                      <img
-                        className="modalOrderImage"
-                        src={el.images[0] || "/images/COPY1.webp"}
-                        alt={el.name || "Слънчеви очила"}
-                      />
-                    </td>
-                    <td>{el.name}</td>
-                    <td>{el.quantity}</td>
-                    <td>{Number(el.price).toFixed(2)}</td>
-                    <td>{(el.price * el.quantity).toFixed(2)}</td>
-                  </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        // <div className="modalOrder">
+        //     <IoIosCloseCircle className="closeDetailsOrderBTN" onClick={() => setIsModalOpen(false)}/>
+        //   <table className="tableModal">
+        //     <thead>
+        //       <tr>
+        //         <th>Снимка</th>
+        //         <th>Име на продукта</th>
+        //         <th>Количество</th>
+        //         <th>Цена за единица</th>
+        //         <th>Обща цена</th>
+        //       </tr>
+        //     </thead>
+        //     <tbody>
+        //       {purchase && purchase.sunglasses?.length > 0 && 
+        //         purchase.sunglasses.map(el => 
+        //           <tr key={el._id}>
+        //               {console.log(el)}
+        //             <td>
+        //               <img
+        //                 className="modalOrderImage"
+        //                 src={el.images[0] || "/images/COPY1.webp"}
+        //                 alt={el.name || "Слънчеви очила"}
+        //               />
+        //             </td>
+        //             <td>{el.name}</td>
+        //             <td>{el.quantity}</td>
+        //             <td>{Number(el.price).toFixed(2)}</td>
+        //             <td>{(el.price * el.quantity).toFixed(2)}</td>
+        //           </tr>
+        //       )}
+        //     </tbody>
+        //   </table>
+        // </div>
+        <OrderDetailsModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        purchase={purchase}
+      />
     }
       </div>
     </>
@@ -171,3 +175,4 @@ const UserOrders = () => {
 };
 
 export default UserOrders;
+

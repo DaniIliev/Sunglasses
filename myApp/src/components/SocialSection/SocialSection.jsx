@@ -50,7 +50,7 @@ const SocialSection = () => {
         {/* Instagram */}
         <div className="social-card">
         <a
-            href="https://tiktok.com/@yourtiktok"
+            href="https://www.instagram.com/vistoptics?igsh=emZ1aTR0eGh4NDM0&utm_source=qr"
             target="_blank"
             rel="noopener noreferrer"
             className="social-card-link"
@@ -58,9 +58,9 @@ const SocialSection = () => {
           <FaInstagram className="social-card-icon instagram" />
           <h3>@vistoptics</h3>
           <div className="social-thumbnails">
-            <img src="/marbleLuxe.JPG" alt="Insta 1" />
-            <img src="/marbleLuxe.JPG" alt="Insta 2" />
-            <img src="/marbleLuxe.JPG" alt="Insta 3" />
+            <img src="/ins1.jpeg" alt="Insta 1" />
+            <img src="/ins2.jpeg" alt="Insta 2" />
+            <img src="/inst3.jpeg" alt="Insta 3" />
           </div>
         </a>
         </div>
@@ -68,7 +68,7 @@ const SocialSection = () => {
         {/* Facebook */}
         <div className="social-card">
         <a
-            href="https://tiktok.com/@yourtiktok"
+            href="https://www.facebook.com/people/Vist-Optics/61576085458561"
             target="_blank"
             rel="noopener noreferrer"
             className="social-card-link"
@@ -76,9 +76,9 @@ const SocialSection = () => {
           <FaFacebookF className="social-card-icon facebook" />
           <h3>Vist Optics </h3>
           <div className="social-thumbnails">
-            <img src="/marbleLuxe.JPG" alt="FB 1" />
-            <img src="/marbleLuxe.JPG" alt="FB 2" />
-            <img src="/marbleLuxe.JPG" alt="FB 3" />
+            <img src="/fb1.jpeg" alt="FB 1" />
+            <img src="/fb2.jpeg" alt="FB 2" />
+            <img src="/fb3.jpeg" alt="FB 3" />
           </div>
         </a>
         </div>
@@ -94,9 +94,9 @@ const SocialSection = () => {
           <FaTiktok className="social-card-icon tiktok" />
           <h3>@yourtiktok</h3>
           <div className="social-thumbnails">
-            <img src="/marbleLuxe.JPG" alt="TikTok 1" />
-            <img src="/marbleLuxe.JPG" alt="TikTok 2" />
-            <img src="/marbleLuxe.JPG" alt="TikTok 3" />
+            <img src="/tiktok1.jpeg" alt="TikTok 1" />
+            <img src="/tiktok2.png" alt="TikTok 2" />
+            <img src="/tiktok3.jpeg" alt="TikTok 3" />
           </div>
         </a>
         </div>

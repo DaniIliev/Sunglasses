@@ -1,17 +1,105 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Cart.css";
-import { FaMinus } from "react-icons/fa6";
-import "../Details/Details.css";
+import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { FaArrowRight } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
 import { UserContext } from "../../context/UserContext";
-import BeatLoader from 'react-spinners/BeatLoader'; // Adjust the path if necessary
+import BeatLoader from 'react-spinners/BeatLoader';
 import { fetchItemsInCart } from "../../utills/sharedFn/fetchItemsInCart";
 import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
 import { updateCount } from "../../utills/sharedFn/updateCount";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { styled } from '@mui/system';
+
+const CartContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(4),
+  maxWidth: '100%',
+  width: '100%',
+  margin: 'auto',
+  [theme.breakpoints.up('md')]: {
+    maxWidth: '1400px',
+  },
+}));
+
+const Titles = styled(Box)({
+  textAlign: 'center',
+  marginBottom: '2em',
+});
+
+const CartHeader = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '2fr 1fr 1fr 1fr',
+  gap: theme.spacing(2),
+  padding: theme.spacing(1),
+  fontWeight: 'bold',
+  borderBottom: '2px solid #ccc',
+}));
+
+const CartRow = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '2fr 1fr 1fr 1fr',
+  gap: theme.spacing(2),
+  alignItems: 'center',
+  padding: theme.spacing(2, 0),
+  borderBottom: '1px solid #ddd',
+}));
+
+const Image = styled('img')(({ theme }) => ({
+  maxWidth: '80px',
+  borderRadius: '8px',
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '60px',
+  },
+}));
+
+const CounterBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  border: '1px solid #ccc',
+  borderRadius: '6px',
+  padding: theme.spacing(0.5, 1),
+  background: '#f8f8f8',
+  maxWidth: '150px', // Ограничаваме максималната ширина
+  justifyContent: 'space-between', // Подредба на иконките
+}));
+
+const TotalBox = styled(Box)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  padding: theme.spacing(3),
+  borderRadius: '8px',
+  background: '#fafafa',
+  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05)',
+  maxWidth: '400px',
+  marginLeft: 'auto',
+}));
+
+const ResponsiveButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#1976d2',
+  color: '#fff',
+  marginTop: theme.spacing(2),
+  padding: theme.spacing(1.5),
+  fontSize: '1rem',
+  '&:hover': {
+    backgroundColor: '#115293',
+  },
+  width: '100%',
+}));
+
+const RemoveButton = styled(IoMdCloseCircleOutline)(({ theme }) => ({
+  cursor: 'pointer',
+  color: '#f44336',  // Червен за премахване
+  '&:hover': {
+    color: '#d32f2f',  // При hover
+  },
+  fontSize: '2rem',  
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.5rem',  
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.5rem',  
+  },
+}));
 
 const Cart = () => {
   const { user, setUser } = useContext(UserContext);
@@ -21,172 +109,96 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-  const {t, i18n} = useTranslation()
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (user) {
       fetchItemsInCart(user).then((items) => {
         setAllItems(items);
-
-        const oldPriceSum = items
-          .map((item) => item.oldPrice != undefined 
-                ? Number(item.oldPrice) * Number(item.quantity)
-                : Number(item.price) * Number(item.quantity))
-          .reduce((sum, price) => sum + price, 0);
-        
-        const totalPrice = items
-          .map((item) => Number(item.price) * Number(item.quantity))
-          .reduce((sum, price) => sum + price, 0);
-          
+        const oldPriceSum = items.map((item) => item.oldPrice != '' && item.oldPrice != 'undefined' ? Number(item.oldPrice) * item.quantity : Number(item.price) * item.quantity).reduce((sum, price) => sum + price, 0);
+        const totalPrice = items.map((item) => Number(item.price) * item.quantity).reduce((sum, price) => sum + price, 0);
         setSumOldPrice(oldPriceSum);
         setTotalPrice(totalPrice);
-        setIsLoading(false)
+        setIsLoading(false);
       });
     }
   }, [user]);
 
-  const onHandleRemove = (el) => {
-    removeFromCart(user, setUser, el);
-  };
-
   const updateCnt = (id, quantity) => {
     updateCount(user, setUser, id, quantity);
   };
+
   const handleNavigate = () => {
-    const dataTransfer = {
-      allItems,
-    };
-    navigate("/delivery", { state: dataTransfer });
+    navigate("/delivery", { state: { allItems } });
   };
+
+  const onHandleRemove = (id) => removeFromCart(user, setUser, id);
+
   return (
-    <>
-    {isLoading ? <BeatLoader  className='loader'/> : 
-      <div className="cart">
-        <div className="titles">
-          <p>HOME / CART</p>
-          <h2>{t('shoppingCart.shoppingCartTitle')}</h2>
-        </div>
-        {allItems?.length == 0 ?
-        <div className="cartIsEmty">
-            <img src="/images/shoppingCart.png" alt="shoppingCart" width={250}/>
-            <h1 style={{textAlign: 'center'}}>{t('shoppingCart.textIfNoAddedItems')}</h1>
-            <Link to='/sunglasses'>{t('shoppingCart.returnToShop')}</Link>
-        </div>
-        :
+    <CartContainer>
+      {isLoading ? <BeatLoader /> : (
         <>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>{t('shoppingCart.photo')}</th>
-              <th>{t('shoppingCart.productName')}</th>
-              <th>{t('shoppingCart.quantity')}</th>
-              <th>{t('shoppingCart.unitPrice')}</th>
-              <th>{t('shoppingCart.totalPrice')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allItems.map((item) => (
-              <tr key={item._id}>
-                <td>
-                  <img src={item.images[0]} alt="" width={100} />
-                </td>
-                <td>{item.name}</td>
-                <td>
-                  <div className="counterTD">
-                    <div className="counter">
-                      <p className="plusMinus">
-                        <FaMinus
-                          onClick={() =>
-                            item.quantity > 1 &&
-                            updateCnt(item._id, item.quantity - 1)
-                          }
-                          disabled={item.quantity === 1}
-                        />
-                      </p>
-                      <p>{item.quantity}</p>
-                      <p className="plusMinus">
-                        <FaPlus
-                          onClick={() => updateCnt(item._id, item.quantity + 1)}
-                        />
-                      </p>
-                    </div>
-                    <IoMdCloseCircleOutline
-                      className="del"
-                      onClick={() => onHandleRemove(item._id)}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div className="prices">
-                    <h5>{item.oldPrice ? item.oldPrice : ""}</h5>
-                    <h4>{item.price}</h4>
-                    <p>
-                      {item.oldPrice
-                        ? `-${Math.round(
-                            ((((item.oldPrice - item.price) / item.oldPrice) *
-                              100) /
-                              10) *
-                              10
-                          )}%`
-                        : ""}
-                    </p>
-                  </div>
-                </td>
-                <td>
-                  <h4>{item.price * item.quantity}</h4>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="orderComplite">
-          <div className="discount">
-            <h4>Използвай бонус код</h4>
-            <div className="discountField">
-              <p className="text">
-                Въведете бонус кода тук и получете допълнителна отстъпка
-              </p>
-              <FaArrowRight className="arr1" />
-              <FaArrowRight className="arr" />
-              <FaArrowRight className="arr" />
-              <div className="field">
-                <input type="text" id="discount" name="discount" />
-                <p className="btnDiscount">Използвай бонус код</p>
-              </div>
-            </div>
-          </div>
-          <div className="totalCount">
-            <p>{t('shoppingCart.totalPrice')}: {sumOfOldPrice.toFixed(2)}</p>
-            <p style={{ color: "red" }}>
-            {t('shoppingCart.promotion')}: 
-              {sumOfOldPrice
-                ? ` -${sumOfOldPrice - totalSum} (-${
-                    Math.round(
-                      (((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100) / 10
-                    ) * 10
-                  }${"%"})`
-                : ""}
-            </p>
-            <p>{t('shoppingCart.totalPrice')}: {totalSum.toFixed(2)}</p>
-            <p>
-            {t('shoppingCart.delivery')}: {totalSum > 150 ? (0.0).toFixed(2) : (6.5).toFixed(2)}
-            </p>
-            <p>
-            {t('shoppingCart.pay')}: {totalSum > 150
-                ? totalSum.toFixed(2)
-                : (totalSum + 6.5).toFixed(2)}
-            </p>
-            <p className="payBTN" onClick={handleNavigate}>
-            {t('shoppingCart.payBTN')}
-            </p>
-          </div>
-        </div>
+          <Titles>
+            <Typography variant="h6">HOME / CART</Typography>
+            <Typography variant="h4">{t('shoppingCart.shoppingCartTitle')}</Typography>
+          </Titles>
+
+          {allItems.length === 0 ? (
+            <Box textAlign="center">
+              <img src="/images/shoppingCart.png" alt="shoppingCart" width={250} />
+              <Typography variant="h6">{t('shoppingCart.textIfNoAddedItems')}</Typography>
+              <Button variant="outlined" component={Link} to="/sunglasses">{t('shoppingCart.returnToShop')}</Button>
+            </Box>
+          ) : (
+            <>
+              <CartHeader>
+                <Typography>Продукт</Typography>
+                <Typography>Количество</Typography>
+                <Typography>Цена</Typography>
+                <Typography>Общо</Typography>
+              </CartHeader>
+
+              {allItems.map((item) => (
+                <CartRow key={item._id}>
+                  <Box display="flex" alignItems="center" gap={2}>
+                    <Image src={item.images[0]} alt={item.name} />
+                    <Typography>{item.name}</Typography>
+                  </Box>
+
+                  <CounterBox>
+                    <FaMinus onClick={() => item.quantity > 1 && updateCnt(item._id, item.quantity - 1)} />
+                    <Typography>{item.quantity}</Typography>
+                    <FaPlus onClick={() => updateCnt(item._id, item.quantity + 1)} />
+                  </CounterBox>
+
+                  <Box>
+                    <Typography variant="body2" sx={{ textDecoration: item.oldPrice != '' && item.oldPrice != 'undefined' ? 'line-through' : 'none' }}>{item.oldPrice != '' && item.oldPrice != 'undefined'|| ''}</Typography>
+                    <Typography variant="h8">{item.price} лв</Typography>
+                  </Box>
+
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h8">{item.price * item.quantity} лв</Typography>
+                    <RemoveButton onClick={() => onHandleRemove(item._id)} />
+                  </Box>
+                </CartRow>
+              ))}
+
+              <TotalBox>
+                <Typography>Обща стойност (стара): {sumOfOldPrice.toFixed(2)} лв</Typography>
+                <Typography color="error">
+                  Отстъпка: -{(sumOfOldPrice - totalSum).toFixed(2)} лв ({Math.round(((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100)}%)
+                </Typography>
+                <Typography>Обща стойност: {totalSum.toFixed(2)} лв</Typography>
+                <Typography>Доставка: {totalSum > 150 ? '0.00' : '6.50'} лв</Typography>
+                <Typography><strong>Крайна цена: {(totalSum + (totalSum > 150 ? 0 : 6.5)).toFixed(2)} лв</strong></Typography>
+                <ResponsiveButton onClick={handleNavigate}>{t('shoppingCart.payBTN')}</ResponsiveButton>
+              </TotalBox>
+            </>
+          )}
         </>
-        }
-      </div>
-}
-    </>
+      )}
+    </CartContainer>
   );
 };
 
