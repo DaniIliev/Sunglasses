@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import { register } from "../../utills/sharedFn/register";
 import { login } from "../../utills/sharedFn/login";
 import { TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const UserAccess = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -14,6 +15,7 @@ const UserAccess = () => {
     email: "",
     password: "",
   });
+  const {t} = useTranslation()
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [showMessage, setShowMessage] = useState(false);
@@ -54,7 +56,8 @@ const UserAccess = () => {
       >
         {isSignIn ? (
           <form action="#">
-            <h1>Sign in</h1>
+            <h1>
+            {t('Sign in')}</h1>
             {/* <div className="social-container">
               <img src="/images/facebook.png" alt="facebook" width={50} />
               <img src="/images/google.png" alt="google" width={50} />
@@ -84,16 +87,19 @@ const UserAccess = () => {
               fullWidth
             />
             <div className="allreadyHaveAcc">
-                  <p>I don't have an account yet:</p>
+                  <p>
+                  {t('I don\'t have an account yet')}:</p>
                   <p className="SignInBTNPHONE" onClick={() => setIsSignIn(false)}>Sing up</p> 
             </div>
             <p className="typeSubmitSignIn" type="submit" onClick={() => handleSubmit('signIn')}>
-              Sign In
+              {t('Sign in')}
             </p>
           </form>
         ) : (
           <form action="#">
-            <h1>Create Account</h1>
+            <h1>
+            {t('Create Account')}
+              </h1>
             {/* <div className="social-container">
               <img src="/images/facebook.png" alt="facebook" width={50} />
               <img src="/images/google.png" alt="google" width={50} />
@@ -133,7 +139,7 @@ const UserAccess = () => {
               fullWidth
             />
             <div className="allreadyHaveAcc">
-              <p>I already have an account:</p>
+              <p>{t('I already have an account')}:</p>
               <span><p className="SignInBTNPHONE" onClick={() => setIsSignIn(true)}>Sing in</p></span>
             </div>
             <p
@@ -141,7 +147,7 @@ const UserAccess = () => {
               type="submit"
               onClick={() => handleSubmit('signUp')}
             >
-              Sign Up
+              {t('Sign Up')}
             </p>
           </form>
         )}
@@ -151,25 +157,27 @@ const UserAccess = () => {
           <div
             className={`overlay-panel overlay-right ${isSignIn ? 'active' : ''}`}
           >
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start your journey with us</p>
+            <h1>{t('Hello, Friend!')}</h1>
+              <p>{t('Enter your personal details and start your journey with us')}</p>
             <p className="signUp" id="signUp" onClick={() => setIsSignIn(false)}>
-              Sign Up
+              {t('Sign Up')}
             </p>
           </div>
           <div
             className={`overlay-panel overlay-left ${isSignIn ? '' : 'active'}`}
           >
-            <h1>Welcome Back!</h1>
+            <h1>
+            {t('Welcome Back')}!</h1>
             <p>
-              To keep connected with us please login with your personal info
+            {t('To keep connected with us please login with your personal info')}
+              
             </p>
             <p
               className="signIn"
               id="signIn"
               onClick={() => setIsSignIn(true)}
             >
-              Sign In
+              {t('Sign in')}
             </p>
           </div>
         </div>

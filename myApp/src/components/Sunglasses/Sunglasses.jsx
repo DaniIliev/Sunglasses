@@ -11,6 +11,7 @@ import { SunglassesContext } from '../../context/SunglassesContext';
 import { sortSunglasses } from '../../utills/sortSunglasses';
 import { filterSunglasses } from '../../utills/filterSunglasses';
 import {Card,CardActionArea,Box,CardMedia, Typography ,CardContent,Button} from '@mui/material'
+import { useTranslation } from 'react-i18next';
 const Sunglasses = () => {
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
@@ -19,9 +20,9 @@ const Sunglasses = () => {
     const {sunglasses, isLoading, filteredSunglasses, setFilteredSunglasses, filterValues, setFilterValues} = useContext(SunglassesContext)
     const [addedProduct, setAddedProduct] = useState(null);
     const navigate = useNavigate()
-
+    const {t} = useTranslation()
     const SunglassesCard = React.memo(({ item, addItem, user }) => {
-    
+      
       const discount =
         item.oldPrice && item.oldPrice !== 'undefined'
           ? `-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}%`
@@ -129,7 +130,7 @@ const Sunglasses = () => {
               sx={{ marginTop: 2, borderRadius: 2 }}
               onClick={user ? () => addItem(item._id, item) : () => navigate('/user/access')}
             >
-              Добави в количката
+              {t('Добави в количката')}
             </Button>
           </CardContent>
         </Card>
@@ -174,7 +175,7 @@ const Sunglasses = () => {
     <div className='div-hr-text-gradient-and-imgFilter'>
         <hr className='hr-text gradient' data-content='HOME / SUNGLASSES / BEST-SELLERS'/>
         <details className='PhoneFillters'>
-            <summary className='summaryFilter'>Filters</summary>
+            <summary className='summaryFilter'>{t("Filters")}</summary>
             <p className='filltersForPhone'>
                 <SunglassesFilter/>
             </p>
@@ -183,17 +184,17 @@ const Sunglasses = () => {
         {isSortOpen ? 
         <div className='sortingDiv' onMouseLeave={() => setIsSortOpen(false)}>
             <ul className='sorting'>
-                <h4>Sort by:</h4>
+                <h4>{t('Sort by')}:</h4>
                     <div className='checkboxes'>
-                        <label className="container"> Newest 
+                        <label className="container"> {t('Newest')}
                             <input type="checkbox" id="1" name="newest" value="newest" checked={filterValues.sort == 'newest'} onChange={() => updateSort('newest')}/>
                             <span className="checkmark" onClick={() => updateSort('newest')}></span>
                         </label>
-                        <label className="container"> Price Ascending
+                        <label className="container"> {t("Price Ascending")}
                             <input type="checkbox" id="2" name="ascending" value="ascending" checked={filterValues.sort == 'ascending'} onChange={() => updateSort('ascending')}/>
                             <span className="checkmark" onClick={() => updateSort('ascending')}></span>
                         </label>
-                        <label className="container"> Price Descending
+                        <label className="container"> {t('Price Descending')}
                             <input type="checkbox" id="3" name="descending" value="descending" checked={filterValues.sort == 'descending'}  onChange={() => updateSort('descending')}/>
                             <span className="checkmark" onClick={() => updateSort('descending')}></span>
                         </label>

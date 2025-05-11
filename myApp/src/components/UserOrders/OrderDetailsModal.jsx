@@ -14,12 +14,14 @@ import {
     useTheme,
     Button,
   } from "@mui/material";
+import { useTranslation } from "react-i18next";
   import { IoIosCloseCircle } from "react-icons/io";
   
   export const OrderDetailsModal = ({ open, onClose, purchase }) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
+    const {t} = useTranslation()
     return (
       <Dialog
         open={open}
@@ -29,7 +31,7 @@ import {
         fullWidth
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6">Детайли за поръчката</Typography>
+          <Typography variant="h6">{t('Детайли за поръчката')}</Typography>
           <IconButton onClick={onClose} color="error">
             <IoIosCloseCircle size={28} />
           </IconButton>
@@ -39,11 +41,11 @@ import {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Снимка</TableCell>
-                <TableCell>Име</TableCell>
-                <TableCell>Количество</TableCell>
-                <TableCell>Цена (бр.)</TableCell>
-                <TableCell>Общо</TableCell>
+                <TableCell>{t('Снимка')}</TableCell>
+                <TableCell>{t('Име')}</TableCell>
+                <TableCell>{t('Количество')}</TableCell>
+                <TableCell>{t('Цена')} ({t('бр')}.)</TableCell>
+                <TableCell>{t('Общо')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -67,7 +69,7 @@ import {
         </DialogContent>
   
         <DialogActions>
-          <Button onClick={onClose} color="primary">Затвори</Button>
+          <Button onClick={onClose} color="primary">{t('Затвори')}</Button>
         </DialogActions>
       </Dialog>
     );

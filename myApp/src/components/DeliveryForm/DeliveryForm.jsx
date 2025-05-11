@@ -7,7 +7,7 @@ import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
 import * as purchaseService from '../../services/purchaseService'
 import * as userService from '../../services/userService'
 import { formatDate } from "../../utills/sharedFn/formatData";
-
+import { useTranslation } from "react-i18next";
 
 const formDataInitial = {
   firstname: "",
@@ -26,7 +26,7 @@ const DeliveryFormPage = () => {
     
   const navigate = useNavigate();
   const location = useLocation();
-
+  const {t} = useTranslation()
   const { user, setUser } = useContext(UserContext);
   const [allItems, setAllItems] = useState(location.state?.allItems || []);
   const [formData, setFormData] = useState(formDataInitial);
@@ -44,7 +44,6 @@ const DeliveryFormPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('All items', allItemsArr)
     formData.sunglasses = allItemsArr;
     formData.totalPurchasePrice = totalPurchasePrice;
     formData.orderCode = Math.floor(10000000 + Math.random() * 90000000).toString();
@@ -81,7 +80,7 @@ const DeliveryFormPage = () => {
   return (
     <div className="modal">
       <header>
-        <h1 className="informationTitle">Информация за доставката</h1>
+        <h1 className="informationTitle">{t('Информация за доставката')}</h1>
       </header>
       <main className="deliveryContent">
         <section className="sectionDeliveryForm">
@@ -91,13 +90,13 @@ const DeliveryFormPage = () => {
                 name="firstname"
                 value={formData.firstname}
                 onChange={handleInputChange}
-                placeholder="Име"
+                placeholder={t('Име')}
               />
               <input
                 name="lastname"
                 value={formData.lastname}
                 onChange={handleInputChange}
-                placeholder="Фамилия"
+                placeholder={t('Фамилия')}
               />
             </div>
             <div className="emailAndPhone">
@@ -105,13 +104,13 @@ const DeliveryFormPage = () => {
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
-                placeholder="Телефонен номер"
+                placeholder={t('Телефонен номер')}
               />
               <input
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Имейл"
+                placeholder={t('Имейл')}
               />
             </div>
             <div className="stateCity">
@@ -119,19 +118,19 @@ const DeliveryFormPage = () => {
                 name="state"
                 value={formData.state}
                 onChange={handleInputChange}
-                placeholder="Държава"
+                placeholder={t('Държава')}
               />
               <input
                 name="area"
                 value={formData.area}
                 onChange={handleInputChange}
-                placeholder="Област"
+                placeholder={t('Област')}
               />
               <input
                 name="city"
                 value={formData.city}
                 onChange={handleInputChange}
-                placeholder="Град"
+                placeholder={t('Град')}
               />
             </div>
             <div className="addressAndAddressNum">
@@ -139,13 +138,13 @@ const DeliveryFormPage = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                placeholder="Адрес"
+                placeholder={t('Адрес')}
               />
               <input
                 name="addressNum"
                 value={formData.addressNum}
                 onChange={handleInputChange}
-                placeholder="Номер"
+                placeholder={t('Номер')}
               />
             </div>
             <div className="addditionalInfoAndZipCode">
@@ -155,29 +154,29 @@ const DeliveryFormPage = () => {
                 value={formData.additionalInfo}
                 onChange={handleInputChange}
               >
-                <option value="" disabled>Изберете адрес</option>
-                <option value="personalAddress">Личен адрес</option>
-                <option value="speedyAddress">Адрес на Спийди</option>
-                <option value="ekontAddress">Адрес на Еконт</option>
+                <option value="" disabled>{t('Изберете адрес')}</option>
+                <option value="personalAddress">{t('Личен адрес')}</option>
+                <option value="speedyAddress">{t('Адрес на спийди')}</option>
+                <option value="ekontAddress">{t('Адрес на еконт')}</option>
               </select>
               <input
                 name="zipCode"
                 value={formData.zipCode}
                 onChange={handleInputChange}
-                placeholder="Пощенски код"
+                placeholder={t('Пощенски код')}
               />
             </div>
 
             <p type="submit" className="saveBTN" onClick={handleSubmit}>
               {/* Запази и продължи напред */}
-              Завърши поръчката
+              {t('Завърши поръчката')}
             </p>
           </form>
         </section>
         <section className="sectionItems">
           <div className="titleAndItemsDiv">
             <h2 className="yourProductsTITLE">
-              Your products{" "}
+            {t('Your products')}{" "}
             </h2>
             {allItems.map((item) => (
               <div className="singleItem" key={item._id}>
@@ -189,7 +188,7 @@ const DeliveryFormPage = () => {
                   <img src="/images/COPY1.webp" width={100} />
                 </div>
                 <div className="infoItem" onClick={() => navigate("/cart")}>
-                  <p className="editBTN">Редактирай</p>
+                  <p className="editBTN">{t('Редактирай')}</p>
                   <h4>{item.name}</h4>
                   <p>{`${item.quantity} x ${item.oldPrice}`}</p>
                   <p>
@@ -213,7 +212,7 @@ const DeliveryFormPage = () => {
               </div>
             ))}
           </div>
-          <p style={{fontSize: '2em'}}>Общо: {totalPurchasePrice}лева</p>
+          <p style={{fontSize: '2em'}}>{t('Общо')}: {totalPurchasePrice}лв</p>
         </section>
       </main>
       {/* <InteractiveMapWithLocations /> */}

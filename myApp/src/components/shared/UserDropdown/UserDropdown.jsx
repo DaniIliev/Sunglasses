@@ -7,6 +7,7 @@ import { UserContext } from "../../../context/UserContext";
 import { logout } from "../../../utills/sharedFn/logout";
 import { login } from "../../../utills/sharedFn/login";
 import { register } from "../../../utills/sharedFn/register";
+import { useTranslation } from "react-i18next";
 
 const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
   const [isSignInForm, setIsSignInForm] = useState(true)
@@ -18,7 +19,7 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
   });
 
   const navigate = useNavigate();
-
+  const {t} = useTranslation()
   const onHandleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -44,9 +45,9 @@ const UserDropdown = ({ setIsUserIconHovered, isUserIconHovered }) => {
         >
           <div className="authorizedUsers">
             <Link to="/orders">
-              <p>My Orders</p>
+              <p>{t('My Orders')}</p>
             </Link>
-            <Link onClick={handleLogout}><p>Logout</p></Link>
+            <Link onClick={handleLogout}><p>{t('Logout')}</p></Link>
           </div>
         </div>
       ) : (

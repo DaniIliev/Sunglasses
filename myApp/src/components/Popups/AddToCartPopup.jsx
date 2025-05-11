@@ -13,12 +13,14 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const AddToCartPopup = ({ product, onClose }) => {
+  const {t} = useTranslation()
   useEffect(() => {
     if (product) {
       const timer = setTimeout(() => {
@@ -52,7 +54,8 @@ const AddToCartPopup = ({ product, onClose }) => {
         }}
       >
         <Typography variant="h6" fontWeight={600}>
-          Продукт добавен
+        {t('Добавен продукт')}
+          
         </Typography>
         <IconButton onClick={onClose} size="small">
           <CloseIcon />
@@ -72,13 +75,13 @@ const AddToCartPopup = ({ product, onClose }) => {
           </Typography>
         </Box>
         <Typography variant="body2">
-          Добавихте <strong style={{textTransform: 'uppercase'}}>{product?.name}</strong> към вашата количка!
+        {t('Добавихте')} <strong style={{textTransform: 'uppercase'}}>{product?.name}</strong> {t('към количката')}!
         </Typography>
       </DialogContent>
 
       <DialogActions sx={{ justifyContent: 'center' }}>
         <Button onClick={onClose} variant="outlined" color="secondary">
-          Затвори
+        {t('Затвори')}
         </Button>
         <Button
           component={Link}
@@ -86,7 +89,7 @@ const AddToCartPopup = ({ product, onClose }) => {
           variant="contained"
           color="primary"
         >
-          Към количката
+         {t('Към количката')}
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,26 +1,26 @@
 import React from 'react'
 import './Footer.css'
-import { FaSquareInstagram } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
-import { AiFillTikTok } from "react-icons/ai";
 
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+    const {t} = useTranslation()
   return (
     <div className='footer'>
             <div className='logo'>
-                <h2>LOGO</h2>
+                <h2><img src="/images/logo.jpg" alt="logo" width={100} style={{borderRadius: 20}}/></h2>
                 <div>
-                    <a href="">Home</a>
-                    <a href="">Catalog</a>
-                    <a href="">Sign in</a>
-                    <a href="">Sign up</a>
+                    <Link to="/">{t('Home')}</Link>
+                    <Link to="/sunglasses">{t('Catalog')}</Link>
+                    <Link to="/user/access">{t('Sign in')}</Link>
+                    <Link to="/user/access">{t('Sign up')}</Link>
                 </div>
             </div>
             <div className='contacts'>
-                <h2>Contacts</h2>
-                <p>9032180912</p>
-                <p>email@abv.bg</p>
+                <h2>{t('Contacts')}</h2>
+                <p>0885188355</p>
+                <p>vist_optics@gmail.com</p>
                 <p>9300 Dobrich Bulgaria</p>
             </div>
             {/* <div className='socialMedias'>

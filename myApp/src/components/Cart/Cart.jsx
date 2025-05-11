@@ -9,7 +9,7 @@ import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
 import { updateCount } from "../../utills/sharedFn/updateCount";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { styled } from '@mui/system';
+import { display, height, styled, width } from '@mui/system';
 
 const CartContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -137,7 +137,7 @@ const Cart = () => {
 
   return (
     <CartContainer>
-      {isLoading ? <BeatLoader /> : (
+      {isLoading? <BeatLoader /> : (
         <>
           <Titles>
             <Typography variant="h6">HOME / CART</Typography>
@@ -153,10 +153,10 @@ const Cart = () => {
           ) : (
             <>
               <CartHeader>
-                <Typography>Продукт</Typography>
-                <Typography>Количество</Typography>
-                <Typography>Цена</Typography>
-                <Typography>Общо</Typography>
+                <Typography>{t('Продукт')}</Typography>
+                <Typography>{t('Количество')}</Typography>
+                <Typography>{t('Цена')}</Typography>
+                <Typography>{t('Общо')}</Typography>
               </CartHeader>
 
               {allItems.map((item) => (
@@ -185,13 +185,13 @@ const Cart = () => {
               ))}
 
               <TotalBox>
-                <Typography>Обща стойност (стара): {sumOfOldPrice.toFixed(2)} лв</Typography>
+                <Typography>{t('Обща стойност (стара)')}: {sumOfOldPrice.toFixed(2)} лв</Typography>
                 <Typography color="error">
-                  Отстъпка: -{(sumOfOldPrice - totalSum).toFixed(2)} лв ({Math.round(((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100)}%)
+                {t('Отстъпка')}: -{(sumOfOldPrice - totalSum).toFixed(2)} лв ({Math.round(((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100)}%)
                 </Typography>
-                <Typography>Обща стойност: {totalSum.toFixed(2)} лв</Typography>
-                <Typography>Доставка: {totalSum > 150 ? '0.00' : '6.50'} лв</Typography>
-                <Typography><strong>Крайна цена: {(totalSum + (totalSum > 150 ? 0 : 6.5)).toFixed(2)} лв</strong></Typography>
+                <Typography>{t('Обща стойност')}: {totalSum.toFixed(2)} лв</Typography>
+                <Typography>{t('Доставка')}: {totalSum > 150 ? '0.00' : '6.50'} лв</Typography>
+                <Typography><strong>{t('Крайна цена')}: {(totalSum + (totalSum > 150 ? 0 : 6.5)).toFixed(2)} лв</strong></Typography>
                 <ResponsiveButton onClick={handleNavigate}>{t('shoppingCart.payBTN')}</ResponsiveButton>
               </TotalBox>
             </>

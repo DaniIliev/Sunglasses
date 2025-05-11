@@ -1,51 +1,14 @@
-// import React from "react";
-// import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
-// import "./SocialSection.css"; // Важно: добави CSS файла
-
-// const SocialSection = () => {
-//   return (
-//     <section className="social-section">
-//       <h2 className="social-title">Последвай ни в социалните мрежи</h2>
-//       <div className="social-icons">
-//         <a
-//           href="https://www.instagram.com/vistoptics?igsh=emZ1aTR0eGh4NDM0&utm_source=qr"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//           className="social-icon instagram"
-//         >
-//           <FaInstagram />
-//         </a>
-//         <a
-//           href="https://facebook.com/yourprofile"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//           className="social-icon facebook"
-//         >
-//           <FaFacebookF />
-//         </a>
-//         <a
-//           href="https://tiktok.com/@yourprofile"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//           className="social-icon tiktok"
-//         >
-//           <FaTiktok />
-//         </a>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default SocialSection;
-
 import React from "react";
 import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
 import "./SocialSection.css";
+import { useTranslation } from "react-i18next";
 
 const SocialSection = () => {
+  const {t} = useTranslation()
   return (
     <section className="social-section">
-      <h2 className="social-title">Свържи се с нас в социалните мрежи</h2>
+      <h2 className="social-title">
+      {t('Свържи се с нас в социалните мрежи')}</h2>
       <div className="social-grid">
         {/* Instagram */}
         <div className="social-card">

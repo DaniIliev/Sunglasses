@@ -22,7 +22,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { REACT_APP_API_URL } from "../../env";
 import { toast } from "react-toastify"
 import { SunglassesContext } from "../../context/SunglassesContext";
-
+import { Box, Typography } from '@mui/material';
 const Details = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([])
@@ -243,34 +243,35 @@ const Details = () => {
           <div className="productDetails">
             <div className="firstSection">
               <p>
-                <strong>FRAME SHAPE:</strong> {item.frameShape}
+                <strong>
+                {t('FRAME SHAPE')}:</strong> {item.frameShape}
               </p>
               <p>
-                <strong>GENDER:</strong> {item.gender}
+                <strong>{t('GENDER')}:</strong> {item.gender}
               </p>
               <p>
-                <strong>FRAME MATERIAL:</strong> {item.frameMaterial}
+                <strong>{t('FRAME MATERIAL')}:</strong> {item.frameMaterial}
               </p>
               <p>
-                <strong>LENS TYPE:</strong> {item.lensType}
+                <strong>{t('LENS TYPE')}:</strong> {item.lensType}
               </p>
               <p>
-                <strong>UV PROTECTION:</strong> {item.UV_Protection}
+                <strong>{t('UV PROTECTION')}:</strong> {item.UV_Protection}
               </p>
             </div>
             <img src="/images/sizeModel.webp" alt="sizeModel" className="sizeModelImg" />
             <div className="secondSection">
               <p>
-                <strong>FRAME WIDTH:</strong> {item.frameWidth}MM
+                <strong>{t('FRAME WIDTH')}:</strong> {item.frameWidth}MM
               </p>
               <p>
-                <strong>FRAME HEIGTH:</strong> {item.frameHeight}MM
+                <strong>{t('FRAME HEIGHT')}:</strong> {item.frameHeight}MM
               </p>
               <p>
-                <strong>LENS WIDTH:</strong> {item.lensWidth}MM
+                <strong>{t('LENS WIDTH')}:</strong> {item.lensWidth}MM
               </p>
               <p>
-                <strong>Temple Length:</strong> {item.templeLength}MM
+                <strong>{t('TEMPLE LENGTH')}:</strong> {item.templeLength}MM
               </p>
             </div>
           </div>
@@ -282,14 +283,42 @@ const Details = () => {
         </h4>
         {isShipingAndReturnOpen ? (
           <div className="shippingANDreturn">
-            <p className="shipping">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Quibusdam numquam quam hic ea illum voluptate dolore sint, iure
-              animi modi ullam? Numquam rem animi vero neque, incidunt earum
-              iste ipsa omnis deleniti laudantium id aperiam quas molestiae
-              accusantium similique. Hic sequi consequatur iusto qui voluptate
-              nesciunt asperiores maiores quia reprehenderit!
-            </p>
+    <Box className="shipping" sx={{ p: 3, textAlign: 'center'}}>
+      <Typography variant="h6" gutterBottom>
+        {t('Доставка в България')}
+      </Typography>
+
+      <Typography variant="body1" paragraph>
+        {t('Ние предлагаме доставка до цяла България чрез куриерските услуги на')}<strong>{t('Еконт')}</strong> {t("и")} <strong>{t('Спиди')}</strong>.
+      </Typography>
+
+      <Typography variant="subtitle1" gutterBottom>
+        {t('Възможности за доставка')}:
+      </Typography>
+      <Typography variant="body2" paragraph>
+        {t('• До офис на Еконт или Спиди – изберете удобен за вас офис при завършване на поръчката.')}
+      </Typography>
+      <Typography variant="body2" paragraph>
+        {t("• До адрес – получете поръчката си директно до вашата врата.")}
+      </Typography>
+
+      <Typography variant="subtitle1" gutterBottom>
+        {t('Време за доставка:')}
+      </Typography>
+      <Typography variant="body2" paragraph>
+        {t("Обикновено доставката отнема")} <strong>{t("1–2 работни дни")}</strong> {t("след потвърждение на поръчката.")}
+      </Typography>
+
+      <Typography variant="subtitle1" gutterBottom>
+        {t('Цена за доставка:')}
+      </Typography>
+      <Typography variant="body2" paragraph>
+        • <strong>{t("Безплатна доставка")}</strong> {t("при поръчки над")} <strong>{t('200')} лв.</strong>
+      </Typography>
+      <Typography variant="body2" paragraph>
+        • {t("Цената на доставката се калкулира автоматично при финализиране на поръчката, в зависимост от избрания куриер и начина на доставка")}.
+      </Typography>
+    </Box>
             <div className="logos">
               <img src="/images/econt-logo.png" alt="econt" width={100} />
               <img src="/images/speedy-logo.png" alt="speedy" width={200} />

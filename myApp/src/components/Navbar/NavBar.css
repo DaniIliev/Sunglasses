@@ -12,18 +12,20 @@
     display: flex;
     align-items: center;
     gap: 2em;
+    margin-right: 2em;
 }
  
 .language, .personIcon, .favoriteIcon, .shoppingIcon{
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+  color: #EEAECA;
 }
 
 .language{
     font-size: 1.5em;
 }
 
-.language:hover, .personIcon:hover, .favoriteIcon:hover, .shoppingIcon:hover, .navBarTwo nav a:hover{
+.language:hover, .personIcon:hover, .favoriteIcon:hover, .shoppingIcon:hover, .hidden:hover, .navBarTwo nav a:hover{
     /* transform: scale(1.5);  */
     color: #2f2e2d;
     cursor: pointer;
@@ -122,6 +124,7 @@
 .logo{
   width: 80px;
   border-radius: 30%;
+  margin-left: 2em;
 }
 /* //////// */
 .navigation__checkbox {
@@ -149,6 +152,12 @@
     top: 3em;
     left: 1em;
   }
+  .hidden{
+    display: none !important;
+  }
+  .aboutUser{
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 600px) {
@@ -175,8 +184,8 @@ background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 23
 
 @media (max-width: 900px) {
   .navigation__background {
-    top: 3em;
-    left: 2.5em;
+    top: 3.5em;
+    left: 2.2em;
     display: inline-block;
   }
 }

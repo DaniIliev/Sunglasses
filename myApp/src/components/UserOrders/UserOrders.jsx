@@ -5,11 +5,12 @@ import { FaUserTie } from "react-icons/fa";
 import * as purchaseService from '../../services/purchaseService'
 import { IoIosCloseCircle } from "react-icons/io";
 import {OrderDetailsModal} from './OrderDetailsModal'
+import { useTranslation } from "react-i18next";
 const UserOrders = () => {
   const { user } = useContext(UserContext);
   const [purchase, setPurchase] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const {t} = useTranslation()
   useEffect(() => {
 
   }, [user]);
@@ -31,9 +32,9 @@ const UserOrders = () => {
           <thead>
             <tr>
               <th></th>
-              <th>Имейл</th>
-              <th>Телефон</th>
-              <th>Номер на улица</th>
+              <th>{t('Имейл')}</th>
+              <th>{t('Телефон')}</th>
+              <th>{t('Номер на улица')}</th>
             </tr>
           </thead>
           <tbody className="tbodyUserOrder">
@@ -83,19 +84,19 @@ const UserOrders = () => {
           </tbody>
         </table>
         <div style={{ textAlign: "center", padding: "1em" }}>
-          <h1 className="yourOrders">Вашите поръчки</h1>
+          <h1 className="yourOrders">{t('Вашите поръчки')}</h1>
           <p>
-            {user?.username}, тук можете да проследите статуса на поръчките си.
+            {user?.username}, {t('тук може да проследите статуса на поръчките си.')}
           </p>
         </div>
         <table style={{ margin: '0 auto', width: '95%'}} className="table tableOrders">
           <thead>
             <tr>
-              <th>Номер на поръчка</th>
-              <th>Обща сума</th>
-              <th>Дата</th>
-              <th>Информация</th>
-              <th>Статус</th>
+              <th>{t('Номер на поръчка')}</th>
+              <th>{t('Обща сума')}</th>
+              <th>{t('Дата')}</th>
+              <th>{t('Информация')}</th>
+              <th>{t('Статус')}</th>
             </tr>
           </thead>
           <tbody>
@@ -106,9 +107,9 @@ const UserOrders = () => {
                   <td>{order.totalPurchasePrice} лв</td>
                   <td>{order.purchaseDate}</td>
                   <td>
-                    <p>Начин на плащане: наложен платеж</p>
+                    <p>{t('Начин на плащане')}</p>
                     <p>
-                      Доставка до:{" "}
+                    {t('Доставка до')}:{" "}
                       {order.additionalInfo === "personalAddress"
                         ? "личен адрес"
                         : order.additionalInfo === "speedyAddress"
@@ -118,13 +119,13 @@ const UserOrders = () => {
                         : ""}
                     </p>
                   </td>
-                  <td>Поръчката е направена</td>
-                  <td className="productDetailsBTN" onClick={() => handleClick(order._id)}>Детайли за поръчката</td>
+                  <td>{t('Поръчката е направена')}</td>
+                  <td className="productDetailsBTN" onClick={() => handleClick(order._id)}>{t('Детайли за поръчката')}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6">Няма налични поръчки</td>
+                <td colSpan="6">{t('Няма налични поръчки')}</td>
               </tr>
             )}
           </tbody>

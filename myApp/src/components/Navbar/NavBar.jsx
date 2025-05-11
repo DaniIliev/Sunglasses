@@ -5,7 +5,7 @@ import { BsCashStack } from "react-icons/bs";
 import SearchBar from '../shared/SearchBar'
 import { RiMenuFold4Fill } from "react-icons/ri";
 import "./NavBar.css"
-import { IoIosClose } from "react-icons/io";
+// import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -33,8 +33,7 @@ import {
     ListItemText,
   } from '@mui/material';
   import LogoutIcon from '@mui/icons-material/Logout';
-  import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-  import LoginIcon from '@mui/icons-material/Login';
+
 const NavBar = () => {
     const [isMenuMenOpen, setIsMenuMenOpen] = useState(false)
     const [isMenuWomenOpen, setIsWomenOpen] = useState(false)
@@ -75,7 +74,6 @@ const NavBar = () => {
 
     const handleLogout = async () => {
         await logout(setUser) 
-        console.log('logout ok')
         navigate('/')
        }
 
@@ -120,7 +118,7 @@ const NavBar = () => {
                     }}
                     >
                     <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-                        Menu
+                        {t("Menu")}
                     </Typography>
 
                     <IconButton
@@ -160,7 +158,7 @@ const NavBar = () => {
                 <List sx={{ px: 2 }}>
                 <ListItem disablePadding>
                     <ListItemButton sx={{textAlign: 'center', fontSize: 30}} component={Link} to="/sunglasses" onClick={() => setIsRepsonsivMenuOpen(false)}>
-                    <ListItemText primary={t('menu.bestsellers')} />
+                    <ListItemText primary={t('View Catalog')} />
                     </ListItemButton>
                 </ListItem>
 
@@ -168,7 +166,7 @@ const NavBar = () => {
                     <>
                     <ListItem disablePadding>
                         <ListItemButton sx={{textAlign: 'center'}} component={Link} to="/orders" onClick={() => setIsRepsonsivMenuOpen(false)}>
-                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary="My orders" />
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary={t("My orders")} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -178,14 +176,14 @@ const NavBar = () => {
                             handleLogout();
                         }}
                         >
-                        <ListItemText sx={{textAlign: 'center', fontSize: 30}}primary="Logout" />
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}}primary={t("Logout")} />
                         </ListItemButton>
                     </ListItem>
                     </>
                 ) : (
                     <ListItem disablePadding>
                     <ListItemButton component={Link} to="/user/access" onClick={() => setIsRepsonsivMenuOpen(false)}>
-                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary="Sign in / Sign up" />
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary={t("Sign in / Sign up")} />
                     </ListItemButton>
                     </ListItem>
                 )}
@@ -197,7 +195,7 @@ const NavBar = () => {
             <SearchBar /> 
 
             <div className='aboutUser'>
-                <p className='language' onClick={() => {
+                {/* <p className='language' onClick={() => {
                     if(isLanguageENG == 'eng'){
                         setIsLanguageENG("bg")
                         switchLanguage("bg")
@@ -205,19 +203,38 @@ const NavBar = () => {
                         setIsLanguageENG("eng")
                         switchLanguage("eng")
                     }
-                }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p>
+                }}><strong>{isLanguageENG == 'eng' ? 'BG' : 'EN'}</strong></p> */}
+
+                    <IconButton
+                        className='hidden'
+                        onClick={() => {
+                        const newLang = isLanguageENG === 'eng' ? 'bg' : 'eng';
+                        setIsLanguageENG(newLang);
+                        switchLanguage(newLang);
+                        }}
+                        size="small"
+                        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                        // className="language responsive"
+                    >
+                        <LanguageIcon />
+                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                        {isLanguageENG === 'eng' ? 'BG' : 'EN'}
+                        </Typography>
+                    </IconButton>   
                 {user ? <p className='welcomeUsernam'>{`Welcome, ${user.username}`}</p> : ''}
-               <Link to={'/user/access'} onMouseEnter={() => setIsUserIconHovered(!isUserIconHovered)}><PersonIcon className='personIcon personIconNone' /> </Link>
+               {user ? <Typography className='hidden' sx={{cursor: 'pointer', color: '#EEAECA' }} onClick={() => navigate('/orders')}>{t('My Orders')}</Typography> : <Link to={'/user/access'} ><PersonIcon className='personIcon personIconNone' /> </Link>}
+
                 {/* <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/> {user? `(${user?.wishlist?.length})` : ''}</Link> */}
                 <Link to='/wishlist'><FavoriteIcon className='favoriteIcon'/></Link>
                 <Link to='/cart' onMouseEnter={() => setIsShippingHovered(!isShippingHovered)}><ShoppingCartIcon className='shoppingIcon'/>({countInCart})</Link>
+                {user && <LogoutIcon className='hidden' sx={{cursor: 'pointer', color: '#EEAECA'}} onClick={handleLogout}/>}
             </div>
         </div>
         <hr />
         <div className='navBarTwo'>
             <nav>
-                <Link  to="/sunglasses">{t('menu.new')}</Link>
-                <Link to="/sunglasses">{t('menu.bestsellers')}</Link>
+                {/* <Link  to="/sunglasses">{t('menu.new')}</Link> */}
+                <Link to="/sunglasses">{t('View Catalog')}</Link>
                 {user?._id == '68092d56a17f6bacd78b1bc4' && <Link to='/create'>Добавинов модел</Link>}
             </nav>
         </div>
