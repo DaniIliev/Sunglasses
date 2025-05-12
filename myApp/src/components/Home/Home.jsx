@@ -4,9 +4,10 @@ import { GiClick } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Grid, Typography, Paper, Avatar } from '@mui/material';
+import QuestionMarkIcon from '@mui/icons-material/HelpOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Reviews from '../Reviews/Reviews';
-import {Box} from '@mui/material'
-import {Avatar} from '@mui/material';
 import SocialSection from '../SocialSection/SocialSection';
 const Home = () => {
 
@@ -84,7 +85,7 @@ const Home = () => {
             <div className='trendingCards'>
                 <Link className='card' to='/sunglasses/681934a2d45dbf51dd66827e'>
                     <div className='imageStock'>
-                        <p className='sale'>TOP</p>
+                        {/* <p className='sale'>TOP</p> */}
                         <div className='imageContainer'>
                             <img src="/marbleLuxe.JPG" alt="ok" width={300} 
                             // className='default-image'
@@ -101,11 +102,11 @@ const Home = () => {
                         </div>
                     </div>
                 </Link>
-                <Link className='card' to='/sunglasses/681927d1d45dbf51dd668203'>
+                <Link className='card' to='/sunglasses'>
                     <div className='imageStock'>
-                        <p className='sale'>TOP</p>
+                        {/* <p className='sale'>TOP</p> */}
                         <div className='imageContainer'>
-                            <img src="/amberOlive.JPG" alt="ok" width={300} 
+                            <img src="/trend2.JPG" alt="ok" width={300} 
                             // className='default-image'
                             />
                             {/* <img src="/images/image.png" width={300} alt="" className='hover-image' */}
@@ -113,10 +114,10 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="info">
-                        <h3>AMBER SOUL && OLIVE EDGE</h3>
+                        <h3></h3>
                         <div className='prices'>
                             {/* <h5>600,00$</h5> */}
-                            <h4>115лв && 120лв</h4>
+                            {/* <h4>115лв && 120лв</h4> */}
                             {/* <p>-10%</p> */}
                         </div>
                     </div>
@@ -140,7 +141,7 @@ const Home = () => {
                 </Link> */}
                 <Link className='card' to='/sunglasses/68193981d45dbf51dd6682a8'>
                     <div className='imageStock'>
-                        <p className='sale' color='blue'>TOP</p>
+                        {/* <p className='sale' color='blue'>TOP</p> */}
                         <div className='imageContainer'>
                             <img src="/redwood.JPG" alt="ok" width={300} 
                             // className='default-image'
@@ -160,23 +161,98 @@ const Home = () => {
                 </Link>
             </div>
         </div>
-        <div className='choice'>
-            <div className='question'>
-                <img src="../../../images/scr2.jpeg" alt="" />  
-                <div>
-                    <h2>{t('home.chooseQuestion')}</h2>
-                    <img src="../../../images/questionsMark.png" alt="" />
-                </div>
-                <img src="../../../images/sunglasses3.jpg" alt="" />
+    <Box
+      sx={{
+        px: 4,
+        py: 6,
+        // background: 'linear-gradient(135deg, #f0f4f8, #d9e4f5)',
+        backgroundColor: '#f7faf7',
+        borderRadius: 4,
+        boxShadow: 3,
+      }}
+    >
+      <Grid container spacing={5} alignItems="center" justifyContent="center">
+        <Grid item xs={12} md={10}>
+        <Box
+            display="flex"
+            flexDirection={{ xs: 'column', sm: 'row' }} // Подреждаме снимките под текста на мобилни устройства
+            alignItems="center"
+            justifyContent="center"
+            gap={4}
+            >
+            {/* Първо изображение */}
+            <Avatar
+                variant="rounded"
+                src="../../../images/scr2.jpeg"
+                sx={{
+                width: { xs: 120, sm: 140, md: 160 },
+                height: { xs: 120, sm: 140, md: 160 },
+                borderRadius: '1.5rem',
+                objectFit: 'cover',
+                }}
+            />
+            
+            {/* Заглавие и въпросителна икона */}
+            <Box textAlign="center">
+                <Typography variant="h4" fontWeight="bold" color="primary">
+                {t('home.chooseQuestion')}
+                </Typography>
+                <QuestionMarkIcon color="secondary" sx={{ fontSize: 45, mt: 1 }} />
+            </Box>
 
-            </div>
-            <div className='benefits'>
-                <p className='benefit'><span>1</span> {t('home.benefit1')}</p>
-                <p className='benefit'><span>2</span> {t('home.benefit2')}</p>
-                <p className='benefit'><span>3</span> {t('home.benefit3')}</p>
-                <p className='benefit'><span>4</span> {t('home.benefit4')}</p>
-            </div>
-        </div>
+            {/* Второ изображение */}
+            <Avatar
+                variant="rounded"
+                src="../../../images/sunglasses3.jpg"
+                sx={{
+                width: { xs: 120, sm: 140, md: 160 },
+                height: { xs: 120, sm: 140, md: 160 },
+                borderRadius: '1.5rem',
+                objectFit: 'cover',
+                }}
+            />
+            </Box>
+
+        </Grid>
+
+        {/* Benefits Section */}
+        <Grid item xs={12}>
+        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+            {[1, 2, 3, 4].map((num) => (
+                <Grid item xs={12} sm={6} md={5} key={num}>
+                <Paper
+                    elevation={4}
+                    sx={{
+                    p: 3,
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 2,
+                    borderRadius: 3,
+                    backgroundColor: '#ffffffcc',
+                    flexDirection: 'row',
+                    transition: '0.3s',
+                    '&:hover': {
+                        backgroundColor: '#e3f2fd',
+                        transform: 'scale(1.02)',
+                    },
+                    }}
+                >
+                    <CheckCircleIcon color="success" sx={{ fontSize: 30, mt: '3px' }} />
+                    <Typography
+                    variant="body1"
+                    fontSize={{ xs: '1rem', sm: '1.1rem' }}
+                    >
+                    {t(`home.benefit${num}`)}
+                    </Typography>
+                </Paper>
+                </Grid>
+            ))}
+            </Grid>
+
+        </Grid>
+      </Grid>
+    </Box>
        {/* <Reviews /> */}
         <SocialSection />
     </div>

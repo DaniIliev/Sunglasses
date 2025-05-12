@@ -342,7 +342,6 @@ const Details = () => {
           .map((sunglass, index) => (
             <Link className="card" to={`/sunglasses/${sunglass.id}`}>
               <div className="imageStock">
-                <p className="sale">SALE</p>
                 <div className="imageContainer">
                   <img
                     src={sunglass.images[0]}

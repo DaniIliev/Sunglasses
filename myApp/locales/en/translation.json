@@ -71,21 +71,22 @@
     "welcome": "",
     "shoppingWithLoveBTN": "",
     "trendingNow": "",
-    "chooseQuestion": "",
-    "benefit1": "",
-    "benefit2": "",
-    "benefit3": "",
-    "benefit4": ""
+    "chooseQuestion": ""
   },
   "wishlistPage": {
     "title": "",
     "underTitle": "",
     "myACC": "",
     "access": "",
+    "signIn": "",
     "startWishlist": "",
     "startWishlistP2": "",
+    "shopMens": "",
+    "shopWomens": "",
     "startWishlistP": ""
   },
+  "My Wishing Sunglasses": "",
+  "Add to cart": "",
   "navBar": {
     "cashOnDelivery": "",
     "freeShipping": "",

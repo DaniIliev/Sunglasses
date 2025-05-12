@@ -202,7 +202,7 @@ return(
         <NativeSelect name="frameMaterial" defaultValue="---" onChange={handleChange}>
           <option value="---">---</option>
           <option value="Titan">Titan</option>
-          <option value="Tree">Tree</option>
+          <option value="Wood">Wood</option>
           <option value="Acetate">Acetate</option>
         </NativeSelect>
       </FormControl>

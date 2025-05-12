@@ -191,8 +191,8 @@ const SunglassesFilter = () => {
               onClick={() => handleFilterChange("frameColor", color)}
             >
               <p className={color}></p>
-              <div className="frameColorP">
-                {t(`sunglassesFilter.${color}`)}
+              <div className="frameColorP" style={{textTransform: "uppercase"}}>
+                {t(`${color}`)}
                 <span>
                   {filterValues.frameColor.includes(color) ? (
                     <FaRegDotCircle />

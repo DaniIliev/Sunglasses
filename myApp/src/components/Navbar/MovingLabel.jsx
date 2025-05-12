@@ -3,6 +3,7 @@ import { BsCashStack, BsSunglasses } from 'react-icons/bs';
 import { MdLocalShipping } from 'react-icons/md';
 import { GiReturnArrow } from 'react-icons/gi';
 import { SiAuthy } from 'react-icons/si';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 export const MovingLabel = ({ t }) => {
   const theme = useTheme();
@@ -11,9 +12,10 @@ export const MovingLabel = ({ t }) => {
 
   const items = [
     { icon: <BsCashStack />, text: t('navBar.cashOnDelivery') },
-    { icon: <MdLocalShipping />, text: t('navBar.freeShipping') },
-    { icon: <BsSunglasses />, text: t('navBar.magicMirror') },
+    // { icon: <MdLocalShipping />, text: t('navBar.freeShipping') },
+    // { icon: <BsSunglasses />, text: t('navBar.magicMirror') },
     { icon: <GiReturnArrow />, text: t('navBar.return') },
+    {icon: <PhoneIcon /> , text: t('ПРИ ВЪЗНИКВАНЕ НА ПРОБЛЕМ С ПОРЪЧКАТА, МОЛЯ СВЪРЖЕТЕ СЕ С НАС НА ТЕЛЕФОН: 0885188355')},
     { icon: <SiAuthy />, text: t('navBar.authorized') },
   ];
 

@@ -21,8 +21,8 @@ const Sunglasses = () => {
     const [addedProduct, setAddedProduct] = useState(null);
     const navigate = useNavigate()
     const {t} = useTranslation()
+
     const SunglassesCard = React.memo(({ item, addItem, user }) => {
-      
       const discount =
         item.oldPrice && item.oldPrice !== 'undefined'
           ? `-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}%`
@@ -31,6 +31,8 @@ const Sunglasses = () => {
       return (
         <Card
           sx={{
+            width: '100%',
+            margin: '0 auto',
             maxWidth: 400,
             position: 'relative',
             overflow: 'hidden',
@@ -54,9 +56,10 @@ const Sunglasses = () => {
                   left: 0,
                   width: '100%',
                   height: '100%',
-                  // objectFit: 'contain',
-                  objectFit: 'fill',
+                  objectFit: 'contain',
+                  // objectFit: 'fill',
                   zIndex: 1,
+                  
                 }}
               />
               <CardMedia
@@ -71,30 +74,14 @@ const Sunglasses = () => {
                   left: 0,
                   width: '100%',
                   height: '100%',
-                  // objectFit: 'contain',
-                  objectFit: 'fill',
+                  objectFit: 'contain',
+                  // objectFit: 'fill',
                   zIndex: 2,
                   '&:hover': { opacity: 1 },
                 }}
                 className="hover-image"
               />
-              <Typography
-                variant="caption"
-                sx={{
-                  position: 'absolute',
-                  top: 10,
-                  left: 10,
-                  backgroundColor: '#e53935',
-                  color: 'white',
-                  padding: '2px 8px',
-                  borderRadius: 1,
-                  fontWeight: 'bold',
-                  fontSize: '0.75rem',
-                  zIndex: 3,
-                }}
-              >
-                SALE
-              </Typography>
+
             </Box>
           </CardActionArea>
     

@@ -375,8 +375,10 @@ color: black;
         grid-template-columns: 45% 45%;
     }
 }
-@media(max-width: 425px){
+@media(max-width: 600px){
     .catalog-cards{
+        align-items: center;
+        justify-content: center;
         grid-template-columns: 90%;
     }
 }
