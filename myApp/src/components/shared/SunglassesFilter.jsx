@@ -42,7 +42,7 @@ const SunglassesFilter = () => {
   };
 
   const formatPrice = (value) => {
-    return `$${parseInt(value).toLocaleString()}`;
+    return `${parseInt(value).toLocaleString()}лв`;
   };
 
   const handleMinPriceChange = (e) => {

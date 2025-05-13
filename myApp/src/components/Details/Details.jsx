@@ -340,14 +340,14 @@ const Details = () => {
           .sort(() => 0.5 - Math.random()) // разбърква масива
           .slice(0, 4) // взима първите 4
           .map((sunglass, index) => (
-            <Link className="card" to={`/sunglasses/${sunglass.id}`}>
+            <Link className="card" to={`/sunglasses/${sunglass._id}`}>
               <div className="imageStock">
                 <div className="imageContainer">
                   <img
                     src={sunglass.images[0]}
                     alt="ok"
                     width={300}
-                    className="default-image"
+                  className="default-image"
                   />
                   <img
                     src={sunglass.images[1]}
