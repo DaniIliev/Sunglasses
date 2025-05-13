@@ -250,7 +250,7 @@ const Details = () => {
                 <strong>{t('GENDER')}:</strong> {item.gender}
               </p>
               <p>
-                <strong>{t('FRAME MATERIAL')}:</strong> {item.frameMaterial}
+                <strong>{t('FRAME MATERIAL')}:</strong> {item.frameMaterial == "Tree" ? "Wood" : item.frameMaterial}
               </p>
               <p>
                 <strong>{t('LENS TYPE')}:</strong> {item.lensType}
