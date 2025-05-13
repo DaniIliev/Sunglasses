@@ -19,13 +19,14 @@
     display: flex; 
     align-items: center;
     gap: 2em;
+    width: 100px;
 }
-.logo div{
+.links{
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
-.logo div a{
+.links a{
     text-decoration: none;
     color: black;
 }
@@ -40,7 +41,10 @@
     .footer{
         font-size: 0.5em;
     }
-
+    .footer .logo{
+        margin: 0;
+        width: 60px;
+    }
     .socialMediasIcons{
         margin-top: 0.5em;
     }

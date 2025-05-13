@@ -171,17 +171,14 @@ const LoveCartList = () => {
                     <div className="signInAcc">
                         <Typography variant="h5">{t('wishlistPage.myACC')}</Typography>
                         <Typography variant="body2">{t('wishlistPage.access')}</Typography>
-                        <Link to='/user/access'><Button variant="outlined">{t('wishlistPage.signIn')}</Button></Link>
+                        <Link to='/user/access'><Button variant="outlined">{t('Sign in')}</Button></Link>
                     </div>
                     <div className="createWishList">
                         <Typography variant="h5">{t("wishlistPage.startWishlist")}</Typography>
                         <Typography variant="body2">{t("wishlistPage.startWishlistP2")}</Typography>
                         <div className="buttonsDivWishlist">
                             <Link to={'/sunglasses'}>
-                                <Button variant="contained">{t("wishlistPage.shopMens")}</Button>
-                            </Link>
-                            <Link to={'/sunglasses'}>
-                                <Button variant="contained">{t("wishlistPage.shopWomens")}</Button>
+                                <Button variant="contained">{t("View Catalog")}</Button>
                             </Link>
                         </div>
                     </div>

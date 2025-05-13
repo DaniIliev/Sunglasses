@@ -17,7 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: relative;
   opacity: 1;
   animation: carousel-track-animation linear forwards;
   animation-timeline: view();
@@ -74,19 +74,21 @@
   justify-content: center;
   gap: 0.1em;
   backdrop-filter: blur(10px);
-  padding: 0.1em;
+  padding: 0.1em 0;
   width: 80%;
   margin: 0 auto;
 }
 
 
   .content {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     /* font-family: 'Tangerine', serif; */
     font-family: "Fredoka", sans-serif;
     z-index: 50;
     display: flex;
     flex-direction: column;
-    gap: 7em;
+    gap: 80px; /* вместо 7em */
     position: absolute;
     top:  50%;
     left: 50%;

@@ -162,7 +162,7 @@
 
 @media (max-width: 600px) {
   .navigation__button {
-    top: 3em;
+    top: 4em;
     right: 19em;
   }
 }
@@ -192,7 +192,7 @@ background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 23
 
 @media (max-width: 600px) {
   .navigation__background {
-    top: 3.4em;
+    top: 4.5em;
     left: 2em;
     display: inline-block;
 

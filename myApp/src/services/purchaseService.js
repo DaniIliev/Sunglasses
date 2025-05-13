@@ -22,6 +22,17 @@ export const createPurchase = async (formData) => {
         console.error("Грешка при fetch:", error);
       }
 }
+export const getAll = async () => {
+    const data = await fetch(`${apiUrl}/purchase`,
+        {
+            method: 'GET',
+            credentials: 'include',
+        }
+    )
+    const purchase = await data.json()
+
+    return purchase
+}
 
 export const getPurchaseById = async (id) => {
   try{

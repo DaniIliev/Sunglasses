@@ -9,18 +9,18 @@ const Footer = () => {
   return (
     <div className='footer'>
             <div className='logo'>
-                <h2><img src="/images/logo.jpg" alt="logo" width={100} style={{borderRadius: 20}}/></h2>
-                <div>
+                <h2><img src="/images/logo.jpg" alt="logo" className='logo' style={{borderRadius: 20}}/></h2>
+            </div>
+                <div className='links'>
                     <Link to="/">{t('Home')}</Link>
                     <Link to="/sunglasses">{t('Catalog')}</Link>
                     <Link to="/user/access">{t('Sign in')}</Link>
                     <Link to="/user/access">{t('Sign up')}</Link>
                 </div>
-            </div>
             <div className='contacts'>
                 <h2>{t('Contacts')}</h2>
                 <p>0885188355</p>
-                <p>vist_optics@gmail.com</p>
+                <p>vistoptics@gmail.com</p>
                 <p>9300 Dobrich Bulgaria</p>
             </div>
             {/* <div className='socialMedias'>

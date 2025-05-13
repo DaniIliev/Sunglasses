@@ -169,6 +169,20 @@ const NavBar = () => {
                         <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary={t("My orders")} />
                         </ListItemButton>
                     </ListItem>
+                    {user?._id == '68092d56a17f6bacd78b1bc4' && 
+                    <>
+                    <ListItem disablePadding>
+                        <ListItemButton sx={{textAlign: 'center'}} component={Link} to="/create" onClick={() => setIsRepsonsivMenuOpen(false)}>
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary={t("Добавинов модел")} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton sx={{textAlign: 'center'}} component={Link} to="/ordersList" onClick={() => setIsRepsonsivMenuOpen(false)}>
+                        <ListItemText sx={{textAlign: 'center', fontSize: 30}} primary={t("Виж поръчките")} />
+                        </ListItemButton>
+                    </ListItem>
+                    </>
+                    }
                     <ListItem disablePadding>
                         <ListItemButton
                         onClick={() => {
@@ -236,6 +250,7 @@ const NavBar = () => {
                 {/* <Link  to="/sunglasses">{t('menu.new')}</Link> */}
                 <Link to="/sunglasses">{t('View Catalog')}</Link>
                 {user?._id == '68092d56a17f6bacd78b1bc4' && <Link to='/create'>Добавинов модел</Link>}
+                {user?._id == '68092d56a17f6bacd78b1bc4' && <Link to='/ordersList'>Виж поръчките</Link>}
             </nav>
         </div>
         {isShippingHovered ? 
