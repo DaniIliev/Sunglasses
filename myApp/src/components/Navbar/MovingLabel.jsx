@@ -35,7 +35,7 @@ export const MovingLabel = ({ t }) => {
         component={'div'}
         sx={{
           display: 'inline-flex',
-          animation: 'scrollLeft 15s linear infinite',
+          animation: 'scrollLeft 35s linear infinite',
           gap: isMobile ? 3 : 5,
           whiteSpace: 'nowrap',
           alignItems: 'center',
