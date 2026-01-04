@@ -29,11 +29,24 @@ router.post("/", async (req, res) => {
   });
   try {
     await newPurchase.save();
+    console.log("✅ Purchase saved, sending emails...");
 
     Promise.allSettled([
       sendOrderPlacedCustomer(newPurchase),
       sendOrderPlacedAdmin(newPurchase),
-    ]).catch((err) => console.error("Email queue error:", err));
+    ])
+      .then((results) => {
+        results.forEach((result, index) => {
+          const emailType = index === 0 ? "Customer" : "Admin";
+          if (result.status === "fulfilled") {
+            console.log(`✅ ${emailType} email sent successfully`);
+          } else {
+            console.error(`❌ ${emailType} email failed:`, result.reason);
+          }
+        });
+      })
+      .catch((err) => console.error("Email queue error:", err));
+
     res.status(201).json(newPurchase);
   } catch (error) {
     console.error("Error saving sunglasses:", error); // Логване на грешката
@@ -92,9 +105,13 @@ router.patch("/:id/seen", async (req, res) => {
     }
 
     if (seen) {
-      sendOrderApproved(updated).catch((err) =>
-        console.error("Error sending approval email:", err)
+      console.log(
+        "✅ Order marked as seen, sending approval email to:",
+        updated.email
       );
+      sendOrderApproved(updated)
+        .then(() => console.log("✅ Approval email sent"))
+        .catch((err) => console.error("❌ Error sending approval email:", err));
     }
 
     res.status(200).json(updated);
@@ -139,9 +156,12 @@ router.post("/:id/out-of-stock", async (req, res) => {
       return res.status(404).json({ message: "Purchase not found" });
     }
 
-    sendOutOfStockNotice(purchase).catch((err) =>
-      console.error("Error sending out-of-stock email:", err)
-    );
+    console.log("✅ Sending out-of-stock email to:", purchase.email);
+    sendOutOfStockNotice(purchase)
+      .then(() => console.log("✅ Out-of-stock email sent"))
+      .catch((err) =>
+        console.error("❌ Error sending out-of-stock email:", err)
+      );
 
     res.status(200).json({ message: "Out of stock email sent" });
   } catch (error) {

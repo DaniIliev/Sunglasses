@@ -23,14 +23,26 @@ const sendMail = async ({ to, subject, html }) => {
   }
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: SMTP_FROM,
       to,
       subject,
       html,
     });
+    console.log(
+      "✅ Email sent successfully to:",
+      to,
+      "| Message ID:",
+      info.messageId
+    );
   } catch (error) {
-    console.error("Email send failed", error);
+    console.error("❌ Email send failed to:", to);
+    console.error("Error details:", error.message);
+    console.error("SMTP config:", {
+      user: SMTP_USER,
+      from: SMTP_FROM,
+      service: "gmail",
+    });
   }
 };
 
