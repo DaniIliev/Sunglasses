@@ -30,7 +30,12 @@ const sendMail = async ({ to, subject, html }) => {
       subject,
       html,
     });
-    console.log("✅ Email sent successfully to:", to, "| Message ID:", response.headers["x-message-id"] || "n/a");
+    console.log(
+      "✅ Email sent successfully to:",
+      to,
+      "| Message ID:",
+      response.headers["x-message-id"] || "n/a"
+    );
     return response;
   } catch (error) {
     console.error("❌ Email send failed to:", to);
