@@ -1,5 +1,7 @@
 const nodemailer = require("nodemailer");
 
+const { SMTP_USER, SMTP_PASS, SMTP_FROM, ADMIN_EMAIL } = process.env;
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   pool: true,
@@ -9,8 +11,8 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 10000,
   socketTimeout: 10000,
   auth: {
-    user: "vistoptics@gmail.com",
-    pass: "cloc mbef fbqy lfrh",
+    user: SMTP_USER,
+    pass: SMTP_PASS,
   },
 });
 
