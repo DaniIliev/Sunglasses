@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import * as purchaseService from "../../services/purchaseService";
 import GenericTable from "../shared/GenericTable";
 import { formatPrice } from "../../utills/currencyConverter";
@@ -36,12 +37,29 @@ const OrdersList = () => {
     setOrders(sorted);
   };
 
-  const handleMarkAsSeen = (id) => {
+  const handleMarkAsSeen = async (id) => {
+    const updated = await purchaseService.markAsSeen(id);
+
+    if (!updated) return;
+
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
         order._id === id ? { ...order, seen: true } : order
       )
     );
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Сигурни ли сте, че искате да изтриете тази поръчка?"
+    );
+
+    if (!confirmDelete) return;
+
+    const deleted = await purchaseService.deletePurchase(id);
+    if (!deleted) return;
+
+    setOrders((prevOrders) => prevOrders.filter((order) => order._id !== id));
   };
 
   const columns = [
@@ -116,19 +134,28 @@ const OrdersList = () => {
         />
       </TableCell>
       <TableCell align="center">
-        <CustomButton
-          variant={order.seen ? "outlined" : "contained"}
-          size="small"
-          startIcon={<VisibilityIcon />}
-          onClick={() => handleMarkAsSeen(order._id)}
-          disabled={order.seen}
-          sx={{
-            textTransform: "none",
-            borderRadius: 2,
-          }}
-        >
-          {order.seen ? "Видяна" : "Маркирай"}
-        </CustomButton>
+        <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
+          <CustomButton
+            variant={order.seen ? "outlined" : "contained"}
+            size="small"
+            startIcon={<VisibilityIcon />}
+            onClick={() => handleMarkAsSeen(order._id)}
+            disabled={order.seen}
+            sx={{ textTransform: "none", borderRadius: 2 }}
+          >
+            {order.seen ? "Видяна" : "Маркирай"}
+          </CustomButton>
+          <CustomButton
+            variant="outlined"
+            color="error"
+            size="small"
+            startIcon={<DeleteForeverIcon />}
+            onClick={() => handleDelete(order._id)}
+            sx={{ textTransform: "none", borderRadius: 2 }}
+          >
+            Изтрий
+          </CustomButton>
+        </Box>
       </TableCell>
     </>
   );
@@ -224,16 +251,26 @@ const OrdersList = () => {
           </Box>
         </Box>
 
-        <CustomButton
-          fullWidth
-          variant={order.seen ? "outlined" : "contained"}
-          startIcon={<VisibilityIcon />}
-          onClick={() => handleMarkAsSeen(order._id)}
-          disabled={order.seen}
-          sx={{ mt: 2 }}
-        >
-          {order.seen ? "Видяна" : "Маркирай като видяна"}
-        </CustomButton>
+        <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+          <CustomButton
+            fullWidth
+            variant={order.seen ? "outlined" : "contained"}
+            startIcon={<VisibilityIcon />}
+            onClick={() => handleMarkAsSeen(order._id)}
+            disabled={order.seen}
+          >
+            {order.seen ? "Видяна" : "Маркирай като видяна"}
+          </CustomButton>
+          <CustomButton
+            fullWidth
+            variant="outlined"
+            color="error"
+            startIcon={<DeleteForeverIcon />}
+            onClick={() => handleDelete(order._id)}
+          >
+            Изтрий
+          </CustomButton>
+        </Box>
       </CardContent>
     </Card>
   );

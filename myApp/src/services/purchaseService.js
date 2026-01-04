@@ -53,3 +53,44 @@ export const getPurchaseById = async (id) => {
   }
 }
 
+export const markAsSeen = async (id) => {
+  try {
+    const response = await fetch(`${apiUrl}/purchase/${id}/seen`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ seen: true }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Грешка от сървъра:", errorData);
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Грешка при fetch:", error);
+    return null;
+  }
+};
+
+export const deletePurchase = async (id) => {
+  try {
+    const response = await fetch(`${apiUrl}/purchase/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Грешка от сървъра:", errorData);
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Грешка при fetch:", error);
+    return null;
+  }
+};
+

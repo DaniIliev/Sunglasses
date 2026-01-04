@@ -3,24 +3,24 @@ const Purchase = require('../schemas/PurchaseSchema')
 const mongoose = require("mongoose")
 
 router.post('/', async (req, res) => {
-
-    const newPurchase = new Purchase({
-        additionalInfo: req.body.additionalInfo,
-        address: req.body.address,
-        addressNum: req.body.addressNum,
-        area: req.body.area,
-        city: req.body.city,
-        email: req.body.email,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        phoneNumber: req.body.phoneNumber,
-        state: req.body.state,
-        sunglasses: req.body.sunglasses,
-        totalPurchasePrice: req.body.totalPurchasePrice,
-        zipCode: req.body.zipCode,
-        orderCode: req.body.orderCode,
-        purchaseDate: req.body.purchaseDate
-    });
+  const newPurchase = new Purchase({
+    seen: req.body.seen ?? false,
+    additionalInfo: req.body.additionalInfo,
+    address: req.body.address,
+    addressNum: req.body.addressNum,
+    area: req.body.area,
+    city: req.body.city,
+    email: req.body.email,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    phoneNumber: req.body.phoneNumber,
+    state: req.body.state,
+    sunglasses: req.body.sunglasses,
+    totalPurchasePrice: req.body.totalPurchasePrice,
+    zipCode: req.body.zipCode,
+    orderCode: req.body.orderCode,
+    purchaseDate: req.body.purchaseDate
+  });
     try{
         await newPurchase.save();
         res.status(201).json(newPurchase);
@@ -59,4 +59,51 @@ router.get('/:id', async (req,res) => {
       res.status(500).json({ message: "Server error", error });
     }
   }); 
+
+router.patch('/:id/seen', async (req, res) => {
+  const { id } = req.params;
+  const { seen = true } = req.body;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+
+    const updated = await Purchase.findByIdAndUpdate(
+      id,
+      { seen },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ message: "Purchase not found" });
+    }
+
+    res.status(200).json(updated);
+  } catch (error) {
+    console.error("Error updating purchase status:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+
+    const deleted = await Purchase.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Purchase not found" });
+    }
+
+    res.status(200).json({ message: "Purchase deleted", id: deleted._id });
+  } catch (error) {
+    console.error("Error deleting purchase:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});
 module.exports = router

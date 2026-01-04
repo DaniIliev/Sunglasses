@@ -102,7 +102,7 @@ const Home = () => {
               <h3>MARBLE LUXE</h3>
               <div className="prices">
                 {/* <h5>600,00$</h5> */}
-                <h4>€66 (~129лв)</h4>
+                <h4>€70.00 (~136.91лв)</h4>
                 {/* <p>-10%</p> */}
               </div>
             </div>
@@ -151,22 +151,13 @@ const Home = () => {
             <div className="imageStock">
               {/* <p className='sale' color='blue'>TOP</p> */}
               <div className="imageContainer">
-                <img
-                  src="/redwood.JPG"
-                  alt="ok"
-                  width={300}
-                  // className='default-image'
-                />
-                {/* <img src="/images/image.png" width={300} alt="" className='hover-image' */}
-                {/* /> */}
+                <img src="/redwood.JPG" alt="ok" width={300} />
               </div>
             </div>
             <div className="info">
               <h3>REDWOOD STOCK</h3>
               <div className="prices">
-                {/* <h5>600,00$</h5> */}
-                <h4>€56 (~110лв)</h4>
-                {/* <p>-10%</p> */}
+                <h4>€55 (~107.57лв)</h4>
               </div>
             </div>
           </Link>
@@ -176,7 +167,6 @@ const Home = () => {
         sx={{
           px: 4,
           py: 6,
-          // background: 'linear-gradient(135deg, #f0f4f8, #d9e4f5)',
           backgroundColor: "#f7faf7",
           borderRadius: 4,
           boxShadow: 3,
