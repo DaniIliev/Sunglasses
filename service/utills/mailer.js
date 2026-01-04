@@ -48,6 +48,7 @@ const sendMail = async ({ to, subject, html }) => {
       "| Message ID:",
       info.messageId
     );
+    return info;
   } catch (error) {
     console.error("❌ Email send failed to:", to);
     console.error("Error details:", error.message);
@@ -68,6 +69,7 @@ const sendMail = async ({ to, subject, html }) => {
       from: SMTP_FROM,
       service: "gmail",
     });
+    throw error; // propagate to caller so Promise.allSettled marks as rejected
   }
 };
 
