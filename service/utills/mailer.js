@@ -1,51 +1,58 @@
-const sgMail = require("@sendgrid/mail");
+const nodemailer = require("nodemailer");
 
-const { SENDGRID_API_KEY, SMTP_FROM, SMTP_USER, ADMIN_EMAIL } = process.env;
+const { GMAIL_USER, GMAIL_APP_PASSWORD, ADMIN_EMAIL } = process.env;
 
-const FROM_EMAIL = SMTP_FROM || SMTP_USER;
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  pool: true,
+  maxConnections: 2,
+  maxMessages: 20,
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
+  auth: {
+    user: GMAIL_USER,
+    pass: GMAIL_APP_PASSWORD,
+  },
+});
 
-if (!SENDGRID_API_KEY) {
-  console.warn("⚠️ SENDGRID_API_KEY is not set; emails will fail.");
-} else {
-  sgMail.setApiKey(SENDGRID_API_KEY);
-}
+// Send emails in background so API responses aren't blocked by SMTP
+const sendInBackground = (mailOptions, successMsg, errorPrefix) => {
+  setImmediate(() => {
+    transporter
+      .sendMail(mailOptions)
+      .then(() => {
+        console.log(successMsg);
+      })
+      .catch((error) => {
+        console.error(errorPrefix, error);
+      });
+  });
+};
 
-const sendMail = async ({ to, subject, html }) => {
+const sendMail = ({ to, subject, html }) => {
   if (!to) {
     console.error("Missing recipient email");
     return;
   }
 
-  if (!SENDGRID_API_KEY) {
-    console.error("❌ SENDGRID_API_KEY not configured. Email not sent.");
+  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
+    console.error("❌ Gmail credentials not configured. Email not sent.");
     return;
   }
 
-  try {
-    console.log(`📧 Attempting to send email to: ${to}`);
+  const mailOptions = {
+    from: GMAIL_USER,
+    to,
+    subject,
+    html,
+  };
 
-    const [response] = await sgMail.send({
-      to,
-      from: FROM_EMAIL,
-      subject,
-      html,
-    });
-    console.log(
-      "✅ Email sent successfully to:",
-      to,
-      "| Message ID:",
-      response.headers["x-message-id"] || "n/a"
-    );
-    return response;
-  } catch (error) {
-    console.error("❌ Email send failed to:", to);
-    console.error("Error details:", error.message || error.toString());
-    console.error("Error code:", error.code);
-    if (error.response?.body) {
-      console.error("SendGrid response:", error.response.body);
-    }
-    throw error;
-  }
+  sendInBackground(
+    mailOptions,
+    `✅ Email sent successfully to: ${to}`,
+    `❌ Email send failed to ${to}:`
+  );
 };
 
 const formatProducts = (sunglasses = []) =>
@@ -118,9 +125,21 @@ const sendOutOfStockNotice = (purchase) =>
     `,
   });
 
+const sendOrderNotificationToVistoptics = (purchase) =>
+  sendMail({
+    to: "vistoptics@gmail.com",
+    subject: `🔔 Нова поръчка #${purchase.orderCode} - ${purchase.firstname} ${purchase.lastname}`,
+    html: `
+      <p><strong>📦 Нова поръчка е направена!</strong></p>
+      ${orderDetailsHtml(purchase)}
+      <p><strong>Действия:</strong> Моля, преглед на поръчката и обработка.</p>
+    `,
+  });
+
 module.exports = {
   sendOrderPlacedCustomer,
   sendOrderPlacedAdmin,
   sendOrderApproved,
   sendOutOfStockNotice,
+  sendOrderNotificationToVistoptics,
 };

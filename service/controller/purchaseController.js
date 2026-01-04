@@ -6,6 +6,7 @@ const {
   sendOrderPlacedAdmin,
   sendOrderApproved,
   sendOutOfStockNotice,
+  sendOrderNotificationToVistoptics,
 } = require("../utills/mailer");
 
 router.post("/", async (req, res) => {
@@ -31,21 +32,10 @@ router.post("/", async (req, res) => {
     await newPurchase.save();
     console.log("✅ Purchase saved, sending emails...");
 
-    Promise.allSettled([
-      sendOrderPlacedCustomer(newPurchase),
-      sendOrderPlacedAdmin(newPurchase),
-    ])
-      .then((results) => {
-        results.forEach((result, index) => {
-          const emailType = index === 0 ? "Customer" : "Admin";
-          if (result.status === "fulfilled") {
-            console.log(`✅ ${emailType} email sent successfully`);
-          } else {
-            console.error(`❌ ${emailType} email failed:`, result.reason);
-          }
-        });
-      })
-      .catch((err) => console.error("Email queue error:", err));
+    // Send emails in background (non-blocking)
+    sendOrderPlacedCustomer(newPurchase);
+    sendOrderPlacedAdmin(newPurchase);
+    sendOrderNotificationToVistoptics(newPurchase);
 
     res.status(201).json(newPurchase);
   } catch (error) {
@@ -109,9 +99,7 @@ router.patch("/:id/seen", async (req, res) => {
         "✅ Order marked as seen, sending approval email to:",
         updated.email
       );
-      sendOrderApproved(updated)
-        .then(() => console.log("✅ Approval email sent"))
-        .catch((err) => console.error("❌ Error sending approval email:", err));
+      sendOrderApproved(updated);
     }
 
     res.status(200).json(updated);
@@ -157,11 +145,7 @@ router.post("/:id/out-of-stock", async (req, res) => {
     }
 
     console.log("✅ Sending out-of-stock email to:", purchase.email);
-    sendOutOfStockNotice(purchase)
-      .then(() => console.log("✅ Out-of-stock email sent"))
-      .catch((err) =>
-        console.error("❌ Error sending out-of-stock email:", err)
-      );
+    sendOutOfStockNotice(purchase);
 
     res.status(200).json({ message: "Out of stock email sent" });
   } catch (error) {

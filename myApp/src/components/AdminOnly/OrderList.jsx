@@ -10,6 +10,8 @@ import {
   List,
   ListItem,
   ListItemText,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -146,38 +148,40 @@ const OrdersList = () => {
         />
       </TableCell>
       <TableCell align="center">
-        <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
-          <CustomButton
-            variant={order.seen ? "outlined" : "contained"}
-            size="small"
-            startIcon={<VisibilityIcon />}
-            onClick={() => handleMarkAsSeen(order._id)}
-            disabled={order.seen}
-            sx={{ textTransform: "none", borderRadius: 2 }}
-          >
-            {order.seen ? "Видяна" : "Маркирай"}
-          </CustomButton>
-          <CustomButton
-            variant="outlined"
-            color="warning"
-            size="small"
-            startIcon={<ReportProblemIcon />}
-            onClick={() => handleOutOfStock(order._id)}
-            disabled={order.outOfStockNotified}
-            sx={{ textTransform: "none", borderRadius: 2 }}
-          >
-            Няма наличност
-          </CustomButton>
-          <CustomButton
-            variant="outlined"
-            color="error"
-            size="small"
-            startIcon={<DeleteForeverIcon />}
-            onClick={() => handleDelete(order._id)}
-            sx={{ textTransform: "none", borderRadius: 2 }}
-          >
-            Изтрий
-          </CustomButton>
+        <Box sx={{ display: "flex", gap: 0.5, justifyContent: "center" }}>
+          <Tooltip title={order.seen ? "Видяна" : "Маркирай като видяна"}>
+            <span>
+              <IconButton
+                size="small"
+                onClick={() => handleMarkAsSeen(order._id)}
+                disabled={order.seen}
+                color={order.seen ? "success" : "default"}
+              >
+                <VisibilityIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Tooltip title="Няма наличност">
+            <span>
+              <IconButton
+                size="small"
+                onClick={() => handleOutOfStock(order._id)}
+                disabled={order.outOfStockNotified}
+                color="warning"
+              >
+                <ReportProblemIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Tooltip title="Изтрий">
+            <IconButton
+              size="small"
+              onClick={() => handleDelete(order._id)}
+              color="error"
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </TableCell>
     </>
@@ -275,34 +279,39 @@ const OrdersList = () => {
         </Box>
 
         <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-          <CustomButton
-            fullWidth
-            variant={order.seen ? "outlined" : "contained"}
-            startIcon={<VisibilityIcon />}
-            onClick={() => handleMarkAsSeen(order._id)}
-            disabled={order.seen}
-          >
-            {order.seen ? "Видяна" : "Маркирай като видяна"}
-          </CustomButton>
-          <CustomButton
-            fullWidth
-            variant="outlined"
-            color="warning"
-            startIcon={<ReportProblemIcon />}
-            onClick={() => handleOutOfStock(order._id)}
-            disabled={order.outOfStockNotified}
-          >
-            Няма наличност
-          </CustomButton>
-          <CustomButton
-            fullWidth
-            variant="outlined"
-            color="error"
-            startIcon={<DeleteForeverIcon />}
-            onClick={() => handleDelete(order._id)}
-          >
-            Изтрий
-          </CustomButton>
+          <Tooltip title={order.seen ? "Видяна" : "Маркирай като видяна"}>
+            <span>
+              <IconButton
+                fullWidth
+                onClick={() => handleMarkAsSeen(order._id)}
+                disabled={order.seen}
+                color={order.seen ? "success" : "default"}
+              >
+                <VisibilityIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Tooltip title="Няма наличност">
+            <span>
+              <IconButton
+                fullWidth
+                onClick={() => handleOutOfStock(order._id)}
+                disabled={order.outOfStockNotified}
+                color="warning"
+              >
+                <ReportProblemIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Tooltip title="Изтрий">
+            <IconButton
+              fullWidth
+              onClick={() => handleDelete(order._id)}
+              color="error"
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </CardContent>
     </Card>

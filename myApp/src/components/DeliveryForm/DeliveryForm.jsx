@@ -116,6 +116,21 @@ const DeliveryFormPage = () => {
                   label={t("Име")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -127,6 +142,21 @@ const DeliveryFormPage = () => {
                   label={t("Фамилия")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -138,6 +168,21 @@ const DeliveryFormPage = () => {
                   label={t("Телефонен номер")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -150,6 +195,21 @@ const DeliveryFormPage = () => {
                   type="email"
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -161,6 +221,21 @@ const DeliveryFormPage = () => {
                   label={t("Държава")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -172,6 +247,21 @@ const DeliveryFormPage = () => {
                   label={t("Област")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -183,6 +273,21 @@ const DeliveryFormPage = () => {
                   label={t("Град")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={8}>
@@ -194,6 +299,21 @@ const DeliveryFormPage = () => {
                   label={t("Адрес")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -205,6 +325,21 @@ const DeliveryFormPage = () => {
                   label={t("Номер")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -217,6 +352,21 @@ const DeliveryFormPage = () => {
                   label={t("Изберете адрес")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 >
                   <MenuItem value="" disabled>
                     {t("Изберете адрес")}
@@ -241,6 +391,21 @@ const DeliveryFormPage = () => {
                   label={t("Пощенски код")}
                   variant="outlined"
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root:focus-within": {
+                      "& fieldset": { borderColor: "#EEAECA" },
+                    },
+                    "& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "#EEAECA",
+                      },
+                    "& .MuiInputBase-input:focus": {
+                      borderColor: "#EEAECA",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#EEAECA",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sx={{ display: { xs: "none", md: "block" } }}>
@@ -338,7 +503,7 @@ const DeliveryFormPage = () => {
                     <Box sx={{ textAlign: "right" }}>
                       <Typography
                         variant="h6"
-                        color="primary"
+                        color="#EEAECA"
                         fontWeight="bold"
                       >
                         €{Number(item.price || 0).toFixed(2)}

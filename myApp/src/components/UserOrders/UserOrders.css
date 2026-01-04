@@ -1,99 +1,97 @@
-.ordersPage{
-    height: 80vh;
-    width: 100%;
-    margin: 0 auto;
+.ordersPage {
+  width: 100%;
+  margin: 0 auto;
 }
 
-.tableUser{
-    width: 90%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    border-bottom: 2px solid red;
+.tableUser {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-bottom: 2px solid red;
 }
-.tableUser th, .tableUser td {  
-    text-align: center; 
-    vertical-align: middle; 
-} 
+.tableUser th,
+.tableUser td {
+  text-align: center;
+  vertical-align: middle;
+}
 
-.namesAndIcon{
-    display: flex;
-    gap: 0.5em;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    padding-bottom: 0.5em;
-
+.namesAndIcon {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  padding-bottom: 0.5em;
 }
 .table td {
-    align-items: center;
-    border: 1px solid gainsboro;
-
+  align-items: center;
+  border: 1px solid gainsboro;
 }
-.productDetailsBTN{
-    cursor: pointer;
+.productDetailsBTN {
+  cursor: pointer;
 }
-.productDetailsBTN:hover{
-    background-color: ghostwhite;
-}
-
-.modalOrder{
-    background-color: white;
-    width: 500px;
-    height: 500px;
-    width: 80%;
-    margin: 0 auto;
-    position: absolute;  
-    top: 42%;
-    left: 10%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
-    z-index: 200; /* За да е над замъгленото фоново съдържание */
+.productDetailsBTN:hover {
+  background-color: ghostwhite;
 }
 
-.tableModal{
-    margin: 3em 2em;
-}
-.closeDetailsOrderBTN{
-    position: absolute;
-    top: 0.2em;
-    font-size: 2em;
-    right: 0.2em;
-}
-.modalOrderImage{
-    width: 7em;
+.modalOrder {
+  background-color: white;
+  width: 500px;
+  height: 500px;
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: 42%;
+  left: 10%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 200; /* За да е над замъгленото фоново съдържание */
 }
 
-@media(max-width: 800px){
-    .namesAndIcon{
-        font-size: 1em;
-        gap: 0.5em;
-    }
-    .tbodyUserOrder tr td{
-        font-size: 0.6em;
-    }
-    .tableUser thead tr th{
-        font-size: 0.8em;
-    }
-    .tableModal{
-        font-size: 0.7em;
-    }
-    .modalOrderImage{
-        width: 5em;
-    }
+.tableModal {
+  margin: 3em 2em;
 }
-@media(max-width: 450px){
-    .tableOrders{
-        font-size: 0.5em;
-    }
-    .namesAndIcon{
-        display: block;
-    }
-    .userAdress{
-        width: 5em;
-    }
-    .tableModal{
-        font-size: 0.5em;
-    }
-    .modalOrderImage{
-        width: 5em;
-    }
+.closeDetailsOrderBTN {
+  position: absolute;
+  top: 0.2em;
+  font-size: 2em;
+  right: 0.2em;
+}
+.modalOrderImage {
+  width: 7em;
+}
+
+@media (max-width: 800px) {
+  .namesAndIcon {
+    font-size: 1em;
+    gap: 0.5em;
+  }
+  .tbodyUserOrder tr td {
+    font-size: 0.6em;
+  }
+  .tableUser thead tr th {
+    font-size: 0.8em;
+  }
+  .tableModal {
+    font-size: 0.7em;
+  }
+  .modalOrderImage {
+    width: 5em;
+  }
+}
+@media (max-width: 450px) {
+  .tableOrders {
+    font-size: 0.5em;
+  }
+  .namesAndIcon {
+    display: block;
+  }
+  .userAdress {
+    width: 5em;
+  }
+  .tableModal {
+    font-size: 0.5em;
+  }
+  .modalOrderImage {
+    width: 5em;
+  }
 }

@@ -304,8 +304,10 @@ const NavBar = () => {
           <Link
             to="/cart"
             onMouseEnter={() => setIsShippingHovered(!isShippingHovered)}
+            style={{ color: "#EEAECA" }}
           >
-            <ShoppingCartIcon className="shoppingIcon" />({countInCart})
+            <ShoppingCartIcon className="shoppingIcon" />
+            <span style={{ color: "#EEAECA" }}>({countInCart})</span>
           </Link>
           {user && (
             <LogoutIcon
