@@ -91,3 +91,23 @@ export const deletePurchase = async (id) => {
     return null;
   }
 };
+
+export const markOutOfStock = async (id) => {
+  try {
+    const response = await fetch(`${apiUrl}/purchase/${id}/out-of-stock`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Грешка от сървъра:", errorData);
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Грешка при fetch:", error);
+    return null;
+  }
+};

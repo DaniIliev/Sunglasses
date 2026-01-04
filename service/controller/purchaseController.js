@@ -1,6 +1,12 @@
 const router = require("express").Router();
 const Purchase = require("../schemas/PurchaseSchema");
 const mongoose = require("mongoose");
+const {
+  sendOrderPlacedCustomer,
+  sendOrderPlacedAdmin,
+  sendOrderApproved,
+  sendOutOfStockNotice,
+} = require("../utills/mailer");
 
 router.post("/", async (req, res) => {
   const newPurchase = new Purchase({
@@ -23,6 +29,11 @@ router.post("/", async (req, res) => {
   });
   try {
     await newPurchase.save();
+
+    Promise.allSettled([
+      sendOrderPlacedCustomer(newPurchase),
+      sendOrderPlacedAdmin(newPurchase),
+    ]).catch((err) => console.error("Email queue error:", err));
     res.status(201).json(newPurchase);
   } catch (error) {
     console.error("Error saving sunglasses:", error); // Логване на грешката
@@ -80,6 +91,12 @@ router.patch("/:id/seen", async (req, res) => {
       return res.status(404).json({ message: "Purchase not found" });
     }
 
+    if (seen) {
+      sendOrderApproved(updated).catch((err) =>
+        console.error("Error sending approval email:", err)
+      );
+    }
+
     res.status(200).json(updated);
   } catch (error) {
     console.error("Error updating purchase status:", error);
@@ -104,6 +121,31 @@ router.delete("/:id", async (req, res) => {
     res.status(200).json({ message: "Purchase deleted", id: deleted._id });
   } catch (error) {
     console.error("Error deleting purchase:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+router.post("/:id/out-of-stock", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+
+    const purchase = await Purchase.findById(id);
+
+    if (!purchase) {
+      return res.status(404).json({ message: "Purchase not found" });
+    }
+
+    sendOutOfStockNotice(purchase).catch((err) =>
+      console.error("Error sending out-of-stock email:", err)
+    );
+
+    res.status(200).json({ message: "Out of stock email sent" });
+  } catch (error) {
+    console.error("Error sending out-of-stock notice:", error);
     res.status(500).json({ message: "Server error", error });
   }
 });

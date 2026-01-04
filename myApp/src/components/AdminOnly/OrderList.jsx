@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import * as purchaseService from "../../services/purchaseService";
 import GenericTable from "../shared/GenericTable";
@@ -60,6 +61,17 @@ const OrdersList = () => {
     if (!deleted) return;
 
     setOrders((prevOrders) => prevOrders.filter((order) => order._id !== id));
+  };
+
+  const handleOutOfStock = async (id) => {
+    const sent = await purchaseService.markOutOfStock(id);
+    if (!sent) return;
+
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order._id === id ? { ...order, outOfStockNotified: true } : order
+      )
+    );
   };
 
   const columns = [
@@ -144,6 +156,17 @@ const OrdersList = () => {
             sx={{ textTransform: "none", borderRadius: 2 }}
           >
             {order.seen ? "Видяна" : "Маркирай"}
+          </CustomButton>
+          <CustomButton
+            variant="outlined"
+            color="warning"
+            size="small"
+            startIcon={<ReportProblemIcon />}
+            onClick={() => handleOutOfStock(order._id)}
+            disabled={order.outOfStockNotified}
+            sx={{ textTransform: "none", borderRadius: 2 }}
+          >
+            Няма наличност
           </CustomButton>
           <CustomButton
             variant="outlined"
@@ -260,6 +283,16 @@ const OrdersList = () => {
             disabled={order.seen}
           >
             {order.seen ? "Видяна" : "Маркирай като видяна"}
+          </CustomButton>
+          <CustomButton
+            fullWidth
+            variant="outlined"
+            color="warning"
+            startIcon={<ReportProblemIcon />}
+            onClick={() => handleOutOfStock(order._id)}
+            disabled={order.outOfStockNotified}
+          >
+            Няма наличност
           </CustomButton>
           <CustomButton
             fullWidth
