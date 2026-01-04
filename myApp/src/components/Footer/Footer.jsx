@@ -1,29 +1,32 @@
-import React from 'react'
-import './Footer.css'
+import React from "react";
+import "./Footer.css";
 
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
-    const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
-    <div className='footer'>
-            <div className='logo'>
-                <h2><img src="/images/logo.jpg" alt="logo" className='logo' style={{borderRadius: 20}}/></h2>
-            </div>
-                <div className='links'>
-                    <Link to="/">{t('Home')}</Link>
-                    <Link to="/sunglasses">{t('Catalog')}</Link>
-                    <Link to="/user/access">{t('Sign in')}</Link>
-                    <Link to="/user/access">{t('Sign up')}</Link>
-                </div>
-            <div className='contacts'>
-                <h2>{t('Contacts')}</h2>
-                <p>0885188355</p>
-                <p>vistoptics@gmail.com</p>
-                <p>9300 Dobrich Bulgaria</p>
-            </div>
-            {/* <div className='socialMedias'>
+    <div className="footer">
+      <div
+        className="logo"
+        style={{ display: "flex", flexDirection: "column", gap: 0.5 }}
+      >
+        <img src="/VistOpticsLogo.png" alt="logo" className="logo-img" />
+      </div>
+      <div className="links">
+        <Link to="/">{t("Home")}</Link>
+        <Link to="/sunglasses">{t("Catalog")}</Link>
+        <Link to="/user/access">{t("Sign in")}</Link>
+        <Link to="/user/access">{t("Sign up")}</Link>
+      </div>
+      <div className="contacts">
+        <h2>{t("Contacts")}</h2>
+        <p>0885188355</p>
+        <p>vistoptics@gmail.com</p>
+        <p>9300 Dobrich Bulgaria</p>
+      </div>
+      {/* <div className='socialMedias'>
                 <h2>Social Medias</h2>
                 <div className='socialMediasIcons'>
                     <FaSquareInstagram />
@@ -32,7 +35,7 @@ const Footer = () => {
                 </div>
             </div> */}
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

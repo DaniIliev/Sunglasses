@@ -1,33 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Typography,
-  Button,
   Box,
   IconButton,
   Avatar,
-  Slide
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+  Slide,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import CustomButton from "../shared/CustomButton";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const AddToCartPopup = ({ product, onClose }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   useEffect(() => {
     if (product) {
       const timer = setTimeout(() => {
         onClose();
-      }, 3000); 
+      }, 3000);
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [product, onClose]);
 
@@ -42,20 +42,19 @@ const AddToCartPopup = ({ product, onClose }) => {
       maxWidth="xs"
       fullWidth
       PaperProps={{
-        sx: { borderRadius: 3, px: 2, py: 1.5 }
+        sx: { borderRadius: 3, px: 2, py: 1.5 },
       }}
     >
       <DialogTitle
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          pb: 1
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          pb: 1,
         }}
       >
         <Typography variant="h6" fontWeight={600}>
-        {t('Добавен продукт')}
-          
+          {t("Добавен продукт")}
         </Typography>
         <IconButton onClick={onClose} size="small">
           <CloseIcon />
@@ -70,33 +69,35 @@ const AddToCartPopup = ({ product, onClose }) => {
             variant="rounded"
             sx={{ width: 64, height: 64 }}
           />
-          <Typography variant="subtitle1" sx={{textTransform: 'uppercase'}} fontWeight={500}>
+          <Typography
+            variant="subtitle1"
+            sx={{ textTransform: "uppercase" }}
+            fontWeight={500}
+          >
             {product?.name}
           </Typography>
         </Box>
         <Typography variant="body2">
-        {t('Добавихте')} <strong style={{textTransform: 'uppercase'}}>{product?.name}</strong> {t('към количката')}!
+          {t("Добавихте")}{" "}
+          <strong style={{ textTransform: "uppercase" }}>
+            {product?.name}
+          </strong>{" "}
+          {t("към количката")}!
         </Typography>
       </DialogContent>
 
-      <DialogActions sx={{ justifyContent: 'center' }}>
-        <Button onClick={onClose} variant="outlined" color="secondary">
-        {t('Затвори')}
-        </Button>
-        <Button
-          component={Link}
-          to="/cart"
-          variant="contained"
-          color="primary"
-        >
-         {t('Към количката')}
-        </Button>
+      <DialogActions sx={{ justifyContent: "center" }}>
+        <CustomButton onClick={onClose} variant="outlined">
+          {t("Затвори")}
+        </CustomButton>
+        <CustomButton component={Link} to="/cart">
+          {t("Към количката")}
+        </CustomButton>
       </DialogActions>
     </Dialog>
   );
 };
 
 export default AddToCartPopup;
-
 
 // export default AddToCartPopup

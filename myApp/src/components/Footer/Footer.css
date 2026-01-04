@@ -1,51 +1,73 @@
-.footer{
-    /* background-color: rgb(86, 46, 31); */
-    /* background-color: #79450e96; */
-    background: #f58e97;
-    background: radial-gradient(circle, rgba(245, 142, 151, 1) 0%, rgba(148, 187, 233, 1) 100%);
-    display: flex;
-    color: black;
-    justify-content: space-around;
-    padding: 1em
+.footer {
+  /* background-color: rgb(86, 46, 31); */
+  /* background-color: #79450e96; */
+  background: #f58e97;
+  background: radial-gradient(
+    circle,
+    rgba(245, 142, 151, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+  display: flex;
+  color: black;
+  justify-content: space-around;
+  padding: 1em;
+  align-items: center;
 }
 
-.socialMediasIcons{
-    display: flex;
-    gap: 1em;
-    font-size: 2em;
-    color: black;
+.socialMediasIcons {
+  display: flex;
+  gap: 1em;
+  font-size: 2em;
+  color: black;
 }
-.logo{
-    display: flex; 
-    align-items: center;
-    gap: 2em;
-    width: 100px;
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.links{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+
+.logo-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
-.links a{
-    text-decoration: none;
-    color: black;
+
+.logo-text h2 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #d6dce3 0%, #e7c3e4 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.contacts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5em;
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.links a {
+  text-decoration: none;
+  color: black;
+}
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
 }
 
 @media (min-width: 300px) and (max-width: 1200px) {
-    .footer{
-        font-size: 0.5em;
-    }
-    .footer .logo{
-        margin: 0;
-        width: 60px;
-    }
-    .socialMediasIcons{
-        margin-top: 0.5em;
-    }
+  .footer {
+    font-size: 0.5em;
+  }
+  .footer .logo {
+    margin: 0;
+    width: 60px;
+  }
+  .socialMediasIcons {
+    margin-top: 0.5em;
+  }
 }

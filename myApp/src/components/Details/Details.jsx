@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import BeatLoader from 'react-spinners/BeatLoader'; 
+import BeatLoader from "react-spinners/BeatLoader";
 import { RiStarSFill } from "react-icons/ri";
 import { FaArrowDown } from "react-icons/fa";
 import { FaShippingFast } from "react-icons/fa";
@@ -17,42 +17,43 @@ import { UserContext } from "../../context/UserContext";
 import { addToCart } from "../../utills/sharedFn/addToCart";
 import AddToCartPopup from "../Popups/addToCartPopup";
 import { useTranslation } from "react-i18next";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { formatPrice } from "../../utills/currencyConverter";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { REACT_APP_API_URL } from "../../env";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import { SunglassesContext } from "../../context/SunglassesContext";
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from "@mui/material";
 const Details = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState([]);
   const [sunglassesCount, setSunglassesCount] = useState(1);
   const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false);
   const [isShipingAndReturnOpen, setIsShipingAndReturnOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [item, setItem] = useState([]);
-  const [isLike, setIsLike] = useState(false)
-  const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false)
+  const [isLike, setIsLike] = useState(false);
+  const [isAddToCartPopupOpen, setIsAddToCartPopupOpen] = useState(false);
 
-  const {sunglasses} = useContext(SunglassesContext)
+  const { sunglasses } = useContext(SunglassesContext);
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);
-  
-  const {t, i18n} = useTranslation()
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    if(user?.wishlist != null){
-        if(Array.isArray(user.wishlist)){
-            if(user.wishlist.includes(id)) setIsLike(true)
-        }
+    if (user?.wishlist != null) {
+      if (Array.isArray(user.wishlist)) {
+        if (user.wishlist.includes(id)) setIsLike(true);
+      }
     }
     sunglassesService
       .getById(id)
       .then((result) => {
-        setItem(result)
-        setImages(result.images)
+        setItem(result);
+        setImages(result.images);
       })
       .catch((error) => console.log(error));
   }, [id, isLike, user]);
@@ -67,42 +68,43 @@ const Details = () => {
     );
   };
 
-
   const handleAddItem = () => {
-    setIsAddToCartPopupOpen(true)
-    setTimeout(() => {  
-        setIsAddToCartPopupOpen(false)
+    setIsAddToCartPopupOpen(true);
+    setTimeout(() => {
+      setIsAddToCartPopupOpen(false);
     }, 3000);
-    addToCart(user, setUser, id, sunglassesCount)
-  }
+    addToCart(user, setUser, id, sunglassesCount);
+  };
 
   const deleteItem = async (id) => {
     try {
-      const response = await fetch(`${REACT_APP_API_URL}/sunglasses/delete/${id}`, {
-        method: 'DELETE',
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(result.message || 'Грешка при изтриване на очилата.');
-      }
-  
+      const response = await fetch(
+        `${REACT_APP_API_URL}/sunglasses/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-            toast.success("✅ Очилата бяха успешно изтрити:)!", {
-              position: "top-center",  
-              autoClose: 3000,        
-              hideProgressBar: false, 
-              closeOnClick: true,     
-              pauseOnHover: true,     
-              draggable: true,        
-              theme: "colored",    
-          });
-          navigate('/sunglasses')
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Грешка при изтриване на очилата.");
+      }
+
+      toast.success("✅ Очилата бяха успешно изтрити:)!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+      navigate("/sunglasses");
       // Може да обновиш UI, например да презаредиш списъка:
       // fetchSunglassesList();
     } catch (error) {
-      toast.error("❌ Възникна грешка при изтриването :(",{
+      toast.error("❌ Възникна грешка при изтриването :(", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -115,43 +117,43 @@ const Details = () => {
   };
   const handleLike = () => {
     const data = {
-        id: id,
-        type: "likeItem",
-    }
+      id: id,
+      type: "likeItem",
+    };
     userService
-        .patchUser(user._id, data)
-        .then(result => {
-            setUser((prevUser) => ({
-            ...prevUser,
-            wishlist: [...prevUser.wishlist, id]
-            }))
-            setIsLike(true)
-        })
-        .catch(error => console.log("User can not like this item"))
-  }
+      .patchUser(user._id, data)
+      .then((result) => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          wishlist: [...prevUser.wishlist, id],
+        }));
+        setIsLike(true);
+      })
+      .catch((error) => console.log("User can not like this item"));
+  };
 
   const handleUnlike = () => {
     const data = {
-        id: id,
-        type: "unlikeItem"
-    }
+      id: id,
+      type: "unlikeItem",
+    };
     userService
-    .patchUser(user._id, data)
-    .then(result => {
+      .patchUser(user._id, data)
+      .then((result) => {
         setUser((prevUser) => ({
-        ...prevUser,
-        wishlist: prevUser.wishlist.filter((item) => item != id)
-        }))
-        setIsLike(false)
-        console.log("User unlike this item")
-    })
-    .catch(error => console.log("User can not like this item"))
-  }
+          ...prevUser,
+          wishlist: prevUser.wishlist.filter((item) => item != id),
+        }));
+        setIsLike(false);
+        console.log("User unlike this item");
+      })
+      .catch((error) => console.log("User can not like this item"));
+  };
 
   return (
     <>
-    {isLoading && <BeatLoader  className='loader'/> }
-    {isAddToCartPopupOpen ? <AddToCartPopup /> : ''}
+      {isLoading && <BeatLoader className="loader" />}
+      {isAddToCartPopupOpen ? <AddToCartPopup /> : ""}
       <div className="detailsPage">
         <div className="allAboutImages">
           <div className="infinitiImages">
@@ -172,25 +174,31 @@ const Details = () => {
             </div>
           </div>
           <div className="imagesContainer">
-          {images.map((item, index) => 
-                <img
+            {images.map((item, index) => (
+              <img
                 src={item}
                 className={`${currentImageIndex == index ? "selected" : ""}`}
                 alt={`sunglasses-${index}`}
                 onClick={() => setCurrentImageIndex(index)}
                 key={`${item}_${index}`}
               />
-          )}
+            ))}
           </div>
         </div>
         <div className="aboutSunglasses">
-          {user?.id == '68092d56a17f6bacd78b1bc4' && 
-          <div style={{display: 'flex', alignItems: 'center', gap: 2}}>
-            <EditIcon onClick={() => navigate(`/edit/${item._id}`)} sx={{color: 'blue', fontSize: 35}}/>
-            <DeleteForeverIcon sx={{color: 'red', fontSize: 35}} onClick={() => deleteItem(item._id)}/>
-          </div>
-          }
-          <h3 style={{textTransform: 'uppercase'}}>{item.name}</h3>
+          {user?._id == "68092d56a17f6bacd78b1bc4" && (
+            <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <EditIcon
+                onClick={() => navigate(`/edit/${item._id}`)}
+                sx={{ color: "blue", fontSize: 35 }}
+              />
+              <DeleteForeverIcon
+                sx={{ color: "red", fontSize: 35 }}
+                onClick={() => deleteItem(item._id)}
+              />
+            </div>
+          )}
+          <h3 style={{ textTransform: "uppercase" }}>{item.name}</h3>
           <p className="reviews">
             <RiStarSFill />
             <RiStarSFill />
@@ -199,79 +207,95 @@ const Details = () => {
             <RiStarSFill />
           </p>
           <div className="prices">
-            <h5>{item.oldPrice != 'undefined' ? item.oldPrice : ''}</h5>
-            <h4>{item.price} лв</h4>
-            <p>{item.oldPrice != 'undefined' && item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+            <h5>{item.oldPrice != "undefined" ? item.oldPrice : ""}</h5>
+            <h4>{formatPrice(item.price)}</h4>
+            <p>
+              {item.oldPrice != "undefined" && item.oldPrice != ""
+                ? `-${
+                    Math.round(
+                      (((item.oldPrice - item.price) / item.oldPrice) * 100) /
+                        10
+                    ) * 10
+                  }${"%"}`
+                : ""}
+            </p>
           </div>
           <div className="counter">
             <p className="plusMinus">
-              <FaMinus onClick={() => 
-                sunglassesCount > 1 && setSunglassesCount(sunglassesCount - 1)}  
-                disabled={sunglassesCount === 1} 
+              <FaMinus
+                onClick={() =>
+                  sunglassesCount > 1 && setSunglassesCount(sunglassesCount - 1)
+                }
+                disabled={sunglassesCount === 1}
               />
             </p>
             <p>{sunglassesCount}</p>
             <p className="plusMinus">
-              <FaPlus onClick={() => setSunglassesCount(sunglassesCount + 1)}/>
+              <FaPlus onClick={() => setSunglassesCount(sunglassesCount + 1)} />
             </p>
           </div>
           <div className="addToCardAndLike">
-            <p 
-              className="addToCart" 
-              onClick={user ? handleAddItem : () => navigate('/user/access')}
+            <p
+              className="addToCart"
+              onClick={user ? handleAddItem : () => navigate("/user/access")}
             >
-              {t('detailsPage.addToCart')}
+              {t("detailsPage.addToCart")}
             </p>
             {user !== null && user !== undefined ? (
-            isLike ? <FaHeart className="hearth liked" onClick={handleUnlike} /> : 
-            <CiHeart className="hearth" onClick={handleLike} />
+              isLike ? (
+                <FaHeart className="hearth liked" onClick={handleUnlike} />
+              ) : (
+                <CiHeart className="hearth" onClick={handleLike} />
+              )
             ) : null}
           </div>
-          <h4>{t('detailsPage.description')}</h4>
+          <h4>{t("detailsPage.description")}</h4>
           <div className="description">
-            <p>
-              {item.description}
-            </p>
+            <p>{item.description}</p>
           </div>
         </div>
       </div>
       <div className="information">
         <h4 onClick={() => setIsProductDetailsOpen(!isProductDetailsOpen)}>
-        {t('detailsPage.productDetails')} <FaArrowDown />
+          {t("detailsPage.productDetails")} <FaArrowDown />
         </h4>
         {isProductDetailsOpen ? (
           <div className="productDetails">
             <div className="firstSection">
               <p>
-                <strong>
-                {t('FRAME SHAPE')}:</strong> {item.frameShape}
+                <strong>{t("FRAME SHAPE")}:</strong> {item.frameShape}
               </p>
               <p>
-                <strong>{t('GENDER')}:</strong> {item.gender}
+                <strong>{t("GENDER")}:</strong> {item.gender}
               </p>
               <p>
-                <strong>{t('FRAME MATERIAL')}:</strong> {item.frameMaterial == "Tree" ? "Wood" : item.frameMaterial}
+                <strong>{t("FRAME MATERIAL")}:</strong>{" "}
+                {item.frameMaterial == "Tree" ? "Wood" : item.frameMaterial}
               </p>
               <p>
-                <strong>{t('LENS TYPE')}:</strong> {item.lensType}
+                <strong>{t("LENS TYPE")}:</strong> {item.lensType}
               </p>
               <p>
-                <strong>{t('UV PROTECTION')}:</strong> {item.UV_Protection}
+                <strong>{t("UV PROTECTION")}:</strong> {item.UV_Protection}
               </p>
             </div>
-            <img src="/images/sizeModel.webp" alt="sizeModel" className="sizeModelImg" />
+            <img
+              src="/images/sizeModel.webp"
+              alt="sizeModel"
+              className="sizeModelImg"
+            />
             <div className="secondSection">
               <p>
-                <strong>{t('FRAME WIDTH')}:</strong> {item.frameWidth}MM
+                <strong>{t("FRAME WIDTH")}:</strong> {item.frameWidth}MM
               </p>
               <p>
-                <strong>{t('FRAME HEIGHT')}:</strong> {item.frameHeight}MM
+                <strong>{t("FRAME HEIGHT")}:</strong> {item.frameHeight}MM
               </p>
               <p>
-                <strong>{t('LENS WIDTH')}:</strong> {item.lensWidth}MM
+                <strong>{t("LENS WIDTH")}:</strong> {item.lensWidth}MM
               </p>
               <p>
-                <strong>{t('TEMPLE LENGTH')}:</strong> {item.templeLength}MM
+                <strong>{t("TEMPLE LENGTH")}:</strong> {item.templeLength}MM
               </p>
             </div>
           </div>
@@ -279,46 +303,61 @@ const Details = () => {
           ""
         )}
         <h4 onClick={() => setIsShipingAndReturnOpen(!isShipingAndReturnOpen)}>
-        {t('detailsPage.description')} <FaShippingFast />
+          {t("detailsPage.description")} <FaShippingFast />
         </h4>
         {isShipingAndReturnOpen ? (
           <div className="shippingANDreturn">
-    <Box className="shipping" sx={{ p: 3, textAlign: 'center'}}>
-      <Typography variant="h6" gutterBottom>
-        {t('Доставка в България')}
-      </Typography>
+            <Box className="shipping" sx={{ p: 3, textAlign: "center" }}>
+              <Typography variant="h6" gutterBottom>
+                {t("Доставка в България")}
+              </Typography>
 
-      <Typography variant="body1" paragraph>
-        {t('Ние предлагаме доставка до цяла България чрез куриерските услуги на')}<strong>{t('Еконт')}</strong> {t("и")} <strong>{t('Спиди')}</strong>.
-      </Typography>
+              <Typography variant="body1" paragraph>
+                {t(
+                  "Ние предлагаме доставка до цяла България чрез куриерските услуги на"
+                )}
+                <strong>{t("Еконт")}</strong> {t("и")}{" "}
+                <strong>{t("Спиди")}</strong>.
+              </Typography>
 
-      <Typography variant="subtitle1" gutterBottom>
-        {t('Възможности за доставка')}:
-      </Typography>
-      <Typography variant="body2" paragraph>
-        {t('• До офис на Еконт или Спиди – изберете удобен за вас офис при завършване на поръчката.')}
-      </Typography>
-      <Typography variant="body2" paragraph>
-        {t("• До адрес – получете поръчката си директно до вашата врата.")}
-      </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                {t("Възможности за доставка")}:
+              </Typography>
+              <Typography variant="body2" paragraph>
+                {t(
+                  "• До офис на Еконт или Спиди – изберете удобен за вас офис при завършване на поръчката."
+                )}
+              </Typography>
+              <Typography variant="body2" paragraph>
+                {t(
+                  "• До адрес – получете поръчката си директно до вашата врата."
+                )}
+              </Typography>
 
-      <Typography variant="subtitle1" gutterBottom>
-        {t('Време за доставка:')}
-      </Typography>
-      <Typography variant="body2" paragraph>
-        {t("Обикновено доставката отнема")} <strong>{t("1–2 работни дни")}</strong> {t("след потвърждение на поръчката.")}
-      </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                {t("Време за доставка:")}
+              </Typography>
+              <Typography variant="body2" paragraph>
+                {t("Обикновено доставката отнема")}{" "}
+                <strong>{t("1–2 работни дни")}</strong>{" "}
+                {t("след потвърждение на поръчката.")}
+              </Typography>
 
-      <Typography variant="subtitle1" gutterBottom>
-        {t('Цена за доставка:')}
-      </Typography>
-      <Typography variant="body2" paragraph>
-        • <strong>{t("Безплатна доставка")}</strong> {t("при поръчки над")} <strong>{t('200')} лв.</strong>
-      </Typography>
-      <Typography variant="body2" paragraph>
-        • {t("Цената на доставката се калкулира автоматично при финализиране на поръчката, в зависимост от избрания куриер и начина на доставка")}.
-      </Typography>
-    </Box>
+              <Typography variant="subtitle1" gutterBottom>
+                {t("Цена за доставка:")}
+              </Typography>
+              <Typography variant="body2" paragraph>
+                • <strong>{t("Безплатна доставка")}</strong>{" "}
+                {t("при поръчки над")} <strong>€77 (~150 лв).</strong>
+              </Typography>
+              <Typography variant="body2" paragraph>
+                •{" "}
+                {t(
+                  "Цената на доставката се калкулира автоматично при финализиране на поръчката, в зависимост от избрания куриер и начина на доставка"
+                )}
+                .
+              </Typography>
+            </Box>
             <div className="logos">
               <img src="/images/econt-logo.png" alt="econt" width={100} />
               <img src="/images/speedy-logo.png" alt="speedy" width={200} />
@@ -333,21 +372,25 @@ const Details = () => {
           isShipingAndReturnOpen ? "shippingIsOpen" : "youmayalsolike"
         }`}
       >
-        {t('detailsPage.YOUMAYALSOLIKE')}
+        {t("detailsPage.YOUMAYALSOLIKE")}
       </h3>
       <div className="catalog-cards maybeLikedCards">
-      {sunglasses
+        {sunglasses
           .sort(() => 0.5 - Math.random()) // разбърква масива
           .slice(0, 4) // взима първите 4
           .map((sunglass, index) => (
-            <Link className="card" to={`/sunglasses/${sunglass._id}`}>
+            <Link
+              key={sunglass._id}
+              className="card"
+              to={`/sunglasses/${sunglass._id}`}
+            >
               <div className="imageStock">
                 <div className="imageContainer">
                   <img
                     src={sunglass.images[0]}
                     alt="ok"
                     width={300}
-                  className="default-image"
+                    className="default-image"
                   />
                   <img
                     src={sunglass.images[1]}
@@ -360,13 +403,27 @@ const Details = () => {
               <div className="info">
                 <h3>{sunglass.name}</h3>
                 <div className="prices">
-                  <h5>{sunglass.oldPrice != 'undefined' && item.oldPrice != '' ? `${sunglass.oldPrice}ЛВ` : ''}</h5>
-                  <h4>{sunglass.price}ЛВ</h4>
-                  <p>{item.oldPrice !== 'undefined' && item.oldPrice != '' ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
+                  <h5>
+                    {sunglass.oldPrice != "undefined" && item.oldPrice != ""
+                      ? `${sunglass.oldPrice}ЛВ`
+                      : ""}
+                  </h5>
+                  <h4>{formatPrice(sunglass.price)}</h4>
+                  <p>
+                    {item.oldPrice !== "undefined" && item.oldPrice != ""
+                      ? `-${
+                          Math.round(
+                            (((item.oldPrice - item.price) / item.oldPrice) *
+                              100) /
+                              10
+                          ) * 10
+                        }${"%"}`
+                      : ""}
+                  </p>
                 </div>
               </div>
             </Link>
-        ))}
+          ))}
       </div>
     </>
   );

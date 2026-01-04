@@ -1,266 +1,349 @@
-// import React, { useContext, useEffect, useState,  } from 'react'
-// import './LoveCartList.css'
-// import { FaHeartCirclePlus } from "react-icons/fa6";
-// import { FaMedal } from "react-icons/fa";
-// import { Link } from 'react-router-dom';
-// import { CiHeart } from "react-icons/ci";
-// import { UserContext } from '../../context/UserContext';
-// import { useTranslation } from 'react-i18next';
-// import { getById } from '../../services/sunglassesService';
-// import { SunglassesContext } from '../../context/SunglassesContext';
-
-// const LoveCartList = () => {
-//     const {user} = useContext(UserContext)
-//     const [wishingCards, setWishingCards] = useState([])
-
-//     const {t, i18n} = useTranslation()
-//     const {sunglasses} = useContext(SunglassesContext)
-//     useEffect(() => {
-//         if (!user?.wishlist) return;
-
-//         Promise.all(user.wishlist.map(itemID => getById(itemID)))
-//             .then(results => setWishingCards(results))
-//             .catch(error => console.error("Error fetching wishlist items:", error));
-//     },[user])
-//   return (
-//     <div className='LoveCartPage'>
-//         {console.log(wishingCards)}
-//         <div className="contentWishlist">
-
-//             <p className='titels'>home / wishlist</p>
-//             <div>
-//             <h1>{t('wishlistPage.title')}</h1>
-//             <p>{t('wishlistPage.underTitle')}</p>
-//             </div>
-//         </div>
-//         {user == undefined &&
-//         <div className='newUserBox'>
-//             <div className="signInAcc">
-//                 <h2>{t('wishlistPage.myACC')}</h2>
-//                 <p>{t('wishlistPage.access')}</p>
-//                 <Link to='/user/access'><p className="wishlistBTN">Sign in</p></Link>
-//             </div>
-//             <div className="createWishList">
-//                 <h2>{t("wishlistPage.startWishlist")}</h2>
-//                 <p>{t("wishlistPage.startWishlistP2")}</p>
-//                 <div className="buttonsDivWishlist">
-//                     <Link to={'/sunglasses'}><p className='wishlistBTN'>Shop Men's</p></Link>
-//                     <Link to={'/sunglasses'}><p className='wishlistBTN'>Shop Women's</p></Link>
-//                 </div>
-//             </div>
-//         </div>
-//         }   
-//         {user != undefined && user?.wishlist.length == 0 &&
-//         <div className="wishlistCreate">
-//             <div className="startWishlist">
-//                 <Link to='/sunglasses'><FaHeartCirclePlus className='wishHeart'/></Link>
-//                 <div>
-//                     <h2>{t("wishlistPage.startWishlist")}</h2>
-//                     <p>{t("wishlistPage.startWishlistP")}</p>
-//                 </div>
-//             </div>
-//             <div className="bestsellers">
-//       {sunglasses
-//           .sort(() => 0.5 - Math.random()) // разбърква масива
-//           .slice(0, 2) // взима първите 4
-//           .map((sunglass, index) => (
-//             <Link className="card" to={`/sunglasses/${sunglass.id}`}>
-//               <div className="imageStock">
-//                 <div className="imageContainer">
-//                   <img
-//                     src={sunglass.images[0]}
-//                     alt="ok"
-//                     width={300}
-//                     className="default-image"
-//                   />
-//                   <img
-//                     src={sunglass.images[1]}
-//                     width={300}
-//                     alt=""
-//                     className="hover-image"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="info">
-//                 <h3>{sunglass.name}</h3>
-//                 <div className="prices">
-//                   <h5>{sunglass.oldPrice != 'undefined' && sunglass.oldPrice != '' ? `${sunglass.oldPrice}ЛВ` : ''}</h5>
-//                   <h4>{sunglass.price}ЛВ</h4>
-//                   <p>{sunglass.oldPrice !== 'undefined' && sunglass.oldPrice != '' ?`-${Math.round((((sunglass.oldPrice - sunglass.price) / sunglass.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-//                 </div>
-//               </div>
-//             </Link>
-//         ))}
-//             </div>
-//         </div>
-//         }
-//         {user != undefined && user?.wishlist.length > 0 &&
-//         <>
-//         <h2 className='yourWishingCardsTitle'>Your Wishing Cards</h2>
-//         <div className="catalog-cards">
-//             {wishingCards.length > 0 && wishingCards.map(item => 
-//               <div className="allAboutCard" key={item._id}>
-//               <div className='card'>
-//                   <div className='imageStock'>
-//                       {console.log(item)}
-//                       <Link className='imageContainer' to={`/sunglasses/${item._id}`}>
-//                           <img src={item?.images[0]} className='default-image'/>
-//                           <img src={item?.images[1]} alt="" className='hover-image'/>
-//                       </Link>
-//                       <p className='addToCartSUNP' 
-//                       onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
-//                       >Add to cart
-//                       </p>
-//                   </div>
-//                   <div className="info">
-//                       <h3>{item.name}</h3>
-//                       <div className='prices'>
-//                           <h5>{item.oldPrice}</h5>
-//                           <h4>{item.price} лв</h4>
-//                           <p>{item.oldPrice ?`-${Math.round((((item.oldPrice - item.price) / item.oldPrice) * 100) / 10) * 10}${'%'}`: ''}</p>
-//                       </div>
-//                   </div>
-//               </div>
-//           </div>
-//             )}
-//         </div>
-//         </>
-//     }
-//     </div>
-//   )
-// }
-
-// export default LoveCartList
-import React, { useContext, useEffect, useState } from 'react'
-import './LoveCartList.css'
+import React, { useContext, useEffect, useState } from "react";
+import "./LoveCartList.css";
 import { FaHeartCirclePlus } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext';
-import { useTranslation } from 'react-i18next';
-import { getById } from '../../services/sunglassesService';
-import { SunglassesContext } from '../../context/SunglassesContext';
-import { Button, Grid, Typography, Card, CardContent, CardMedia, Box, CardActionArea} from '@mui/material';
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { useTranslation } from "react-i18next";
+import { getById } from "../../services/sunglassesService";
+import { SunglassesContext } from "../../context/SunglassesContext";
+import {
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Box,
+  CardActionArea,
+  Container,
+  Paper,
+  Divider,
+  Chip,
+} from "@mui/material";
+import { formatPrice } from "../../utills/currencyConverter";
+import CustomButton from "../shared/CustomButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { addToCart } from "../../utills/sharedFn/addToCart";
 
 const LoveCartList = () => {
-    const { user } = useContext(UserContext)
-    const [wishingCards, setWishingCards] = useState([])
+  const { user, setUser } = useContext(UserContext);
+  const [wishingCards, setWishingCards] = useState([]);
+  const navigate = useNavigate();
 
-    const { t } = useTranslation()
-    const { sunglasses } = useContext(SunglassesContext)
+  const { t } = useTranslation();
+  const { sunglasses } = useContext(SunglassesContext);
 
-    useEffect(() => {
-        if (!user?.wishlist) return;
+  useEffect(() => {
+    if (!user?.wishlist) return;
 
-        Promise.all(user.wishlist.map(itemID => getById(itemID)))
-            .then(results => setWishingCards(results))
-            .catch(error => console.error("Error fetching wishlist items:", error));
-    }, [user])
+    Promise.all(user.wishlist.map((itemID) => getById(itemID)))
+      .then((results) => setWishingCards(results))
+      .catch((error) => console.error("Error fetching wishlist items:", error));
+  }, [user]);
 
-    return (
-        <div className='LoveCartPage'>
-            <div className="contentWishlist">
-                <Typography variant="h6" className="titels">home / wishlist</Typography>
-                <div>
-                    <Typography variant="h4">{t('wishlistPage.title')}</Typography>
-                    <Typography variant="body1">{t('wishlistPage.underTitle')}</Typography>
-                </div>
-            </div>
+  const addItem = (id) => {
+    addToCart(user, setUser, id, 1);
+  };
 
-            {user == undefined &&
-                <div className='newUserBox'>
-                    <div className="signInAcc">
-                        <Typography variant="h5">{t('wishlistPage.myACC')}</Typography>
-                        <Typography variant="body2">{t('wishlistPage.access')}</Typography>
-                        <Link to='/user/access'><Button variant="outlined">{t('Sign in')}</Button></Link>
-                    </div>
-                    <div className="createWishList">
-                        <Typography variant="h5">{t("wishlistPage.startWishlist")}</Typography>
-                        <Typography variant="body2">{t("wishlistPage.startWishlistP2")}</Typography>
-                        <div className="buttonsDivWishlist">
-                            <Link to={'/sunglasses'}>
-                                <Button variant="contained">{t("View Catalog")}</Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            }
+  return (
+    <Container maxWidth="xl" sx={{ py: { xs: 3, md: 6 } }}>
+      {/* Header Section */}
+      <Box textAlign="center" mb={6}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mb: 1, textTransform: "uppercase", letterSpacing: 1 }}
+        >
+          HOME / WISHLIST
+        </Typography>
+        <Typography variant="h3" fontWeight={700} gutterBottom>
+          {t("wishlistPage.title")}
+        </Typography>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ maxWidth: 600, mx: "auto" }}
+        >
+          {t("wishlistPage.underTitle")}
+        </Typography>
+      </Box>
 
-            {user != undefined && user?.wishlist.length == 0 &&
-                <div className="wishlistCreate">
-                    <div className="startWishlist">
-                        <Link to='/sunglasses'><FaHeartCirclePlus className='wishHeart' /></Link>
-                        <div>
-                            <Typography variant="h6">{t("wishlistPage.startWishlist")}</Typography>
-                            <Typography variant="body1">{t("wishlistPage.startWishlistP")}</Typography>
-                        </div>
-                    </div>
-                    <div className="bestsellers">
-                        {sunglasses
-                            .sort(() => 0.5 - Math.random()) // разбърква масива
-                            .slice(0, 2) // взима първите 2
-                            .map((sunglass, index) => (
-                                <Link className="card" to={`/sunglasses/${sunglass._id}`} key={index}>
-                                    <Card sx={{ maxWidth: 300 }}>
-                                        <CardMedia
-                                            component="img"
-                                            height="200"
-                                            image={sunglass.images[0]}
-                                            alt={sunglass.name}
-                                            sx={{
-                                                objectFit: 'contain'
-                                            }}
-                                        />
-                                        <CardContent sx={{display: 'flex', alignItems: 'center',flexDirection: 'column', justifyContent: 'center'}}>
-                                            <Typography variant="h6" sx={{textTransform: 'uppercase'}}>{sunglass.name}</Typography>
-                                            <Typography variant="h5">{sunglass.price} ЛВ</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Link>
-                            ))}
-                    </div>
-                </div>
-            }
+      {/* Not Logged In Section */}
+      {user == undefined && (
+        <Grid container spacing={4} sx={{ mb: 6 }}>
+          <Grid item xs={12} md={6}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 4,
+                textAlign: "center",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                background: "linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)",
+              }}
+            >
+              <FavoriteIcon sx={{ fontSize: 60, color: "#e89bb8", mb: 2 }} />
+              <Typography variant="h5" fontWeight={600} gutterBottom>
+                {t("wishlistPage.myACC")}
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                {t("wishlistPage.access")}
+              </Typography>
+              <CustomButton
+                variant="outlined"
+                component={Link}
+                to="/user/access"
+                size="large"
+              >
+                {t("Sign in")}
+              </CustomButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 4,
+                textAlign: "center",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <ShoppingCartIcon
+                sx={{ fontSize: 60, color: "#e89bb8", mb: 2 }}
+              />
+              <Typography variant="h5" fontWeight={600} gutterBottom>
+                {t("wishlistPage.startWishlist")}
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                {t("wishlistPage.startWishlistP2")}
+              </Typography>
+              <CustomButton component={Link} to="/sunglasses" size="large">
+                {t("View Catalog")}
+              </CustomButton>
+            </Paper>
+          </Grid>
+        </Grid>
+      )}
 
-            {user != undefined && user?.wishlist.length > 0 &&
-                <>
-                    <Typography variant="h4" className='yourWishingCardsTitle'>{t("Моите желани слънчеви очила")}</Typography>
-                    <Grid container spacing={2}>
-                        {wishingCards.length > 0 && wishingCards.map(item => (
-                            <Grid item xs={12} sm={6} md={4} key={item._id}>
-                                <Card sx={{ maxWidth: 300, margin: 'auto' }}>
-                                    <CardActionArea component={Link} to={`/sunglasses/${item._id}`}>
-                                        <CardMedia
-                                            component="img"
-                                            height="200"
-                                            image={item?.images[0]}
-                                            alt={item.name}
-                                            sx={{ objectFit: 'contain' }}
-                                        />
-                                    </CardActionArea>
-                                    <CardContent sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                                        <Typography variant="h6" sx={{textTransform: 'uppercase'}}>{item.name}</Typography>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                                            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                                                {item.price} лв
-                                            </Typography>
-                                            </Box>
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            sx={{ marginTop: 2 }}
-                                            onClick={user ? () => addItem(item._id) : () => navigate('/user/access')}
-                                        >
-                                            {t('Add to cart')}
-                                        </Button>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </>
-            }
-        </div>
-    )
-}
+      {/* Empty Wishlist Section */}
+      {user != undefined && user?.wishlist.length == 0 && (
+        <Box>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 6,
+              textAlign: "center",
+              mb: 6,
+              background: "linear-gradient(135deg, #fff5f7 0%, #ffe0e8 100%)",
+            }}
+          >
+            <FaHeartCirclePlus
+              style={{ fontSize: 80, color: "#e89bb8", marginBottom: 16 }}
+            />
+            <Typography variant="h5" fontWeight={600} gutterBottom>
+              {t("wishlistPage.startWishlist")}
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              {t("wishlistPage.startWishlistP")}
+            </Typography>
+            <CustomButton
+              component={Link}
+              to="/sunglasses"
+              size="large"
+              startIcon={<ShoppingCartIcon />}
+            >
+              {t("View Catalog")}
+            </CustomButton>
+          </Paper>
 
-export default LoveCartList
+          <Box sx={{ mb: 4 }}>
+            <Typography
+              variant="h5"
+              fontWeight={600}
+              gutterBottom
+              textAlign="center"
+            >
+              {t("Trending Products")}
+            </Typography>
+            <Divider sx={{ mb: 4 }} />
+            <Grid container spacing={3} justifyContent="center">
+              {sunglasses
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 2)
+                .map((sunglass, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Card
+                      elevation={3}
+                      sx={{
+                        maxWidth: 400,
+                        mx: "auto",
+                        transition: "transform 0.3s",
+                        "&:hover": {
+                          transform: "translateY(-8px)",
+                          boxShadow: 6,
+                        },
+                      }}
+                    >
+                      <CardActionArea
+                        component={Link}
+                        to={`/sunglasses/${sunglass._id}`}
+                      >
+                        <CardMedia
+                          component="img"
+                          height="250"
+                          image={sunglass.images[0]}
+                          alt={sunglass.name}
+                          sx={{ objectFit: "contain", p: 2 }}
+                        />
+                        <CardContent sx={{ textAlign: "center" }}>
+                          <Typography
+                            variant="h6"
+                            fontWeight={600}
+                            sx={{ textTransform: "uppercase", mb: 1 }}
+                          >
+                            {sunglass.name}
+                          </Typography>
+                          <Chip
+                            label={formatPrice(sunglass.price)}
+                            color="primary"
+                            sx={{
+                              fontSize: "1rem",
+                              fontWeight: 600,
+                              backgroundColor: "#e89bb8",
+                            }}
+                          />
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                ))}
+            </Grid>
+          </Box>
+        </Box>
+      )}
+
+      {/* Wishlist Items Grid */}
+      {user != undefined && user?.wishlist.length > 0 && (
+        <Box>
+          <Typography
+            variant="h4"
+            fontWeight={700}
+            textAlign="center"
+            sx={{ mb: 4 }}
+          >
+            {t("Моите желани слънчеви очила")}
+          </Typography>
+          <Grid container spacing={3}>
+            {wishingCards.length > 0 &&
+              wishingCards.map((item) => (
+                <Grid item xs={12} sm={6} md={4} key={item._id}>
+                  <Card
+                    elevation={3}
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: 8,
+                      },
+                    }}
+                  >
+                    <CardActionArea
+                      component={Link}
+                      to={`/sunglasses/${item._id}`}
+                      sx={{ flexGrow: 1 }}
+                    >
+                      <Box sx={{ position: "relative" }}>
+                        <CardMedia
+                          component="img"
+                          height="280"
+                          image={item?.images[0]}
+                          alt={item.name}
+                          sx={{
+                            objectFit: "contain",
+                            p: 3,
+                            backgroundColor: "#fafafa",
+                          }}
+                        />
+                        <Chip
+                          icon={<FavoriteIcon />}
+                          label="In Wishlist"
+                          size="small"
+                          sx={{
+                            position: "absolute",
+                            top: 12,
+                            right: 12,
+                            backgroundColor: "#e89bb8",
+                            color: "white",
+                            fontWeight: 600,
+                          }}
+                        />
+                      </Box>
+                      <Divider />
+                      <CardContent
+                        sx={{
+                          flexGrow: 1,
+                          textAlign: "center",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          variant="h6"
+                          fontWeight={600}
+                          sx={{
+                            textTransform: "uppercase",
+                            mb: 2,
+                            minHeight: 48,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                        <Chip
+                          label={formatPrice(item.price)}
+                          color="primary"
+                          sx={{
+                            fontSize: "1.1rem",
+                            fontWeight: 700,
+                            backgroundColor: "#EEAECA",
+                          }}
+                        />
+                      </CardContent>
+                    </CardActionArea>
+                    <Box sx={{ p: 2, pt: 0 }}>
+                      <CustomButton
+                        fullWidth
+                        size="large"
+                        startIcon={<ShoppingCartIcon />}
+                        onClick={
+                          user
+                            ? () => addItem(item._id)
+                            : () => navigate("/user/access")
+                        }
+                      >
+                        {t("Add to cart")}
+                      </CustomButton>
+                    </Box>
+                  </Card>
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
+      )}
+    </Container>
+  );
+};
+
+export default LoveCartList;

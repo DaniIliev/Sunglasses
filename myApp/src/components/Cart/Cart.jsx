@@ -1,105 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Typography,
+  useMediaQuery,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Card,
+  CardContent,
+  Divider,
+  useTheme,
+} from "@mui/material";
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { UserContext } from "../../context/UserContext";
-import BeatLoader from 'react-spinners/BeatLoader';
+import BeatLoader from "react-spinners/BeatLoader";
 import { fetchItemsInCart } from "../../utills/sharedFn/fetchItemsInCart";
 import { removeFromCart } from "../../utills/sharedFn/removeFromCart";
 import { updateCount } from "../../utills/sharedFn/updateCount";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { display, height, styled, width } from '@mui/system';
-
-const CartContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(4),
-  maxWidth: '100%',
-  width: '100%',
-  margin: 'auto',
-  [theme.breakpoints.up('md')]: {
-    maxWidth: '1400px',
-  },
-}));
-
-const Titles = styled(Box)({
-  textAlign: 'center',
-  marginBottom: '2em',
-});
-
-const CartHeader = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '2fr 1fr 1fr 1fr',
-  gap: theme.spacing(2),
-  padding: theme.spacing(1),
-  fontWeight: 'bold',
-  borderBottom: '2px solid #ccc',
-}));
-
-const CartRow = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '2fr 1fr 1fr 1fr',
-  gap: theme.spacing(2),
-  alignItems: 'center',
-  padding: theme.spacing(2, 0),
-  borderBottom: '1px solid #ddd',
-}));
-
-const Image = styled('img')(({ theme }) => ({
-  maxWidth: '80px',
-  borderRadius: '8px',
-  [theme.breakpoints.down('sm')]: {
-    maxWidth: '60px',
-  },
-}));
-
-const CounterBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  border: '1px solid #ccc',
-  borderRadius: '6px',
-  padding: theme.spacing(0.5, 1),
-  background: '#f8f8f8',
-  maxWidth: '150px', // Ограничаваме максималната ширина
-  justifyContent: 'space-between', // Подредба на иконките
-}));
-
-const TotalBox = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  padding: theme.spacing(3),
-  borderRadius: '8px',
-  background: '#fafafa',
-  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05)',
-  maxWidth: '400px',
-  marginLeft: 'auto',
-}));
-
-const ResponsiveButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#1976d2',
-  color: '#fff',
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(1.5),
-  fontSize: '1rem',
-  '&:hover': {
-    backgroundColor: '#115293',
-  },
-  width: '100%',
-}));
-
-const RemoveButton = styled(IoMdCloseCircleOutline)(({ theme }) => ({
-  cursor: 'pointer',
-  color: '#f44336',  // Червен за премахване
-  '&:hover': {
-    color: '#d32f2f',  // При hover
-  },
-  fontSize: '2rem',  
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.5rem',  
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '2.5rem',  
-  },
-}));
+import { formatPrice } from "../../utills/currencyConverter";
+import CustomButton from "../shared/CustomButton";
 
 const Cart = () => {
   const { user, setUser } = useContext(UserContext);
@@ -107,6 +34,8 @@ const Cart = () => {
   const [sumOfOldPrice, setSumOldPrice] = useState(0);
   const [totalSum, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -116,8 +45,16 @@ const Cart = () => {
     if (user) {
       fetchItemsInCart(user).then((items) => {
         setAllItems(items);
-        const oldPriceSum = items.map((item) => item.oldPrice != '' && item.oldPrice != 'undefined' ? Number(item.oldPrice) * item.quantity : Number(item.price) * item.quantity).reduce((sum, price) => sum + price, 0);
-        const totalPrice = items.map((item) => Number(item.price) * item.quantity).reduce((sum, price) => sum + price, 0);
+        const oldPriceSum = items
+          .map((item) =>
+            item.oldPrice != "" && item.oldPrice != "undefined"
+              ? Number(item.oldPrice) * item.quantity
+              : Number(item.price) * item.quantity
+          )
+          .reduce((sum, price) => sum + price, 0);
+        const totalPrice = items
+          .map((item) => Number(item.price) * item.quantity)
+          .reduce((sum, price) => sum + price, 0);
         setSumOldPrice(oldPriceSum);
         setTotalPrice(totalPrice);
         setIsLoading(false);
@@ -136,69 +73,324 @@ const Cart = () => {
   const onHandleRemove = (id) => removeFromCart(user, setUser, id);
 
   return (
-    <CartContainer>
-      {isLoading? <BeatLoader /> : (
+    <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: 1400, mx: "auto" }}>
+      {isLoading ? (
+        <Box display="flex" justifyContent="center" py={8}>
+          <BeatLoader />
+        </Box>
+      ) : (
         <>
-          <Titles>
-            <Typography variant="h6">HOME / CART</Typography>
-            <Typography variant="h4">{t('shoppingCart.shoppingCartTitle')}</Typography>
-          </Titles>
+          <Box textAlign="center" mb={4}>
+            <Typography variant="body2" color="text.secondary" gutterBottom>
+              HOME / CART
+            </Typography>
+            <Typography variant="h4" fontWeight={600}>
+              {t("shoppingCart.shoppingCartTitle")}
+            </Typography>
+          </Box>
 
           {allItems.length === 0 ? (
-            <Box textAlign="center">
-              <img src="/images/shoppingCart.png" alt="shoppingCart" width={250} />
-              <Typography variant="h6">{t('shoppingCart.textIfNoAddedItems')}</Typography>
-              <Button variant="outlined" component={Link} to="/sunglasses">{t('shoppingCart.returnToShop')}</Button>
+            <Box textAlign="center" py={8}>
+              <img
+                src="/images/shoppingCart.png"
+                alt="shoppingCart"
+                width={250}
+                style={{ marginBottom: 24 }}
+              />
+              <Typography variant="h6" gutterBottom>
+                {t("shoppingCart.textIfNoAddedItems")}
+              </Typography>
+              <CustomButton
+                variant="outlined"
+                component={Link}
+                to="/sunglasses"
+                sx={{ mt: 2 }}
+              >
+                {t("shoppingCart.returnToShop")}
+              </CustomButton>
             </Box>
           ) : (
             <>
-              <CartHeader>
-                <Typography>{t('Продукт')}</Typography>
-                <Typography>{t('Количество')}</Typography>
-                <Typography>{t('Цена')}</Typography>
-                <Typography>{t('Общо')}</Typography>
-              </CartHeader>
+              {!isMobile ? (
+                <TableContainer component={Paper} elevation={2} sx={{ mb: 4 }}>
+                  <Table>
+                    <TableHead>
+                      <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+                        <TableCell>
+                          <Typography fontWeight={600}>
+                            {t("Продукт")}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography fontWeight={600}>{t("Цена")}</Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography fontWeight={600}>
+                            {t("Количество")}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography fontWeight={600}>{t("Общо")}</Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Typography fontWeight={600}>
+                            {t("Действие")}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {allItems.map((item) => (
+                        <TableRow
+                          key={item._id}
+                          sx={{
+                            "&:hover": { backgroundColor: "#fafafa" },
+                            "&:last-child td": { border: 0 },
+                          }}
+                        >
+                          <TableCell>
+                            <Box display="flex" alignItems="center" gap={2}>
+                              <img
+                                src={item.images[0]}
+                                alt={item.name}
+                                style={{
+                                  width: 80,
+                                  height: 80,
+                                  objectFit: "cover",
+                                  borderRadius: 8,
+                                }}
+                              />
+                              <Typography fontWeight={500}>
+                                {item.name}
+                              </Typography>
+                            </Box>
+                          </TableCell>
+                          <TableCell align="center">
+                            <Typography variant="body1" fontWeight={600}>
+                              {formatPrice(item.price)}
+                            </Typography>
+                          </TableCell>
+                          <TableCell align="center">
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
+                              gap={1}
+                              sx={{
+                                border: "1px solid #e0e0e0",
+                                borderRadius: 2,
+                                p: 1,
+                                display: "inline-flex",
+                              }}
+                            >
+                              <IconButton
+                                size="small"
+                                onClick={() =>
+                                  item.quantity > 1 &&
+                                  updateCnt(item._id, item.quantity - 1)
+                                }
+                                disabled={item.quantity === 1}
+                              >
+                                <FaMinus size={14} />
+                              </IconButton>
+                              <Typography
+                                fontWeight={600}
+                                sx={{ minWidth: 30, textAlign: "center" }}
+                              >
+                                {item.quantity}
+                              </Typography>
+                              <IconButton
+                                size="small"
+                                onClick={() =>
+                                  updateCnt(item._id, item.quantity + 1)
+                                }
+                              >
+                                <FaPlus size={14} />
+                              </IconButton>
+                            </Box>
+                          </TableCell>
+                          <TableCell align="center">
+                            <Typography
+                              variant="h6"
+                              fontWeight={600}
+                              // color="primary"
+                              color="#e89bb8"
+                            >
+                              {formatPrice(item.price * item.quantity)}
+                            </Typography>
+                          </TableCell>
+                          <TableCell align="center">
+                            <IconButton
+                              color="error"
+                              onClick={() => onHandleRemove(item._id)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <Box sx={{ mb: 4 }}>
+                  {allItems.map((item) => (
+                    <Card key={item._id} sx={{ mb: 2 }} elevation={2}>
+                      <CardContent>
+                        <Box display="flex" gap={2} mb={2}>
+                          <img
+                            src={item.images[0]}
+                            alt={item.name}
+                            style={{
+                              width: 80,
+                              height: 80,
+                              objectFit: "cover",
+                              borderRadius: 8,
+                            }}
+                          />
+                          <Box flex={1}>
+                            <Typography fontWeight={600} gutterBottom>
+                              {item.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {formatPrice(item.price)}
+                            </Typography>
+                          </Box>
+                          <IconButton
+                            color="error"
+                            onClick={() => onHandleRemove(item._id)}
+                            size="small"
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Box>
+                        <Divider sx={{ my: 1 }} />
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            gap={1}
+                            sx={{
+                              border: "1px solid #e0e0e0",
+                              borderRadius: 2,
+                              p: 1,
+                            }}
+                          >
+                            <IconButton
+                              size="small"
+                              onClick={() =>
+                                item.quantity > 1 &&
+                                updateCnt(item._id, item.quantity - 1)
+                              }
+                              disabled={item.quantity === 1}
+                            >
+                              <FaMinus size={14} />
+                            </IconButton>
+                            <Typography
+                              fontWeight={600}
+                              sx={{ minWidth: 30, textAlign: "center" }}
+                            >
+                              {item.quantity}
+                            </Typography>
+                            <IconButton
+                              size="small"
+                              onClick={() =>
+                                updateCnt(item._id, item.quantity + 1)
+                              }
+                            >
+                              <FaPlus size={14} />
+                            </IconButton>
+                          </Box>
+                          <Typography
+                            variant="h6"
+                            fontWeight={600}
+                            color="primary"
+                          >
+                            {formatPrice(item.price * item.quantity)}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </Box>
+              )}
 
-              {allItems.map((item) => (
-                <CartRow key={item._id}>
-                  <Box display="flex" alignItems="center" gap={2}>
-                    <Image src={item.images[0]} alt={item.name} />
-                    <Typography>{item.name}</Typography>
-                  </Box>
-
-                  <CounterBox>
-                    <FaMinus onClick={() => item.quantity > 1 && updateCnt(item._id, item.quantity - 1)} />
-                    <Typography>{item.quantity}</Typography>
-                    <FaPlus onClick={() => updateCnt(item._id, item.quantity + 1)} />
-                  </CounterBox>
-
-                  <Box>
-                    <Typography variant="body2" sx={{ textDecoration: item.oldPrice != '' && item.oldPrice != 'undefined' ? 'line-through' : 'none' }}>{item.oldPrice != '' && item.oldPrice != 'undefined'|| ''}</Typography>
-                    <Typography variant="h8">{item.price} лв</Typography>
-                  </Box>
-
-                  <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h8">{item.price * item.quantity} лв</Typography>
-                    <RemoveButton onClick={() => onHandleRemove(item._id)} />
-                  </Box>
-                </CartRow>
-              ))}
-
-              <TotalBox>
-                <Typography>{t('Обща стойност (стара)')}: {sumOfOldPrice.toFixed(2)} лв</Typography>
-                <Typography color="error">
-                {t('Отстъпка')}: -{(sumOfOldPrice - totalSum).toFixed(2)} лв ({Math.round(((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100)}%)
+              <Paper
+                elevation={3}
+                sx={{
+                  p: 3,
+                  maxWidth: 450,
+                  ml: "auto",
+                  backgroundColor: "#fafafa",
+                }}
+              >
+                <Typography variant="h6" fontWeight={600} gutterBottom>
+                  {t("Обобщение на поръчката")}
                 </Typography>
-                <Typography>{t('Обща стойност')}: {totalSum.toFixed(2)} лв</Typography>
-                <Typography>{t('Доставка')}: {totalSum > 150 ? '0.00' : '6.50'} лв</Typography>
-                <Typography><strong>{t('Крайна цена')}: {(totalSum + (totalSum > 150 ? 0 : 6.5)).toFixed(2)} лв</strong></Typography>
-                <ResponsiveButton onClick={handleNavigate}>{t('shoppingCart.payBTN')}</ResponsiveButton>
-              </TotalBox>
+                <Divider sx={{ my: 2 }} />
+                <Box display="flex" justifyContent="space-between" mb={1}>
+                  <Typography color="text.secondary">
+                    {t("Обща стойност (стара)")}:
+                  </Typography>
+                  <Typography fontWeight={500}>
+                    {formatPrice(sumOfOldPrice)}
+                  </Typography>
+                </Box>
+                {sumOfOldPrice > totalSum && (
+                  <Box display="flex" justifyContent="space-between" mb={1}>
+                    <Typography color="error">{t("Отстъпка")}:</Typography>
+                    <Typography color="error" fontWeight={500}>
+                      -{formatPrice(sumOfOldPrice - totalSum)} (
+                      {Math.round(
+                        ((sumOfOldPrice - totalSum) / sumOfOldPrice) * 100
+                      )}
+                      %)
+                    </Typography>
+                  </Box>
+                )}
+                <Box display="flex" justifyContent="space-between" mb={1}>
+                  <Typography color="text.secondary">
+                    {t("Обща стойност")}:
+                  </Typography>
+                  <Typography fontWeight={600}>
+                    {formatPrice(totalSum)}
+                  </Typography>
+                </Box>
+                <Box display="flex" justifyContent="space-between" mb={2}>
+                  <Typography color="text.secondary">
+                    {t("Доставка")}:
+                  </Typography>
+                  <Typography fontWeight={500}>
+                    {totalSum > 77 ? "€0.00" : formatPrice(6.5)}
+                  </Typography>
+                </Box>
+                <Divider sx={{ my: 2 }} />
+                <Box display="flex" justifyContent="space-between" mb={3}>
+                  <Typography variant="h6" fontWeight={700}>
+                    {t("Крайна цена")}:
+                  </Typography>
+                  <Typography variant="h6" fontWeight={700} color="#e89bb8">
+                    {formatPrice(totalSum + (totalSum > 77 ? 0 : 6.5))}
+                  </Typography>
+                </Box>
+                <CustomButton
+                  fullWidth
+                  size="large"
+                  onClick={handleNavigate}
+                  sx={{ py: 1.5, fontSize: "1.1rem" }}
+                >
+                  {t("shoppingCart.payBTN")}
+                </CustomButton>
+              </Paper>
             </>
           )}
         </>
       )}
-    </CartContainer>
+    </Box>
   );
 };
 

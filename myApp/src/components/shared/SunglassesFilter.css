@@ -1,0 +1,92 @@
+/* MUI Accordion customization for filters */
+.MuiAccordion-root {
+  box-shadow: none !important;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+}
+
+.MuiAccordion-root:before {
+  display: none;
+}
+
+.MuiAccordion-root:last-child {
+  border-bottom: none;
+}
+
+.MuiAccordionSummary-root {
+  padding: 16px;
+  min-height: 56px !important;
+}
+
+.MuiAccordionSummary-root:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.MuiAccordionSummary-content {
+  margin: 12px 0 !important;
+}
+
+.MuiAccordionDetails-root {
+  padding: 8px 16px 20px;
+}
+
+/* Checkbox styling */
+.MuiCheckbox-root {
+  padding: 6px;
+}
+
+/* Slider styling for price filter */
+.MuiSlider-root {
+  color: #000 !important;
+}
+
+.MuiSlider-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #000;
+}
+
+.MuiSlider-track {
+  background-color: #000;
+}
+
+.MuiSlider-rail {
+  background-color: #e0e0e0;
+}
+
+/* Avatar images for filters */
+.MuiAvatar-rounded {
+  border: 1px solid #e0e0e0;
+  object-fit: cover;
+}
+
+/* Better image display for frame shapes */
+.MuiAvatar-rounded img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Lens type images should contain not cover */
+.lens-type-avatar.MuiAvatar-rounded img {
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* Hover effects */
+.MuiFormControlLabel-root:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+
+/* CheckCircle icon color */
+.MuiSvgIcon-colorPrimary {
+  color: #1976d2;
+}
+
+/* Typography adjustments */
+.MuiTypography-root {
+  font-family: inherit;
+}

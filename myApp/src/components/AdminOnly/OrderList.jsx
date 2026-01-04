@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
   Typography,
-  Button,
-  Grid,
   Box,
   Divider,
-} from '@mui/material';
-import * as purchaseService from '../../services/purchaseService'
+  TableCell,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import * as purchaseService from "../../services/purchaseService";
+import GenericTable from "../shared/GenericTable";
+import { formatPrice } from "../../utills/currencyConverter";
+import CustomButton from "../shared/CustomButton";
+
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
+
   const fetchData = async () => {
-    const result = await purchaseService.getAll(); 
+    const result = await purchaseService.getAll();
     const sorted = [...result].sort((a, b) => {
-        const dateA = new Date(a.purchaseDate.split('.').reverse().join('-'));
-        const dateB = new Date(b.purchaseDate.split('.').reverse().join('-'));
-        return dateB - dateA;
-      });
-    
+      const dateA = new Date(a.purchaseDate.split(".").reverse().join("-"));
+      const dateB = new Date(b.purchaseDate.split(".").reverse().join("-"));
+      return dateB - dateA;
+    });
+
     setOrders(sorted);
-}
+  };
+
   const handleMarkAsSeen = (id) => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
@@ -33,58 +44,210 @@ const OrdersList = () => {
     );
   };
 
-  return (
-    <Grid container spacing={3}>
-      {orders.map((order) => (
-        <Grid item xs={12} md={6} sx={{p: 5}} key={order._id}>
-          <Card sx={{width: '90%', margin: '0 auto'}} variant="outlined">
-            <CardContent>
-              <Typography variant="h6">
-                Поръчка #{order.orderCode}
-              </Typography>
-              <Typography>
-                <strong>Име:</strong> {order.firstname} {order.lastname}
-              </Typography>
-              <Typography>
-                <strong>Email:</strong> {order.email}
-              </Typography>
-              <Typography>
-                <strong>Телефон:</strong> {order.phoneNumber}
-              </Typography>
-              <Typography>
-                <strong>Адрес:</strong> {order.address} №{order.addressNum}, {order.city}, {order.state}, {order.zipCode}
-              </Typography>
-              <Typography>
-                <strong>Дата:</strong> {order.purchaseDate}
-              </Typography>
-              <Typography>
-                <strong>Допълнителна информация:</strong> {order.additionalInfo}
-              </Typography>
-              <Divider sx={{ my: 2 }} />
-              <Typography variant="subtitle1">Продукти:</Typography>
+  const columns = [
+    { label: "Номер на поръчка", align: "left" },
+    { label: "Клиент", align: "left" },
+    { label: "Контакти", align: "left" },
+    { label: "Адрес", align: "left" },
+    { label: "Продукти", align: "left" },
+    { label: "Обща сума", align: "right" },
+    { label: "Дата", align: "left" },
+    { label: "Статус", align: "center" },
+    { label: "Действия", align: "center" },
+  ];
+
+  const renderRow = (order) => (
+    <>
+      <TableCell>
+        <Typography variant="body2" fontWeight={600} color="primary">
+          #{order.orderCode}
+        </Typography>
+      </TableCell>
+      <TableCell>
+        <Typography variant="body2" fontWeight={600}>
+          {order.firstname} {order.lastname}
+        </Typography>
+      </TableCell>
+      <TableCell>
+        <Box>
+          <Typography variant="body2">{order.email}</Typography>
+          <Typography variant="caption" color="text.secondary">
+            {order.phoneNumber}
+          </Typography>
+        </Box>
+      </TableCell>
+      <TableCell>
+        <Typography variant="body2" sx={{ maxWidth: 200 }}>
+          {order.address} №{order.addressNum}
+        </Typography>
+        <Typography variant="caption" color="text.secondary">
+          {order.city}, {order.zipCode}
+        </Typography>
+      </TableCell>
+      <TableCell>
+        <Box sx={{ maxWidth: 250 }}>
+          {order.sunglasses.slice(0, 2).map((product, index) => (
+            <Typography key={index} variant="caption" display="block">
+              • {product.name} x{product.quantity}
+            </Typography>
+          ))}
+          {order.sunglasses.length > 2 && (
+            <Typography variant="caption" color="text.secondary">
+              +{order.sunglasses.length - 2} още
+            </Typography>
+          )}
+        </Box>
+      </TableCell>
+      <TableCell align="right">
+        <Typography variant="body1" fontWeight={600}>
+          {formatPrice(order.totalPurchasePrice)}
+        </Typography>
+      </TableCell>
+      <TableCell>
+        <Typography variant="body2">{order.purchaseDate}</Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Chip
+          label={order.seen ? "Видяна" : "Нова"}
+          color={order.seen ? "success" : "warning"}
+          size="small"
+          icon={order.seen ? <CheckCircleIcon /> : null}
+          sx={{ fontWeight: 500 }}
+        />
+      </TableCell>
+      <TableCell align="center">
+        <CustomButton
+          variant={order.seen ? "outlined" : "contained"}
+          size="small"
+          startIcon={<VisibilityIcon />}
+          onClick={() => handleMarkAsSeen(order._id)}
+          disabled={order.seen}
+          sx={{
+            textTransform: "none",
+            borderRadius: 2,
+          }}
+        >
+          {order.seen ? "Видяна" : "Маркирай"}
+        </CustomButton>
+      </TableCell>
+    </>
+  );
+
+  const renderMobileCard = (order) => (
+    <Card key={order._id} elevation={3}>
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 2,
+          }}
+        >
+          <Typography variant="h6" color="primary">
+            #{order.orderCode}
+          </Typography>
+          <Chip
+            label={order.seen ? "Видяна" : "Нова"}
+            color={order.seen ? "success" : "warning"}
+            size="small"
+            icon={order.seen ? <CheckCircleIcon /> : null}
+          />
+        </Box>
+
+        <Divider sx={{ mb: 2 }} />
+
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Клиент
+            </Typography>
+            <Typography variant="body1" fontWeight={600}>
+              {order.firstname} {order.lastname}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Контакти
+            </Typography>
+            <Typography variant="body2">{order.email}</Typography>
+            <Typography variant="body2">{order.phoneNumber}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Адрес
+            </Typography>
+            <Typography variant="body2">
+              {order.address} №{order.addressNum}, {order.city}, {order.zipCode}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Продукти
+            </Typography>
+            <List dense sx={{ py: 0 }}>
               {order.sunglasses.map((product, index) => (
-                <Box key={index} sx={{ mb: 1, ml: 2 }}>
-                  <Typography>- {product.name} x {product.quantity} ({product.totalPrice} лв)</Typography>
-                </Box>
+                <ListItem key={index} sx={{ px: 0 }}>
+                  <ListItemText
+                    primary={`${product.name} x${product.quantity}`}
+                    secondary={formatPrice(product.totalPrice)}
+                  />
+                </ListItem>
               ))}
-              <Divider sx={{ my: 2 }} />
-              <Typography>
-                <strong>Обща стойност:</strong> {order.totalPurchasePrice} лв
-              </Typography>
-              <Button
-                variant="contained"
-                color={order.seen ? "success" : "primary"}
-                onClick={() => handleMarkAsSeen(order._id)}
-                disabled={order.seen}
-                sx={{ mt: 2 }}
-              >
-                {order.seen ? "Видяна" : "Маркирай като видяна"}
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+            </List>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Обща сума
+            </Typography>
+            <Typography variant="h6" fontWeight={600} color="primary">
+              {formatPrice(order.totalPurchasePrice)}
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Дата
+            </Typography>
+            <Typography variant="body2">{order.purchaseDate}</Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Допълнителна информация
+            </Typography>
+            <Typography variant="body2">{order.additionalInfo}</Typography>
+          </Box>
+        </Box>
+
+        <CustomButton
+          fullWidth
+          variant={order.seen ? "outlined" : "contained"}
+          startIcon={<VisibilityIcon />}
+          onClick={() => handleMarkAsSeen(order._id)}
+          disabled={order.seen}
+          sx={{ mt: 2 }}
+        >
+          {order.seen ? "Видяна" : "Маркирай като видяна"}
+        </CustomButton>
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <Box sx={{ p: { xs: 2, md: 4 } }}>
+      <GenericTable
+        columns={columns}
+        data={orders}
+        renderRow={renderRow}
+        renderMobileCard={renderMobileCard}
+        emptyMessage="Няма налични поръчки"
+      />
+    </Box>
   );
 };
 
