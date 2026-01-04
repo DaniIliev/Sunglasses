@@ -1,23 +1,14 @@
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
-const { SMTP_USER, SMTP_PASS, SMTP_FROM, ADMIN_EMAIL } = process.env;
+const { SENDGRID_API_KEY, SMTP_FROM, SMTP_USER, ADMIN_EMAIL } = process.env;
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  secure: true, // use SSL
-  auth: {
-    user: SMTP_USER,
-    pass: SMTP_PASS,
-  },
-  pool: true,
-  maxConnections: 2,
-  maxMessages: 20,
-  connectionTimeout: 30000, // increased timeout
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
-  logger: true, // enable logging
-  debug: true, // show SMTP traffic
-});
+const FROM_EMAIL = SMTP_FROM || SMTP_USER;
+
+if (!SENDGRID_API_KEY) {
+  console.warn("⚠️ SENDGRID_API_KEY is not set; emails will fail.");
+} else {
+  sgMail.setApiKey(SENDGRID_API_KEY);
+}
 
 const sendMail = async ({ to, subject, html }) => {
   if (!to) {
@@ -25,49 +16,30 @@ const sendMail = async ({ to, subject, html }) => {
     return;
   }
 
-  if (!SMTP_USER || !SMTP_PASS) {
-    console.error("❌ SMTP credentials not configured. Email not sent.");
-    console.error("Set SMTP_USER and SMTP_PASS in .env file");
+  if (!SENDGRID_API_KEY) {
+    console.error("❌ SENDGRID_API_KEY not configured. Email not sent.");
     return;
   }
 
   try {
     console.log(`📧 Attempting to send email to: ${to}`);
 
-    const info = await transporter.sendMail({
-      from: SMTP_FROM || SMTP_USER,
+    const [response] = await sgMail.send({
       to,
+      from: FROM_EMAIL,
       subject,
       html,
     });
-    console.log(
-      "✅ Email sent successfully to:",
-      to,
-      "| Message ID:",
-      info.messageId
-    );
-    return info;
+    console.log("✅ Email sent successfully to:", to, "| Message ID:", response.headers["x-message-id"] || "n/a");
+    return response;
   } catch (error) {
     console.error("❌ Email send failed to:", to);
-    console.error("Error details:", error.message);
+    console.error("Error details:", error.message || error.toString());
     console.error("Error code:", error.code);
-
-    if (error.code === "ETIMEDOUT") {
-      console.error(
-        "⚠️  SMTP connection timeout - firewall may be blocking Gmail SMTP"
-      );
+    if (error.response?.body) {
+      console.error("SendGrid response:", error.response.body);
     }
-    if (error.code === "EAUTH") {
-      console.error(
-        "⚠️  Authentication failed - check SMTP_USER and SMTP_PASS"
-      );
-    }
-    console.error("SMTP config:", {
-      user: SMTP_USER,
-      from: SMTP_FROM,
-      service: "gmail",
-    });
-    throw error; // propagate to caller so Promise.allSettled marks as rejected
+    throw error;
   }
 };
 
